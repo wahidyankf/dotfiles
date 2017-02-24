@@ -1,6 +1,9 @@
 " set non compatible mode with vi
 set nocompatible
 
+" syntax
+syntax enable
+
 " set relative number
 set relativenumber
 
@@ -36,6 +39,7 @@ set incsearch
 set textwidth=80
 set colorcolumn=+1
 highlight ColorColumn ctermbg=233
+set cursorline
 
 " set tab to 4 spaces
 set tabstop=4
@@ -43,11 +47,24 @@ set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
+set autoindent
+set ai "auto indent
+set si "smart indedt
+set wrap " wrap
 
 " disable backup and swap
 set nobackup
 set nowritebackup
 set noswapfile
+
+" format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+" set encoding
+set encoding=utf8
+
+" history
+set history=700
 
 " key mapping
 
