@@ -83,6 +83,33 @@ nnoremap <Leader>-- i----------<CR><Esc> "create a ruler
 nnoremap <Leader><CR><CR> $a<CR><Esc> "add new line from normal mode
 
 " create a title
-nnoremap <Leader>tit i----------<CR><CR>----------<CR><Esc>kki
+nnoremap <Leader>ti- i----------<CR><CR>----------<CR><Esc>kki
+nnoremap <Leader>ti= i==========<CR><CR>==========<CR><Esc>kki
 
+" support for md. it is not might not be faster but easier to remember (at
+" least for me :p)
 
+" headings
+nnoremap <Leader>mdh1 i#
+nnoremap <Leader>mdh2 i##
+nnoremap <Leader>mdh3 i###
+nnoremap <Leader>mdh4 i####
+nnoremap <Leader>mdh5 i#####
+nnoremap <Leader>mdh6 i######
+
+" emphasis and italics
+nnoremap <Leader>mdit i__<Esc>i
+nnoremap <Leader>mdem i****<Esc>hi
+nnoremap <Leader>mdcem i**____**<Esc>hhhi
+nnoremap <Leader>mdst i~~~~<Esc>hi
+
+" source code
+nnoremap <Leader>mdcil i``<CR><Esc>ka
+nnoremap <Leader>mdcpy i```python<CR><CR>```<CR><Esc>kki
+nnoremap <Leader>mdcjs i```javascript<CR><CR>```<CR><Esc>kki
+nnoremap <Leader>mdcgn i```<CR><CR>```<CR><Esc>kki
+
+" quote, link
+nnoremap <Leader>mdq i><Space>
+nnoremap <Leader>mdln i[hyperlink](link)<Esc>hhhhhhhhhhhhhhh
+nnoremap <Leader>md- i----------<CR><Esc> 
