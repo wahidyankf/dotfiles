@@ -80,7 +80,7 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " map for ruler
 nnoremap <Leader>-- i----------<CR><Esc> "create a ruler
-nnoremap <Leader><CR><CR> i<CR><Esc> "add new line from normal mode
+nnoremap <Leader><CR><CR> $a<CR><Esc> "add new line from normal mode
 
 " create a title
 nnoremap <Leader>tit i----------<CR><CR>----------<CR><Esc>kki
