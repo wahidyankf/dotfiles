@@ -1,0 +1,47 @@
+
+Messages maintainer: Bram Moolenaar <Bram@vim.org>
+Error detected while processing /home/gollem/Dropbox/0_code/dotfiles/.vim/plugin/nerdtree/plugin/NERD_tree.vim:
+line   70:
+E117: Unknown function: nerdtree#runningWindows
+E15: Invalid expression: !nerdtree#runningWindows()
+line  105:
+E117: Unknown function: nerdtree#runningWindows
+E15: Invalid expression: nerdtree#runningWindows()
+line  152:
+E117: Unknown function: nerdtree#loadClassFiles
+line  156:
+E117: Unknown function: nerdtree#ui_glue#setupCommands
+line  162:
+E121: Undefined variable: g:NERDTreeCreator
+E15: Invalid expression: "autocmd BufLeave ". g:NERDTreeCreator.BufNamePrefix() ."* if g:NERDTree.IsOpen() | call b:NERDTree.ui.saveScreenState() | endif"
+line  165:
+E121: Undefined variable: g:NERDTreeCreator
+E15: Invalid expression: "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
+line  216:
+E117: Unknown function: nerdtree#postSourceActions
+Error detected while processing /home/gollem/Dropbox/0_code/dotfiles/.vim/plugin/nerdtree/syntax/nerdtree.vim:
+line   25:
+E121: Undefined variable: g:NERDTreeDirArrowCollapsible
+E116: Invalid arguments for function escape(g:NERDTreeDirArrowCollapsible, '~').'# containedin=NERDTreeDir,NERDTreeFile'
+E15: Invalid expression: 'syn match NERDTreeClosable #'.escape(g:NERDTreeDirArrowCollapsible, '~').'# containedin=NERDTreeDir,NERDTreeFile'
+line   26:
+E121: Undefined variable: g:NERDTreeDirArrowExpandable
+E116: Invalid arguments for function escape(g:NERDTreeDirArrowExpandable, '~').'# containedin=NERDTreeDir,NERDTreeFile'
+E15: Invalid expression: 'syn match NERDTreeOpenable #'.escape(g:NERDTreeDirArrowExpandable, '~').'# containedin=NERDTreeDir,NERDTreeFile'
+line   28:
+E121: Undefined variable: g:NERDTreeDirArrowCollapsible
+E116: Invalid arguments for function escape(g:NERDTreeDirArrowCollapsible, '~]\-').escape(g:NERDTreeDirArrowExpandable, '~]\-')
+E15: Invalid expression: escape(g:NERDTreeDirArrowCollapsible, '~]\-').escape(g:NERDTreeDirArrowExpandable, '~]\-')
+line   29:
+E121: Undefined variable: s:dirArrows
+E15: Invalid expression: 'syn match NERDTreeDir #[^'.s:dirArrows.' ].*/#'
+line   31:
+E121: Undefined variable: s:dirArrows
+E15: Invalid expression: 'syn match NERDTreeFile  #^[^"\.'.s:dirArrows.'] *[^'.s:dirArrows.']*# contains=NERDTreeLink,NERDTreeRO,NERDTreeBookmark,NERDTreeExecFile'
+Error detected while processing /home/gollem/Dropbox/0_code/dotfiles/.vim/plugin/vim-go/scripts/runtest.vim:
+line    8:
+E499: Empty file name for '%' or '#', only works with ":p:h": source %
+
+From :
+
+Executed 0 test. Total test time: 0.012263s
