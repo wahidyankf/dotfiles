@@ -4,7 +4,11 @@ set nocompatible
 " set relative number
 set relativenumber
 
+" show the cursor position all the time
+set ruler
+
 " install plugin using vim-plug
+
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -29,8 +33,8 @@ set smartcase
 set incsearch
 
 " column
-set tw=79
-set colorcolumn=80
+set textwidth=80
+set colorcolumn=+1
 highlight ColorColumn ctermbg=233
 
 " set tab to 4 spaces
