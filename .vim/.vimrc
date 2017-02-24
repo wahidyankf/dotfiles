@@ -35,11 +35,11 @@ set winheight=999
 set smartcase
 set incsearch
 
-" column
+" column and cursor
 set textwidth=80
 set colorcolumn=+1
+set cursorline "show location of cursor using a horizontal line
 highlight ColorColumn ctermbg=233
-set cursorline
 
 " set tab to 4 spaces
 set tabstop=4
@@ -65,6 +65,10 @@ set encoding=utf8
 
 " history
 set history=700
+
+" wildness
+set wildmenu "show autocomplete menu
+set wildmode=list:longest
 
 " key mapping
 
