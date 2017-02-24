@@ -77,3 +77,7 @@ nnoremap <Leader>ydoc :YcmCompleter GetDoc<CR>
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" map for
+nnoremap <Leader>-- i----------<CR><Esc> "create a ruler
+nnoremap <Leader><CR><CR> i<CR><Esc> "enter from normal mode
