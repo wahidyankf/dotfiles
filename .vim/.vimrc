@@ -23,7 +23,7 @@ Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
 call plug#end()
 
-" set the split, so that it behave more 'normal'
+" set the split, so that it behave more 'normal', also modify the focused split
 set splitbelow
 set splitright
 set winwidth=84
