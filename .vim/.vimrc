@@ -1,4 +1,4 @@
-" set non compatible mode with vi
+" please move on, she is not that good anyway
 set nocompatible
 
 " syntax
@@ -39,8 +39,8 @@ set incsearch
 " column and cursor
 set textwidth=80
 set colorcolumn=+1
-set cursorline "show location of cursor using a horizontal line
-highlight ColorColumn ctermbg=233
+set cursorline
+hi ColorColumn ctermbg=DarkGray
 
 " set tab to 4 spaces
 set tabstop=4
@@ -50,7 +50,7 @@ set shiftround
 set expandtab
 set autoindent
 set ai "auto indent
-set si "smart indedt
+set si "smart indent
 set wrap " wrap
 
 " disable backup and swap
@@ -133,5 +133,4 @@ nnoremap <Leader>mdcgn i```<CR><CR>```<CR><Esc>kki
 " quote, link
 nnoremap <Leader>mdq i><Space>
 nnoremap <Leader>mdln i[hyperlink](link)<Esc>hhhhhhhhhhhhhhh
-noremap <Leader>md- i----------<CR><Esc> 
-
+noremap <Leader>md- i----------<CR><Esc>
