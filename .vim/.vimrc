@@ -2,7 +2,7 @@
 set nocompatible
 
 " syntax
-syntax enable
+syntax on
 
 " set relative number
 set relativenumber
@@ -98,7 +98,9 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " map for ruler
 nnoremap <Leader>-- i----------<CR><Esc> "create a ruler
-nnoremap <Leader><CR><CR> $a<CR><Esc> "add new line from normal mode
+
+" add new line shortcut
+nnoremap <Leader><CR><CR> $a<CR><Esc> 
 
 " create a title
 nnoremap <Leader>ti- i----------<CR><CR>----------<CR><Esc>kki
