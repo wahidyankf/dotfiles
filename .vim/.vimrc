@@ -136,4 +136,3 @@ noremap <Leader>md- i----------<CR><Esc>
 
 " test vim-fugitive, using gstatus and gcommit
 " add second line to the comment
-" add the third line to the comment. (again)
