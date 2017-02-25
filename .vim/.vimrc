@@ -57,9 +57,6 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
 " set encoding
 set encoding=utf8
 
