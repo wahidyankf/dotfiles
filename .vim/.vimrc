@@ -134,5 +134,3 @@ nnoremap <Leader>mdq i><Space>
 nnoremap <Leader>mdln i[hyperlink](link)<Esc>hhhhhhhhhhhhhhh
 noremap <Leader>md- i----------<CR><Esc> 
 
-" test vim-fugitive, using gstatus and gcommit
-" add
