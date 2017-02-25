@@ -132,4 +132,6 @@ nnoremap <Leader>mdcgn i```<CR><CR>```<CR><Esc>kki
 " quote, link
 nnoremap <Leader>mdq i><Space>
 nnoremap <Leader>mdln i[hyperlink](link)<Esc>hhhhhhhhhhhhhhh
-nnoremap <Leader>md- i----------<CR><Esc> 
+noremap <Leader>md- i----------<CR><Esc> 
+
+" test vim-fugitive, using gstatus and gcommit
