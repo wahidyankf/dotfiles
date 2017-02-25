@@ -4,8 +4,9 @@ set nocompatible
 " syntax
 syntax on
 
-" set relative number
+" set hybridnumber
 set relativenumber
+set number
 
 " show the cursor position all the time
 set ruler
