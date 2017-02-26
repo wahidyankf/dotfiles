@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
 Plug 'tpope/vim-commentary'
 Plug 'kien/ctrlp.vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
 call plug#end()
