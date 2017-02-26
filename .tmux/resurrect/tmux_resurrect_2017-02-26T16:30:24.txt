@@ -1,0 +1,5 @@
+pane	fundamentals	1	:vim	1	:*	1	:/home/gollembox/Dropbox/0_code/bank_of_code/code_notes	1	vim	:vim 000_vim.txt
+pane	fundamentals	1	:vim	1	:*	2	:/home/gollembox/Dropbox/0_code/bank_of_code	0	zsh	:
+pane	fundamentals	1	:vim	1	:*	3	:/home/gollembox/Dropbox/0_code/dotfiles	0	zsh	:
+window	fundamentals	1	1	:*	1be7,212x57,0,0{151x57,0,0,0,60x57,152,0[60x28,152,0,1,60x28,152,29,2]}
+state	fundamentals	
