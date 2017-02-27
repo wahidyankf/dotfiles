@@ -1,3 +1,0 @@
-pane	fundamentals	1	:../bank_of_code	1	:*	1	:/home/gollembox/Dropbox/0_code/bank_of_code	1	zsh	:
-window	fundamentals	1	1	:*	c9dd,212x57,0,0,0
-state	fundamentals	

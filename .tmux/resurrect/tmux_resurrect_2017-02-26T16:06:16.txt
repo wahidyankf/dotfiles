@@ -1,5 +1,0 @@
-pane	0	1	:..ropbox/0_code	1	:*	1	:/home/gollem/Dropbox/0_code	1	zsh	:
-pane	fundamental	1	:..ropbox/0_code	1	:*	1	:/home/gollem/Dropbox/0_code	1	zsh	:
-window	0	1	1	:*	cebd,118x67,0,0,0
-window	fundamental	1	1	:*	6bdf,238x69,0,0,10
-state	fundamental	

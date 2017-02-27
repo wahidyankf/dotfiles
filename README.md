@@ -22,8 +22,6 @@ vim configuration:
 
 tmux configuration:
 - [tpm](https://github.com/tmux-plugins/tpm), to manage the tmux plugin. 
-- [tmux
-  resurrect](https://github.com/tmux-plugins/tmux-resurrect/blob/master,/docs/restoring_vim_and_neovim_sessions.m://github.com/tmux-plugins/tmux-resurrect), never lose your tmux sessions.
 - [vim tmux navigator](https://github.com/christoomey/vim-tmux-navigator),
   integrate vim with tmux navigation.
 - Various binding remap and theme customization.

@@ -34,6 +34,7 @@ set winminheight=5
 set winheight=999
 
 " searching preference
+set ignorecase
 set smartcase
 set incsearch
 
