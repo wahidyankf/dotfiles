@@ -19,6 +19,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
 Plug 'tpope/vim-commentary'
+Plug 'rizzatti/dash.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'reewr/vim-monokai-phoenix'
