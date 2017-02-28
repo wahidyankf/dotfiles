@@ -19,10 +19,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
 Plug 'tpope/vim-commentary'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " set the split, so that it behave more 'normal', also modify the focused split
@@ -108,6 +109,10 @@ nnoremap <Leader><CR><CR> $a<CR><Esc>
 " create a title
 nnoremap <Leader>ti- i----------<CR><CR>----------<CR><Esc>kki
 nnoremap <Leader>ti= i==========<CR><CR>==========<CR><Esc>kki
+
+" nerd tree
+
+map <Leader>nrd :NERDTreeToggle<CR>
 
 " support for md. it is not might not be faster but easier to remember (at
 " least for me :p)
