@@ -24,6 +24,7 @@ tmux configuration:
 - [tpm](https://github.com/tmux-plugins/tpm), to manage the tmux plugin. 
 - [vim tmux navigator](https://github.com/christoomey/vim-tmux-navigator),
   integrate vim with tmux navigation.
+- [tmux-battery](https://github.com/tmux-plugins/tmux-battery), to show battery indicator.
 - Various binding remap and theme customization.
 - e.t.c.
 
