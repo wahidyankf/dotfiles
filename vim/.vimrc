@@ -11,8 +11,10 @@ set number
 " show the cursor position all the time
 set ruler
 
-" install plugin using vim-plug
+" set backspace like normal apps
+set backspace=2
 
+" install plugin using vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -58,6 +60,10 @@ set ai "auto indent
 set si "smart indent
 set wrap " wrap
 
+" set wildmenu
+set wildmenu
+set wildmode=list:longest,full 
+
 " disable backup and swap
 set nobackup
 set nowritebackup
@@ -68,10 +74,6 @@ set encoding=utf8
 
 " history
 set history=700
-
-" wildness
-set wildmenu "show autocomplete menu
-set wildmode=list:longest
 
 " key mapping
 
