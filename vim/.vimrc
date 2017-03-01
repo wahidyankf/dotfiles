@@ -1,4 +1,4 @@
-" please move on, she is not that good anyway
+"please move on, she is not that good anyway
 set nocompatible
 
 " syntax
@@ -41,8 +41,9 @@ set smartcase
 set incsearch
 
 " column and cursor
-set textwidth=80
-set colorcolumn=+1
+set textwidth=0
+set wrapmargin=0
+set colorcolumn=80
 set cursorline
 hi ColorColumn ctermbg=DarkGray
 
