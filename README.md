@@ -17,6 +17,7 @@ vim configuration:
 - [Vim commentary](https://github.com/tpope/vim-commentary), for multiple comment
 - [Monokai Phoenix theme](https://github.com/Reewr/vim-monokai-phoenix), just because I like it.
 - [Vim system copy](https://github.com/christoomey/vim-system-copy), to copy and paste using clipboard. 
+- [Vim Indent Guide](https://github.com/nathanaelkane/vim-indent-guides), to highlight and show indentation.
 - Various split windows optimization.
 - e.t.c.
 

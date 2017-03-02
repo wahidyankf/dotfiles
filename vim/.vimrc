@@ -27,6 +27,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 " set the split, so that it behave more 'normal', also modify the focused split
