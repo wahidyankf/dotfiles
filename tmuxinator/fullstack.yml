@@ -31,17 +31,24 @@ root: ~/Dropbox/0_code/udacity_fullstack_web_developer
 # post: tmux -CC attach -t fullstack
 
 windows:
-  - web:
+  - web_dev:
       layout: 8491,238x59,0,0[238x54,0,0,0,238x4,0,55{119x4,0,55,1,118x4,120,55,2}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
+      root: ~/Dropbox/0_code/udacity_fullstack_web_developer
       panes:
-        - cd udacity_fullstack_web_developer/ && vim
-        - cd udacity_fullstack_web_developer 
-        - cd udacity_fullstack_web_developer
-  - dashboard:
+        - vim
+        - web_dev:
+            - cd udacity_fullstack_web_developer
+            - clear
+        - web_dev:
+            - cd udacity_fullstack_web_developer
+            - clear
+  - command_control:
       layout: even-horizontal
       panes:
-        -
-        -
+        - command_control:
+            - cd
+            - clear
+        - clear
