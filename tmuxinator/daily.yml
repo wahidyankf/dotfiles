@@ -1,6 +1,6 @@
 # ~/.tmuxinator/fullstack.yml
 
-name: fullstack
+name: daily
 root: ~/Dropbox/0_code/udacity_fullstack_web_developer
 
 # Optional tmux socket
