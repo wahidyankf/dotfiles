@@ -38,6 +38,9 @@ set winheight=5
 set winminheight=5
 set winheight=999
 
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set list
+
 " searching preference
 set ignorecase
 set smartcase
