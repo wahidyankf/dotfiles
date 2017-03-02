@@ -1,6 +1,6 @@
 # Dotfiles
 
-This repository contain the configuration files from several of my favourite tools. Feel free to copy and use it.
+This repository contain the configuration files from several of my favourite tools. I mainly use this repository as a back up for my dotfiles, but feel free to copy and use it.
 
 ## Usage
 
@@ -28,6 +28,13 @@ tmux configuration:
 - [tmux-battery](https://github.com/tmux-plugins/tmux-battery), to show battery indicator.
 - Various binding remap and theme customization.
 - e.t.c.
+
+tmuxinator configuration:
+- add template for tmux
+
+zsh:
+- change default template
+- e.t.c
 
 ## License
 
