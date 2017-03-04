@@ -38,7 +38,9 @@ windows:
       # synchronize: after
       root: ~/Dropbox/0_code/udacity_fullstack_web_developer
       panes:
-        - vim
+        - web_dev:
+            - cd udacity_fullstack_web_developer
+            - clear
         - web_dev:
             - cd udacity_fullstack_web_developer
             - clear
@@ -52,3 +54,7 @@ windows:
             - cd
             - clear
         - clear
+  - notes:
+      layout: main-vertical
+      panes:
+        - cd Dropbox/0_code/bank_of_notes

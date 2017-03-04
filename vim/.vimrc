@@ -122,6 +122,9 @@ nnoremap <Leader>ti= i==========<CR><CR>==========<CR><Esc>kki
 
 map <Leader>nrd :NERDTreeToggle<CR>
 
+" copy all to system clipboard
+nnoremap <Leader>cpa gg"*yG
+
 " support for md. it is not might not be faster but easier to remember (at
 " least for me :p)
 
