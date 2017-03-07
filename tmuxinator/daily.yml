@@ -52,7 +52,7 @@ windows:
       panes:
         - clear
         - clear
-  - command_control:
+  - command_center:
       layout: even-horizontal
       panes:
         - root:
