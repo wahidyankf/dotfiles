@@ -31,30 +31,37 @@ root: ~/Dropbox/0_code/udacity_fullstack_web_developer
 # post: tmux -CC attach -t fullstack
 
 windows:
-  - web_dev:
-      layout: 8491,238x59,0,0[238x54,0,0,0,238x4,0,55{119x4,0,55,1,118x4,120,55,2}]
+  - main:
+      layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
-      root: ~/Dropbox/0_code/udacity_fullstack_web_developer
+      root: ~/Dropbox/0_code
       panes:
-        - web_dev:
-            - cd udacity_fullstack_web_developer
+        - main:
+            - cd a_teamtreehouse_fullstackpy
             - clear
-        - web_dev:
-            - cd udacity_fullstack_web_developer
+        - main:
+            - cd a_teamtreehouse_fullstackpy
             - clear
-        - web_dev:
-            - cd udacity_fullstack_web_developer
+        - main:
+            - cd a_teamtreehouse_fullstackpy
             - clear
+  - quicky:
+      layout: even-horizontal
+      panes:
+        - clear
+        - clear
   - command_control:
       layout: even-horizontal
       panes:
-        - command_control:
-            - cd
+        - root:
+            - cd ~
             - clear
         - clear
   - notes:
       layout: main-vertical
       panes:
-        - cd Dropbox/0_code/bank_of_notes
+        - notes:
+            - cd bank_of_notes
+            - clear
