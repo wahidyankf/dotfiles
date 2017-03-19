@@ -128,14 +128,6 @@ nnoremap <Leader>cpa gg"*yG
 " support for md. it is not might not be faster but easier to remember (at
 " least for me :p)
 
-" headings
-nnoremap <Leader>mdh1 i#
-nnoremap <Leader>mdh2 i##
-nnoremap <Leader>mdh3 i###
-nnoremap <Leader>mdh4 i####
-nnoremap <Leader>mdh5 i#####
-nnoremap <Leader>mdh6 i######
-
 " emphasis and italics
 nnoremap <Leader>mdit i__<Esc>i
 nnoremap <Leader>mdem i****<Esc>hi
@@ -152,3 +144,7 @@ nnoremap <Leader>mdcgn i```<CR><CR>```<CR><Esc>kki
 nnoremap <Leader>mdq i><Space>
 nnoremap <Leader>mdln i[hyperlink](link)<Esc>hhhhhhhhhhhhhhh
 noremap <Leader>md- i----------<CR><Esc>
+
+" support for hexo tag asset res "
+
+nnoremap <Leader>hximg i{% asset_img image.jpg %}<Esc>0
