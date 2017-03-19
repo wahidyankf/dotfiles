@@ -147,4 +147,6 @@ noremap <Leader>md- i----------<CR><Esc>
 
 " support for hexo tag asset res "
 
-nnoremap <Leader>hximg i{% asset_img image.jpg %}<Esc>0
+nnoremap <Leader>hximg i{% asset_img image.jpg 'put caption here'%}<Esc>0
+nnoremap <Leader>hxref i{% asset_link mylink.pdf 'put caption here'%}<Esc>0
+nnoremap <Leader>hxrm i<!-- more --><Esc>0
