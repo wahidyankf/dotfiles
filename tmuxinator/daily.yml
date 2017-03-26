@@ -32,33 +32,39 @@ root: ~/Dropbox/0_code/udacity_fullstack_web_developer
 
 windows:
   - main:
-      layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
+      layout: a132,238x62,0,0{196x62,0,0,1,41x62,197,0[41x31,197,0,7,41x30,197,32,11]}
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       root: ~/Dropbox/0_code
       panes:
         - main:
-            - clear
+            - reset
         - main:
-            - clear
+            - reset
         - main:
-            - clear
+            - reset
   - quicky:
       layout: even-horizontal
       panes:
-        - clear
-        - clear
+        - reset
+        - reset
   - command_center:
       layout: even-horizontal
       panes:
         - root:
             - cd ~
-            - clear
-        - clear
-  - notes:
-      layout: main-vertical
+            - reset
+        - reset
+  - blog:
+      layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
       panes:
-        - notes:
-            - cd bank_of_note
-            - clear
+        - write:
+            - cd ~/Dropbox/0_code/bank_of_project/hexo_blog/source
+            - reset
+        - hexo_server:
+            - cd ~/Dropbox/0_code/bank_of_project/hexo_blog/
+            - reset
+        - hexo_commands:
+            - cd ~/Dropbox/0_code/bank_of_project/hexo_blog/
+            - reset
