@@ -43,4 +43,4 @@ simple web build system to automate our web development using
 
 ## License
 
-[MIT License](https://en.wikipedia.org/wiki/MIT_License).
+[MIT](https://en.wikipedia.org/wiki/MIT_License).
