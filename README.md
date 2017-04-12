@@ -36,6 +36,11 @@ zsh:
 - change default template
 - e.t.c
 
+simple web build system to automate our web development using
+- gulp
+- scss
+- js and css concatenation
+
 ## License
 
 [MIT License](https://en.wikipedia.org/wiki/MIT_License).

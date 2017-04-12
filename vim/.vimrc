@@ -53,10 +53,10 @@ set colorcolumn=80
 set cursorline
 hi ColorColumn ctermbg=DarkGray
 
-" set tab to 4 spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+" set tab to 2 spaces
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set shiftround
 set expandtab
 set autoindent
