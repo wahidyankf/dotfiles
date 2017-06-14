@@ -73,10 +73,16 @@ gulp.task('copyAudio', function(){
         .pipe(gulp.dest(options.dist + '/audio'));
 });
 
+gulp.task('copyVideo', function(){
+    return gulp.src(options.src + '/video')
+        .pipe(gulp.dest(options.dist + '/video'));
+});
+
 gulp.task('build', ['html'], function(){
     gulp.start('copyImage');
     gulp.start('copyFonts');
     gulp.start('copyAudio');
+    gulp.start('copyVideo');
 });
 
 gulp.task('default', ['clean'], function(){

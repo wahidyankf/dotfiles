@@ -1,7 +1,5 @@
-# ~/.tmuxinator/fullstack.yml
-
 name: daily
-root: ~/Dropbox/0_code/udacity_fullstack_web_developer
+root: ~/Dropbox/0_code/
 
 # Optional tmux socket
 # socket_name: foo
@@ -62,10 +60,10 @@ windows:
             - cd ~
             - reset
         - reset
-        - reset
         - ijs:
             - reset
-            - ijs
+            - jupyter notebook --browser chrome
+        - reset
   - blog:
       layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
       panes:
