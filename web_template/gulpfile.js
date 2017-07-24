@@ -26,7 +26,7 @@ gulp.task('deploy', function(){
 });
 
 gulp.task('compileSass', function(){
-    return gulp.src(options.src + '/scss/app.scss')
+    return gulp.src(options.src + '/scss/**/*.scss')
         .pipe(plumber())
         .pipe(maps.init())
         .pipe(sass())
@@ -60,7 +60,7 @@ gulp.task('cleanAll', function(){
 })
 
 gulp.task('html', function(){
-    gulp.src(options.src + '/index.html')
+    gulp.src(options.src + '/**/*.html')
         .pipe(useref())
         .pipe(iff('*.js', uglify()))
         .pipe(iff('*.css', csso()))
