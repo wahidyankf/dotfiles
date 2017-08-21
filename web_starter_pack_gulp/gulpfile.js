@@ -39,11 +39,6 @@ gulp.task('compileSass', function() {
     .pipe(maps.init())
     .pipe(sass())
     .pipe(postcss([autoprefixer()]))
-    .pipe(
-      uncss({
-        html: ['src/**/*.html']
-      })
-    )
     .pipe(maps.write('./'))
     .pipe(gulp.dest(options.src + '/css'))
     .pipe(browserSync.stream());
