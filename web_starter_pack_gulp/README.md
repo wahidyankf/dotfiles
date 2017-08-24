@@ -24,7 +24,7 @@ This app was tested using [HTML](https://validator.w3.org/) and [CSS](https://ji
 
 ## Sreenshots
 
-![screenshot 1](screenshots/___.jpg)
+![screenshot 1](screenshots/___.png)
 
 ## License
 
