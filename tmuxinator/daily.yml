@@ -1,5 +1,5 @@
 name: daily
-root: ~/Dropbox/0_code/
+root: ~
 
 # Optional tmux socket
 # socket_name: foo
@@ -35,44 +35,39 @@ root: ~/Dropbox/0_code/
 # 4: blog- (3 panes) [238x62] [layout 4785,238x62,0,0[238x55,0,0,3,238x6,0,56{118x6,0,56,8,119x6,119,56,9}]] @3  
 
 windows:
-  - main:
-      layout: 2bf5,238x62,0,0{190x62,0,0,0,47x62,191,0[47x31,191,0,4,47x30,191,32,5]}
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      root: ~/Dropbox/0_code
-      panes:
-        - main:
-            - reset
-        - main:
-            - reset
-        - main:
-            - reset
-  - quicky:
-      layout: even-horizontal
-      panes:
-        - reset
-        - reset
-  - command_center:
+  - 4Eq:
       layout: e18e,238x62,0,0{118x62,0,0[118x31,0,0,2,118x30,0,32,11],119x62,119,0[119x31,119,0,7,119x30,119,32,10]}
       panes:
         - root:
             - cd ~
             - reset
         - reset
-        - ijs:
-            - reset
-            - jupyter notebook --browser chrome
         - reset
-  - blog:
+        - reset
+  - LR:
+      layout: even-horizontal
+      panes:
+        - reset
+        - reset
+  - LRR:
+      layout: 2bf5,238x62,0,0{190x62,0,0,0,47x62,191,0[47x31,191,0,4,47x30,191,32,5]}
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      root: ~
+      panes:
+        - main:
+            - reset
+        - main:
+            - reset
+        - main:
+            - reset
+  - TBB:
       layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
       panes:
-        - write:
-            - cd ~/Dropbox/0_code/bank_of_project/hexo_blog/source
+        - top:
             - reset
-        - hexo_server:
-            - cd ~/Dropbox/0_code/bank_of_project/hexo_blog/
+        - bottom1:
             - reset
-        - hexo_commands:
-            - cd ~/Dropbox/0_code/bank_of_project/hexo_blog/
+        - bottom2:
             - reset
