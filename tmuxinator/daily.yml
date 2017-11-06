@@ -35,39 +35,63 @@ root: ~
 # 4: blog- (3 panes) [238x62] [layout 4785,238x62,0,0[238x55,0,0,3,238x6,0,56{118x6,0,56,8,119x6,119,56,9}]] @3  
 
 windows:
-  - 4Eq:
-      layout: e18e,238x62,0,0{118x62,0,0[118x31,0,0,2,118x30,0,32,11],119x62,119,0[119x31,119,0,7,119x30,119,32,10]}
-      panes:
-        - root:
-            - cd ~
-            - reset
-        - reset
-        - reset
-        - reset
-  - LR:
+  - Extra:
       layout: even-horizontal
       panes:
         - reset
         - reset
-  - Lrr:
-      layout: 2bf5,238x62,0,0{190x62,0,0,0,47x62,191,0[47x31,191,0,4,47x30,191,32,5]}
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      root: ~
+  - Personal Project:
+      layout: e18e,238x62,0,0{118x62,0,0[118x31,0,0,2,118x30,0,32,11],119x62,119,0[119x31,119,0,7,119x30,119,32,10]}
       panes:
-        - main:
+        - root:
+            - cd ~/0_onlineRepos/1_icc && gitbook serve
             - reset
-        - main:
+        - root:
+            - cd ~/0_onlineRepos/
             - reset
-        - main:
+        - root:
+            - cd ~/0_onlineRepos/
             - reset
-  - Tbb:
-      layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
+        - root:
+            - cd ~/0_onlineRepos
+            - reset
+  - Jobs:
+      layout: e18e,238x62,0,0{118x62,0,0[118x31,0,0,2,118x30,0,32,11],119x62,119,0[119x31,119,0,7,119x30,119,32,10]}
       panes:
-        - top:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
             - reset
-        - bottom1:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - yarn local
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
             - reset
-        - bottom2:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - yarn css
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
             - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/front-end-docs-and-convention
+            - reset
+#   - Lrr:
+#       layout: 2bf5,238x62,0,0{190x62,0,0,0,47x62,191,0[47x31,191,0,4,47x30,191,32,5]}
+#       root: ~
+#       panes:
+#         - main:
+#             - reset
+#         - main:
+#             - reset
+#         - main:
+#             - reset
+#   - Tbb:
+#       layout: 4602,238x62,0,0[238x55,0,0,0,238x6,0,56{118x6,0,56,4,119x6,119,56,5}]
+#       panes:
+#         - top:
+#             - reset
+#         - bottom1:
+#             - reset
+#         - bottom2:
+#             - reset
