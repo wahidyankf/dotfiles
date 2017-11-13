@@ -59,19 +59,19 @@ windows:
       layout: e18e,238x62,0,0{118x62,0,0[118x31,0,0,2,118x30,0,32,11],119x62,119,0[119x31,119,0,7,119x30,119,32,10]}
       panes:
         - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
-            - reset
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
+            - yarn start
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
             - yarn local
         - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
-            - reset
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
+            - yarn css
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
             - yarn css
         - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
             - reset
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/front-end-docs-and-convention

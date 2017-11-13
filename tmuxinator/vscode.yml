@@ -1,0 +1,46 @@
+name: daily
+root: ~
+
+windows:
+  - R:
+      layout: even-vertical
+      panes:
+        - reset
+        - reset
+        - reset
+  - P:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/1_icc && gitbook serve
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/
+            - reset
+  - J A:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - yarn local
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - yarn css
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/front-end-docs-and-convention
+            - reset
+  - J B:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
+            - yarn start
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
+            - reset
