@@ -1,0 +1,28 @@
+name: daily
+root: ~
+
+windows:
+  - R:
+      layout: even-vertical
+      panes:
+        - reset
+        - reset
+        - reset
+  - DS:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/1_icc && gitbook serve
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_data_science
+            - reset
+  - FE:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/react-stack/
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/react-stack/
+            - reset
