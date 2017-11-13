@@ -5,14 +5,16 @@ windows:
   - R:
       layout: even-vertical
       panes:
-        - reset
+        - root:
+            - cd ~/0_onlineRepos/1_icc && gitbook serve
+            - reset
         - reset
         - reset
   - DS:
       layout: even-vertical
       panes:
         - root:
-            - cd ~/0_onlineRepos/1_icc && gitbook serve
+            - cd ~/0_onlineRepos/2_learn_data_science
             - reset
         - root:
             - cd ~/0_onlineRepos/2_learn_data_science
