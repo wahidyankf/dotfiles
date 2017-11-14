@@ -23,8 +23,8 @@ windows:
       layout: even-vertical
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/react-stack/
+            - cd ~/0_onlineRepos/2_learn_javascript/
             - reset
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/react-stack/
+            - cd ~/0_onlineRepos/2_learn_javascript/
             - reset
