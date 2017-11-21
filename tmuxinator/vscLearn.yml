@@ -28,3 +28,9 @@ windows:
         - root:
             - cd ~/0_onlineRepos/2_learn_javascript/
             - reset
+  - BE:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
