@@ -1,0 +1,33 @@
+name: vscJobsH
+root: ~
+
+windows:
+  - R:
+      layout: even-horizontal
+      panes:
+        - reset
+        - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/front-end-docs-and-convention
+            - reset
+  - B:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - yarn local
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - yarn css
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
+            - reset
+  - C:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
+            - yarn start
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
+            - reset
