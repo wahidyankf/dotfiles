@@ -1,0 +1,25 @@
+name: vscLearnBE
+root: ~
+
+windows:
+  - BE1:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+  - BE2:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+  - BE3:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset

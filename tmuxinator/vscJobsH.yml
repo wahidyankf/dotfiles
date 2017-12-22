@@ -27,7 +27,7 @@ windows:
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
-            - yarn start
+            - yarn local
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/ruang-uji-revamp
             - reset

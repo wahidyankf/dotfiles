@@ -3,24 +3,15 @@ root: ~
 
 windows:
   - R:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - root:
             - cd ~/0_onlineRepos/1_icc && gitbook serve
             - reset
         - reset
         - reset
-  - DS:
-      layout: even-vertical
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/2_learn_data_science
-            - reset
-        - root:
-            - cd ~/0_onlineRepos/2_learn_data_science
-            - reset
-  - FE:
-      layout: even-vertical
+  - 3cols:
+      layout: even-horizontal
       panes:
         - root:
             - cd ~/0_onlineRepos/2_learn_javascript/
@@ -28,8 +19,20 @@ windows:
         - root:
             - cd ~/0_onlineRepos/2_learn_javascript/
             - reset
-  - BE:
-      layout: even-vertical
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+  - 2cols:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+  - 3cols:
+      layout: even-horizontal
       panes:
         - root:
             - cd ~/0_onlineRepos/2_learn_javascript/
