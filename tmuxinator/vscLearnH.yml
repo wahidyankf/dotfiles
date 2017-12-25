@@ -2,13 +2,15 @@ name: vscLearn
 root: ~
 
 windows:
-  - R:
+  - icc:
       layout: even-horizontal
       panes:
         - root:
             - cd ~/0_onlineRepos/1_icc && gitbook serve
             - reset
-        - reset
+        - root:
+            - cd ~/0_onlineRepos/1_icc && gitbook serve
+            - reset
         - reset
   - 3cols:
       layout: even-horizontal
@@ -31,7 +33,13 @@ windows:
         - root:
             - cd ~/0_onlineRepos/2_learn_javascript/
             - reset
-  - 3cols:
+  - 1cols2:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/
+            - reset
+  - 1cols1:
       layout: even-horizontal
       panes:
         - root:

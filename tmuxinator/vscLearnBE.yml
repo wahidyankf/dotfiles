@@ -2,24 +2,42 @@ name: vscLearnBE
 root: ~
 
 windows:
-  - BE1:
-      layout: even-vertical
+  - ICC:
+      layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/1_icc/
             - reset
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/1_icc/
+            - reset
+  - BE1:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_backend/
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_backend/
             - reset
   - BE2:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn_backend/
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_backend/
             - reset
   - BE3:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn_backend/
+            - reset
+  - BE4:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_backend/
             - reset
