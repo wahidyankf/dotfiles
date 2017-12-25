@@ -1,17 +1,7 @@
-name: vscLearn
+name: vscLearnH
 root: ~
 
 windows:
-  - icc:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/1_icc && gitbook serve
-            - reset
-        - root:
-            - cd ~/0_onlineRepos/1_icc && gitbook serve
-            - reset
-        - reset
   - 3cols:
       layout: even-horizontal
       panes:

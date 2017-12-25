@@ -2,15 +2,6 @@ name: vscLearnBE
 root: ~
 
 windows:
-  - ICC:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/1_icc/
-            - reset
-        - root:
-            - cd ~/0_onlineRepos/1_icc/
-            - reset
   - BE1:
       layout: even-horizontal
       panes:

@@ -1,0 +1,12 @@
+name: writing
+root: ~
+
+windows:
+  - icc:
+      layout: even-vertical
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/1_icc && gitbook serve
+        - root:
+            - cd ~/0_onlineRepos/1_icc
+            - reset
