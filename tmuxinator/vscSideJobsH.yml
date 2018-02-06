@@ -1,0 +1,40 @@
+name: vscJobsH
+root: ~
+
+windows:
+  - A:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/template
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/template
+            - reset
+  - B:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/admin
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/admin
+            - reset
+  - C:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/staff
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/staff
+            - reset
+  - D:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web
+            - reset

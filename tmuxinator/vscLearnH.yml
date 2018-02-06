@@ -35,3 +35,12 @@ windows:
         - root:
             - cd ~/0_onlineRepos/2_learn_javascript/
             - reset
+  - ongoing:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/kindle-eloquent-js
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/2_learn_javascript/kindle-eloquent-js
+            - reset

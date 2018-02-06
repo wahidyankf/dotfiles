@@ -3,10 +3,19 @@ root: ~
 
 windows:
   - icc:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/1_icc && gitbook serve
+            - cd ~/0_onlineRepos/0_writing/indocodecamp && gitbook serve
         - root:
-            - cd ~/0_onlineRepos/1_icc
+            - cd ~/0_onlineRepos/0_writing/indocodecamp
+            - reset
+  - ayk:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_writing/ayokoding
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_writing/ayokoding
             - reset
