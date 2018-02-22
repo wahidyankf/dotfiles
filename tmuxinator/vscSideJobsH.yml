@@ -2,7 +2,17 @@ name: vscSideJobsH
 root: ~
 
 windows:
-  - A:
+  - user:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/user
+            - yarn local
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/user
+            - reset
+  - template:
       layout: even-horizontal
       panes:
         - root:
@@ -11,7 +21,7 @@ windows:
         - root:
             - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/template
             - reset
-  - B:
+  - admin:
       layout: even-horizontal
       panes:
         - root:
@@ -20,16 +30,7 @@ windows:
         - root:
             - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/admin
             - reset
-  - C:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/staff
-            - reset
-        - root:
-            - cd ~/0_onlineRepos/0_jobs_gits/pwc_digital_office_web/staff
-            - reset
-  - D:
+  - root:
       layout: even-horizontal
       panes:
         - root:

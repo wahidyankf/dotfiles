@@ -6,41 +6,32 @@ windows:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn
             - reset
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn
             - reset
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn
             - reset
   - 2cols:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn
             - reset
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
-            - reset
-  - 1cols2:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn
             - reset
   - 1cols1:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/
+            - cd ~/0_onlineRepos/2_learn
             - reset
-  - ongoing:
+  - 1cols2:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/kindle-eloquent-js
-            - reset
-        - root:
-            - cd ~/0_onlineRepos/2_learn_javascript/kindle-eloquent-js
+            - cd ~/0_onlineRepos/2_learn
             - reset

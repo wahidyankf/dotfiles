@@ -24,7 +24,7 @@ var gulp = require('gulp'),
 var options = {
   src: 'src',
   dist: 'dist',
-  test: 'optimization-testing/public'
+  test: 'optimization-testing/public',
 };
 
 gulp.task('deploy', function() {
@@ -45,7 +45,7 @@ gulp.task('compileSass', function() {
 
 gulp.task('serve', ['compileSass'], function() {
   browserSync.init({
-    server: './src'
+    server: './src',
   });
 
   gulp.watch(options.src + '/scss/**/*.scss', ['compileSass']);
@@ -78,7 +78,7 @@ gulp.task('html', function() {
       iff(
         '*.html',
         htmlmin({
-          collapseWhitespace: true
+          collapseWhitespace: true,
         })
       )
     )
@@ -94,30 +94,30 @@ gulp.task('optimizeImage', function() {
     .pipe(
       imagemin([
         imagemin.gifsicle({
-          interlaced: true
+          interlaced: true,
         }),
         imagemin.jpegtran({
-          progressive: true
+          progressive: true,
         }),
         imagemin.optipng({
-          optimizationLevel: 5
+          optimizationLevel: 5,
         }),
         imagemin.svgo({
           plugins: [
             {
               removeViewBox: true,
-              cleanupAttrs: true
-            }
-          ]
+              cleanupAttrs: true,
+            },
+          ],
         }),
         imageminJpegrecompress({
           min: 25,
           max: 25,
-          quality: 'low'
+          quality: 'low',
         }),
         imageminPngquant({
-          quality: 25
-        })
+          quality: 25,
+        }),
       ])
     )
     .pipe(gulp.dest(options.src + '/img/'));
