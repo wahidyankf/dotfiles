@@ -6,6 +6,9 @@ export ZSH=/Users/abdurrahman/.oh-my-zsh
 export PATH=/Users/abdurrahman/anaconda3/bin:$PATH
 export EDITOR=vim
 export DISABLE_AUTO_TITLE=true
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -98,3 +101,26 @@ if [ -f '/Users/abdurrahman/google-cloud-sdk/completion.zsh.inc' ]; then source 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 
 tmux
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+function ykcdlearn {
+  builtin cd ~/0_onlineRepos/2_learn/
+}
+
+function ykcdrg {
+ builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/
+}
+
+function ykcdfe {
+  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/
+}
+
+function ykcdport {
+  builtin cd ~/0_onlineRepos/1_portfolio/
+}
+
+function ykcddot {
+  builtin cd ~/Dropbox/0_code/a_dotfiles/
+}
+
