@@ -1,5 +1,5 @@
 {
-  "name": "web_template",
+  "name": "webtemplategulp",
   "version": "1.0.0",
   "description": "web template",
   "main": "gulpfile.js",
