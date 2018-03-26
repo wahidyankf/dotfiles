@@ -2,7 +2,25 @@ name: vscJobsH
 root: ~
 
 windows:
-  - A:
+  - ruker:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
+            - npm start
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
+            - reset
+  - uji:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
+            - reset
+  - rg:
       layout: even-horizontal
       panes:
         - root:
@@ -13,22 +31,4 @@ windows:
             - reset
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
-            - reset
-  - B:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
-            - yarn local-staging
-        - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
-            - reset
-  - C:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
-            - reset
-        - root:
-            - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
             - reset

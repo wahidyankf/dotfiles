@@ -124,3 +124,6 @@ function ykcddot {
   builtin cd ~/Dropbox/0_code/a_dotfiles/
 }
 
+function ykcdruker {
+  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
+}
