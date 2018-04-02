@@ -127,3 +127,15 @@ function ykcddot {
 function ykcdruker {
   builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
 }
+
+function ykrniosgoto {
+  xcrun simctl openurl booted ruangkerja://$1
+}
+
+function ykrndebugger {
+  open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
+}
+
+function ykreloadzsh {
+  builtin source ~/.zshrc
+}
