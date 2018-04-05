@@ -3,3 +3,4 @@ _book
 dist
 bower_components
 .vscode
+.DS_Store
