@@ -10,7 +10,7 @@ windows:
             - yarn start
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
-            - reset
+            - yarn run-ios
   - uji:
       layout: even-horizontal
       panes:
