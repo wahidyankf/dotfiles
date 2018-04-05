@@ -148,6 +148,10 @@ function ykrndebugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
 
+function ykbackuprepo {
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
+}
+
 function ykreloadzsh {
   builtin source ~/.zshrc
 }
