@@ -2,20 +2,20 @@ name: writing
 root: ~
 
 windows:
-  - icc:
-      layout: even-horizontal
-      panes:
-        - root:
-            - cd ~/0_onlineRepos/0_writing/indocodecamp && gitbook serve
-        - root:
-            - cd ~/0_onlineRepos/0_writing/indocodecamp
-            - reset
   - ayk:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/0_writing/ayokoding
-            - reset
+            - cd ~/0_onlineRepos/0_writing/ayokoding && gitbook serve
         - root:
             - cd ~/0_onlineRepos/0_writing/ayokoding
+            - reset
+  - icc:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_writing/indocodecamp
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_writing/indocodecamp
             - reset
