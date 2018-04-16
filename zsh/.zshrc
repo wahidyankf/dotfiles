@@ -144,6 +144,10 @@ function ykrnandroidgoto2 {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja && adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
 }
 
+function ykrnandroidrestartgoto {
+  yarn run-android && adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
+}
+
 function ykrndebugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
