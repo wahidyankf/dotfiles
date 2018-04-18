@@ -11,6 +11,7 @@ windows:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
             - yarn run-android
+            - yarn run-ios
   - uji:
       layout: even-horizontal
       panes:

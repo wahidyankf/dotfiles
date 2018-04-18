@@ -136,6 +136,10 @@ function ykrniosgoto2 {
   xcrun simctl openurl booted ruangkerja://$1 && xcrun simctl openurl booted ruangkerja://$1
 }
 
+function ykrniosstartgoto {
+  yarn run-ios && xcrun simctl openurl booted ruangkerja://$1
+}
+
 function ykrnandroidgoto {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
 }
@@ -144,7 +148,7 @@ function ykrnandroidgoto2 {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja && adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
 }
 
-function ykrnandroidrestartgoto {
+function ykrnandroidstartgoto {
   yarn run-android && adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
 }
 
