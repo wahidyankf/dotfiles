@@ -133,23 +133,23 @@ function ykrniosgoto {
 }
 
 function ykrniosgoto2 {
-  xcrun simctl openurl booted ruangkerja://$1 && xcrun simctl openurl booted ruangkerja://$1
+  ykrniosgoto $1 && ykrniosgoto $2
 }
 
 function ykrniosstartgoto {
-  yarn run-ios && xcrun simctl openurl booted ruangkerja://$1
+  yarn run-ios && ykrniosgoto $1
 }
 
 function ykrnandroidgoto {
-  adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
+  adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangguru.kerjaStaging
 }
 
 function ykrnandroidgoto2 {
-  adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja && adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
+  ykrnandroidgoto $1 && ykrnandroidgoto $2
 }
 
 function ykrnandroidstartgoto {
-  yarn run-android && adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangkerja
+  yarn run-android && ykrnandroidgoto $1
 }
 
 function ykrndebugger {
@@ -170,4 +170,8 @@ function ykclearandbackuprepo {
 
 function ykreloadzsh {
   builtin source ~/.zshrc
+}
+
+function ykreloadzshgotoruker {
+  ykreloadzsh && ykcdruker
 }
