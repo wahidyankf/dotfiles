@@ -1,0 +1,22 @@
+{
+  "name": "a_dotfiles",
+  "version": "1.0.0",
+  "description":
+    "This repository contain the configuration files from several of my favourite tools. I mainly use this repository as a back up for my dotfiles, but feel free to copy and use it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy":
+      "git add --all && git commit -m \"update $(date +\"%D %T\")\" && git push origin master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wahidyankf/dotfiles.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wahidyankf/dotfiles/issues"
+  },
+  "homepage": "https://github.com/wahidyankf/dotfiles#readme"
+}
