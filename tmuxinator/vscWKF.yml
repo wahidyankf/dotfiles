@@ -11,3 +11,9 @@ windows:
         - root:
             - cd ~/0_onlineRepos/1_portfolio/wahidyankf.github.io/
             - reset
+  - dot:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd Dropbox/0_code/a_dotfiles
+            - reset
