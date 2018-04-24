@@ -1,0 +1,13 @@
+name: vscJobsH
+root: ~
+
+windows:
+  - wkf:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/1_portfolio/wahidyankf.github.io/
+            - gulp serve
+        - root:
+            - cd ~/0_onlineRepos/1_portfolio/wahidyankf.github.io/
+            - reset
