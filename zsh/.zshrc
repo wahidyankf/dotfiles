@@ -156,6 +156,55 @@ function ykrndebugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
 
+function ykrniosdevpretestview {
+  ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+}
+
+function ykrniosdevpretestresult {
+  ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
+}
+
+function ykrniosdevposttestview {
+  ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+}
+
+function ykrniosdevposttestresult {
+  ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
+}
+
+function ykrnandroiddevpretestview {
+  ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+}
+
+function ykrnandroiddevpretestresult {
+  ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+}
+
+function ykrnandroiddevposttestview {
+  ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+}
+
+function ykrnandroiddevposttestresult {
+  ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+}
+
+function ykrniosdevcoursedetail {
+  ykrniosgoto course-detail/course12311
+}
+
+function ykrniosdevcoursepreview {
+  ykrniosgoto course-preview/course1231
+}
+
+function ykrnandroiddevcoursedetail {
+  ykrnandroidgoto course-detail/course12311
+}
+
+function ykrnandroiddevcoursepreview {
+  ykrnandroidgoto course-preview/course1231
+}
+
+
 function ykclearbackup {
   rm -rf ~/Dropbox/0_backup_onlineRepos/
 }
