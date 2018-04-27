@@ -164,12 +164,20 @@ function ykrniosdevpretestresult {
   ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
+function ykrniosdevpretestresult0 {
+  ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
+}
+
 function ykrniosdevposttestview {
   ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
 function ykrniosdevposttestresult {
   ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
+}
+
+function ykrniosdevposttestresult0 {
+  ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
 function ykrnandroiddevpretestview {
@@ -180,12 +188,20 @@ function ykrnandroiddevpretestresult {
   ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
+function ykrnandroiddevpretestresult0 {
+  ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+}
+
 function ykrnandroiddevposttestview {
   ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
 function ykrnandroiddevposttestresult {
   ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+}
+
+function ykrnandroiddevposttestresult0 {
+  ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
 function ykrniosdevcoursedetail {
