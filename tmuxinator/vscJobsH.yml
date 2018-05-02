@@ -2,16 +2,24 @@ name: vscJobsH
 root: ~
 
 windows:
-  - ruker:
+  - ruker-app:
       layout: even-horizontal
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
-            - yarn start
+            - reset
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
-            - yarn run-android
-            - yarn run-ios
+            - reset
+  - ruker-dash:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
+            - reset
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
+            - reset
   - uji:
       layout: even-horizontal
       panes:
