@@ -104,6 +104,8 @@ tmux
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Functions - Personal
+
 function ykcdlearn {
   builtin cd ~/0_onlineRepos/2_learn/
 }
@@ -111,6 +113,28 @@ function ykcdlearn {
 function ykcdayokoding {
   builtin cd ~/0_onlineRepos/0_writing/ayokoding/
 }
+
+function ykcdport {
+  builtin cd ~/0_onlineRepos/1_portfolio/
+}
+
+function ykcddot {
+  builtin cd ~/Dropbox/0_code/a_dotfiles/
+}
+
+function ykbackuprepo {
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
+}
+
+function ykclearandbackuprepo {
+  rm -rf ~/Dropbox/0_backup_onlineRepos/ && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
+}
+
+function ykreloadzsh {
+  builtin source ~/.zshrc
+}
+
+# Functions - jobs
 
 function ykcdrg {
  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/
@@ -120,12 +144,8 @@ function ykcdfe {
   builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/
 }
 
-function ykcdport {
-  builtin cd ~/0_onlineRepos/1_portfolio/
-}
-
-function ykcddot {
-  builtin cd ~/Dropbox/0_code/a_dotfiles/
+function ykcdsource {
+  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source
 }
 
 function ykcdrukerapp {
@@ -236,21 +256,8 @@ function ykrnandroiddevcoursepreview {
   ykrnandroidgoto course-preview/course1231
 }
 
-
 function ykclearbackup {
   rm -rf ~/Dropbox/0_backup_onlineRepos/
-}
-
-function ykbackuprepo {
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
-}
-
-function ykclearandbackuprepo {
-  rm -rf ~/Dropbox/0_backup_onlineRepos/ && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
-}
-
-function ykreloadzsh {
-  builtin source ~/.zshrc
 }
 
 function ykreloadzshgotoruker {
