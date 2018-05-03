@@ -192,6 +192,8 @@ function ykrniosdevposttestresult {
   ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
+
+
 function ykrniosdevposttestresult0 {
   ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
