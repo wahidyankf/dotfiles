@@ -108,6 +108,10 @@ function ykcdlearn {
   builtin cd ~/0_onlineRepos/2_learn/
 }
 
+function ykcdayokoding {
+  builtin cd ~/0_onlineRepos/0_writing/ayokoding/
+}
+
 function ykcdrg {
  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/
 }
@@ -124,8 +128,20 @@ function ykcddot {
   builtin cd ~/Dropbox/0_code/a_dotfiles/
 }
 
-function ykcdruker {
+function ykcdrukerapp {
   builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
+}
+
+function ykcdrukerdash {
+  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
+}
+
+function ykcdrukercms {
+  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-cms
+}
+
+function ykcdrgsharedlibs {
+  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib
 }
 
 function ykrniosgoto {
