@@ -106,20 +106,28 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Functions - Personal
 
+path_online_repos=~/0_onlineRepos/
+
+path_learn=$path_online_repos"2_learn/"
+path_writing=$path_online_repos"0_writing/"
+path_portfolio=$path_online_repos"1_portfolio/"
+
+path_ayokoding=$path_writing"ayokoding/"
+
 function ykcdonlinerepos {
-  builtin cd ~/0_onlineRepos/
+  builtin cd $path_online_repos
 }
 
 function ykcdlearn {
-  ykcdonlinerepos && builtin cd 2_learn/
+  builtin cd $path_learn
 }
 
 function ykcdayokoding {
-  ykcdonlinerepos && builtin cd 0_writing/ayokoding/
+  builtin cd $path_ayokoding
 }
 
 function ykcdport {
-  ykcdonlinerepos && builtin cd 1_portfolio/
+  builtin cd $path_portfolio
 }
 
 function ykcddot {
