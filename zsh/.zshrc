@@ -127,7 +127,9 @@ function ykcddot {
 }
 
 function ykcddotdeploy {
-  ykcddot && npm run deploy
+  cwd=$(pwd)
+
+  ykcddot && npm run deploy && builtin cd $cwd
 }
 
 function ykbackuprepo {
