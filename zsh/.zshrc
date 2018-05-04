@@ -146,135 +146,129 @@ function ykclearandbackuprepo {
 }
 
 function ykreloadzsh {
-  builtin source ~/.zshrc
+  cwd=$(pwd)
+  builtin source ~/.zshrc && builtin cd $cwd
 }
 
 # Functions - jobs
 
-function ykcdrg {
- ykcdonlinerepos && builtin cd 0_jobs_ruang_guru/
+function ykrgcdrg {
+ ykrgcdonlinerepos && builtin cd 0_jobs_ruang_guru/
 }
 
-function ykcdfe {
-  ykcdonlinerepos && builtin cd 0_jobs_ruang_guru/frontend/
+function ykrgcdfe {
+  ykrgcdonlinerepos && builtin cd 0_jobs_ruang_guru/frontend/
 }
 
-function ykcdsource {
-  ykcdonlinerepos && builtin cd 0_jobs_ruang_guru/source
+function ykrgcdsource {
+  ykrgcdonlinerepos && builtin cd 0_jobs_ruang_guru/source
 }
 
-function ykcdrukerapp {
-  ykcdsource && builtin cd ruker-app
+function ykrgcdrukerapp {
+  ykrgcdsource && builtin cd ruker-app
 }
 
-function ykcdrukerdash {
-  ykcdsource && builtin cd ruker-dashboard
+function ykrgcdrukerdash {
+  ykrgcdsource && builtin cd ruker-dashboard
 }
 
-function ykcdrukercms {
-  ykcdsource && builtin cd ruker-cms
+function ykrgcdrukercms {
+  ykrgcdsource && builtin cd ruker-cms
 }
 
-function ykcdrgsharedlibs {
-  ykcdsource && builtin cd shared-lib
+function ykrgcdrgsharedlibs {
+  ykrgcdsource && builtin cd shared-lib
 }
 
-function ykrniosgoto {
+function ykrgrniosgoto {
   xcrun simctl openurl booted ruangkerja://$1
 }
 
-function ykrniosgoto2 {
-  ykrniosgoto $1 && ykrniosgoto $2
+function ykrgrniosgoto2 {
+  ykrgrniosgoto $1 && ykrgrniosgoto $2
 }
 
-function ykrniosstartgoto {
-  yarn run-ios && ykrniosgoto $1
+function ykrgrniosstartgoto {
+  yarn run-ios && ykrgrniosgoto $1
 }
 
-function ykrnandroidgoto {
+function ykrgrnandroidgoto {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangguru.kerjaStaging
 }
 
-function ykrnandroidgoto2 {
-  ykrnandroidgoto $1 && ykrnandroidgoto $2
+function ykrgrnandroidgoto2 {
+  ykrgrnandroidgoto $1 && ykrgrnandroidgoto $2
 }
 
-function ykrnandroidstartgoto {
-  yarn run-android && ykrnandroidgoto $1
+function ykrgrnandroidstartgoto {
+  yarn run-android && ykrgrnandroidgoto $1
 }
 
-function ykrndebugger {
+function ykrgrndebugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
 
-function ykrniosdevpretestview {
-  ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+function ykrgrniosdevpretestview {
+  ykrgrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
 }
 
-function ykrniosdevpretestresult {
-  ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
+function ykrgrniosdevpretestresult {
+  ykrgrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrgrniosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrniosdevpretestresult0 {
-  ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
+function ykrgrniosdevpretestresult0 {
+  ykrgrniosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrniosdevposttestview {
-  ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+function ykrgrniosdevposttestview {
+  ykrgrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
-function ykrniosdevposttestresult {
-  ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
+function ykrgrniosdevposttestresult {
+  ykrgrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrgrniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrniosdevposttestresult0 {
-  ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
+function ykrgrniosdevposttestresult0 {
+  ykrgrniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrnandroiddevpretestview {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+function ykrgrnandroiddevpretestview {
+  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
 }
 
-function ykrnandroiddevpretestresult {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+function ykrgrnandroiddevpretestresult {
+  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrgrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrnandroiddevpretestresult0 {
-  ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+function ykrgrnandroiddevpretestresult0 {
+  ykrgrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrnandroiddevposttestview {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+function ykrgrnandroiddevposttestview {
+  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
-function ykrnandroiddevposttestresult {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+function ykrgrnandroiddevposttestresult {
+  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrgrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrnandroiddevposttestresult0 {
-  ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+function ykrgrnandroiddevposttestresult0 {
+  ykrgrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrniosdevcoursedetail {
-  ykrniosgoto course-detail/course12311
+function ykrgrniosdevcoursedetail {
+  ykrgrniosgoto course-detail/course12311
 }
 
-function ykrniosdevcoursepreview {
-  ykrniosgoto course-preview/course1231
+function ykrgrniosdevcoursepreview {
+  ykrgrniosgoto course-preview/course1231
 }
 
-function ykrnandroiddevcoursedetail {
-  ykrnandroidgoto course-detail/course12311
+function ykrgrnandroiddevcoursedetail {
+  ykrgrnandroidgoto course-detail/course12311
 }
 
-function ykrnandroiddevcoursepreview {
-  ykrnandroidgoto course-preview/course1231
+function ykrgrnandroiddevcoursepreview {
+  ykrgrnandroidgoto course-preview/course1231
 }
 
-function ykclearbackup {
-  rm -rf ~/Dropbox/0_backup_onlineRepos/
-}
-
-function ykreloadzshgotoruker {
-  ykreloadzsh && ykcdruker
-}
