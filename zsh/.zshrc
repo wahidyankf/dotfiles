@@ -106,63 +106,37 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Functions - Personal
 
-function ykcdlearn {
-  builtin cd ~/0_onlineRepos/2_learn/
-}
+alias ykcdlearn = "cd ~/0_onlineRepos/2_learn/"
 
-function ykcdayokoding {
-  builtin cd ~/0_onlineRepos/0_writing/ayokoding/
-}
+alias ykcdayokoding = "cd ~/0_onlineRepos/0_writing/ayokoding/"
 
-function ykcdport {
-  builtin cd ~/0_onlineRepos/1_portfolio/
-}
+alias ykcdport = "cd ~/0_onlineRepos/1_portfolio/"
 
-function ykcddot {
-  builtin cd ~/Dropbox/0_code/a_dotfiles/
-}
+alias ykcddot = "cd ~/Dropbox/0_code/a_dotfiles/"
 
-function ykbackuprepo {
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
-}
+alias ykbackuprepo = "cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/"
 
-function ykclearandbackuprepo {
-  rm -rf ~/Dropbox/0_backup_onlineRepos/ && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
-}
+alias ykclearbackup = "-rf ~/Dropbox/0_backup_onlineRepos/"
 
-function ykreloadzsh {
-  builtin source ~/.zshrc
-}
+alias ykclearandbackuprepo = "-rf ~/Dropbox/0_backup_onlineRepos/ && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/"
+
+alias ykreloadzsh = "source ~/.zshrc"
 
 # Functions - jobs
 
-function ykcdrg {
- builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/
-}
+alias ykcdrg = "cd ~/0_onlineRepos/0_jobs_ruang_guru/"
 
-function ykcdfe {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/
-}
+alias ykcdfe = "cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/"
 
-function ykcdsource {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source
-}
+alias ykcdsource = "cd ~/0_onlineRepos/0_jobs_ruang_guru/source"
 
-function ykcdrukerapp {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
-}
+alias ykcdrukerapp = "cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app"
 
-function ykcdrukerdash {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
-}
+alias ykcdrukerdash = "cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard"
 
-function ykcdrukercms {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-cms
-}
+alias ykcdrukercms = "cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-cms"
 
-function ykcdrgsharedlibs {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib
-}
+alias ykcdrgsharedlibs = "cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib"
 
 function ykrniosgoto {
   xcrun simctl openurl booted ruangkerja://$1
@@ -188,78 +162,37 @@ function ykrnandroidstartgoto {
   yarn run-android && ykrnandroidgoto $1
 }
 
-function ykrndebugger {
-  open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
+alias ykrndebugger = "open \"rndebugger://set-debugger-loc?host=localhost&port=8081\""
 }
 
-function ykrniosdevpretestview {
-  ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
-}
+alias ykrniosdevpretestview = "ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123"
 
-function ykrniosdevpretestresult {
-  ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
-}
+alias ykrniosdevpretestresult = "ykrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrniosgoto test-result/course12311/pretest/course12311-pretest123"
 
-function ykrniosdevpretestresult0 {
-  ykrniosgoto test-result/course12311/pretest/course12311-pretest123 
-}
+alias ykrniosdevpretestresult0 = "ykrniosgoto test-result/course12311/pretest/course12311-pretest123"
 
-function ykrniosdevposttestview {
-  ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
-}
+alias ykrniosdevposttestview = "ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123"
 
-function ykrniosdevposttestresult {
-  ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
-}
+alias ykrniosdevposttestresult = "ykrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrniosgoto test-result/course12311/posttest/course12311-posttest123 "
 
-function ykrniosdevposttestresult0 {
-  ykrniosgoto test-result/course12311/posttest/course12311-posttest123 
-}
+alias ykrniosdevposttestresult0 = "ykrniosgoto test-result/course12311/posttest/course12311-posttest123 "
 
-function ykrnandroiddevpretestview {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
-}
+alias ykrnandroiddevpretestview = "ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123"
 
-function ykrnandroiddevpretestresult {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
-}
+alias ykrnandroiddevpretestresult = "ykrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 "
 
-function ykrnandroiddevpretestresult0 {
-  ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
-}
+alias ykrnandroiddevpretestresult0 = "ykrnandroidgoto test-result/course12311/pretest/course12311-pretest123 "
 
-function ykrnandroiddevposttestview {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
-}
+alias ykrnandroiddevposttestview = "ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123"
 
-function ykrnandroiddevposttestresult {
-  ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
-}
+alias ykrnandroiddevposttestresult = "ykrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 "
 
-function ykrnandroiddevposttestresult0 {
-  ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
-}
+alias ykrnandroiddevposttestresult0 = "ykrnandroidgoto test-result/course12311/posttest/course12311-posttest123 "
 
-function ykrniosdevcoursedetail {
-  ykrniosgoto course-detail/course12311
-}
+alias ykrniosdevcoursedetail = "ykrniosgoto course-detail/course12311"
 
-function ykrniosdevcoursepreview {
-  ykrniosgoto course-preview/course1231
-}
+alias ykrniosdevcoursepreview = "ykrniosgoto course-preview/course1231"
 
-function ykrnandroiddevcoursedetail {
-  ykrnandroidgoto course-detail/course12311
-}
+alias ykrnandroiddevcoursedetail = "ykrnandroidgoto course-detail/course12311"
 
-function ykrnandroiddevcoursepreview {
-  ykrnandroidgoto course-preview/course1231
-}
-
-function ykclearbackup {
-  rm -rf ~/Dropbox/0_backup_onlineRepos/
-}
-
-function ykreloadzshgotoruker {
-  ykreloadzsh && ykcdruker
-}
+alias ykrnandroiddevcoursepreview = "ykrnandroidgoto course-preview/course1231"
