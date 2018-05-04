@@ -132,11 +132,17 @@ function ykcddotdeploy {
 }
 
 function ykbackuprepo {
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
+  cwd=$(pwd)
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/ && builtin cd $cwd
+}
+
+function ykclearbackup {
+  rm -rf ~/Dropbox/0_backup_onlineRepos/
 }
 
 function ykclearandbackuprepo {
-  rm -rf ~/Dropbox/0_backup_onlineRepos/ && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/
+  cwd=$(pwd)
+  ykclearbackup && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/ && builtin cd $cwd
 }
 
 function ykreloadzsh {
