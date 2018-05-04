@@ -106,16 +106,20 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Functions - Personal
 
+function ykcdonlinerepos {
+  builtin cd ~/0_onlineRepos/
+}
+
 function ykcdlearn {
-  builtin cd ~/0_onlineRepos/2_learn/
+  ykcdonlinerepos && builtin cd 2_learn/
 }
 
 function ykcdayokoding {
-  builtin cd ~/0_onlineRepos/0_writing/ayokoding/
+  ykcdonlinerepos && builtin cd 0_writing/ayokoding/
 }
 
 function ykcdport {
-  builtin cd ~/0_onlineRepos/1_portfolio/
+  ykcdonlinerepos && builtin cd 1_portfolio/
 }
 
 function ykcddot {
@@ -141,31 +145,31 @@ function ykreloadzsh {
 # Functions - jobs
 
 function ykcdrg {
- builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/
+ ykcdonlinerepos && builtin cd 0_jobs_ruang_guru/
 }
 
 function ykcdfe {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/
+  ykcdonlinerepos && builtin cd 0_jobs_ruang_guru/frontend/
 }
 
 function ykcdsource {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source
+  ykcdonlinerepos && builtin cd 0_jobs_ruang_guru/source
 }
 
 function ykcdrukerapp {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
+  ykcdsource && builtin cd ruker-app
 }
 
 function ykcdrukerdash {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
+  ykcdsource && builtin cd ruker-dashboard
 }
 
 function ykcdrukercms {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-cms
+  ykcdsource && builtin cd ruker-cms
 }
 
 function ykcdrgsharedlibs {
-  builtin cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib
+  ykcdsource && builtin cd shared-lib
 }
 
 function ykrniosgoto {
