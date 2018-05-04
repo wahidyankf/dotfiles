@@ -128,7 +128,6 @@ function ykcddot {
 
 function ykcddotdeploy {
   cwd=$(pwd)
-
   ykcddot && npm run deploy && builtin cd $cwd
 }
 
