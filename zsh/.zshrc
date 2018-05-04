@@ -126,7 +126,7 @@ function ykcddot {
   builtin cd ~/Dropbox/0_code/a_dotfiles/
 }
 
-function ykcddotdeploy {
+function ykdotdeploy {
   cwd=$(pwd)
   ykcddot && npm run deploy && builtin cd $cwd
 }
