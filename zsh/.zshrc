@@ -107,207 +107,207 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # PERSONAL
 
 # First level
-path_online_repos=~/0_onlineRepos/
-path_dropbox=~/Dropbox/
+yk_path_online_repos=~/0_onlineRepos/
+yk_path_dropbox=~/Dropbox/
 
-path_zshrc=~/.zshrc
+yk_path_zshrc=~/.zshrc
 
 # # Second level
-path_learn=$path_online_repos"2_learn/"
-path_writing=$path_online_repos"0_writing/"
-path_portfolio=$path_online_repos"1_portfolio/"
+yk_path_learn=$yk_path_online_repos"2_learn/"
+yk_path_writing=$yk_path_online_repos"0_writing/"
+yk_path_portfolio=$yk_path_online_repos"1_portfolio/"
 
-path_0_code=$path_dropbox"0_code/"
-path_backup_online_repos=$path_dropbox"0_backup_onlineRepos/"
+yk_path_0_code=$yk_path_dropbox"0_code/"
+yk_path_backup_online_repos=$yk_path_dropbox"0_backup_onlineRepos/"
 
 # # # Third level
-path_ayokoding=$path_writing"ayokoding/"
-path_dot_files=$path_0_code"a_dotfiles/"
+yk_path_ayokoding=$yk_path_writing"ayokoding/"
+yk_path_dot_files=$yk_path_0_code"a_dotfiles/"
 
-function ykcdonlinerepos {
-  builtin cd $path_online_repos
+function yk_cd_onlinerepos {
+  builtin cd $yk_path_online_repos
 }
 
-function ykcdlearn {
-  builtin cd $path_learn
+function yk_cd_learn {
+  builtin cd $yk_path_learn
 }
 
-function ykcdayokoding {
-  builtin cd $path_ayokoding
+function yk_cd_ayokoding {
+  builtin cd $yk_path_ayokoding
 }
 
-function ykcdport {
-  builtin cd $path_portfolio
+function yk_cd_port {
+  builtin cd $yk_path_portfolio
 }
 
-function ykcddot {
-  builtin cd $path_dot_files
+function yk_cd_dot {
+  builtin cd $yk_path_dot_files
 }
 
-function ykdotdeploy {
+function yk_dotdeploy {
   cwd=$(pwd)
-  ykcddot && npm run deploy && builtin cd $cwd
+  yk_cd_dot && npm run deploy && builtin cd $cwd
 }
 
-function ykbackuprepo {
+function yk_backuprepo {
   cwd=$(pwd)
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $path_online_repos $path_backup_online_repos && builtin cd $cwd
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_path_online_repos $yk_path_backup_online_repos && builtin cd $cwd
 }
 
-function ykclearbackup {
-  rm -rf $path_backup_online_repos
+function yk_clearbackup {
+  rm -rf $yk_path_backup_online_repos
 }
 
-function ykclearandbackuprepo {
-  ykclearbackup && ykbackuprepo
+function yk_clearandbackuprepo {
+  yk_clearbackup && yk_backuprepo
 }
 
-function ykreloadzsh {
+function yk_reloadzsh {
   cwd=$(pwd)
-  builtin source $path_zshrc && builtin cd $cwd
+  builtin source $yk_path_zshrc && builtin cd $cwd
 }
 
-function yktestcmd {
+function yk_testcmd {
   cwd=$(pwd)
-  ykreloadzsh && builtin cd $cwd && $1
+  yk_reloadzsh && builtin cd $cwd && $1
 }
 
-# JOBS
+# JOBS - RG
 
 # RG - First level
 
-path_rg=$path_online_repos"0_jobs_ruang_guru/"
+rg_path=$path_online_repos"0_jobs_ruang_guru/"
 
 # # RG - Second level
 
-path_rg_fe=$path_rg"frontend/"
-path_rg_source=$path_rg"source/"
+rg_path_fe=$rg_path"frontend/"
+rg_path_source=$rg_path"source/"
 
 # # RG - Third Level
-path_rg_ruker_app=$path_rg_source"ruker-app/"
-path_rg_ruker_dashboard=$path_rg_source"ruker-dashboard/"
-path_rg_ruker_cms=$path_rg_source"ruker-cms/"
-path_rg_shared_lib=$path_rg_source"shared-lib/"
+rg_path_ruker_app=$rg_path_source"ruker-app/"
+rg_path_ruker_dashboard=$rg_path_source"ruker-dashboard/"
+rg_path_ruker_cms=$rg_path_source"ruker-cms/"
+rg_path_shared_lib=$rg_path_source"shared-lib/"
 
-function ykrgcdrg {
- builtin cd $path_rg
+function rg_cd_rg {
+ builtin cd $rg_path
 }
 
-function ykrgcdfe {
-  builtin cd $path_rg_fe
+function rg_cd_fe {
+  builtin cd $rg_path_fe
 }
 
-function ykrgcdsource {
-  builtin cd $path_rg_source
+function rg_cd_source {
+  builtin cd $rg_path_source
 }
 
-function ykrgcdrukerapp {
-  builtin cd $path_rg_ruker_app
+function rg_cd_rukerapp {
+  builtin cd $rg_path_ruker_app
 }
 
-function ykrgcdrukerdash {
-  builtin cd $path_rg_ruker_dashboard
+function rg_cd_rukerdash {
+  builtin cd $rg_path_ruker_dashboard
 }
 
-function ykrgcdrukercms {
-  builtin cd $path_rg_ruker_cms
+function rg_cd_rukercms {
+  builtin cd $rg_path_ruker_cms
 }
 
-function ykrgcdsharedlibs {
-  builtin cd $path_rg_shared_lib
+function rg_cd_sharedlibs {
+  builtin cd $rg_path_shared_lib
 }
 
 # RG - Ruker App - Utils
 
-function ykrgrniosgoto {
+function rg_rniosgoto {
   xcrun simctl openurl booted ruangkerja://$1
 }
 
-function ykrgrniosgoto2 {
-  ykrgrniosgoto $1 && ykrgrniosgoto $2
+function rg_rniosgoto2 {
+  rg_rniosgoto $1 && rg_rniosgoto $2
 }
 
-function ykrgrniosstartgoto {
-  yarn run-ios && ykrgrniosgoto $1
+function rg_rniosstartgoto {
+  yarn run-ios && rg_rniosgoto $1
 }
 
-function ykrgrnandroidgoto {
+function rg_rnandroidgoto {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangguru.kerjaStaging
 }
 
-function ykrgrnandroidgoto2 {
-  ykrgrnandroidgoto $1 && ykrgrnandroidgoto $2
+function rg_rnandroidgoto2 {
+  rg_rnandroidgoto $1 && rg_rnandroidgoto $2
 }
 
-function ykrgrnandroidstartgoto {
-  yarn run-android && ykrgrnandroidgoto $1
+function rg_rnandroidstartgoto {
+  yarn run-android && rg_rnandroidgoto $1
 }
 
-function ykrgrndebugger {
+function rg_rndebugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
 
-function ykrgrniosdevpretestview {
-  ykrgrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+function rg_rniosdevpretestview {
+  rg_rniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
 }
 
-function ykrgrniosdevpretestresult {
-  ykrgrniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrgrniosgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rniosdevpretestresult {
+  rg_rniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && rg_rniosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrgrniosdevpretestresult0 {
-  ykrgrniosgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rniosdevpretestresult0 {
+  rg_rniosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrgrniosdevposttestview {
-  ykrgrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+function rg_rniosdevposttestview {
+  rg_rniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
-function ykrgrniosdevposttestresult {
-  ykrgrniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrgrniosgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rniosdevposttestresult {
+  rg_rniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && rg_rniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrgrniosdevposttestresult0 {
-  ykrgrniosgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rniosdevposttestresult0 {
+  rg_rniosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrgrnandroiddevpretestview {
-  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+function rg_rnandroiddevpretestview {
+  rg_rnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
 }
 
-function ykrgrnandroiddevpretestresult {
-  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && ykrgrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rnandroiddevpretestresult {
+  rg_rnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && rg_rnandroidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrgrnandroiddevpretestresult0 {
-  ykrgrnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rnandroiddevpretestresult0 {
+  rg_rnandroidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function ykrgrnandroiddevposttestview {
-  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+function rg_rnandroiddevposttestview {
+  rg_rnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
-function ykrgrnandroiddevposttestresult {
-  ykrgrnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && ykrgrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rnandroiddevposttestresult {
+  rg_rnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && rg_rnandroidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrgrnandroiddevposttestresult0 {
-  ykrgrnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rnandroiddevposttestresult0 {
+  rg_rnandroidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function ykrgrniosdevcoursedetail {
-  ykrgrniosgoto course-detail/course12311
+function rg_rniosdevcoursedetail {
+  rg_rniosgoto course-detail/course12311
 }
 
-function ykrgrniosdevcoursepreview {
-  ykrgrniosgoto course-preview/course1231
+function rg_rniosdevcoursepreview {
+  rg_rniosgoto course-preview/course1231
 }
 
-function ykrgrnandroiddevcoursedetail {
-  ykrgrnandroidgoto course-detail/course12311
+function rg_rnandroiddevcoursedetail {
+  rg_rnandroidgoto course-detail/course12311
 }
 
-function ykrgrnandroiddevcoursepreview {
-  ykrgrnandroidgoto course-preview/course1231
+function rg_rnandroiddevcoursepreview {
+  rg_rnandroidgoto course-preview/course1231
 }
 
