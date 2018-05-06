@@ -104,15 +104,25 @@ tmux
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Functions - Personal
+# PERSONAL
 
+# First level
 path_online_repos=~/0_onlineRepos/
+path_dropbox=~/Dropbox/
 
+path_zshrc=~/.zshrc
+
+# # Second level
 path_learn=$path_online_repos"2_learn/"
 path_writing=$path_online_repos"0_writing/"
 path_portfolio=$path_online_repos"1_portfolio/"
 
+path_0_code=$path_dropbox"0_code/"
+path_backup_online_repos=$path_dropbox"0_backup_onlineRepos/"
+
+# # # Third level
 path_ayokoding=$path_writing"ayokoding/"
+path_dot_files=$path_0_code"a_dotfiles/"
 
 function ykcdonlinerepos {
   builtin cd $path_online_repos
@@ -131,7 +141,7 @@ function ykcdport {
 }
 
 function ykcddot {
-  builtin cd ~/Dropbox/0_code/a_dotfiles/
+  builtin cd $path_dot_files
 }
 
 function ykdotdeploy {
@@ -141,31 +151,43 @@ function ykdotdeploy {
 
 function ykbackuprepo {
   cwd=$(pwd)
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/ && builtin cd $cwd
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $path_online_repos $path_backup_online_repos && builtin cd $cwd
 }
 
 function ykclearbackup {
-  rm -rf ~/Dropbox/0_backup_onlineRepos/
+  rm -rf $path_backup_online_repos
 }
 
 function ykclearandbackuprepo {
-  cwd=$(pwd)
-  ykclearbackup && builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' ~/0_onlineRepos/ ~/Dropbox/0_backup_onlineRepos/ && builtin cd $cwd
+  ykclearbackup && ykbackuprepo
 }
 
 function ykreloadzsh {
   cwd=$(pwd)
-  builtin source ~/.zshrc && builtin cd $cwd
+  builtin source $path_zshrc && builtin cd $cwd
 }
 
-# Functions - jobs
+function yktestcmd {
+  cwd=$(pwd)
+  ykreloadzsh && builtin cd $cwd && $1
+}
+
+# JOBS
+
+# First level
+
+path_rg=$path_online_repos"0_jobs_ruang_guru/"
+
+# # Second level
+
+path_rg_fe=$path_rg"frontend/"
 
 function ykrgcdrg {
- ykrgcdonlinerepos && builtin cd 0_jobs_ruang_guru/
+ builtin cd $path_rg
 }
 
 function ykrgcdfe {
-  ykrgcdonlinerepos && builtin cd 0_jobs_ruang_guru/frontend/
+  builtin cd $path_rg_fe
 }
 
 function ykrgcdsource {
