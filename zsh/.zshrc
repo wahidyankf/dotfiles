@@ -174,11 +174,11 @@ function yktestcmd {
 
 # JOBS
 
-# First level
+# RG - First level
 
 path_rg=$path_online_repos"0_jobs_ruang_guru/"
 
-# # Second level
+# # RG - Second level
 
 path_rg_fe=$path_rg"frontend/"
 
