@@ -144,32 +144,32 @@ function yk_cd_dot {
   builtin cd $yk_path_dot_files
 }
 
-function yk_dotdeploy {
+function yk_deploy_dot {
   cwd=$(pwd)
   yk_cd_dot && npm run deploy && builtin cd $cwd
 }
 
-function yk_backuprepo {
+function yk_backup_repo {
   cwd=$(pwd)
   builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_path_online_repos $yk_path_backup_online_repos && builtin cd $cwd
 }
 
-function yk_clearbackup {
+function yk_backup_repo_clear {
   rm -rf $yk_path_backup_online_repos
 }
 
-function yk_clearandbackuprepo {
-  yk_clearbackup && yk_backuprepo
+function yk_backup_repo_clear_and_backup {
+  yk_backup_repo_clear && yk_backup_repo
 }
 
-function yk_reloadzsh {
+function yk_zsh_reload {
   cwd=$(pwd)
   builtin source $yk_path_zshrc && builtin cd $cwd
 }
 
-function yk_testcmd {
+function yk_test_cmd {
   cwd=$(pwd)
-  yk_reloadzsh && builtin cd $cwd && $1
+  yk_zsh_reload && builtin cd $cwd && $1
 }
 
 # JOBS - RG
@@ -219,95 +219,95 @@ function rg_cd_sharedlibs {
 
 # RG - Ruker App - Utils
 
-function rg_rniosgoto {
+function rg_rn_iosgoto {
   xcrun simctl openurl booted ruangkerja://$1
 }
 
-function rg_rniosgoto2 {
-  rg_rniosgoto $1 && rg_rniosgoto $2
+function rg_rn_iosgoto2 {
+  rg_rn_iosgoto $1 && rg_rn_iosgoto $2
 }
 
-function rg_rniosstartgoto {
-  yarn run-ios && rg_rniosgoto $1
+function rg_rn_iosstartgoto {
+  yarn run-ios && rg_rn_iosgoto $1
 }
 
-function rg_rnandroidgoto {
+function rg_rn_androidgoto {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangguru.kerjaStaging
 }
 
-function rg_rnandroidgoto2 {
-  rg_rnandroidgoto $1 && rg_rnandroidgoto $2
+function rg_rn_androidgoto2 {
+  rg_rn_androidgoto $1 && rg_rn_androidgoto $2
 }
 
-function rg_rnandroidstartgoto {
-  yarn run-android && rg_rnandroidgoto $1
+function rg_rn_androidstartgoto {
+  yarn run-android && rg_rn_androidgoto $1
 }
 
-function rg_rndebugger {
+function rg_rn_debugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
 
-function rg_rniosdevpretestview {
-  rg_rniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+function rg_rn_iosdevpretestview {
+  rg_rn_iosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
 }
 
-function rg_rniosdevpretestresult {
-  rg_rniosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && rg_rniosgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rn_iosdevpretestresult {
+  rg_rn_iosgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && rg_rn_iosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function rg_rniosdevpretestresult0 {
-  rg_rniosgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rn_iosdevpretestresult0 {
+  rg_rn_iosgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function rg_rniosdevposttestview {
-  rg_rniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+function rg_rn_iosdevposttestview {
+  rg_rn_iosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
-function rg_rniosdevposttestresult {
-  rg_rniosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && rg_rniosgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rn_iosdevposttestresult {
+  rg_rn_iosgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && rg_rn_iosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function rg_rniosdevposttestresult0 {
-  rg_rniosgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rn_iosdevposttestresult0 {
+  rg_rn_iosgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function rg_rnandroiddevpretestview {
-  rg_rnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
+function rg_rn_androiddevpretestview {
+  rg_rn_androidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123
 }
 
-function rg_rnandroiddevpretestresult {
-  rg_rnandroidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && rg_rnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rn_androiddevpretestresult {
+  rg_rn_androidgoto2 course-detail/course12311 test/course12311/pretest/course12311-pretest123 && rg_rn_androidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function rg_rnandroiddevpretestresult0 {
-  rg_rnandroidgoto test-result/course12311/pretest/course12311-pretest123 
+function rg_rn_androiddevpretestresult0 {
+  rg_rn_androidgoto test-result/course12311/pretest/course12311-pretest123 
 }
 
-function rg_rnandroiddevposttestview {
-  rg_rnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
+function rg_rn_androiddevposttestview {
+  rg_rn_androidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123
 }
 
-function rg_rnandroiddevposttestresult {
-  rg_rnandroidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && rg_rnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rn_androiddevposttestresult {
+  rg_rn_androidgoto2 course-detail/course12311 test/course12311/posttest/course12311-posttest123 && rg_rn_androidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function rg_rnandroiddevposttestresult0 {
-  rg_rnandroidgoto test-result/course12311/posttest/course12311-posttest123 
+function rg_rn_androiddevposttestresult0 {
+  rg_rn_androidgoto test-result/course12311/posttest/course12311-posttest123 
 }
 
-function rg_rniosdevcoursedetail {
-  rg_rniosgoto course-detail/course12311
+function rg_rn_iosdevcoursedetail {
+  rg_rn_iosgoto course-detail/course12311
 }
 
-function rg_rniosdevcoursepreview {
-  rg_rniosgoto course-preview/course1231
+function rg_rn_iosdevcoursepreview {
+  rg_rn_iosgoto course-preview/course1231
 }
 
-function rg_rnandroiddevcoursedetail {
-  rg_rnandroidgoto course-detail/course12311
+function rg_rn_androiddevcoursedetail {
+  rg_rn_androidgoto course-detail/course12311
 }
 
-function rg_rnandroiddevcoursepreview {
-  rg_rnandroidgoto course-preview/course1231
+function rg_rn_androiddevcoursepreview {
+  rg_rn_androidgoto course-preview/course1231
 }
 
