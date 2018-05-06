@@ -181,6 +181,13 @@ path_rg=$path_online_repos"0_jobs_ruang_guru/"
 # # RG - Second level
 
 path_rg_fe=$path_rg"frontend/"
+path_rg_source=$path_rg"source/"
+
+# # RG - Third Level
+path_rg_ruker_app=$path_rg_source"ruker-app/"
+path_rg_ruker_dashboard=$path_rg_source"ruker-dashboard/"
+path_rg_ruker_cms=$path_rg_source"ruker-cms/"
+path_rg_shared_lib=$path_rg_source"shared-lib/"
 
 function ykrgcdrg {
  builtin cd $path_rg
@@ -191,24 +198,26 @@ function ykrgcdfe {
 }
 
 function ykrgcdsource {
-  ykrgcdonlinerepos && builtin cd 0_jobs_ruang_guru/source
+  builtin cd $path_rg_source
 }
 
 function ykrgcdrukerapp {
-  ykrgcdsource && builtin cd ruker-app
+  builtin cd $path_rg_ruker_app
 }
 
 function ykrgcdrukerdash {
-  ykrgcdsource && builtin cd ruker-dashboard
+  builtin cd $path_rg_ruker_dashboard
 }
 
 function ykrgcdrukercms {
-  ykrgcdsource && builtin cd ruker-cms
+  builtin cd $path_rg_ruker_cms
 }
 
-function ykrgcdrgsharedlibs {
-  ykrgcdsource && builtin cd shared-lib
+function ykrgcdsharedlibs {
+  builtin cd $path_rg_shared_lib
 }
+
+# RG - Ruker App - Utils
 
 function ykrgrniosgoto {
   xcrun simctl openurl booted ruangkerja://$1
