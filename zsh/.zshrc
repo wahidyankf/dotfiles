@@ -176,7 +176,7 @@ function ykf_test_cmd {
 
 # RG - First level
 
-rgv_path=$path_online_repos"0_jobs_ruang_guru/"
+rgv_path=$ykv_path_online_repos"0_jobs_ruang_guru/"
 
 # # RG - Second level
 
