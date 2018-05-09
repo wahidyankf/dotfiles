@@ -11,6 +11,15 @@ windows:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
             - reset
+  - rg-slibs:
+      layout: even-horizontal
+      panes:
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib/js/uikit
+            - yarn storybook
+        - root:
+            - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib/js/uikit
+            - reset
   - ruker-app:
       layout: even-horizontal
       panes:
