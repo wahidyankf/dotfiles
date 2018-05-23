@@ -107,194 +107,198 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # PERSONAL
 
 # First level
-ykv_path_online_repos=~/0_onlineRepos/
-ykv_path_dropbox=~/Dropbox/
+yk_var_path_online_repos=~/0_onlineRepos/
+yk_var_path_dropbox=~/Dropbox/
 
-ykv_path_zshrc=~/.zshrc
+yk_var_path_zshrc=~/.zshrc
 
 # # Second level
-ykv_path_learn=$ykv_path_online_repos"2_learn/"
-ykv_path_writing=$ykv_path_online_repos"0_writing/"
-ykv_path_portfolio=$ykv_path_online_repos"1_portfolio/"
+yk_var_path_learn=$yk_var_path_online_repos"2_learn/"
+yk_var_path_writing=$yk_var_path_online_repos"0_writing/"
+yk_var_path_portfolio=$yk_var_path_online_repos"1_portfolio/"
 
-ykv_path_0_code=$ykv_path_dropbox"0_code/"
-ykv_path_backup_online_repos=$ykv_path_dropbox"0_backup_onlineRepos/"
+yk_var_path_0_code=$yk_var_path_dropbox"0_code/"
+yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
 
 # # # Third level
-ykv_path_ayokoding=$ykv_path_writing"ayokoding/"
-ykv_path_dot_files=$ykv_path_0_code"a_dotfiles/"
+yk_var_path_ayokoding=$yk_var_path_writing"ayokoding/"
+yk_var_path_dot_files=$yk_var_path_0_code"a_dotfiles/"
 
-function ykf_cd_online_repos {
-  builtin cd $ykv_path_online_repos
+function yk_cd_online_repos {
+  builtin cd $yk_var_path_online_repos
 }
 
-function ykf_cd_learn {
-  builtin cd $ykv_path_learn
+function yk_cd_learn {
+  builtin cd $yk_var_path_learn
 }
 
-function ykf_cd_ayokoding {
-  builtin cd $ykv_path_ayokoding
+function yk_cd_ayokoding {
+  builtin cd $yk_var_path_ayokoding
 }
 
-function ykf_cd_port {
-  builtin cd $ykv_path_portfolio
+function yk_cd_port {
+  builtin cd $yk_var_path_portfolio
 }
 
-function ykf_cd_dot {
-  builtin cd $ykv_path_dot_files
+function yk_cd_dot {
+  builtin cd $yk_var_path_dot_files
 }
 
-function ykf_deploy_dot {
+function yk_deploy_dot {
   cwd=$(pwd)
-  ykf_cd_dot && npm run deploy && builtin cd $cwd
+  yk_cd_dot && npm run deploy && builtin cd $cwd
 }
 
-function ykf_backup_repo {
+function yk_backup_repo {
   cwd=$(pwd)
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $ykv_path_online_repos $ykv_path_backup_online_repos && builtin cd $cwd
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_online_repos $yk_var_path_backup_online_repos && builtin cd $cwd
 }
 
-function ykf_backup_repo_clear {
-  rm -rf $ykv_path_backup_online_repos
+function yk_backup_repo_clear {
+  rm -rf $yk_var_path_backup_online_repos
 }
 
-function ykf_backup_repo_clear_and_backup {
-  ykf_backup_repo_clear && ykf_backup_repo
+function yk_backup_repo_clear_and_backup {
+  yk_backup_repo_clear && yk_backup_repo
 }
 
-function ykf_zsh_reload {
+function yk_zsh_reload {
   cwd=$(pwd)
-  builtin source $ykv_path_zshrc && builtin cd $cwd
+  builtin source $yk_var_path_zshrc && builtin cd $cwd
 }
 
-function ykf_test_cmd {
+function yk_test_cmd {
   cwd=$(pwd)
-  ykf_zsh_reload && builtin cd $cwd && $1
+  yk_zsh_reload && builtin cd $cwd && $1
+}
+
+function yk_tmux_vscjobsh {
+  tmuxinator start vscJobsH
 }
 
 # JOBS - RG
 
 # RG - First level
 
-rgv_path=$ykv_path_online_repos"0_jobs_ruang_guru/"
+rg_var_path=$yk_var_path_online_repos"0_jobs_ruang_guru/"
 
 # # RG - Second level
 
-rgv_path_fe=$rgv_path"frontend/"
-rgv_path_source=$rgv_path"source/"
+rg_var_path_fe=$rg_var_path"frontend/"
+rg_var_path_source=$rg_var_path"source/"
 
 # # RG - Third Level
-rgv_path_ruker_app=$rgv_path_source"ruker-app/"
-rgv_path_ruker_dashboard=$rgv_path_source"ruker-dashboard/"
-rgv_path_ruker_cms=$rgv_path_source"ruker-cms/"
-rgv_path_shared_lib=$rgv_path_source"shared-lib/"
+rg_var_path_ruker_app=$rg_var_path_source"ruker-app/"
+rg_var_path_ruker_dashboard=$rg_var_path_source"ruker-dashboard/"
+rg_var_path_ruker_cms=$rg_var_path_source"ruker-cms/"
+rg_var_path_shared_lib=$rg_var_path_source"shared-lib/"
 
-function rgf_cd_rg {
- builtin cd $rgv_path
+function rg_cd_rg {
+ builtin cd $rg_var_path
 }
 
-function rgf_cd_frontend {
-  builtin cd $rgv_path_fe
+function rg_cd_frontend {
+  builtin cd $rg_var_path_fe
 }
 
-function rgf_cd_source {
-  builtin cd $rgv_path_source
+function rg_cd_source {
+  builtin cd $rg_var_path_source
 }
 
-function rgf_cd_rukerapp {
-  builtin cd $rgv_path_ruker_app
+function rg_cd_rukerapp {
+  builtin cd $rg_var_path_ruker_app
 }
 
-function rgf_cd_rukerdash {
-  builtin cd $rgv_path_ruker_dashboard
+function rg_cd_rukerdash {
+  builtin cd $rg_var_path_ruker_dashboard
 }
 
-function rgf_cd_rukercms {
-  builtin cd $rgv_path_ruker_cms
+function rg_cd_rukercms {
+  builtin cd $rg_var_path_ruker_cms
 }
 
-function rgf_cd_sharedlibs {
-  builtin cd $rgv_path_shared_lib
+function rg_cd_sharedlibs {
+  builtin cd $rg_var_path_shared_lib
 }
 
 # RG - Ruker App - Utils
 
-function rgf_rn_ios_goto {
+function rg_rn_ios_goto {
   xcrun simctl openurl booted ruangkerja://$1
 }
 
-function rgf_rn_ios_goto_2 {
-  rgf_rn_ios_goto $1 && rgf_rn_ios_goto $2
+function rg_rn_ios_goto_2 {
+  rg_rn_ios_goto $1 && rg_rn_ios_goto $2
 }
 
-function rgf_rn_ios_goto_with_start {
-  yarn run-ios && rgf_rn_ios_goto $1
+function rg_rn_ios_goto_with_start {
+  yarn run-ios && rg_rn_ios_goto $1
 }
 
-function rgf_rn_android_goto {
+function rg_rn_android_goto {
   adb shell am start -W -a android.intent.action.VIEW -d "ruangkerja://ruangkerja/$1" com.ruangguru.kerjaStaging
 }
 
-function rgf_rn_android_goto_2 {
-  rgf_rn_android_goto $1 && rgf_rn_android_goto $2
+function rg_rn_android_goto_2 {
+  rg_rn_android_goto $1 && rg_rn_android_goto $2
 }
 
-function rgf_rn_android_goto_with_start {
-  yarn run-android && rgf_rn_android_goto $1
+function rg_rn_android_goto_with_start {
+  yarn run-android && rg_rn_android_goto $1
 }
 
-function rgf_rn_debugger {
+function rg_rn_debugger {
   open "rndebugger://set-debugger-loc?host=localhost&port=8081"  
 }
 
-rgv_serial_course=course1231
-rgv_serial_assigned_course=course12311
-rgv_serial_pretest=$rgv_serial_assigned_course"-pretest123"
-rgv_serial_posttest=$rgv_serial_assigned_course"-posttest123"
+rg_var_serial_course=course1231
+rg_var_serial_assigned_course=course12311
+rg_var_serial_pretest=$rg_var_serial_assigned_course"-pretest123"
+rg_var_serial_posttest=$rg_var_serial_assigned_course"-posttest123"
 
-function rgf_rn_ios_dev_course_detail {
-  rgf_rn_ios_goto course-detail/$rgv_serial_assigned_course
+function rg_rn_ios_dev_course_detail {
+  rg_rn_ios_goto course-detail/$rg_var_serial_assigned_course
 }
 
-function rgf_rn_ios_dev_course_preview {
-  rgf_rn_ios_goto course-preview/$rgv_serial_course
+function rg_rn_ios_dev_course_preview {
+  rg_rn_ios_goto course-preview/$rg_var_serial_course
 }
 
-function rgf_rn_android_dev_course_detail {
-  rgf_rn_android_goto course-detail/$rgv_serial_assigned_course
+function rg_rn_android_dev_course_detail {
+  rg_rn_android_goto course-detail/$rg_var_serial_assigned_course
 }
 
-function rgf_rn_android_dev_course_preview {
-  rgf_rn_android_goto course-preview/$rgv_serial_course
+function rg_rn_android_dev_course_preview {
+  rg_rn_android_goto course-preview/$rg_var_serial_course
 }
-function rgf_rn_ios_dev_test_pre_view {
-  rgf_rn_ios_goto_2 course-detail/$rgv_serial_assigned_course test/$rgv_serial_assigned_course/pretest/$rgv_serial_pretest
-}
-
-function rgf_rn_ios_dev_test_pre_result {
-  rgf_rn_ios_goto test-result/$rgv_serial_assigned_course/pretest/$rgv_serial_pretest
+function rg_rn_ios_dev_test_pre_view {
+  rg_rn_ios_goto_2 course-detail/$rg_var_serial_assigned_course test/$rg_var_serial_assigned_course/pretest/$rg_var_serial_pretest
 }
 
-function rgf_rn_ios_dev_test_post_view {
-  rgf_rn_ios_goto_2 course-detail/$rgv_serial_assigned_course test/$rgv_serial_assigned_course/posttest/$rgv_serial_posttest
+function rg_rn_ios_dev_test_pre_result {
+  rg_rn_ios_goto test-result/$rg_var_serial_assigned_course/pretest/$rg_var_serial_pretest
 }
 
-function rgf_rn_ios_dev_test_post_result {
-  rgf_rn_ios_goto test-result/$rgv_serial_assigned_course/posttest/$rgv_serial_posttest
+function rg_rn_ios_dev_test_post_view {
+  rg_rn_ios_goto_2 course-detail/$rg_var_serial_assigned_course test/$rg_var_serial_assigned_course/posttest/$rg_var_serial_posttest
 }
 
-function rgf_rn_android_dev_test_pre_view {
-  rgf_rn_android_goto_2 course-detail/$rgv_serial_assigned_course test/$rgv_serial_assigned_course/pretest/$rgv_serial_pretest
+function rg_rn_ios_dev_test_post_result {
+  rg_rn_ios_goto test-result/$rg_var_serial_assigned_course/posttest/$rg_var_serial_posttest
 }
 
-function rgf_rn_android_dev_test_pre_result {
-  rgf_rn_android_goto test-result/$rgv_serial_assigned_course/pretest/$rgv_serial_pretest
+function rg_rn_android_dev_test_pre_view {
+  rg_rn_android_goto_2 course-detail/$rg_var_serial_assigned_course test/$rg_var_serial_assigned_course/pretest/$rg_var_serial_pretest
 }
 
-function rgf_rn_android_dev_test_post_view {
-  rgf_rn_android_goto_2 course-detail/$rgv_serial_assigned_course test/$rgv_serial_assigned_course/posttest/$rgv_serial_posttest
+function rg_rn_android_dev_test_pre_result {
+  rg_rn_android_goto test-result/$rg_var_serial_assigned_course/pretest/$rg_var_serial_pretest
 }
 
-function rgf_rn_android_dev_test_post_result {
-  rgf_rn_android_goto test-result/$rgv_serial_assigned_course/posttest/$rgv_serial_posttest
+function rg_rn_android_dev_test_post_view {
+  rg_rn_android_goto_2 course-detail/$rg_var_serial_assigned_course test/$rg_var_serial_assigned_course/posttest/$rg_var_serial_posttest
+}
+
+function rg_rn_android_dev_test_post_result {
+  rg_rn_android_goto test-result/$rg_var_serial_assigned_course/posttest/$rg_var_serial_posttest
 }
