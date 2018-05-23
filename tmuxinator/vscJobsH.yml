@@ -10,8 +10,8 @@ windows:
             - yarn start
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
-            - open http://localhost:3000
-            - open http://localhost:6007
+            # - open http://localhost:3000
+            # - open http://localhost:6007
             - reset
   - rg-slibs:
       layout: even-horizontal
