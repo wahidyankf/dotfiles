@@ -98,7 +98,7 @@ function yk_test_cmd {
 }
 
 function yk_tmux_vscjobs {
-  tmuxinator start vscJobsH
+  tmuxinator start vscJobs
 }
 
 # JOBS - RG
