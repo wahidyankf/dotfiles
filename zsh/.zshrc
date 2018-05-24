@@ -97,7 +97,7 @@ function yk_test_cmd {
   yk_zsh_reload && builtin cd $cwd && $1
 }
 
-function yk_tmux_vscjobsh {
+function yk_tmux_vscjobs {
   tmuxinator start vscJobsH
 }
 
