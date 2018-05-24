@@ -146,6 +146,13 @@ function rg_cd_sharedlibs {
   builtin cd $rg_var_path_shared_lib
 }
 
+# RG - Source
+
+function yk_deploy_dot {
+  cwd=$(pwd)
+  builtin cd $rg_var_path_source && yarn build:libs && cd $cwd
+}
+
 # RG - Ruker App - Utils
 
 function rg_rn_ios_goto {
