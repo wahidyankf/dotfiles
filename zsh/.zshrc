@@ -148,7 +148,7 @@ function rg_cd_sharedlibs {
 
 # RG - Source
 
-function yk_deploy_dot {
+function rg_source_rebuild_fe {
   cwd=$(pwd)
   builtin cd $rg_var_path_source && yarn build:libs && cd $cwd
 }
