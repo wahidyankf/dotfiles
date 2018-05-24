@@ -3,7 +3,7 @@ root: ~
 
 windows:
   - ruker-dash:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
@@ -14,7 +14,7 @@ windows:
             # - open http://localhost:6007
             - reset
   - rg-slibs:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib/js/uikit
@@ -23,7 +23,7 @@ windows:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/shared-lib/js/uikit
             - reset
   - ruker-app:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
@@ -32,7 +32,7 @@ windows:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-app
             - reset
   - source:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source
@@ -41,7 +41,7 @@ windows:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source
             - reset
   - uji:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
@@ -50,7 +50,7 @@ windows:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/frontend/uji
             - reset
   - newfs:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/new-fs-ruangguru
