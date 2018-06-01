@@ -6,7 +6,7 @@ windows:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/0_writing/ayokoding && gitbook serve
+            - cd ~/0_onlineRepos/0_writing/ayokoding/releases && gitbook serve
         - root:
             - cd ~/0_onlineRepos/0_writing/ayokoding
             - reset
