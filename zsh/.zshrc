@@ -9,6 +9,9 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+# Elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 ZSH_THEME="cloud"
 
 plugins=(git)
@@ -151,6 +154,11 @@ function rg_cd_sharedlibs {
 function rg_source_rebuild_fe {
   cwd=$(pwd)
   builtin cd $rg_var_path_source && yarn build:libs && cd $cwd
+}
+
+function rg_source_init_fe {
+  cwd=$(pwd)
+  builtin cd $rg_var_path_source && yarn init-repo && cd $cwd
 }
 
 # RG - Ruker App - Utils

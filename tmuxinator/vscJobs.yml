@@ -7,7 +7,7 @@ windows:
       panes:
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
-            - yarn start
+            - yarn develop
         - root:
             - cd ~/0_onlineRepos/0_jobs_ruang_guru/source/ruker-dashboard
             # - open http://localhost:3000
