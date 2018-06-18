@@ -52,6 +52,9 @@ yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
 yk_var_path_ayokoding=$yk_var_path_writing"ayokoding/"
 yk_var_path_dot_files=$yk_var_path_0_code"a_dotfiles/"
 
+# # Fourth level
+yk_var_path_ayokoding_release=$yk_var_path_ayokoding"release/"
+
 function yk_cd_online_repos {
   builtin cd $yk_var_path_online_repos
 }
@@ -72,9 +75,18 @@ function yk_cd_dot {
   builtin cd $yk_var_path_dot_files
 }
 
+function yk_cd_ayokoding_release {
+  builtin cd $yk_var_path_ayokoding_release
+}
+
 function yk_deploy_dot {
   cwd=$(pwd)
   yk_cd_dot && npm run deploy && builtin cd $cwd
+}
+
+function yk_deploy_ayokoding {
+  cwd=$(pwd)
+  yk_cd_ayokoding_release && npm run deploy && builtin cd $cwd
 }
 
 function yk_backup_repo {
