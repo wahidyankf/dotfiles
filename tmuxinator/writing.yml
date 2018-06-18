@@ -6,9 +6,9 @@ windows:
       layout: even-horizontal
       panes:
         - root:
-            - cd ~/0_onlineRepos/0_writing/ayokoding/releases && gitbook serve
+            - cd ~/0_onlineRepos/0_writing/ayokoding/release && gitbook serve
         - root:
-            - cd ~/0_onlineRepos/0_writing/ayokoding/releases
+            - cd ~/0_onlineRepos/0_writing/ayokoding/release
             - reset
   - icc:
       layout: even-horizontal
