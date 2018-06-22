@@ -51,9 +51,12 @@ yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
 # # Third level
 yk_var_path_ayokoding=$yk_var_path_writing"ayokoding/"
 yk_var_path_dot_files=$yk_var_path_0_code"a_dotfiles/"
+yk_var_path_notes=$yk_var_path_0_code"notes/"
+
 
 # # Fourth level
 yk_var_path_ayokoding_release=$yk_var_path_ayokoding"release/"
+yk_var_path_quick_scripts=$yk_var_path_notes"quickScripts/"
 
 function yk_cd_online_repos {
   builtin cd $yk_var_path_online_repos
@@ -73,6 +76,10 @@ function yk_cd_port {
 
 function yk_cd_dot {
   builtin cd $yk_var_path_dot_files
+}
+
+function yk_cd_quickScripts {
+  builtin cd  $yk_var_path_quick_scripts
 }
 
 function yk_cd_ayokoding_release {
