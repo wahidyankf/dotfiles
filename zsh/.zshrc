@@ -123,6 +123,10 @@ function yk_tmux_vscjobs {
   tmuxinator start vscJobs
 }
 
+function yk_git_branch_clean_local {
+  git branch | grep -v "master" | xargs git branch -D 
+}
+
 # JOBS - RG
 
 # # RG - First level
