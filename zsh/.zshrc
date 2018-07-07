@@ -14,7 +14,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 ZSH_THEME="cloud"
 
-plugins=(git)
+plugins=(git wakatime)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,6 +96,8 @@ function yk_deploy_ayokoding {
   yk_cd_ayokoding_release && npm run deploy && builtin cd $cwd
 }
 
+# # Back up
+
 function yk_backup_repo {
   cwd=$(pwd)
   builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_online_repos $yk_var_path_backup_online_repos && builtin cd $cwd
@@ -109,6 +111,8 @@ function yk_backup_repo_clear_and_backup {
   yk_backup_repo_clear && yk_backup_repo
 }
 
+# # Bash
+
 function yk_zsh_reload {
   cwd=$(pwd)
   builtin source $yk_var_path_zshrc && builtin cd $cwd
@@ -119,12 +123,24 @@ function yk_test_cmd {
   yk_zsh_reload && builtin cd $cwd && $1
 }
 
+# # Tmux
+
 function yk_tmux_vscjobs {
   tmuxinator start vscJobs
 }
 
+# # Git
+
 function yk_git_branch_clean_local {
   git branch | grep -v "master" | xargs git branch -D 
+}
+
+function yk_git_pull_checkout_master {
+  git checkout master && git pull
+}
+
+function yk_git_pull_master_here {
+  git pull origin master 
 }
 
 # JOBS - RG
