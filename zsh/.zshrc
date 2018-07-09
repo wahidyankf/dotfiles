@@ -8,6 +8,7 @@ export DISABLE_AUTO_TITLE=true
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export GOPATH=$HOME/go
 
 ZSH_THEME="cloud"
 
@@ -216,6 +217,18 @@ function rg_source_rebuild_fe {
 function rg_source_init_fe {
   cwd=$(pwd)
   builtin cd $rg_var_path_source && yarn init-repo && cd $cwd
+}
+
+# RG - Rogu
+
+function rg_deploy_ruker_dashboard_staging {
+  cwd=$(pwd)
+  builtin cd $rg_var_path_ruker_dashboard && rogu deploy -n staging && cd $cwd
+}
+
+function rg_deploy_ruker_dashboard_production {
+  cwd=$(pwd)
+  builtin cd $rg_var_path_ruker_dashboard && rogu deploy -n production && cd $cwd
 }
 
 # RG - Ruker App - Utils
