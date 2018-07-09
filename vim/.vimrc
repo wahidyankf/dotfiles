@@ -4,16 +4,6 @@ set nocompatible
 " syntax
 syntax on
 
-" set hybridnumber
-set relativenumber
-set number
-
-" show the cursor position all the time
-set ruler
-
-" set backspace like normal apps
-set backspace=2
-
 " install plugin using vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
@@ -29,6 +19,17 @@ Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
 Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
+
+" set hybridnumber
+set relativenumber
+set number
+
+" show the cursor position all the time
+set ruler
+
+" set backspace like normal apps
+set backspace=2
+
 
 " set the split, so that it behave more 'normal', also modify the focused split
 set splitbelow
