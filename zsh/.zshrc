@@ -9,9 +9,6 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# Elixir
-export ERL_AFLAGS="-kernel shell_history enabled"
-
 ZSH_THEME="cloud"
 
 plugins=(git wakatime)
@@ -31,6 +28,11 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 tmux
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # PERSONAL
 
@@ -118,7 +120,7 @@ function yk_zsh_reload {
   builtin source $yk_var_path_zshrc && builtin cd $cwd
 }
 
-function yk_test_cmd {
+function yk_zsh_cmd_test {
   cwd=$(pwd)
   yk_zsh_reload && builtin cd $cwd && $1
 }
@@ -129,19 +131,25 @@ function yk_tmux_vscjobs {
   tmuxinator start vscJobs
 }
 
+function yk_tmux_writing {
+  tmuxinator start writing
+}
+
 # # Git
 
-function yk_git_branch_clean_local {
+function yk_git_clean_branch_local {
   git branch | grep -v "master" | xargs git branch -D 
 }
 
-function yk_git_pull_checkout_master {
+function yk_git_checkout_pull_master {
   git checkout master && git pull
 }
 
 function yk_git_pull_master_here {
   git pull origin master 
 }
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # JOBS - RG
 
