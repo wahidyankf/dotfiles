@@ -37,115 +37,125 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # PERSONAL
 
 # # First level
-yk_var_path_online_repos=~/0_onlineRepos/
-yk_var_path_dropbox=~/Dropbox/
+y_var_path_online_repos=~/0_onlineRepos/
+y_var_path_dropbox=~/Dropbox/
 
-yk_var_path_zshrc=~/.zshrc
+y_var_path_zshrc=~/.zshrc
 
 # # Second level
-yk_var_path_learn=$yk_var_path_online_repos"2_learn/"
-yk_var_path_writing=$yk_var_path_online_repos"0_writing/"
-yk_var_path_portfolio=$yk_var_path_online_repos"1_portfolio/"
+y_var_path_learn=$y_var_path_online_repos"2_learn/"
+y_var_path_writing=$y_var_path_online_repos"0_writing/"
+y_var_path_portfolio=$y_var_path_online_repos"1_portfolio/"
 
-yk_var_path_0_code=$yk_var_path_dropbox"0_code/"
-yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
+y_var_path_0_code=$y_var_path_dropbox"0_code/"
+y_var_path_backup_online_repos=$y_var_path_dropbox"0_backup_onlineRepos/"
 
 # # Third level
-yk_var_path_ayokoding=$yk_var_path_writing"ayokoding/"
-yk_var_path_dot_files=$yk_var_path_0_code"a_dotfiles/"
-yk_var_path_notes=$yk_var_path_0_code"notes/"
+y_var_path_ayokoding=$y_var_path_writing"ayokoding/"
+y_var_path_dot_files=$y_var_path_0_code"a_dotfiles/"
+y_var_path_notes=$y_var_path_0_code"notes/"
+
+y_var_path_learn_junior_to_senior_web=$y_var_path_learn"learn-junior-to-senior-web/"
 
 
 # # Fourth level
-yk_var_path_ayokoding_release=$yk_var_path_ayokoding"release/"
-yk_var_path_quick_scripts=$yk_var_path_notes"quickScripts/"
+y_var_path_ayokoding_release=$y_var_path_ayokoding"release/"
+y_var_path_quick_scripts=$y_var_path_notes"quickScripts/"
 
-function yk_cd_online_repos {
-  builtin cd $yk_var_path_online_repos
+# # # CD
+
+function y_cd_online_repos {
+  builtin cd $y_var_path_online_repos
 }
 
-function yk_cd_learn {
-  builtin cd $yk_var_path_learn
+function y_cd_learn {
+  builtin cd $y_var_path_learn
 }
 
-function yk_cd_ayokoding {
-  builtin cd $yk_var_path_ayokoding
+function y_cd_learn_junior_to_senior_web {
+  builtin cd $y_var_path_learn_junior_to_senior_web
 }
 
-function yk_cd_port {
-  builtin cd $yk_var_path_portfolio
+function y_cd_ayokoding {
+  builtin cd $y_var_path_ayokoding
 }
 
-function yk_cd_dot {
-  builtin cd $yk_var_path_dot_files
+function y_cd_port {
+  builtin cd $y_var_path_portfolio
 }
 
-function yk_cd_quickScripts {
-  builtin cd  $yk_var_path_quick_scripts
+function y_cd_dot {
+  builtin cd $y_var_path_dot_files
 }
 
-function yk_cd_ayokoding_release {
-  builtin cd $yk_var_path_ayokoding_release
+function y_cd_quickScripts {
+  builtin cd  $y_var_path_quick_scripts
 }
 
-function yk_deploy_dot {
+function y_cd_ayokoding_release {
+  builtin cd $y_var_path_ayokoding_release
+}
+
+# # # Deployment
+
+function y_deploy_dot {
   cwd=$(pwd)
-  yk_cd_dot && npm run deploy && builtin cd $cwd
+  y_cd_dot && npm run deploy && builtin cd $cwd
 }
 
-function yk_deploy_ayokoding {
+function y_deploy_ayokoding {
   cwd=$(pwd)
-  yk_cd_ayokoding_release && npm run deploy && builtin cd $cwd
+  y_cd_ayokoding_release && npm run deploy && builtin cd $cwd
 }
 
-# # Back up
+# # # Back up
 
-function yk_backup_repo {
+function y_backup_repo {
   cwd=$(pwd)
-  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_online_repos $yk_var_path_backup_online_repos && builtin cd $cwd
+  builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $y_var_path_online_repos $y_var_path_backup_online_repos && builtin cd $cwd
 }
 
-function yk_backup_repo_clear {
-  rm -rf $yk_var_path_backup_online_repos
+function y_backup_repo_clear {
+  rm -rf $y_var_path_backup_online_repos
 }
 
-function yk_backup_repo_clear_and_backup {
-  yk_backup_repo_clear && yk_backup_repo
+function y_backup_repo_clear_and_backup {
+  y_backup_repo_clear && y_backup_repo
 }
 
-# # Bash
+# # # Bash
 
-function yk_zsh_reload {
+function y_zsh_reload {
   cwd=$(pwd)
-  builtin source $yk_var_path_zshrc && builtin cd $cwd
+  builtin source $y_var_path_zshrc && builtin cd $cwd
 }
 
-function yk_zsh_cmd_test {
+function y_zsh_cmd_test {
   cwd=$(pwd)
-  yk_zsh_reload && builtin cd $cwd && $1
+  y_zsh_reload && builtin cd $cwd && $1
 }
 
-# # Tmux
+# # # Tmux
 
-function yk_tmux_vscjobs {
+function y_tmux_vscjobs {
   tmuxinator start vscJobs
 }
 
-function yk_tmux_writing {
+function y_tmux_writing {
   tmuxinator start writing
 }
 
-# # Git
+# # # Git
 
-function yk_git_clean_branch_local {
+function y_git_clean_branch_local {
   git branch | grep -v "master" | xargs git branch -D 
 }
 
-function yk_git_checkout_pull_master {
+function y_git_checkout_pull_master {
   git checkout master && git pull
 }
 
-function yk_git_pull_master_here {
+function y_git_pull_master_here {
   git pull origin master 
 }
 
@@ -155,7 +165,7 @@ function yk_git_pull_master_here {
 
 # # RG - First level
 
-rg_var_path=$yk_var_path_online_repos"0_jobs_ruang_guru/"
+rg_var_path=$y_var_path_online_repos"0_jobs_ruang_guru/"
 
 # # RG - Second level
 
