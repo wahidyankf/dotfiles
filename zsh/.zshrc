@@ -8,11 +8,11 @@ export DISABLE_AUTO_TITLE=true
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export GOPATH=$HOME/go
+export PATH=$PATH:$(go env GOPATH)/bin
 
 ZSH_THEME="cloud"
 
-plugins=(git wakatime)
+plugins=(git zsh-wakatime)
 
 source $ZSH/oh-my-zsh.sh
 
