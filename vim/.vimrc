@@ -50,7 +50,7 @@ set incsearch
 set textwidth=0
 set wrapmargin=0
 set colorcolumn=80
-set cursorline
+" set cursorline
 hi ColorColumn ctermbg=DarkGray
 
 " set tab to 2 spaces
