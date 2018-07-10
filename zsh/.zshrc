@@ -221,14 +221,13 @@ function rg_source_init_fe {
 
 # RG - Rogu
 
-function rg_deploy_ruker_dashboard_staging {
-  cwd=$(pwd)
-  builtin cd $rg_var_path_ruker_dashboard && rogu deploy -n staging && cd $cwd
+function rg_rogu_list_version {
+  temp_file_name=$1_versions_list.md
+  builtin cd $rg_var_path_source && builtin cd $1 && rogu list-version > $temp_file_name && vim $temp_file_name && rm -rf $temp_file_name
 }
 
-function rg_deploy_ruker_dashboard_production {
-  cwd=$(pwd)
-  builtin cd $rg_var_path_ruker_dashboard && rogu deploy -n production && cd $cwd
+function rg_rogu_list_version_ruker_dashboard {
+  rg_rogu_list_version ruker-dashboard
 }
 
 # RG - Ruker App - Utils
