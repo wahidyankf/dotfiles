@@ -18,16 +18,27 @@ Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'wakatime/vim-wakatime'
+
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
+"
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
+
+Plug 'ternjs/tern_for_vim'
+
 call plug#end()
+
+"" Use python.
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+"" Use deoplete. Use deoplete 
+let g:deoplete#enable_at_startup = 1
 
 " set hybridnumber
 set relativenumber
