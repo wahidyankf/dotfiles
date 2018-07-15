@@ -12,6 +12,7 @@ export PATH=$PATH:$(go env GOPATH)/bin
 
 ZSH_THEME="cloud"
 
+# Specify the plugin being used by zsh
 plugins=(git zsh-wakatime z)
 
 source $ZSH/oh-my-zsh.sh

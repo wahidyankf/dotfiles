@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
 Plug 'tpope/vim-commentary'
 Plug 'rizzatti/dash.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -18,6 +17,16 @@ Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'wakatime/vim-wakatime'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
 call plug#end()
 
 " set hybridnumber
