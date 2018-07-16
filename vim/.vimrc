@@ -1,11 +1,9 @@
-"please move on, she is not that good anyway
-set nocompatible
-
-" syntax
-syntax on
-
 " install plugin using vim-plug
 call plug#begin('~/.vim/plugged')
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'flazz/vim-colorschemes'
+
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -13,10 +11,9 @@ Plug 'tpope/vim-commentary'
 Plug 'rizzatti/dash.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
-Plug 'nathanaelkane/vim-indent-gukides'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'wakatime/vim-wakatime'
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
@@ -32,6 +29,12 @@ endif
 Plug 'ternjs/tern_for_vim'
 
 call plug#end()
+
+set nocompatible
+
+" syntax
+syntax on
+colorscheme dracula
 
 "" Use python.
 let g:python2_host_prog = '/usr/local/bin/python'
@@ -59,7 +62,8 @@ set winheight=5
 set winminheight=5
 set winheight=999
 
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+" set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
 
 " searching preference
@@ -72,7 +76,7 @@ set textwidth=0
 set wrapmargin=0
 set colorcolumn=80
 " set cursorline
-hi ColorColumn ctermbg=DarkGray
+" hi ColorColumn ctermbg=DarkGray
 
 " set tab to 2 spaces
 set tabstop=2
