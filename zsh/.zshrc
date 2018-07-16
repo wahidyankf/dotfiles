@@ -225,7 +225,10 @@ function rg_source_init_fe {
   builtin cd $rg_var_path_source && yarn init-repo && cd $cwd
 }
 
+
 # RG - Rogu
+
+alias rogu="$GOBIN/rogu"
 
 function rg_rogu_list_version {
   temp_file_name=$1_versions_list.md
