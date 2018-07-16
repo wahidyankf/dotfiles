@@ -1,14 +1,19 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export ZSH=/Users/abdurrahman/.oh-my-zsh
-export PATH=/Users/abdurrahman/anaconda3/bin:$PATH
+Y_USER_NAME=$(logname)
+
+export ZSH=/Users/$Y_USER_NAME/.oh-my-zsh
+export PATH=/Users/$Y_USER_NAME/anaconda3/bin:$PATH
 export EDITOR=vim
 export DISABLE_AUTO_TITLE=true
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$(go env GOPATH)/bin
+
+# GO paths
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
 
 ZSH_THEME="cloud"
 
@@ -20,10 +25,10 @@ source $ZSH/oh-my-zsh.sh
 cd ~
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/abdurrahman/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/abdurrahman/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/abdurrahman/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/abdurrahman/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 
