@@ -16,7 +16,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'reewr/vim-monokai-phoenix'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-gukides'
 Plug 'wakatime/vim-wakatime'
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
