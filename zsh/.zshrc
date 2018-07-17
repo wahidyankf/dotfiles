@@ -103,6 +103,10 @@ function y_cd_ayokoding_release {
   builtin cd $y_var_path_ayokoding_release
 }
 
+# # # Brew
+
+alias y_brew_maintenance="brew cleanup ; brew doctor ; brew update ; brew upgrade"
+
 # # # Deployment
 
 function y_deploy_dot {
