@@ -32,7 +32,7 @@ if [ -f "/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc" ]; then source
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 
-tmux
+# tmux
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
