@@ -25,10 +25,10 @@ source $ZSH/oh-my-zsh.sh
 cd ~
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc" ]; then source "/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc" ]; then source "/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc"; fi
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 
