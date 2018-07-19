@@ -149,11 +149,11 @@ function y_zsh_cmd_test {
 # # # Tmux
 
 function y_tmux_vscjobs {
-  tmuxinator start vscJobs
+  tmux && tmuxinator start vscJobs
 }
 
 function y_tmux_writing {
-  tmuxinator start writing
+  tmux && tmuxinator start writing
 }
 
 # # # Git
