@@ -233,8 +233,9 @@ function rg_source_init_fe() {
 alias rogu="$GOBIN/rogu"
 
 function rg_rogu_list_version() {
+	cwd=$(pwd)
 	temp_file_name=$1_versions_list.md
-	builtin cd $rg_var_path_source && builtin cd $1 && rogu list-version >$temp_file_name && vim $temp_file_name && rm -rf $temp_file_name
+	builtin cd $rg_var_path_source && builtin cd $1 && rogu list-version >$temp_file_name && vim $temp_file_name && rm -rf $temp_file_name && builtin cd $cwd
 }
 
 function rg_rogu_deploy_version_production() {
