@@ -169,6 +169,12 @@ function y_git_pull_master_here() {
 	git pull origin master
 }
 
+# # # Prettier
+
+function y_js_prettify_all() {
+	prettier --write **/*.js
+}
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # JOBS - RG
