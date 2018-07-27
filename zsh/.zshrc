@@ -61,6 +61,7 @@ y_var_path_backup_online_repos=$y_var_path_dropbox"0_backup_onlineRepos/"
 y_var_path_ayokoding=$y_var_path_writing"ayokoding/"
 y_var_path_dot_files=$y_var_path_0_code"a_dotfiles/"
 y_var_path_notes=$y_var_path_0_code"notes/"
+y_var_path_devnotes=$y_var_path_writing"devnotes/"
 
 y_var_path_learn_junior_to_senior_web=$y_var_path_learn"learn-junior-to-senior-web/"
 
@@ -102,6 +103,10 @@ function y_cd_ayokoding_release() {
 	builtin cd $y_var_path_ayokoding_release
 }
 
+function y_cd_devnotes() {
+	builtin cd $y_var_path_devnotes
+}
+
 # # # Brew
 
 alias y_brew_maintenance="brew cleanup ; brew doctor ; brew update ; brew upgrade"
@@ -116,6 +121,11 @@ function y_deploy_dot() {
 function y_deploy_ayokoding() {
 	cwd=$(pwd)
 	y_cd_ayokoding_release && npm run deploy && builtin cd $cwd
+}
+
+function y_deploy_devnotes() {
+	cwd=$(pwd)
+	y_cd_devnotes && npm run deploy && builtin cd $cwd
 }
 
 # # # Back up
