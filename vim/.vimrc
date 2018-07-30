@@ -124,11 +124,6 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-" you complete me
-nnoremap <Leader>ydef :YcmCompleter GoTo<CR>
-nnoremap <Leader>yref :YcmCompleter GoToReferences<CR>
-nnoremap <Leader>ydoc :YcmCompleter GetDoc<CR>
-
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -139,10 +134,6 @@ nnoremap <Leader>-- i----------<CR><Esc> "create a ruler
 " add new line shortcut
 nnoremap <Leader><CR><CR> $a<CR><Esc> 
 
-" create a title
-nnoremap <Leader>ti- i----------<CR><CR>----------<CR><Esc>kki
-nnoremap <Leader>ti= i==========<CR><CR>==========<CR><Esc>kki
-
 " nerd tree
 
 map <Leader>nrd :NERDTreeToggle<CR>
@@ -150,28 +141,3 @@ map <Leader>nrd :NERDTreeToggle<CR>
 " copy all to system clipboard
 nnoremap <Leader>cpa gg"*yG
 
-" support for md. it is not might not be faster but easier to remember (at
-" least for me :p)
-
-" emphasis and italics
-nnoremap <Leader>mdit i__<Esc>i
-nnoremap <Leader>mdem i****<Esc>hi
-nnoremap <Leader>mdcem i**____**<Esc>hhhi
-nnoremap <Leader>mdst i~~~~<Esc>hi
-
-" source code
-nnoremap <Leader>mdcil i``<CR><Esc>ka
-nnoremap <Leader>mdcpy i```python<CR><CR>```<CR><Esc>kki
-nnoremap <Leader>mdcjs i```javascript<CR><CR>```<CR><Esc>kki
-nnoremap <Leader>mdcgn i```<CR><CR>```<CR><Esc>kki
-
-" quote, link
-nnoremap <Leader>mdq i><Space>
-nnoremap <Leader>mdln i[hyperlink](link)<Esc>hhhhhhhhhhhhhhh
-noremap <Leader>md- i----------<CR><Esc>
-
-" support for hexo tag asset res "
-
-nnoremap <Leader>hximg i{% asset_img image.jpg 'put caption here'%}<Esc>0
-nnoremap <Leader>hxref i{% asset_link mylink.pdf 'put caption here'%}<Esc>0
-nnoremap <Leader>hxrm i<!-- more --><Esc>0
