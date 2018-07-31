@@ -51,8 +51,7 @@ y_var_path_zshrc=~/.zshrc
 
 # # Second level
 y_var_path_learn=$y_var_path_online_repos"2_learn/"
-y_var_path_writing=$y_var_path_online_repos"0_writing/"
-y_var_path_portfolio=$y_var_path_online_repos"1_portfolio/"
+y_var_path_writing=$y_var_path_online_repos"yk_writing/"
 
 y_var_path_0_code=$y_var_path_dropbox"0_code/"
 y_var_path_backup_online_repos=$y_var_path_dropbox"0_backup_onlineRepos/"
@@ -85,10 +84,6 @@ function y_cd_learn_junior_to_senior_web() {
 
 function y_cd_ayokoding() {
 	builtin cd $y_var_path_ayokoding
-}
-
-function y_cd_port() {
-	builtin cd $y_var_path_portfolio
 }
 
 function y_cd_dot() {
