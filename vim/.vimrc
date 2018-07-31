@@ -26,7 +26,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'ternjs/tern_for_vim'
+" post install (yarn install | npm install)
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call plug#end()
 
@@ -52,7 +53,6 @@ set ruler
 
 " set backspace like normal apps
 set backspace=2
-
 
 " set the split, so that it behave more 'normal', also modify the focused split
 set splitbelow
@@ -104,7 +104,9 @@ set encoding=utf8
 " history
 set history=700
 
+" -----------------------------------------------------------------------------
 " key mapping
+" -----------------------------------------------------------------------------
 
 " map leader to space
 let mapleader = "\<Space>"
@@ -126,17 +128,19 @@ noremap <Right> <Nop>
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
-" map for ruler
-nnoremap <Leader>-- i----------<CR><Esc> "create a ruler
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-" add new line shortcut
-nnoremap <Leader><CR><CR> $a<CR><Esc> 
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " nerd tree
-
-map <Leader>nrd :NERDTreeToggle<CR>
+map <Leader>nt :NERDTreeToggle<CR>
 
 " copy all to system clipboard
 nnoremap <Leader>cpa gg"*yG
