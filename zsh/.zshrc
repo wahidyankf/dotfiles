@@ -1,10 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-Y_USER_NAME=$(logname)
+YK_USER_NAME=$(logname)
 
-export ZSH=/Users/$Y_USER_NAME/.oh-my-zsh
-export PATH=/Users/$Y_USER_NAME/anaconda3/bin:$PATH
+export ZSH=/Users/$YK_USER_NAME/.oh-my-zsh
+export PATH=/Users/$YK_USER_NAME/anaconda3/bin:$PATH
 export EDITOR=vim
 export DISABLE_AUTO_TITLE=true
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -25,10 +25,10 @@ source $ZSH/oh-my-zsh.sh
 cd ~
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f "/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc" ]; then source "/Users/$Y_USER_NAME/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "/Users/$YK_USER_NAME/google-cloud-sdk/path.zsh.inc" ]; then source "/Users/$YK_USER_NAME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f "/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc" ]; then source "/Users/$Y_USER_NAME/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -f "/Users/$YK_USER_NAME/google-cloud-sdk/completion.zsh.inc" ]; then source "/Users/$YK_USER_NAME/google-cloud-sdk/completion.zsh.inc"; fi
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
@@ -44,139 +44,153 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # PERSONAL
 
 # # First level
-y_var_path_online_repos=~/0_onlineRepos/
-y_var_path_dropbox=~/Dropbox/
+yk_var_path_online_repos=~/0_onlineRepos/
+yk_var_path_dropbox=~/Dropbox/
 
-y_var_path_zshrc=~/.zshrc
+yk_var_path_zshrc=~/.zshrc
 
 # # Second level
-y_var_path_learn=$y_var_path_online_repos"2_learn/"
-y_var_path_writing=$y_var_path_online_repos"yk_writing/"
+yk_var_path_learn=$yk_var_path_online_repos"yk_learn/"
+yk_var_path_writing=$yk_var_path_online_repos"yk_writing/"
 
-y_var_path_0_code=$y_var_path_dropbox"0_code/"
-y_var_path_backup_online_repos=$y_var_path_dropbox"0_backup_onlineRepos/"
+yk_var_path_0_code=$yk_var_path_dropbox"0_code/"
+yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
+yk_var_path_backup_learn=$yk_var_path_dropbox"0_backup_learn/"
 
 # # Third level
-y_var_path_ayokoding=$y_var_path_writing"ayokoding/"
-y_var_path_dot_files=$y_var_path_0_code"a_dotfiles/"
-y_var_path_notes=$y_var_path_0_code"notes/"
-y_var_path_devnotes=$y_var_path_writing"devnotes/"
+yk_var_path_ayokoding=$yk_var_path_writing"ayokoding/"
+yk_var_path_dot_files=$yk_var_path_0_code"a_dotfiles/"
+yk_var_path_notes=$yk_var_path_0_code"notes/"
+yk_var_path_devnotes=$yk_var_path_writing"devnotes/"
 
-y_var_path_learn_junior_to_senior_web=$y_var_path_learn"learn-junior-to-senior-web/"
+yk_var_path_learn_junior_to_senior_web=$yk_var_path_learn"learn-junior-to-senior-web/"
 
 # # Fourth level
-y_var_path_ayokoding_release=$y_var_path_ayokoding"release/"
-y_var_path_quick_scripts=$y_var_path_notes"quickScripts/"
+yk_var_path_ayokoding_release=$yk_var_path_ayokoding"release/"
+yk_var_path_quick_scripts=$yk_var_path_notes"quickScripts/"
 
 # # # CD
 
-function y_cd_online_repos() {
-	builtin cd $y_var_path_online_repos
+function yk_cd_online_repos() {
+	builtin cd $yk_var_path_online_repos
 }
 
-function y_cd_learn() {
-	builtin cd $y_var_path_learn
+function yk_cd_learn() {
+	builtin cd $yk_var_path_learn
 }
 
-function y_cd_learn_junior_to_senior_web() {
-	builtin cd $y_var_path_learn_junior_to_senior_web
+function yk_cd_learn_junior_to_senior_web() {
+	builtin cd $yk_var_path_learn_junior_to_senior_web
 }
 
-function y_cd_ayokoding() {
-	builtin cd $y_var_path_ayokoding
+function yk_cd_ayokoding() {
+	builtin cd $yk_var_path_ayokoding
 }
 
-function y_cd_dot() {
-	builtin cd $y_var_path_dot_files
+function yk_cd_dot() {
+	builtin cd $yk_var_path_dot_files
 }
 
-function y_cd_quickScripts() {
-	builtin cd $y_var_path_quick_scripts
+function yk_cd_quickScripts() {
+	builtin cd $yk_var_path_quick_scripts
 }
 
-function y_cd_ayokoding_release() {
-	builtin cd $y_var_path_ayokoding_release
+function yk_cd_ayokoding_release() {
+	builtin cd $yk_var_path_ayokoding_release
 }
 
-function y_cd_devnotes() {
-	builtin cd $y_var_path_devnotes
+function yk_cd_devnotes() {
+	builtin cd $yk_var_path_devnotes
 }
 
 # # # Brew
 
-alias y_brew_maintenance="brew cleanup ; brew doctor ; brew update ; brew upgrade"
+alias yk_brew_maintenance="brew cleanup ; brew doctor ; brew update ; brew upgrade"
 
 # # # Deployment
 
-function y_deploy_dot() {
+function yk_deploy_dot() {
 	cwd=$(pwd)
-	y_cd_dot && npm run deploy && builtin cd $cwd
+	yk_cd_dot && npm run deploy && builtin cd $cwd
 }
 
-function y_deploy_ayokoding() {
+function yk_deploy_ayokoding() {
 	cwd=$(pwd)
-	y_cd_ayokoding_release && npm run deploy && builtin cd $cwd
+	yk_cd_ayokoding_release && npm run deploy && builtin cd $cwd
 }
 
-function y_deploy_devnotes() {
+function yk_deploy_devnotes() {
 	cwd=$(pwd)
-	y_cd_devnotes && npm run deploy && builtin cd $cwd
+	yk_cd_devnotes && npm run deploy && builtin cd $cwd
 }
 
 # # # Back up
 
-function y_backup_repo() {
+function yk_backup_repo() {
 	cwd=$(pwd)
-	builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $y_var_path_online_repos $y_var_path_backup_online_repos && builtin cd $cwd
+	builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_online_repos $yk_var_path_backup_online_repos && builtin cd $cwd
 }
 
-function y_backup_repo_clear() {
-	rm -rf $y_var_path_backup_online_repos
+function yk_backup_repo_clear() {
+	rm -rf $yk_var_path_backup_online_repos
 }
 
-function y_backup_repo_clear_and_backup() {
-	y_backup_repo_clear && y_backup_repo
+function yk_backup_repo_clear_and_backup() {
+	yk_backup_repo_clear && yk_backup_repo
+}
+
+function yk_backup_learn() {
+	cwd=$(pwd)
+	builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_learn $yk_var_path_backup_learn && builtin cd $cwd
+}
+
+function yk_backup_learn_clear() {
+	rm -rf $yk_var_path_backup_learn
+}
+
+function yk_backup_learn_clear_and_backup() {
+	yk_backup_learn_clear && yk_backup_learn
 }
 
 # # # Bash
 
-function y_zsh_reload() {
+function yk_zsh_reload() {
 	cwd=$(pwd)
-	builtin source $y_var_path_zshrc && builtin cd $cwd
+	builtin source $yk_var_path_zshrc && builtin cd $cwd
 }
 
-function y_zsh_cmd_test() {
+function yk_zsh_cmd_test() {
 	cwd=$(pwd)
-	y_zsh_reload && builtin cd $cwd && $1
+	yk_zsh_reload && builtin cd $cwd && $1
 }
 
 # # # Tmux
 
-function y_tmux_vscjobs() {
+function yk_tmux_vscjobs() {
 	tmuxinator start vscJobs
 }
 
-function y_tmux_writing() {
+function yk_tmux_writing() {
 	tmuxinator start writing
 }
 
 # # # Git
 
-function y_git_clean_branch_local() {
+function yk_git_clean_branch_local() {
 	git branch | grep -v "master" | xargs git branch -D
 }
 
-function y_git_checkout_pull_master() {
+function yk_git_checkout_pull_master() {
 	git checkout master && git pull
 }
 
-function y_git_pull_master_here() {
+function yk_git_pull_master_here() {
 	git pull origin master
 }
 
 # # # Prettier
 
-function y_js_prettify_all() {
+function yk_js_prettifyk_all() {
 	prettier --config ~/.prettierrc --write **/*.js
 }
 
@@ -186,7 +200,7 @@ function y_js_prettify_all() {
 
 # # RG - First level
 
-rg_var_path=$y_var_path_online_repos"0_jobs_ruang_guru/"
+rg_var_path=$yk_var_path_online_repos"0_jobs_ruang_guru/"
 
 # # RG - Second level
 
