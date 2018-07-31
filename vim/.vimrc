@@ -1,4 +1,7 @@
+" -----------------------------------------------------------------------------
 " install plugin using vim-plug
+" -----------------------------------------------------------------------------
+"
 call plug#begin('~/.vim/plugged')
 
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -23,11 +26,15 @@ Plug 'prettier/vim-prettier', {
 
 call plug#end()
 
+" -----------------------------------------------------------------------------
+" vim settings (without plugins)
+" -----------------------------------------------------------------------------
+
 set nocompatible
 
 " syntax
 syntax on
-colorscheme dracula
+" colorscheme dracula
 
 "" Use python.
 let g:python2_host_prog = '/usr/local/bin/python'
@@ -158,16 +165,17 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 " -----------------------------------------------------------------------------
 " key mapping
 " -----------------------------------------------------------------------------
 
 " disable arrow key, just because, you know..
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
+" noremap <Left> <Nop>
+" noremap <Right> <Nop>
 
 " map leader to space
 let mapleader = "\<Space>"
@@ -186,7 +194,6 @@ nnoremap <Leader>cpa gg"*yG
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMRU'
 
 " nerd tree
 map <Leader>nt :NERDTreeToggle<CR>
