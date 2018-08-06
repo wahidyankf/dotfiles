@@ -1,6 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# use neovim as "preferred editor"
+# export VISUAL=nvim
+
+# use Neovim instead of Vim or Vi
+# alias vim=nvim
+# alias vi=nvim
+
 YK_USER_NAME=$(logname)
 
 export ZSH=/Users/$YK_USER_NAME/.oh-my-zsh
