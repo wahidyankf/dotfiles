@@ -60,6 +60,7 @@ yk_var_path_zshrc=~/.zshrc
 # # Second level
 yk_var_path_learn=$yk_var_path_online_repos"yk_learn/"
 yk_var_path_writing=$yk_var_path_online_repos"yk_writing/"
+yk_var_path_portfolio=$yk_var_path_online_repos"yk_projects/"
 
 yk_var_path_0_code=$yk_var_path_dropbox"0_code/"
 yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
@@ -70,6 +71,7 @@ yk_var_path_ayokoding=$yk_var_path_writing"ayokoding/"
 yk_var_path_dot_files=$yk_var_path_0_code"a_dotfiles/"
 yk_var_path_notes=$yk_var_path_0_code"notes/"
 yk_var_path_devnotes=$yk_var_path_writing"devnotes/"
+yk_var_path_wahidyankfgithubio=$yk_var_path_portfolio"wahidyankf.github.io/"
 
 yk_var_path_learn_junior_to_senior_web=$yk_var_path_learn"learn-junior-to-senior-web/"
 
@@ -111,6 +113,10 @@ function yk_cd_devnotes() {
 	builtin cd $yk_var_path_devnotes
 }
 
+function yk_cd_wahidyankfgithubio() {
+	builtin cd $yk_var_path_wahidyankfgithubio
+}
+
 # # # Brew
 
 alias yk_brew_maintenance="brew cleanup ; brew doctor ; brew update ; brew upgrade"
@@ -135,6 +141,13 @@ function yk_deploy_devnotes() {
 	cwd=$(pwd)
 	yk_cd_devnotes
 	npm run deploy
+	builtin cd $cwd
+}
+
+function yk_deploy_wahidyankf_github() {
+	cwd=$(pwd)
+	yk_cd_wahidyankfgithubio
+	yarn buildDeploy
 	builtin cd $cwd
 }
 
