@@ -41,7 +41,8 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # tmux
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "${HOME}/.iterm2_shell_integration.zsh"
+source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -118,24 +119,32 @@ alias yk_brew_maintenance="brew cleanup ; brew doctor ; brew update ; brew upgra
 
 function yk_deploy_dot() {
 	cwd=$(pwd)
-	yk_cd_dot && npm run deploy && builtin cd $cwd
+	yk_cd_dot
+	npm run deploy
+	builtin cd $cwd
 }
 
 function yk_deploy_ayokoding() {
 	cwd=$(pwd)
-	yk_cd_ayokoding_release && npm run deploy && builtin cd $cwd
+	yk_cd_ayokoding_release
+	npm run deploy
+	builtin cd $cwd
 }
 
 function yk_deploy_devnotes() {
 	cwd=$(pwd)
-	yk_cd_devnotes && npm run deploy && builtin cd $cwd
+	yk_cd_devnotes
+	npm run deploy
+	builtin cd $cwd
 }
 
 # # # Back up
 
 function yk_backup_repo() {
 	cwd=$(pwd)
-	builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_online_repos $yk_var_path_backup_online_repos && builtin cd $cwd
+	builtin cd ~
+	rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_online_repos $yk_var_path_backup_online_repos
+	builtin cd $cwd
 }
 
 function yk_backup_repo_clear() {
@@ -143,12 +152,15 @@ function yk_backup_repo_clear() {
 }
 
 function yk_backup_repo_clear_and_backup() {
-	yk_backup_repo_clear && yk_backup_repo
+	yk_backup_repo_clear
+	yk_backup_repo
 }
 
 function yk_backup_learn() {
 	cwd=$(pwd)
-	builtin cd ~ && rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_learn $yk_var_path_backup_learn && builtin cd $cwd
+	builtin cd ~
+	rsync -avz --progress --exclude-from '.rsyncexclude' $yk_var_path_learn $yk_var_path_backup_learn
+	builtin cd $cwd
 }
 
 function yk_backup_learn_clear() {
@@ -156,19 +168,23 @@ function yk_backup_learn_clear() {
 }
 
 function yk_backup_learn_clear_and_backup() {
-	yk_backup_learn_clear && yk_backup_learn
+	yk_backup_learn_clear
+	yk_backup_learn
 }
 
 # # # Bash
 
 function yk_zsh_reload() {
 	cwd=$(pwd)
-	builtin source $yk_var_path_zshrc && builtin cd $cwd
+	builtin source $yk_var_path_zshrc
+	builtin cd $cwd
 }
 
 function yk_zsh_cmd_test() {
 	cwd=$(pwd)
-	yk_zsh_reload && builtin cd $cwd && $1
+	yk_zsh_reload
+	builtin cd $cwd
+	$1
 }
 
 # # # Tmux
@@ -188,7 +204,8 @@ function yk_git_clean_branch_local() {
 }
 
 function yk_git_checkout_pull_master() {
-	git checkout master && git pull
+	git checkout master
+	git pull
 }
 
 function yk_git_pull_master_here() {
@@ -252,12 +269,24 @@ function rg_cd_sharedlibs() {
 
 function rg_source_rebuild_fe() {
 	cwd=$(pwd)
-	builtin cd $rg_var_path_source && yarn build:libs && cd $cwd
+	builtin cd $rg_var_path_source
+	yarn build:libs
+	cd $cwd
 }
 
 function rg_source_init_fe() {
 	cwd=$(pwd)
-	builtin cd $rg_var_path_source && yarn init-repo && cd $cwd
+	builtin cd $rg_var_path_source
+	yarn init-repo
+	cd $cwd
+}
+
+function rg_source_clean_init_fe() {
+	cwd=$(pwd)
+	builtin cd $rg_var_path_source
+	yarn clean
+	yarn init-repo
+	cd $cwd
 }
 
 # RG - Rogu
@@ -267,7 +296,12 @@ alias rogu="$GOBIN/rogu"
 function rg_rogu_list_version() {
 	cwd=$(pwd)
 	temp_file_name=$1_versions_list.md
-	builtin cd $rg_var_path_source && builtin cd $1 && rogu list-version >$temp_file_name && vim $temp_file_name && rm -rf $temp_file_name && builtin cd $cwd
+	builtin cd $rg_var_path_source
+	builtin cd $1
+	rogu list-version >$temp_file_name
+	vim $temp_file_name
+	rm -rf $temp_file_name
+	builtin cd $cwd
 }
 
 function rg_rogu_deploy_version_production() {
@@ -281,11 +315,13 @@ function rg_rn_ios_goto() {
 }
 
 function rg_rn_ios_goto_2() {
-	rg_rn_ios_goto $1 && rg_rn_ios_goto $2
+	rg_rn_ios_goto $1
+	rg_rn_ios_goto $2
 }
 
 function rg_rn_ios_goto_with_start() {
-	yarn run-ios && rg_rn_ios_goto $1
+	yarn run-ios
+	rg_rn_ios_goto $1
 }
 
 function rg_rn_android_goto() {
@@ -293,11 +329,13 @@ function rg_rn_android_goto() {
 }
 
 function rg_rn_android_goto_2() {
-	rg_rn_android_goto $1 && rg_rn_android_goto $2
+	rg_rn_android_goto $1
+	rg_rn_android_goto $2
 }
 
 function rg_rn_android_goto_with_start() {
-	yarn run-android && rg_rn_android_goto $1
+	yarn run-android
+	rg_rn_android_goto $1
 }
 
 function rg_rn_debugger() {

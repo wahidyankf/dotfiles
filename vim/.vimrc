@@ -49,19 +49,19 @@ Plug 'Shougo/neosnippet-snippets'
 " Deoplete completion source
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 
+" syntax
+Plug 'https://github.com/pangloss/vim-javascript'
+
+" flow
+Plug 'https://github.com/flowtype/vim-flow'
+
+call plug#end()
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
 " neosnippet
 let g:neosnippet#enable_completed_snippet = 1
-
-" syntax
-Plug 'https://github.com/pangloss/vim-javascript'
-
-" flow
-" Plug 'https://github.com/flowtype/vim-flow'
-
-call plug#end()
 
 " -----------------------------------------------------------------------------
 " vim settings (without plugins)
