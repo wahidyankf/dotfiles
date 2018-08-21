@@ -160,12 +160,12 @@ function yk_backup_repo() {
 	builtin cd $cwd
 }
 
-function yk_backup_repo_clear() {
+function yk_backup_repo_clean() {
 	rm -rf $yk_var_path_backup_online_repos
 }
 
-function yk_backup_repo_clear_and_backup() {
-	yk_backup_repo_clear
+function yk_backup_repo_clean_and_backup() {
+	yk_backup_repo_clean
 	yk_backup_repo
 }
 
@@ -176,12 +176,12 @@ function yk_backup_learn() {
 	builtin cd $cwd
 }
 
-function yk_backup_learn_clear() {
+function yk_backup_learn_clean() {
 	rm -rf $yk_var_path_backup_learn
 }
 
-function yk_backup_learn_clear_and_backup() {
-	yk_backup_learn_clear
+function yk_backup_learn_clean_and_backup() {
+	yk_backup_learn_clean
 	yk_backup_learn
 }
 
@@ -227,8 +227,8 @@ function yk_git_pull_master_here() {
 
 # # # Prettier
 
-function yk_js_prettifyk_all() {
-	prettier --config ~/.prettierrc --write **/*.js
+function yk_js_prettify_all() {
+	prettier --config ~/.prettierrc --write **/*.js **/*.es6 **/*.jsx
 }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
