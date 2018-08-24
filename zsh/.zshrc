@@ -228,7 +228,11 @@ function yk_git_pull_master_here() {
 # # # Prettier
 
 function yk_js_prettify_all() {
-	prettier --config ~/.prettierrc --write **/*.js **/*.es6 **/*.jsx
+	prettier --config ~/.prettierrc --write **/*.js **/*.jsx
+}
+
+function yk_js_prettify_all_ignore_node() {
+	find . -name "*.js" | grep -v node_modules | xargs prettier --config ~/.prettierrc --write **/*.js **/*.jsx
 }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
