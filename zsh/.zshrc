@@ -325,6 +325,10 @@ function rg_rogu_deploy_version_production() {
 	rogu deploy-version -n production $1
 }
 
+function rg_rogu_deploy_version_staging() {
+	rogu deploy-version -n staging $1
+}
+
 # RG - Ruker App - Utils
 
 function rg_rn_ios_goto() {
