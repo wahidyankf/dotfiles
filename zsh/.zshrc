@@ -105,10 +105,6 @@ function yk_cd_quickScripts() {
 	builtin cd $yk_var_path_quick_scripts
 }
 
-function yk_cd_ayokoding_release() {
-	builtin cd $yk_var_path_ayokoding_release
-}
-
 function yk_cd_devnotes() {
 	builtin cd $yk_var_path_devnotes
 }
@@ -132,9 +128,15 @@ function yk_deploy_dot() {
 
 function yk_deploy_ayokoding() {
 	cwd=$(pwd)
-	yk_cd_ayokoding_release
-	npm run deploy
+	yk_cd_ayokoding
+	yarn deploy:auto
 	builtin cd $cwd
+}
+
+function yk_develop_ayokoding() {
+	cwd=$(pwd)
+	yk_cd_ayokoding
+	yarn content:dev
 }
 
 function yk_deploy_devnotes() {
