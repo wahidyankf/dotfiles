@@ -139,10 +139,24 @@ function yk_develop_ayokoding() {
 	yarn content:dev
 }
 
+function yk_update_ayokoding() {
+	cwd=$(pwd)
+	yk_cd_ayokoding
+	git pull origin master
+	builtin cd $cwd
+}
+
 function yk_deploy_devnotes() {
 	cwd=$(pwd)
 	yk_cd_devnotes
 	npm run deploy
+	builtin cd $cwd
+}
+
+function yk_update_devnotes() {
+	cwd=$(pwd)
+	yk_cd_devnotes
+	git pull origin master
 	builtin cd $cwd
 }
 
