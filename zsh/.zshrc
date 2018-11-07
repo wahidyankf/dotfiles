@@ -232,13 +232,15 @@ function yk_git_clean_branch_local() {
 	git branch | grep -v "master" | xargs git branch -D
 }
 
-function yk_git_checkout_pull_master() {
+function yk_git_complom() {
 	git checkout master
-	git pull
+	git pull origin master
 }
 
-function yk_git_pull_master_here() {
+function yk_git_complom_clean() {
+	git checkout master
 	git pull origin master
+	yk_git_clean_branch_local
 }
 
 # # # Prettier
