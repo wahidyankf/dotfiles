@@ -129,14 +129,14 @@ function yk_deploy_dot() {
 function yk_deploy_ayokoding() {
 	cwd=$(pwd)
 	yk_cd_ayokoding
-	yarn deploy:auto
+	yarn deploy:all:auto
 	builtin cd $cwd
 }
 
 function yk_develop_ayokoding() {
 	cwd=$(pwd)
 	yk_cd_ayokoding
-	yarn content:dev
+	yarn dev:ayokoding-web
 }
 
 function yk_update_ayokoding() {
