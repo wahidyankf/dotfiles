@@ -25,7 +25,7 @@ export GOBIN=$HOME/go/bin
 ZSH_THEME="cloud"
 
 # Specify the plugin being used by zsh
-plugins=(git zsh-wakatime z)
+plugins=(git zsh-wakatime z zsh-nvm)
 
 source $ZSH/oh-my-zsh.sh
 
