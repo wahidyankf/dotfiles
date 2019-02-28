@@ -240,12 +240,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " key mapping
 " -----------------------------------------------------------------------------
 
-" disable arrow key, just because, you know..
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
-" noremap <Left> <Nop>
-" noremap <Right> <Nop>
-
 " map leader to space
 let mapleader = "\<Space>"
 

@@ -61,6 +61,7 @@ yk_var_path_zshrc=~/.zshrc
 yk_var_path_learn=$yk_var_path_online_repos"yk_learn/"
 yk_var_path_writing=$yk_var_path_online_repos"yk_writing/"
 yk_var_path_portfolio=$yk_var_path_online_repos"yk_projects/"
+yk_var_path_patternmatching=$yk_var_path_online_repos"patternmatching.rocks/"
 
 yk_var_path_0_code=$yk_var_path_dropbox"0_code/"
 yk_var_path_backup_online_repos=$yk_var_path_dropbox"0_backup_onlineRepos/"
@@ -93,6 +94,10 @@ function yk_cd_learn_junior_to_senior_web() {
 	builtin cd $yk_var_path_learn_junior_to_senior_web
 }
 
+function yk_cd_patternmatching() {
+	builtin cd $yk_var_path_patternmatching
+}
+
 function yk_cd_ayokoding() {
 	builtin cd $yk_var_path_ayokoding
 }
@@ -123,6 +128,33 @@ function yk_deploy_dot() {
 	cwd=$(pwd)
 	yk_cd_dot
 	npm run deploy
+	builtin cd $cwd
+}
+
+function yk_deploy_patternmatching() {
+	cwd=$(pwd)
+	yk_cd_patternmatching
+	yarn deploy:patternmatching-web
+	builtin cd $cwd
+}
+
+function yk_deploy_patternmatching_auto_commit() {
+	cwd=$(pwd)
+	yk_cd_patternmatching
+	yarn deploy:patternmatching-web:auto
+	builtin cd $cwd
+}
+
+function yk_develop_patternmatching() {
+	cwd=$(pwd)
+	yk_cd_patternmatching
+	yarn patternmatching-web
+}
+
+function yk_update_patternmatching() {
+	cwd=$(pwd)
+	yk_cd_patternmatching
+	git pull origin master
 	builtin cd $cwd
 }
 
@@ -316,11 +348,11 @@ function rg_source_init_fe() {
 	cd $cwd
 }
 
-function rg_source_clean_init_fe() {
+function rg_source_clean_init_fe_re() {
 	cwd=$(pwd)
 	builtin cd $rg_var_path_source
-	yarn clean
-	yarn init-repo
+	rogu frontend clean -e re
+	rogu frontend init-repo -e re
 	cd $cwd
 }
 
