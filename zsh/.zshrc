@@ -12,6 +12,8 @@ YK_USER_NAME=$(logname)
 
 export ZSH=/Users/$YK_USER_NAME/.oh-my-zsh
 export PATH=/Users/$YK_USER_NAME/anaconda3/bin:$PATH
+export PATH=/Users/$YK_USER_NAME/anaconda3/bin:$PATH
+export PATH=/Users/$YK_USER_NAME/.opam/default/bin:$PATH
 export EDITOR=vim
 export DISABLE_AUTO_TITLE=true
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -351,8 +353,8 @@ function rg_source_init_fe() {
 function rg_source_clean_init_fe_re() {
 	cwd=$(pwd)
 	builtin cd $rg_var_path_source
-	rogu frontend clean -e re
-	rogu frontend init-repo -e re
+	$GOBIN/rogu frontend clean -e re
+	$GOBIN/rogu frontend init-repo -e re
 	cd $cwd
 }
 
@@ -464,3 +466,6 @@ function rg_rn_android_dev_test_post_view() {
 function rg_rn_android_dev_test_post_result() {
 	rg_rn_android_goto test-result/$rg_var_serial_assigned_course/posttest/$rg_var_serial_posttest
 }
+
+# opam configuration
+test -r /Users/abdurrahman/.opam/opam-init/init.zsh && . /Users/abdurrahman/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
