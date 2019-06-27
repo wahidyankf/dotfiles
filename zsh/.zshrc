@@ -27,7 +27,7 @@ export GOBIN=$HOME/go/bin
 ZSH_THEME="cloud"
 
 # Specify the plugin being used by zsh
-plugins=(git zsh-wakatime z zsh-nvm)
+plugins=(git zsh-wakatime z terminalapp vscode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -41,10 +41,8 @@ if [ -f "/Users/$YK_USER_NAME/google-cloud-sdk/completion.zsh.inc" ]; then sourc
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
-# tmux
-
 test -e "${HOME}/.iterm2_shell_integration.zsh"
-source "${HOME}/.iterm2_shell_integration.zsh"
+# source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -469,3 +467,7 @@ function rg_rn_android_dev_test_post_result() {
 
 # opam configuration
 test -r /Users/abdurrahman/.opam/opam-init/init.zsh && . /Users/abdurrahman/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# go to last working dir
+cd -
+
