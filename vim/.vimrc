@@ -44,23 +44,23 @@ augroup END
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
-Plug 'mileszs/ack.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'reasonml-editor/vim-reason-plus'
-Plug 'wakatime/vim-wakatime'
 Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
@@ -208,7 +208,7 @@ function! ToggleSignColumn()
 endfunction
 
 nnoremap <bs>h :noh<cr>
-nnoremap <bs>cp :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
+nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
 
 " }}}
 
@@ -225,19 +225,6 @@ inoremap <m-j> <Esc>:m .+1<cr>==gi
 inoremap <m-k> <Esc>:m .-2<cr>==gi
 vnoremap <m-j> :m '>+1<cr>gv=gv
 vnoremap <m-k> :m '<-2<cr>gv=gv
-
-" }}}
-
-" Key-Bindings - Folding {{{
-
-" toggle folding current level
-nnoremap <bs>ff za
-" fold all level
-nnoremap <bs>fm zM
-" unfold all level
-nnoremap <bs>fr zR
-" toggle folding all level
-nnoremap <expr> <bs>f<space> &foldlevel ? 'zM' :'zR'
 
 " }}}
 
@@ -264,7 +251,7 @@ let mapleader="\<Space>"
 
 " RC files {{{
 
-" config-action-type
+" mnemonic: config-action-type
 
 " vim
 nnoremap <Leader>crv :source $MYVIMRC<cr> :mode<cr> <c-w>=
@@ -401,25 +388,13 @@ nnoremap <Leader>ntv :NERDTreeVCS<cr><c-w>=
 
 " }}}
 
-" Plugin - Ctrl P {{{
+" Plugin - FZF {{{
 
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
-
-let g:ctrlp_root_markers=['package.json']
-let g:ctrlp_custom_ignore='\v[\/](node_modules|target|dist|build)|(\.(swp|ico|git|svn|bs.js|vscode))$'
-let g:ctrlp_max_files=0
-let g:ctrlp_lazy_update=400
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_match_func = {'match': 'pymatcher#PyMatch'}
-
-" map ctrl-p buffer mode to c-b
-nnoremap <c-b> :CtrlPBuffer<cr>
+nnoremap <bs>ff :Files<cr>
+nnoremap <bs>fg :GFiles<cr>
+nnoremap <bs>fb :Buffers<cr>
+nnoremap <bs>fc :Commits<cr>
+nnoremap <bs>fa :Ag<cr>
 
 " }}}
 
