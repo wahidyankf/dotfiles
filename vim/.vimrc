@@ -2,8 +2,6 @@
 " NOTES
 " ============================================================
 
-" when to use `nore` map:
-" - if we don't want to use existing binding
 " when to use regular mapping:
 " - when we want to utilize existing mapping (e.g. <Plug>)
 
@@ -11,8 +9,7 @@
 " TODO
 " ============================================================
 
-" - ack.vim shortcut
-" - should be something like 'are -> :Ack! pattern **/*.re
+" - grep/ripgrep from the nearest project root
 
 " ============================================================
 " BASIC SETTINGS
@@ -22,7 +19,8 @@
 
 augroup vim_enter
     " Redraw screen after entering vim (there is a bugs that make it render only
-    " half of the screen available on start up) we can also adjust zoom to make vim recalculate its stuffs
+    " half of the screen available on start up) we can also adjust zoom to make
+    " vim recalculate its stuffs
     
     autocmd!
     autocmd VimEnter * :mode
@@ -31,7 +29,6 @@ augroup END
 augroup vim_cd
     " automatically change current directory to be the same directory as current
     " buffer.
-    " source: https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
 
     autocmd!
     set autochdir
@@ -61,6 +58,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -69,20 +67,32 @@ call plug#end()
 " Settings - Theming {{{
 
 set term=xterm-256color
-colorscheme murphy
 
 " enable syntax highlighting
 syntax on
 
+" Murphy colorscheme - inactive {{{
+
+" colorscheme murphy
 " change popup menu to the same as dracula pop up (for easier use)
-hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+" hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+" hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+
+" }}}
+
+" Gruvbox - inactive {{{
+
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
+set bg=dark
+
+" }}}
+
 
 " number and characters
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
 
-" line settings
 " set column width to 80
 set columns=80
 " enable text wrapping
@@ -122,8 +132,6 @@ set incsearch
 set ignorecase
 set smartcase
 
-" make a fold based on indentation
-" set foldmethod=indent
 
 " make newly opened buffer not folded when first opened
 " autocmd BufRead * normal zM
@@ -160,22 +168,74 @@ let g:netrw_localrmdir='rm -r'
 
 augroup filetype_vim
     autocmd!
-    autocmd FileType vim setlocal foldmethod =marker
+    autocmd FileType javascript setlocal foldmethod=syntax
+    autocmd FileType reason setlocal foldmethod=syntax
+    autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
 " }}}
 
 " Abbreviations {{{
 
-iabbrev 'v-- " ============================================================
+inoreabbrev 'v-- " ============================================================
+cnoreabbrev yarn_cgb yarn clean && yarn gen && yarn build
+cnoreabbrev yarn_cbl yarn clean && yarn build:libs
 
 " }}}
 
 " ============================================================
-" KEY-BINDINGS - BASICS
+" HELPER FUNCTIONS
 " ============================================================
 
-" Key-bindings - Navigation {{{
+" Navigation {{{
+
+function! g:GetProjectRootPWD()
+    " config - what files/dir will be used for project's root directory marker
+    " lower index means higher priority
+    let l:project_root_marker = ["package.json", ".git"]
+    " set maximum round of tree traversal
+    let l:maximum_traversal_round = 10
+
+    " initial values
+    let l:current_traversal_round = 0
+    let l:starting_pwd = system('pwd')
+
+    " accumulator for returned pwd
+    let l:last_pwd = system('pwd')
+
+   while current_traversal_round < maximum_traversal_round
+        let marker_count_as_str = "0"
+        let marker_count = 0
+
+        for marker in project_root_marker
+            let marker_count_as_str = system("cd " . last_pwd . " ; ls -a | grep -w " . marker .  " | wc -l")
+            let marker_count = str2nr(marker_count_as_str)
+
+            if marker_count > 0
+                break
+            endif
+        endfor
+
+        if marker_count > 0
+            " found it!
+            break
+        else
+            "project root marker not found, traversing up
+            let last_pwd = system("cd " . last_pwd . " ; cd .. ; pwd")
+        endif
+
+        let current_traversal_round += 1
+    endwhile
+
+    if current_traversal_round < 10
+        return last_pwd
+    else 
+        return starting_pwd
+    endif
+endfunction
+
+" Use `:GetProjectRootPWD` to cd Project root
+command! -nargs=0 GetProjectRootPWD :call GetProjectRootPWD()
 
 function! HLNext (blinktime)
     let [bufnum, lnum, col, off]=getpos('.')
@@ -188,29 +248,24 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
+" }}}
+
+" ============================================================
+" KEY-BINDINGS - BASICS
+" ============================================================
+
+" Key-bindings - Navigation {{{
+
 nnoremap <silent> n   n:call HLNext(0.025)<cr>
 nnoremap <silent> N   N:call HLNext(0.025)<cr>
 
+nnoremap <c-w>t :tab split<cr>
 
 " }}}
 
-" Key-bindings - Settings {{{
-
-" Toggle signcolumn. Works only on vim>=8.0 or NeoVim
-function! ToggleSignColumn()
-    if !exists("b:signcolumn_on") || b:signcolumn_on
-        set signcolumn=no
-        let b:signcolumn_on=0
-    else
-        set signcolumn=auto
-        let b:signcolumn_on=1
-    endif
-endfunction
-
-nnoremap <bs>h :noh<cr>
-nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
-
-" }}}
+" ============================================================
+" KEY-BINDINGS - EDITING (ALT/META)
+" ============================================================
 
 " Key-Bindings - Editing {{{
 
@@ -228,6 +283,81 @@ vnoremap <m-k> :m '<-2<cr>gv=gv
 
 " }}}
 
+" ============================================================
+" KEY-BINDINGS - MODES AND BIG MOVEMENTS (BACKSPACE)
+" ============================================================
+
+" Key-Bindings - RC files {{{
+
+" mnemonic: config-action-type
+
+" vim
+nnoremap <bs>cev :tabnew $MYVIMRC<cr>
+nnoremap <bs>crv :source $MYVIMRC<cr>:mode<cr><c-w>=
+
+" vim-coc
+nnoremap <bs>cec :CocConfig<cr>
+" zsh
+nnoremap <bs>cez :tabnew ~/.zshrc<cr>
+" ack
+nnoremap <bs>cea :tabnew ~/.ackrc<cr>
+" tmux
+nnoremap <bs>cet :tabnew ~/.tmux.conf<cr>
+" work
+nnoremap <bs>cew :tabnew ~/wkf-repos/ruangguru/source/package.re.json<cr>
+
+" }}}
+
+" Leader - Buffer management {{{
+
+" close all buffers except this one
+nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
+
+" reload current buffer
+nnoremap <bs>e :e<cr>
+
+" print pwd
+nnoremap <bs>i :pwd<cr>
+
+" }}}
+
+" Key-bindings - Navigation {{{
+
+nnoremap <bs>L gt
+nnoremap <bs>H gT
+
+" }}}
+
+" Key-Bindings - Modes {{{
+
+" Toggle signcolumn. Works only on vim>=8.0 or NeoVim
+function! ToggleSignColumn()
+    if !exists("b:signcolumn_on") || b:signcolumn_on
+        set signcolumn=no
+        let b:signcolumn_on=0
+    else
+        set signcolumn=auto
+        let b:signcolumn_on=1
+    endif
+endfunction
+
+nnoremap <bs>h :noh<cr>
+nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
+
+" }}}
+
+" Key-Bindings - Visual {{{
+
+function VisualLength()
+  exe 'normal "xy'
+  echo "Visual: " . strlen(@x) . "\n"
+  exe 'normal gv'
+endfunction
+
+map <bs>vc "xy:call VisualLength()<CR>
+
+" }}}
+
 " Key-Bindings - Sessions {{{
 
 " SessionSaveTarget
@@ -239,7 +369,21 @@ nnoremap <bs>ssa :mks! ~/.vim/sessions/auto-session.vim<cr>
 " SessionLoadAuto
 nnoremap <bs>sla :source ~/.vim/sessions/auto-session.vim<cr>
 " SessionSaveautoQuit
-nnoremap <bs>ssq :mks! ~/.vim/sessions/auto-session.vim<cr>:qa!<cr>
+nnoremap <bs>ssaq :mks! ~/.vim/sessions/auto-session.vim<cr>:qa!<cr>
+
+" SessionSaveWork
+nnoremap <bs>ssw :mks! ~/.vim/sessions/work-session.vim<cr>
+" SessionLoadAuto
+nnoremap <bs>slw :source ~/.vim/sessions/work-session.vim<cr>
+" SessionSaveWorkQuit
+nnoremap <bs>sswq :mks! ~/.vim/sessions/work-session.vim<cr>:qa!<cr>
+
+" SessionSaveLearn
+nnoremap <bs>ssl :mks! ~/.vim/sessions/learn-session.vim<cr>
+" SessionLoadLearn
+nnoremap <bs>sll :source ~/.vim/sessions/learn-session.vim<cr>
+" SessionSaveLearnQuit
+nnoremap <bs>sslq :mks! ~/.vim/sessions/learn-session.vim<cr>:qa!<cr>
 
 " }}}
 
@@ -249,33 +393,14 @@ nnoremap <bs>ssq :mks! ~/.vim/sessions/auto-session.vim<cr>:qa!<cr>
 
 let mapleader="\<Space>"
 
-" RC files {{{
+" Leader - Editing {{{
 
-" mnemonic: config-action-type
-
-" vim
-nnoremap <Leader>crv :source $MYVIMRC<cr> :mode<cr> <c-w>=
-nnoremap <Leader>cev :tabnew $MYVIMRC<cr>
-
-" vim-coc
-nnoremap <Leader>cec :CocConfig<vR>
-" zsh
-nnoremap <Leader>cez :tabnew ~/.zshrc<cr>
-" tmux
-nnoremap <Leader>cet :tabnew ~/.tmux.conf<cr>
-" work
-nnoremap <Leader>cew :tabnew ~/wkf-repos/ruangguru/source/package.re.json<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>qa! :qa!<cr>
 
 " }}}
 
-" Editing {{{
-
-nnoremap <Leader>q :q<cr>
-nnoremap <Leader>qa! :qa!<cr>
-
-" }}}
-
-" Workspace management {{{
+" Leader - Workspace management {{{
 
 " 'cd' towards the dir in which the current file is edited
 " but only change the path for the current window
@@ -283,16 +408,9 @@ noremap <leader>cd :lcd %:h<cr>
 
 " }}}
 
-" Window management {{{
+" Leader - Window management {{{
 
-nnoremap <Leader>tn :tabnew<Space>
-
-" }}}
-
-" Buffer management {{{
-
-" close all buffers except this one
-nnoremap <leader>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
+nnoremap <leader>tn :tabnew<Space>
 
 " }}}
 
@@ -300,6 +418,7 @@ nnoremap <leader>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
 " KEY-BINDINGS - LOCAL LEADER
 " ============================================================
 
+let maplocalleader=","
 
 " ============================================================
 " PLUGINS
@@ -324,32 +443,36 @@ set guifont=Fira\ Code:h12
 
 " }}}
 
-" Plugin - Ack.vim {{{
+" Plugin - FZF and Ack.Vim {{{
 
-" make ack.vim not to automatically open first result
-cnoreabbrev Ack Ack!
-nnoremap <Leader>fa :Ack!<Space>-i<Space>
-nnoremap <Leader>fijs :Ack!<Space>--js<Space>-i<Space>
-nnoremap <Leader>fijon :Ack!<Space>--json<Space>-i<Space>
-nnoremap <Leader>fimd :Ack!<Space>--md<Space>-i<Space>
-nnoremap <Leader>fire :Ack!<Space>--reasonml<Space>-i<Space>
-nnoremap <Leader>fiatd :Ack!<Space>--atd<Space>-i<Space>
-nnoremap <Leader>ficss :Ack!<Space>--css<Space>-i<Space>
-nnoremap <Leader>fiml :Ack!<Space>--css<Space>-i<Space>
+" Use `:CDProjectRoot` to cd Project root
+command! -nargs=0 CDProjectRoot :execute 'cd' GetProjectRootPWD()
+
+nnoremap <bs>fb :Buffers<cr>
+nnoremap <bs>fc :Commits<cr>
+nnoremap <bs>ff :Files<cr>
+nnoremap <bs>fg :GFiles<cr>
+nnoremap <bs>fp :CDProjectRoot<cr>:Files
+
+nnoremap <c-g> :GFiles<cr>
+nnoremap <c-p> :CDProjectRoot<cr>:Files<cr>
+nnoremap <c-b> :Buffers<cr>
+
+nnoremap <bs>gg :CDProjectRoot<cr>:Ack!<Space>-i<Space>
+nnoremap <bs>grg :CDProjectRoot<cr>:Rg<cr>
+nnoremap <bs>gatd :CDProjectRoot<cr>:Ack!<Space>--atd<Space>-i<Space>
+nnoremap <bs>gcss :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
+nnoremap <bs>gjson :CDProjectRoot<cr>:Ack!<Space>--json<Space>-i<Space>
+nnoremap <bs>gjs :CDProjectRoot<cr>:Ack!<Space>--js<Space>-i<Space>
+nnoremap <bs>gmd :CDProjectRoot<cr>:Ack!<Space>--md<Space>-i<Space>
+nnoremap <bs>gml :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
+nnoremap <bs>gre :CDProjectRoot<cr>:Ack!<Space>--reason<Space>-i<Space>
+nnoremap <bs>g :CDProjectRoot<cr>:Ack!<Space>-i<Space>
 
 let g:ack_mappings={
               \ 'v':  '<c-W><cr><c-W>L<c-W>p<c-W>J<c-W>p<c-W>=',
               \ 'gv': '<c-W><cr><c-W>L<c-W>p<c-W>J<c-W>='
               \ }
-" if executable('ag')
-  " let g:ackprg = 'ag --nogroup --nocolor --column --vimgrep'
-" endif
-
-" }}}
-
-" Plugin - Prettier {{{
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " }}}
 
@@ -360,7 +483,7 @@ set laststatus=2
 let g:lightline={
       \ 'colorscheme': 'powerline',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
+      \   'left': [ ['mode', 'paste'],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
@@ -378,23 +501,17 @@ let NERDTreeShowBookmarks=1
 let NERDTreeHijackNetrw=0
 " show hidden files in nerdtree
 let NERDTreeShowHidden=1
+let g:NERDTreeIgnore = ['.bs.js$']
 
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 let NERDTreeChDirMode=2
-nnoremap <Leader>ntt :NERDTreeToggle<cr><c-w>=
-nnoremap <Leader>ntn :NERDTree<cr><c-w>=
-nnoremap <Leader>ntv :NERDTreeVCS<cr><c-w>=
 
-" }}}
-
-" Plugin - FZF {{{
-
-nnoremap <bs>ff :Files<cr>
-nnoremap <bs>fg :GFiles<cr>
-nnoremap <bs>fb :Buffers<cr>
-nnoremap <bs>fc :Commits<cr>
-nnoremap <bs>fa :Ag<cr>
+" e stands for explorer
+nnoremap <bs>et :NERDTreeToggle<cr><c-w>=
+nnoremap <bs>ee :NERDTree<cr><c-w>=
+nnoremap <bs>ep :CDProjectRoot<cr>:NERDTree<cr><c-w>=
+nnoremap <bs>eg :NERDTreeVCS<cr><c-w>=
 
 " }}}
 
@@ -481,7 +598,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-
 augroup coc_cursor_hold
     autocmd!
 
@@ -490,12 +606,7 @@ augroup coc_cursor_hold
 augroup END
 
 " Remap for rename current word
-nmap <leader>ern <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>cofs  <Plug>(coc-format-selected)
-nmap <leader>cofs <Plug>(coc-format-selected)
-
+nmap <leader>corcw <Plug>(coc-rename)
 
 augroup coc_format_expr
   autocmd!
@@ -507,18 +618,18 @@ augroup coc_format_expr
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>coar  <Plug>(coc-codeaction-selected)
+xmap <leader>coar <Plug>(coc-codeaction-selected)
 nmap <leader>coar <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>coal  <Plug>(coc-codeaction)
+nmap <leader>coac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>cofc  <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <c-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
@@ -548,9 +659,10 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <leader>coda  :<c-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>cold  :<c-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <leader>cole  :<c-u>CocList extensions<cr>
+" B
 " Show commands
 nnoremap <silent> <leader>colc  :<c-u>CocList commands<cr>
 " Find symbol of current document
@@ -567,7 +679,8 @@ nnoremap <silent> <leader>colr  :<c-u>CocListResume<cr>
 nnoremap <silent> <leader>codr  :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
-nnoremap <Leader>w :Format<cr>:w<cr>
+nnoremap <leader>w :Format<cr>:w<cr>
+nnoremap <leader>W :w<cr>
 
 " }}}
 
