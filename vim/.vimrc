@@ -59,12 +59,15 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
 Plug 'morhetz/gruvbox'
+Plug 'figitaki/vim-dune'
+Plug 'jpalardy/vim-slime'
+Plug 'gcmt/taboo.vim'
 
 call plug#end()
 
 " }}}
 
-" Settings - Theming {{{
+" Settings - Theme {{{
 
 set term=xterm-256color
 
@@ -80,14 +83,30 @@ syntax on
 
 " }}}
 
-" Gruvbox - inactive {{{
+" Gruvbox - active {{{
 
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 set bg=dark
 
-" }}}
+" color palette: 223, 233, 235, 240, 241, 246, 250,
 
+function! g:SetTablineTheme ()
+    " TabLine -> tab pages line, not active tab page label
+    highlight TabLine gui=None cterm=NONE term=NONE ctermfg=246 ctermbg=233
+    " TabLineFill -> tab pages line, where there are no labels
+    highlight TabLineFill gui=None cterm=NONE term=NONE ctermfg=246 ctermbg=233
+    " TabLineSel -> tab pages line, active tab page label
+    highlight TabLineSel gui=None cterm=bold term=NONE ctermfg=235 ctermbg=246
+endfunction
+
+augroup configure_tabline
+    autocmd!
+    autocmd SourcePost * silent call SetTablineTheme()
+    autocmd SessionLoadPost * silent call SetTablineTheme()
+augroup END
+
+" }}}
 
 " number and characters
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
@@ -192,7 +211,7 @@ cnoreabbrev yarn_cbl yarn clean && yarn build:libs
 function! g:GetProjectRootPWD()
     " config - what files/dir will be used for project's root directory marker
     " lower index means higher priority
-    let l:project_root_marker = ["package.json", ".git"]
+    let l:project_root_marker = ["package.json", ".git", "dune-project"]
     " set maximum round of tree traversal
     let l:maximum_traversal_round = 10
 
@@ -260,6 +279,9 @@ nnoremap <silent> n   n:call HLNext(0.025)<cr>
 nnoremap <silent> N   N:call HLNext(0.025)<cr>
 
 nnoremap <c-w>t :tab split<cr>
+nnoremap <bs>ts :tab split<cr>
+nnoremap <bs>l gt
+nnoremap <bs>h gT
 
 " }}}
 
@@ -293,22 +315,33 @@ vnoremap <m-k> :m '<-2<cr>gv=gv
 
 " vim
 nnoremap <bs>cev :tabnew $MYVIMRC<cr>
+nnoremap <bs>vcev :vsp $MYVIMRC<cr>
 nnoremap <bs>crv :source $MYVIMRC<cr>:mode<cr><c-w>=
 
 " vim-coc
 nnoremap <bs>cec :CocConfig<cr>
 " zsh
 nnoremap <bs>cez :tabnew ~/.zshrc<cr>
+nnoremap <bs>vcez :vsp ~/.zshrc<cr>
 " ack
 nnoremap <bs>cea :tabnew ~/.ackrc<cr>
+nnoremap <bs>vcea :vsp ~/.ackrc<cr>
 " tmux
-nnoremap <bs>cet :tabnew ~/.tmux.conf<cr>
+nnoremap <bs>cett :tabnew ~/.tmux.conf<cr>
+nnoremap <bs>vcett :vsp ~/.tmux.conf<cr>
+nnoremap <bs>cetw :tabnew ~/.config/tmuxinator/work.yml<cr>
+nnoremap <bs>vcetw :vsp ~/.config/tmuxinator/work.yml<cr>
+nnoremap <bs>cetl :tabnew ~/.config/tmuxinator/learn.yml<cr>
+nnoremap <bs>vcetl :vsp ~/.config/tmuxinator/learn.yml<cr>
+nnoremap <bs>cetp :tabnew ~/.config/tmuxinator/prod.yml<cr>
+nnoremap <bs>vcetp :vsp ~/.config/tmuxinator/prod.yml<cr>
 " work
 nnoremap <bs>cew :tabnew ~/wkf-repos/ruangguru/source/package.re.json<cr>
+nnoremap <bs>vcew :vsp ~/wkf-repos/ruangguru/source/package.re.json<cr>
 
 " }}}
 
-" Leader - Buffer management {{{
+" Key-Bindings - Buffer management {{{
 
 " close all buffers except this one
 nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
@@ -316,15 +349,18 @@ nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
 " reload current buffer
 nnoremap <bs>e :e<cr>
 
+" bufdo e
+nnoremap <bs>bde :bufdo e<cr>
+
 " print pwd
 nnoremap <bs>i :pwd<cr>
 
 " }}}
 
-" Key-bindings - Navigation {{{
+" Key-Bindings - Window management {{{
 
-nnoremap <bs>L gt
-nnoremap <bs>H gT
+" windo e
+nnoremap <bs>wde :windo e<cr>
 
 " }}}
 
@@ -341,7 +377,7 @@ function! ToggleSignColumn()
     endif
 endfunction
 
-nnoremap <bs>h :noh<cr>
+nnoremap <bs>/ :noh<cr>
 nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
 
 " }}}
@@ -515,6 +551,52 @@ nnoremap <bs>eg :NERDTreeVCS<cr><c-w>=
 
 " }}}
 
+" Plugin - Vim-Slime {{{
+
+let g:slime_no_mappings = 1
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.slime_paste"
+
+" Token		Meaning
+" {last}	!	The last (previously active) pane
+" {next}	+	The next pane by number
+" {previous}	-	The previous pane by number
+" {top}		The top pane
+" {bottom}		The bottom pane
+" {left}		The leftmost pane
+" {right}		The rightmost pane
+" {top-left}		The top-left pane
+" {top-right}		The top-right pane
+" {bottom-left}		The bottom-left pane
+" {bottom-right}		The bottom-right pane
+" {up-of}		The pane above the active pane
+" {down-of}		The pane below the active pane
+" {left-of}		The pane to the left of the active pane
+" {right-of}		The pane to the right of the active pane
+
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{down-of}"}
+
+xmap <c-c><c-c> <Plug>SlimeRegionSend
+nmap <c-c><c-c> <Plug>SlimeParagraphSend
+nmap <c-c>v     <Plug>SlimeConfig
+
+" }}}
+
+" Plugin - Taboo.vim {{{
+
+set guioptions-=e
+set sessionoptions+=tabpages,globals
+
+nnoremap <bs>tn :TabooRename 
+nnoremap <bs>to :TabooOpen 
+nnoremap <bs>tr :TabooReset<cr>
+
+let g:taboo_tab_format=" |> %N %f%m (%W) "
+let g:taboo_renamed_tab_format=" |> %N %l%m (%W) "
+let g:taboo_tabline=1
+
+" }}}
+
 " Plugin - CoC {{{
 
 let g:coc_global_extensions=[
@@ -681,6 +763,20 @@ nnoremap <silent> <leader>codr  :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 " Modify leader w to format and save
 nnoremap <leader>w :Format<cr>:w<cr>
 nnoremap <leader>W :w<cr>
+
+" }}}
+
+" Ocaml {{{
+
+
+" Quick setup for VIM
+" -------------------
+" Append this to your .vimrc to add merlin to vim's runtime-path:
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" 
+" Also run the following line in vim to index the documentation:
+" :execute "helptags " . g:opamshare . "/merlin/vim/doc"
 
 " }}}
 
