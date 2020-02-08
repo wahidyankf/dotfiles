@@ -35,11 +35,12 @@ augroup vim_cd
     autocmd BufEnter * silent! cd %:p:h
 augroup END
 
+
 " }}}
 
 " VIM Plug {{{
-"
-call plug#begin('~/.vim/plugged')
+
+call plug#begin()
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
@@ -62,6 +63,9 @@ Plug 'morhetz/gruvbox'
 Plug 'figitaki/vim-dune'
 Plug 'jpalardy/vim-slime'
 Plug 'gcmt/taboo.vim'
+Plug 'diepm/vim-rest-console'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -69,19 +73,10 @@ call plug#end()
 
 " Settings - Theme {{{
 
-set term=xterm-256color
+" set term=xterm-256color
 
 " enable syntax highlighting
 syntax on
-
-" Murphy colorscheme - inactive {{{
-
-" colorscheme murphy
-" change popup menu to the same as dracula pop up (for easier use)
-" hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-" hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
-
-" }}}
 
 " Gruvbox - active {{{
 
@@ -112,23 +107,27 @@ augroup END
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
 
-" set column width to 80
-set columns=80
 " enable text wrapping
 set wrap
+
 " enable linebreak
 set linebreak
+
 " make line break (wrap) shown as ...
 set showbreak=....
+
 " mark 81th column line
 set colorcolumn=81
-highlight ColorColumn ctermbg=8
+
 " set hybrid line numbering
 set number relativenumber
 
 " }}}
 
 " Settings - Editing & Navigation {{{
+
+" writes the content of the file automatically if we call :make
+autocmd FileType go set autowrite
 
 set encoding=UTF-8
 
@@ -141,7 +140,7 @@ set expandtab
 " number of spaces tab is counted for
 set tabstop=2
 " number of spaces to use for autoindent
-set shiftwidth=4
+set shiftwidth=2
 " fix backspace behavior on most terminals
 set backspace=2
 
@@ -151,18 +150,14 @@ set incsearch
 set ignorecase
 set smartcase
 
-
-" make newly opened buffer not folded when first opened
-" autocmd BufRead * normal zM
-
 " make scroll happened at 15 from top/bottom
-set so=15
+" set so=15
 
 " }}}
 
 " File and buffers management {{{
 
-" make all swap files to be centralized into .vim/swap
+" make all swap files to be centralized into .config/nvim/swap
 set directory=$HOME/.vim/swap//
 
 " close buffer without closing window
@@ -189,6 +184,7 @@ augroup filetype_vim
     autocmd!
     autocmd FileType javascript setlocal foldmethod=syntax
     autocmd FileType reason setlocal foldmethod=syntax
+    autocmd FileType go setlocal foldmethod=syntax
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
@@ -211,7 +207,7 @@ cnoreabbrev yarn_cbl yarn clean && yarn build:libs
 function! g:GetProjectRootPWD()
     " config - what files/dir will be used for project's root directory marker
     " lower index means higher priority
-    let l:project_root_marker = ["package.json", ".git", "dune-project"]
+    let l:project_root_marker = ["package.json", ".git", "dune-project", ".wkf-root"]
     " set maximum round of tree traversal
     let l:maximum_traversal_round = 10
 
@@ -267,6 +263,9 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
+" Use `:CDProjectRoot` to cd Project root
+command! -nargs=0 CDProjectRoot :execute 'cd' GetProjectRootPWD()
+
 " }}}
 
 " ============================================================
@@ -280,6 +279,15 @@ nnoremap <silent> N   N:call HLNext(0.025)<cr>
 
 nnoremap <c-w>t :tab split<cr>
 nnoremap <bs>ts :tab split<cr>
+nnoremap <bs>1 1gt
+nnoremap <bs>2 2gt
+nnoremap <bs>3 3gt
+nnoremap <bs>4 4gt
+nnoremap <bs>5 5gt
+nnoremap <bs>6 6gt
+nnoremap <bs>7 7gt
+nnoremap <bs>8 8gt
+nnoremap <bs>9 9gt
 nnoremap <bs>l gt
 nnoremap <bs>h gT
 
@@ -293,6 +301,7 @@ nnoremap <bs>h gT
 
 " delete to the beginning of line in insert mode
 inoremap <m-c> <esc>0C
+inoremap <m-l> <esc>la
 inoremap <m-O> <esc>O
 
 " move block of text using alt-something
@@ -309,39 +318,98 @@ vnoremap <m-k> :m '<-2<cr>gv=gv
 " KEY-BINDINGS - MODES AND BIG MOVEMENTS (BACKSPACE)
 " ============================================================
 
-" Key-Bindings - RC files {{{
+" Key-Bindings - Files {{{
 
 " mnemonic: config-action-type
+" vim-coc
+nnoremap <bs>coc :CocConfig<cr>
+
+" ack
+nnoremap <bs>cat :tabnew ~/.ackrc<cr>
+nnoremap <bs>cav :vsp ~/.ackrc<cr>p
+nnoremap <bs>cas :sp ~/.ackrc<cr>
+
+" tmux
+nnoremap <bs>ctt :tabnew ~/.tmux.conf<cr>
+nnoremap <bs>ctv :vsp ~/.tmux.conf<cr>
+nnoremap <bs>cts :sp ~/.tmux.conf<cr>
+
+nnoremap <bs>ctwt :tabnew ~/.config/tmuxinator/work.yml<cr>
+nnoremap <bs>ctwv :vsp ~/.config/tmuxinator/work.yml<cr>
+nnoremap <bs>ctws :sp ~/.config/tmuxinator/work.yml<cr>
+
+nnoremap <bs>ctlt :tabnew ~/.config/tmuxinator/learn.yml<cr>
+nnoremap <bs>ctlv :vsp ~/.config/tmuxinator/learn.yml<cr>
+nnoremap <bs>ctls :sp ~/.config/tmuxinator/learn.yml<cr>
+
+nnoremap <bs>ctpt :tabnew ~/.config/tmuxinator/prod.yml<cr>
+nnoremap <bs>ctpv :vsp ~/.config/tmuxinator/prod.yml<cr>
+nnoremap <bs>ctps :sp ~/.config/tmuxinator/prod.yml<cr>
 
 " vim
-nnoremap <bs>cev :tabnew $MYVIMRC<cr>
-nnoremap <bs>vcev :vsp $MYVIMRC<cr>
-nnoremap <bs>crv :source $MYVIMRC<cr>:mode<cr><c-w>=
+nnoremap <bs>cvt :tabnew ~/.vimrc<cr>
+nnoremap <bs>cvv :vsp ~/.vimrc<cr>
+nnoremap <bs>cvs :sp ~/.vimrc<cr>
+nnoremap <bs>cve :e ~/.vimrc<cr>
 
-" vim-coc
-nnoremap <bs>cec :CocConfig<cr>
-" zsh
-nnoremap <bs>cez :tabnew ~/.zshrc<cr>
-nnoremap <bs>vcez :vsp ~/.zshrc<cr>
-" ack
-nnoremap <bs>cea :tabnew ~/.ackrc<cr>
-nnoremap <bs>vcea :vsp ~/.ackrc<cr>
-" tmux
-nnoremap <bs>cett :tabnew ~/.tmux.conf<cr>
-nnoremap <bs>vcett :vsp ~/.tmux.conf<cr>
-nnoremap <bs>cetw :tabnew ~/.config/tmuxinator/work.yml<cr>
-nnoremap <bs>vcetw :vsp ~/.config/tmuxinator/work.yml<cr>
-nnoremap <bs>cetl :tabnew ~/.config/tmuxinator/learn.yml<cr>
-nnoremap <bs>vcetl :vsp ~/.config/tmuxinator/learn.yml<cr>
-nnoremap <bs>cetp :tabnew ~/.config/tmuxinator/prod.yml<cr>
-nnoremap <bs>vcetp :vsp ~/.config/tmuxinator/prod.yml<cr>
+nnoremap <bs>cnvt :tabnew $MYVIMRC<cr>
+nnoremap <bs>cnvv :vsp $MYVIMRC<cr>
+nnoremap <bs>cnvs :sp $MYVIMRC<cr>
+nnoremap <bs>cnve :e $MYVIMRC<cr>
+
+nnoremap <bs>cvr :source ~/.vimrc<cr>:mode<cr><c-w>=
+
 " work
-nnoremap <bs>cew :tabnew ~/wkf-repos/ruangguru/source/package.re.json<cr>
-nnoremap <bs>vcew :vsp ~/wkf-repos/ruangguru/source/package.re.json<cr>
+nnoremap <bs>cwt :tabnew ~/wkf-repos/ruangguru/source/package.re.json<cr>
+nnoremap <bs>cwv :vsp ~/wkf-repos/ruangguru/source/package.re.json<cr>
+nnoremap <bs>cws :sp ~/wkf-repos/ruangguru/source/package.re.json<cr>
+
+" zsh
+
+nnoremap <bs>czt :tabnew ~/.zshrc<cr>
+nnoremap <bs>czv :vsp ~/.zshrc<cr>
+nnoremap <bs>czs :sp ~/.zshrc<cr>
+
+
+" private
+nnoremap <bs>nt :tabnew ~/wkf-notes/README.md<cr>
+nnoremap <bs>nv :vsp ~/wkf-notes/README.md<cr>
+nnoremap <bs>ns :sp ~/wkf-notes/README.md<cr>
+
+nnoremap <bs>ntdt :tabnew ~/wkf-notes/daily/todo.md<cr>
+nnoremap <bs>ntdv :vsp ~/wkf-notes/daily/todo.md<cr>
+nnoremap <bs>ntds :sp ~/wkf-notes/daily/todo.md<cr>
+
+" skillacademy
+
+nnoremap <bs>nsat :tabnew ~/wkf-notes/ruangguru/skill_academy/README.md<cr>
+nnoremap <bs>nsav :vsp ~/wkf-notes/ruangguru/skill_academy/README.md<cr>
+nnoremap <bs>nsas :sp ~/wkf-notes/ruangguru/skill_academy/README.md<cr>
+
+" rest client
+nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
+nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
+
+" sort
+xnoremap <bs>s :sort<cr>
+
+" nvim terminl
+nnoremap <bs>zv :CDProjectRoot<cr>:vsp term://zsh<cr>
+nnoremap <bs>zs :CDProjectRoot<cr>:sp term://zsh<cr>
+nnoremap <bs>zt :CDProjectRoot<cr>:tabnew term://zsh<cr>
+tnoremap <C-[> <C-\><C-n>
 
 " }}}
 
 " Key-Bindings - Buffer management {{{
+
+function! s:BDExt(ext)
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && bufname(v:val) =~ "\.'.a:ext.'$"')
+  if empty(buffers) |throw "no *.".a:ext." buffer" | endif
+  exe 'bd! '.join(buffers, ' ')
+endfunction
+
+command! -nargs=1 BDExt :call s:BDExt(<f-args>)
 
 " close all buffers except this one
 nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
@@ -350,10 +418,19 @@ nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
 nnoremap <bs>e :e<cr>
 
 " bufdo e
-nnoremap <bs>bde :bufdo e<cr>
+nnoremap <bs>bdoe :bufdo e<cr>
 
 " print pwd
 nnoremap <bs>i :pwd<cr>
+
+" bdext
+nnoremap <bs>bde :BDExt 
+
+" buffer quit hjkl
+nnoremap <bs>bqh <c-w>h:q<cr>
+nnoremap <bs>bqj <c-w>j:q<cr>
+nnoremap <bs>bqk <c-w>k:q<cr>
+nnoremap <bs>bql <c-w>l:q<cr>
 
 " }}}
 
@@ -384,13 +461,13 @@ nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<c
 
 " Key-Bindings - Visual {{{
 
-function VisualLength()
+function! VisualLengthCount()
   exe 'normal "xy'
   echo "Visual: " . strlen(@x) . "\n"
   exe 'normal gv'
 endfunction
 
-map <bs>vc "xy:call VisualLength()<CR>
+map <bs>vlc "xy:call VisualLengthCount()<CR>
 
 " }}}
 
@@ -420,6 +497,15 @@ nnoremap <bs>ssl :mks! ~/.vim/sessions/learn-session.vim<cr>
 nnoremap <bs>sll :source ~/.vim/sessions/learn-session.vim<cr>
 " SessionSaveLearnQuit
 nnoremap <bs>sslq :mks! ~/.vim/sessions/learn-session.vim<cr>:qa!<cr>
+
+" }}}
+
+" Key-Bindings - Quick Fix {{{
+
+nnoremap <leader>fn :cnext<CR>
+nnoremap <leader>fp :cprevious<CR>
+nnoremap <leader>fq :cclose<CR>
+nnoremap <leader>fe :copen<CR>
 
 " }}}
 
@@ -481,34 +567,69 @@ set guifont=Fira\ Code:h12
 
 " Plugin - FZF and Ack.Vim {{{
 
-" Use `:CDProjectRoot` to cd Project root
-command! -nargs=0 CDProjectRoot :execute 'cd' GetProjectRootPWD()
-
 nnoremap <bs>fb :Buffers<cr>
 nnoremap <bs>fc :Commits<cr>
 nnoremap <bs>ff :Files<cr>
 nnoremap <bs>fg :GFiles<cr>
 nnoremap <bs>fp :CDProjectRoot<cr>:Files
+nnoremap <bs>fl :Lines<cr>
+nnoremap <bs>fbl :BLines<cr>
+nnoremap <bs>fm :Marks<cr>
+nnoremap <bs>fw :Windows<cr>
+nnoremap <bs>fhh :History<cr>
+nnoremap <bs>fh/ :History/<cr>
+nnoremap <bs>fh: :History:<cr>
 
 nnoremap <c-g> :GFiles<cr>
 nnoremap <c-p> :CDProjectRoot<cr>:Files<cr>
 nnoremap <c-b> :Buffers<cr>
 
-nnoremap <bs>gg :CDProjectRoot<cr>:Ack!<Space>-i<Space>
-nnoremap <bs>grg :CDProjectRoot<cr>:Rg<cr>
-nnoremap <bs>gatd :CDProjectRoot<cr>:Ack!<Space>--atd<Space>-i<Space>
-nnoremap <bs>gcss :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
-nnoremap <bs>gjson :CDProjectRoot<cr>:Ack!<Space>--json<Space>-i<Space>
-nnoremap <bs>gjs :CDProjectRoot<cr>:Ack!<Space>--js<Space>-i<Space>
-nnoremap <bs>gmd :CDProjectRoot<cr>:Ack!<Space>--md<Space>-i<Space>
-nnoremap <bs>gml :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
-nnoremap <bs>gre :CDProjectRoot<cr>:Ack!<Space>--reason<Space>-i<Space>
-nnoremap <bs>g :CDProjectRoot<cr>:Ack!<Space>-i<Space>
+nnoremap <leader>gg :CDProjectRoot<cr>:Ack!<Space>-i<Space>
+nnoremap <leader>grg :CDProjectRoot<cr>:Rg<cr>
+nnoremap <leader>gatd :CDProjectRoot<cr>:Ack!<Space>--atd<Space>-i<Space>
+nnoremap <leader>gcss :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
+nnoremap <leader>gjson :CDProjectRoot<cr>:Ack!<Space>--json<Space>-i<Space>
+nnoremap <leader>gjs :CDProjectRoot<cr>:Ack!<Space>--js<Space>-i<Space>
+nnoremap <leader>gmd :CDProjectRoot<cr>:Ack!<Space>--md<Space>-i<Space>
+nnoremap <leader>gml :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
+nnoremap <leader>gre :CDProjectRoot<cr>:Ack!<Space>--reason<Space>-i<Space>
+nnoremap <leader>g :CDProjectRoot<cr>:Ack!<Space>-i<Space>
 
 let g:ack_mappings={
               \ 'v':  '<c-W><cr><c-W>L<c-W>p<c-W>J<c-W>p<c-W>=',
               \ 'gv': '<c-W><cr><c-W>L<c-W>p<c-W>J<c-W>='
               \ }
+
+" FZF to checkout git branches, Usage: GCheckout
+function! s:open_branch_fzf(line)
+  let l:parser = split(a:line)
+  let l:branch = l:parser[0]
+  if l:branch ==? '*'
+    let l:branch = l:parser[1]
+  endif
+  execute '!git checkout ' . l:branch
+endfunction
+
+command! -bang -nargs=0 GCheckout
+  \ call fzf#vim#grep(
+  \   'git branch -v', 0,
+  \   {
+  \     'sink': function('s:open_branch_fzf')
+  \   },
+  \   <bang>0
+  \ )
+
+" }}}
+
+" Plugin - Git Ops {{{
+
+nnoremap <bs>gco :GCheckout<cr>
+nnoremap <bs>gcm :Commits<cr>
+nnoremap <bs>gs :Gstatus<cr>
+nnoremap <bs>gf :GFiles?<cr>
+nnoremap <bs>gvd :Gvdiff<cr>
+nnoremap <bs>gbl :Gblame<cr>
+nnoremap <bs>gbc :BCommits<cr>
 
 " }}}
 
@@ -538,6 +659,7 @@ let NERDTreeHijackNetrw=0
 " show hidden files in nerdtree
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['.bs.js$']
+let g:NERDTreeWinPos = "left"
 
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
@@ -547,7 +669,10 @@ let NERDTreeChDirMode=2
 nnoremap <bs>et :NERDTreeToggle<cr><c-w>=
 nnoremap <bs>ee :NERDTree<cr><c-w>=
 nnoremap <bs>ep :CDProjectRoot<cr>:NERDTree<cr><c-w>=
+nnoremap <bs>ef :NERDTreeFocus<cr>
+nnoremap <bs>eq :NERDTreeClose<cr>
 nnoremap <bs>eg :NERDTreeVCS<cr><c-w>=
+nnoremap <bs>er :NERDTreeRefreshRoot<cr>
 
 " }}}
 
@@ -590,6 +715,7 @@ set sessionoptions+=tabpages,globals
 nnoremap <bs>tn :TabooRename 
 nnoremap <bs>to :TabooOpen 
 nnoremap <bs>tr :TabooReset<cr>
+nnoremap <bs>tm :tabmove 
 
 let g:taboo_tab_format=" |> %N %f%m (%W) "
 let g:taboo_renamed_tab_format=" |> %N %l%m (%W) "
@@ -605,14 +731,12 @@ let g:coc_global_extensions=[
             \ 'coc-git',
             \ 'coc-html', 
             \ 'coc-json', 
-            \ 'coc-markdownlint',
             \ 'coc-prettier',
             \ 'coc-python',
             \ 'coc-reason',
             \ 'coc-svg',
             \ 'coc-tsserver',
             \ 'coc-vimlsp',
-            \ 'coc-xml',
             \ 'coc-yaml', 
             \ ]
 
@@ -645,7 +769,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<c-p>" : "\<c-h>"
 
 function! s:check_back_space() abort
   let col=col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  return !col || getline('.')[col - 1] =~# '\s'
 endfunction
 
 " Use <c-leader> to trigger completion.
@@ -688,7 +812,7 @@ augroup coc_cursor_hold
 augroup END
 
 " Remap for rename current word
-nmap <leader>corcw <Plug>(coc-rename)
+nmap <localleader>ncw <Plug>(coc-rename)
 
 augroup coc_format_expr
   autocmd!
@@ -699,14 +823,20 @@ augroup coc_format_expr
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+" The editor.action.organizeImport code action will auto-format code and add missing imports.
+" The code below used to run this automatically on save
+augroup go_pls
+    autocmd! BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+augroup END
+
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>coar <Plug>(coc-codeaction-selected)
-nmap <leader>coar <Plug>(coc-codeaction-selected)
+xmap <localleader>car <Plug>(coc-codeaction-selected)
+nmap <localleader>car <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>coac  <Plug>(coc-codeaction)
+nmap <localleader>caa <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-nmap <leader>cofc  <Plug>(coc-fix-current)
+nmap <localleader>dff <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
@@ -728,41 +858,122 @@ endfunction
 command! -nargs=0 Format :call Format()
 
 " Use leader cof to format reason
-nnoremap <silent> <leader>cof :Format<cr>
+nnoremap <silent> <localleader>f :Format<cr>
 
 " Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <leader>cold  :<c-u>CocList diagnostics<cr>
+nnoremap <silent> <localleader>dl :<c-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <leader>cole  :<c-u>CocList extensions<cr>
+nnoremap <silent> <bs>cole :<c-u>CocList extensions<cr>
 " B
 " Show commands
-nnoremap <silent> <leader>colc  :<c-u>CocList commands<cr>
+nnoremap <silent> <bs>colc :<c-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <leader>coou  :<c-u>CocList outline<cr>
+nnoremap <silent> <localleader>do :<c-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <leader>cols  :<c-u>CocList -I symbols<cr>
+nnoremap <silent> <localleader>dsl :<c-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <leader>con  :<c-u>CocNext<cr>
+nnoremap <silent> <localleader>dn :<c-u>CocNext<cr>
 " Do default action for previous item.
-nnoremap <silent> <leader>cop  :<c-u>CocPrev<cr>
+nnoremap <silent> <localleader>dp :<c-u>CocPrev<cr>
 " Resume latest coc list
-nnoremap <silent> <leader>colr  :<c-u>CocListResume<cr>
+nnoremap <silent> <bs>colr :<c-u>CocListResume<cr>
 " Restart
-nnoremap <silent> <leader>codr  :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
+nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
-nnoremap <leader>w :Format<cr>:w<cr>
-nnoremap <leader>W :w<cr>
+nnoremap <localleader>w :Format<cr>:w<cr>
+nnoremap <leader>w :w<cr>
+
+" }}}
+
+" Plugin - Vim Rest Console {{{
+let g:vrc_auto_format_response_patterns = {
+  \ 'json': 'python3 -m json.tool',
+  \ 'xml': 'xmllint --format -',
+\}
+let g:vrc_curl_opts = {
+  \ '-sS': '',
+  \ '--connect-timeout': 10,
+  \ '-i': '',
+  \ '--max-time': 60,
+  \ '-k': '',
+\}
+
+" }}}
+
+" Plugin - Vim-Go {{{
+
+let g:go_auto_type_info = 1
+let g:go_def_mode='gopls'
+let g:go_diagnostics_enabled = 1
+let g:go_doc_popup_window = 1
+let g:go_fmt_experimental = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_info_mode='gopls'
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_deadline = "5s"
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+augroup vim_go
+    autocmd!
+
+    function! SetGoIndentation()
+      setlocal noexpandtab tabstop=4 shiftwidth=4
+    endfunction
+
+    function! SetGoMapping()
+      nmap <localleader>bq  <bs>qq
+      nmap <localleader>rr  <Plug>(go-run)
+      nmap <localleader>r  <Plug>(go-run-split)
+      nmap <localleader>rt  <Plug>(go-run-tab)
+      nmap <localleader>rs  <Plug>(go-run-split)
+      nmap <localleader>rv  <Plug>(go-run-vertical)
+      nmap <localleader>rq  <bs>bqj
+      nmap <localleader>rvq  <bs>bql
+      nmap <localleader>rsq  <bs>bqj
+      nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
+      nmap <localleader>tr  <Plug>(go-test)
+      nmap <localleader>tt  <Plug>(go-alternate-edit)
+      nmap <localleader>ts  <Plug>(go-alternate-split)
+      nmap <localleader>tv  <Plug>(go-alternate-vertical)
+      nmap <localleader>tc <Plug>(go-coverage-toggle)
+      nmap <localleader>l <Plug>(go-metalinter)
+      nmap <localleader>i <Plug>(go-info)
+      nnoremap <localleader>s :GoPlay<cr>
+    endfunction
+
+
+    " make newly opened buffer not folded when first opened
+    " the folding is kinda meh if we use it with fold
+    autocmd BufNewFile,BufRead *.go call SetGoIndentation()
+    autocmd FileType go call SetGoMapping()
+augroup END
 
 " }}}
 
@@ -780,3 +991,14 @@ nnoremap <leader>W :w<cr>
 
 " }}}
 
+" Rogu {{{
+
+" Rogu
+" make sure `:echo has('terminal')` returns 1
+function! s:Rogu(args) abort
+  execute ':terminal rogu' a:args
+endfunction
+
+com! -nargs=? Rg :execute s:Rogu(<q-args>)
+
+" }}}
