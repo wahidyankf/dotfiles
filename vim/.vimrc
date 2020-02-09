@@ -302,6 +302,7 @@ nnoremap <bs>h gT
 " delete to the beginning of line in insert mode
 inoremap <m-c> <esc>0C
 inoremap <m-l> <esc>la
+inoremap <m-h> <esc>i
 inoremap <m-O> <esc>O
 
 " move block of text using alt-something
