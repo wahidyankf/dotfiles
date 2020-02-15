@@ -303,6 +303,8 @@ nnoremap <bs>h gT
 inoremap <m-c> <esc>0C
 inoremap <m-l> <esc>la
 inoremap <m-h> <esc>i
+inoremap <m-L> <esc>lcl
+inoremap <m-H> <esc>cl
 inoremap <m-O> <esc>O
 
 " move block of text using alt-something
@@ -572,7 +574,8 @@ nnoremap <bs>fb :Buffers<cr>
 nnoremap <bs>fc :Commits<cr>
 nnoremap <bs>ff :Files<cr>
 nnoremap <bs>fg :GFiles<cr>
-nnoremap <bs>fp :CDProjectRoot<cr>:Files
+nnoremap <bs>fp :CDProjectRoot<cr>:Files<cr>
+nnoremap <bs>frg :CDProjectRoot<cr>:Rg<cr>
 nnoremap <bs>fl :Lines<cr>
 nnoremap <bs>fbl :BLines<cr>
 nnoremap <bs>fm :Marks<cr>
@@ -738,6 +741,7 @@ let g:coc_global_extensions=[
             \ 'coc-svg',
             \ 'coc-tsserver',
             \ 'coc-vimlsp',
+            \ 'coc-java',
             \ 'coc-yaml', 
             \ ]
 
@@ -1000,6 +1004,6 @@ function! s:Rogu(args) abort
   execute ':terminal rogu' a:args
 endfunction
 
-com! -nargs=? Rg :execute s:Rogu(<q-args>)
+com! -nargs=? Rogu :execute s:Rogu(<q-args>)
 
 " }}}
