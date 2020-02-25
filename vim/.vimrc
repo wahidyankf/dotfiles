@@ -66,6 +66,7 @@ Plug 'gcmt/taboo.vim'
 Plug 'diepm/vim-rest-console'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'jiangmiao/auto-pairs'
+Plug 'elixir-editors/vim-elixir'
 
 call plug#end()
 
@@ -742,6 +743,7 @@ let g:coc_global_extensions=[
             \ 'coc-tsserver',
             \ 'coc-vimlsp',
             \ 'coc-java',
+            \ 'coc-elixir',
             \ 'coc-yaml', 
             \ ]
 
@@ -979,6 +981,16 @@ augroup vim_go
     autocmd BufNewFile,BufRead *.go call SetGoIndentation()
     autocmd FileType go call SetGoMapping()
 augroup END
+
+" }}}
+
+" Plugin - Elixir {{{
+
+" augroup elixirsetup
+  " au!
+  " autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
+  " autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
+" augroup END
 
 " }}}
 
