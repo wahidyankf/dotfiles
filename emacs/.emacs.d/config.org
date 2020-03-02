@@ -1,0 +1,105 @@
+* Before
+  
+** General
+
+#+BEGIN_SRC emacs-lisp
+  ;; disable startup message
+  (setq inhibit-startup-message t)
+
+  ;; hide toolbar in gui mode
+  (tool-bar-mode -1)
+
+  ;; (setq global-display-line-numbers-mode 1)
+  (setq-default display-line-numbers 'relative)
+
+  (global-visual-line-mode t)
+  
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+#+END_SRC
+
+** Theme - Gruvbox
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'gruvbox t)
+#+END_SRC
+
+** Font
+
+#+BEGIN_SRC emacs-lisp
+  ;; set font - Dank Mono - 11
+  (set-frame-font "Dank Mono 11" nil t)
+#+END_SRC
+
+* Package - Evil
+
+#+BEGIN_SRC emacs-lisp
+  (setq evil-want-C-i-jump nil)
+  (require 'evil)
+  (evil-mode 1)
+#+END_SRC
+
+* Package - helm
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+  (global-set-key (kbd "C-x C-f") #'helm-find-files)
+#+END_SRC
+
+* Package - Org Mode
+
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+
+  (setq org-log-done t)
+
+  (setq org-agenda-files (list "~/wkf-org/wkf.org"
+	  "~/wkf-org/ruangguru/ruangguru.org" "~/wkf-org/README.org" ))
+
+  (require 'ob-elixir)
+  (require 'ob-ipython)
+  ;; Run/highlight code using babel in org-mode
+  (org-babel-do-load-languages 'org-babel-load-languages '(
+      (python . t) (ipython . t) (elixir . t) (shell . t) (typescript . t) (js . t) (plantuml . t)))
+
+  ;; Syntax highlight in #+BEGIN_SRC blocks
+  (setq org-src-fontify-natively t)
+  ;; Don't prompt before running code in org
+  (setq org-confirm-babel-evaluate nil)
+  
+  (setq org-plantuml-jar-path
+	(expand-file-name "~/.emacs.d/contrib/plantuml/plantuml.jar"))
+
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
+  ;; (setq org-babel-python-command "python3")
+  ;; (setq python-shell-interpreter "python3")
+  ;; (setq exec-path (append exec-path '("/opt/local/bin")))
+  ;; (setq exec-path (append exec-path '("/usr/local/bin")))
+#+END_SRC
+
+* Package - Projectile
+
+#+BEGIN_SRC emacs-lisp
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+  (setq projectile-project-search-path
+  '("~/wkf-devbox/" "~/wkf-learn/" "~/wkf-org" "~/.emacs.d"))
+#+END_SRC
+
+* Package - Fly Check
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+#+END_SRC
+
+* Package - wakatime mode
+
+#+BEGIN_SRC emacs-lisp
+  (global-wakatime-mode)
+#+END_SRC
