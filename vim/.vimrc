@@ -123,6 +123,9 @@ set colorcolumn=81
 " set hybrid line numbering
 set number relativenumber
 
+" TODO update the color theme
+hi SignColumn ctermfg=none ctermbg=darkgray cterm=NONE
+
 " }}}
 
 " Settings - Editing & Navigation {{{
