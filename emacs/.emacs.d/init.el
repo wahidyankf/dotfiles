@@ -4,12 +4,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(line-number-mode nil)
- '(org-agenda-files
-   (quote
-    ("~/wkf-org/wkf.org" "~/wkf-org/ruangguru/ruangguru.org")))
+ '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (wakatime-mode ob-ipython ob-typescript elixir-mode ob-elixir use-package try projectile htmlize helm gruvbox-theme flycheck evil))))
+    (wakatime-mode ob-ipython ob-typescript elixir-mode ob-elixir use-package try projectile htmlize helm gruvbox-theme flycheck evil)))
+ '(wakatime-cli-path "/usr/local/bin/wakatime")
+ '(wakatime-python-bin nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -37,7 +37,7 @@
   :ensure t)
 
 ;; install all packages we need
-(dolist (package '(evil helm projectile htmlize gruvbox-theme elixir-mode wakatime-mode ob-typescript ob-elixir ob-ipython))
+(dolist (package '(evil helm projectile htmlize gruvbox-theme elixir-mode wakatime-mode ob-typescript ob-elixir ob-ipython linum-relative))
   (unless (package-installed-p package)
    (package-install package))
    (require package))

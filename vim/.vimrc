@@ -439,6 +439,8 @@ nnoremap <bs>bqj <c-w>j:q<cr>
 nnoremap <bs>bqk <c-w>k:q<cr>
 nnoremap <bs>bql <c-w>l:q<cr>
 
+nnoremap <bs>burc :bufdo set undoreload=0<cr>:bufdo e<cr>:bufdo set undoreload=1000<cr><C-o><cr>:windo e<cr>
+
 " }}}
 
 " Key-Bindings - Window management {{{

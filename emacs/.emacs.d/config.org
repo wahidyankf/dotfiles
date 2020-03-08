@@ -10,11 +10,15 @@
   (tool-bar-mode -1)
 
   ;; (setq global-display-line-numbers-mode 1)
-  (setq-default display-line-numbers 'relative)
+  ;; (setq-default display-line-numbers 'relative)
 
   (global-visual-line-mode t)
   
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+ 
+  (linum-mode)
+  (linum-relative-global-mode)
+  (setq linum-relative-current-symbol "-")
 #+END_SRC
 
 ** Theme - Gruvbox
@@ -28,6 +32,90 @@
 #+BEGIN_SRC emacs-lisp
   ;; set font - Dank Mono - 11
   (set-frame-font "Dank Mono 11" nil t)
+#+END_SRC
+
+* Dired
+
+#+BEGIN_SRC emacs-lisp
+(defun my-display-buffer-below (buffer alist)
+"Doc-string."
+  (let (
+      (window
+        (cond
+          ((get-buffer-window buffer (selected-frame)))
+          ((window-in-direction 'below))
+          (t
+            (split-window (selected-window) nil 'below)))))
+    (window--display-buffer buffer window 'window alist display-buffer-mark-dedicated)
+    window))
+
+(defun my-display-buffer-above (buffer alist)
+"Doc-string."
+  (let (
+      (window
+        (cond
+          ((get-buffer-window buffer (selected-frame)))
+          ((window-in-direction 'above))
+          (t
+            (split-window (selected-window) nil 'above)))))
+    (window--display-buffer buffer window 'window alist display-buffer-mark-dedicated)
+    window))
+
+(defun my-display-buffer-left (buffer alist)
+"Doc-string."
+  (let (
+      (window
+        (cond
+          ((get-buffer-window buffer (selected-frame)))
+          ((window-in-direction 'left))
+          (t
+            (split-window (selected-window) nil 'left)))))
+    (window--display-buffer buffer window 'window alist display-buffer-mark-dedicated)
+    window))
+
+(defun my-display-buffer-right (buffer alist)
+"Doc-string."
+  (let (
+      (window
+        (cond
+          ((get-buffer-window buffer (selected-frame)))
+          ((window-in-direction 'right))
+          (t
+            (split-window (selected-window) nil 'right)))))
+    (window--display-buffer buffer window 'window alist display-buffer-mark-dedicated)
+    window))
+
+(defun dired-display-above ()
+"Doc-string."
+(interactive)
+  (let* (
+      (file-or-dir (dired-get-file-for-visit))
+      (buffer (find-file-noselect file-or-dir)))
+    (my-display-buffer-above buffer nil)))
+
+(defun dired-display-below ()
+"Doc-string."
+(interactive)
+  (let* (
+      (file-or-dir (dired-get-file-for-visit))
+      (buffer (find-file-noselect file-or-dir)))
+    (my-display-buffer-below buffer nil)))
+
+(defun dired-display-left ()
+"Doc-string."
+(interactive)
+  (let* (
+      (file-or-dir (dired-get-file-for-visit))
+      (buffer (find-file-noselect file-or-dir)))
+    (my-display-buffer-left buffer nil)))
+
+(defun dired-display-right ()
+"Doc-string."
+(interactive)
+  (let* (
+      (file-or-dir (dired-get-file-for-visit))
+      (buffer (find-file-noselect file-or-dir)))
+    (my-display-buffer-right buffer nil)))
 #+END_SRC
 
 * Package - Evil
@@ -54,8 +142,7 @@
 
   (setq org-log-done t)
 
-  (setq org-agenda-files (list "~/wkf-org/wkf.org"
-	  "~/wkf-org/ruangguru/ruangguru.org" "~/wkf-org/README.org" ))
+  (setq org-agenda-files (list "~/wkf-org/"))
 
   (require 'ob-elixir)
   (require 'ob-ipython)
@@ -67,7 +154,7 @@
   (setq org-src-fontify-natively t)
   ;; Don't prompt before running code in org
   (setq org-confirm-babel-evaluate nil)
-  
+
   (setq org-plantuml-jar-path
 	(expand-file-name "~/.emacs.d/contrib/plantuml/plantuml.jar"))
 
