@@ -1057,7 +1057,9 @@ for tool in s:opam_packages
 endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line
 " ## added by OPAM user-setup for vim / ocp-indent ## 2e29750dcdc1b35f0bc1baf8b38a99f0 ## you can edit, but keep this line
-if count(s:opam_available_tools,"ocp-indent") == 0
-  source "/Users/abdurrahman/.opam/4.09.0/share/ocp-indent/vim/indent/ocaml.vim"
-endif
+"
+" uncomment this when we want to edit ocaml file
+" if count(s:opam_available_tools,"ocp-indent") == 0
+  " source "/Users/abdurrahman/.opam/4.09.0/share/ocp-indent/vim/indent/ocaml.vim"
+" endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
