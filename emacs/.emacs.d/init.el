@@ -7,7 +7,7 @@
  '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (company auto-complete merlin utop tuareg wakatime-mode ob-ipython ob-typescript elixir-mode ob-elixir use-package try projectile htmlize helm gruvbox-theme flycheck evil)))
+    (exec-path-from-shell company auto-complete merlin utop tuareg wakatime-mode ob-ipython ob-typescript elixir-mode ob-elixir use-package try projectile htmlize helm gruvbox-theme flycheck evil)))
  '(wakatime-cli-path "/usr/local/bin/wakatime")
  '(wakatime-python-bin nil))
 (custom-set-faces
@@ -37,7 +37,7 @@
   :ensure t)
 
 ;; install all packages we need
-(dolist (package '(evil helm projectile htmlize gruvbox-theme elixir-mode wakatime-mode ob-typescript ob-elixir ob-ipython linum-relative haskell-mode tuareg utop merlin auto-complete company))
+(dolist (package '(evil helm projectile htmlize gruvbox-theme elixir-mode wakatime-mode ob-typescript ob-elixir ob-ipython linum-relative haskell-mode tuareg utop merlin auto-complete company exec-path-from-shell))
   (unless (package-installed-p package)
    (package-install package))
    (require package))
@@ -45,3 +45,5 @@
 (require 'org)
 (org-babel-load-file
  (expand-file-name "config.org" user-emacs-directory))
+
+(exec-path-from-shell-initialize)
