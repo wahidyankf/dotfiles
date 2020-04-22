@@ -106,6 +106,7 @@ augroup END
 
 " number and characters
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
+" set listchars=tab:>·,trail:~,extends:>,precedes:<
 set list
 
 " enable text wrapping
@@ -118,7 +119,7 @@ set linebreak
 set showbreak=....
 
 " mark 81th column line
-set colorcolumn=81
+" set colorcolumn=81
 
 " set hybrid line numbering
 set number relativenumber
@@ -188,7 +189,7 @@ augroup filetype_vim
     autocmd!
     autocmd FileType javascript setlocal foldmethod=syntax
     autocmd FileType reason setlocal foldmethod=syntax
-    autocmd FileType go setlocal foldmethod=syntax
+    autocmd FileType go setlocal foldmethod=manual
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
@@ -211,7 +212,7 @@ cnoreabbrev yarn_cbl yarn clean && yarn build:libs
 function! g:GetProjectRootPWD()
     " config - what files/dir will be used for project's root directory marker
     " lower index means higher priority
-    let l:project_root_marker = ["package.json", ".git", "dune-project", ".wkf-root"]
+    let l:project_root_marker = ["package.json", ".git", "dune-project", ".wkf-root", "service.yaml"]
     " set maximum round of tree traversal
     let l:maximum_traversal_round = 10
 
@@ -570,7 +571,7 @@ let g:NERDCommentEmptyLines = 1
 
 " Plugin - Vim DevIcons {{{
 
-set guifont=Fira\ Code:h12
+set guifont=Fira\ Code:h10
 
 " }}}
 
@@ -938,9 +939,12 @@ let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_info_mode='gopls'
 let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
+" let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
 let g:go_metalinter_deadline = "5s"
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_enabled = ['vet', 'errcheck']
+
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
