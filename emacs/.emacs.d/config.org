@@ -124,6 +124,7 @@
   (setq evil-want-C-i-jump nil)
   (require 'evil)
   (evil-mode 1)
+  (global-evil-surround-mode 1)
 #+END_SRC
 
 * Package - helm
