@@ -68,6 +68,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'elixir-editors/vim-elixir'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'Twinside/vim-haskellFold'
 
 call plug#end()
 
@@ -167,6 +168,9 @@ set smartcase
 
 " make scroll happened at 15 from top/bottom
 " set so=15
+
+" copy text under visual to clipboard
+vmap <bs>yv :w !pbcopy<CR><CR>
 
 " }}}
 
