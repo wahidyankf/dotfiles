@@ -1043,7 +1043,6 @@ let g:vim_markdown_new_list_item_indent = 0
 " 
 " Ocaml {{{
 
-
 " Quick setup for VIM
 " -------------------
 " Append this to your .vimrc to add merlin to vim's runtime-path:
@@ -1108,4 +1107,3 @@ let g:vim_markdown_new_list_item_indent = 0
 "    },
 
 " }}}
-"
