@@ -35,9 +35,9 @@ augroup vim_cd
     autocmd BufEnter * silent! cd %:p:h
 augroup END
 
-augroup fmt
+augroup ocamlfmt
   autocmd!
-  autocmd BufWritePre * :Neoformat
+  autocmd BufWritePre *.ml :Neoformat
 augroup END
 
 
