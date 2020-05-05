@@ -1047,7 +1047,7 @@ let g:vim_markdown_new_list_item_indent = 0
 
 " }}}
 
-" Ocaml - Active {{{
+" Ocaml {{{
 
 let g:neoformat_ocaml_ocamlformat = {
             \ 'exe': 'ocamlformat',
@@ -1059,70 +1059,4 @@ let g:neoformat_ocaml_ocamlformat = {
 let g:neoformat_enabled_ocaml = ['ocamlformat']
 
 " }}}
-
-" Ocaml - Archive {{{
-
-" Quick setup for VIM
-" -------------------
-" Append this to your .vimrc to add merlin to vim's runtime-path:
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-
-" :execute "set rtp+=" . g:opamshare . "/merlin/vim"
-" 
-" Also run the following line in vim to index the documentation:
-" :execute "helptags " . g:opamshare . "/merlin/vim/doc"
-
-" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
-" let s:opam_share_dir = system("opam config var share")
-" let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
-" 
-" let s:opam_configuration = {}
-" 
-" function! OpamConfOcpIndent()
-  " execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
-" endfunction
-" let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
-" 
-" function! OpamConfOcpIndex()
-  " execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
-" endfunction
-" let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
-" 
-" function! OpamConfMerlin()
-  " let l:dir = s:opam_share_dir . "/merlin/vim"
-  " execute "set rtp+=" . l:dir
-" endfunction
-" 
-" let s:opam_configuration['merlin'] = function('OpamConfMerlin')
-" 
-" let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
-" let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
-" let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
-" 
-" for tool in s:opam_packages
-  " " Respect package order (merlin should be after ocp-index)
-  " if count(s:opam_available_tools, tool) > 0
-    " call s:opam_configuration[tool]()
-  " endif
-" endfor
-
-" ## end of OPAM user-setup addition for vim / base ## keep this line
-" ## added by OPAM user-setup for vim / ocp-indent ## 2e29750dcdc1b35f0bc1baf8b38a99f0 ## you can edit, but keep this line
 "
-" uncomment this when we want to edit ocaml file
-
-" if count(s:opam_available_tools,"ocp-indent") == 0
-  " source "/Users/abdurrahman/.opam/4.09.0/share/ocp-indent/vim/indent/ocaml.vim"
-" endif
-
-" ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
-"
-"
-"    "ocaml": {
-"      "command": "ocaml-language-server",
-"      "args": ["--stdio"],
-"      "filetypes": ["ocaml"],
-"      "rootPatterns": [".merlin"]
-"    },
-
-" }}}
