@@ -35,12 +35,6 @@ augroup vim_cd
     autocmd BufEnter * silent! cd %:p:h
 augroup END
 
-augroup ocamlfmt
-  autocmd!
-  autocmd BufWritePre *.ml :Neoformat
-augroup END
-
-
 " }}}
 
 " VIM Plug {{{
@@ -1058,5 +1052,10 @@ let g:neoformat_ocaml_ocamlformat = {
 
 let g:neoformat_enabled_ocaml = ['ocamlformat']
 
+augroup ocamlfmt
+  autocmd!
+  autocmd BufWritePre *.ml :Neoformat
+augroup END
+
 " }}}
-"
+
