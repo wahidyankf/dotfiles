@@ -35,6 +35,11 @@ augroup vim_cd
     autocmd BufEnter * silent! cd %:p:h
 augroup END
 
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * :Neoformat
+augroup END
+
 
 " }}}
 
@@ -71,6 +76,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'Twinside/vim-haskellFold'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
@@ -1040,8 +1046,21 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
 " }}}
-" 
-" Ocaml {{{
+
+" Ocaml - Active {{{
+
+let g:neoformat_ocaml_ocamlformat = {
+            \ 'exe': 'ocamlformat',
+            \ 'no_append': 1,
+            \ 'stdin': 1,
+            \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
+            \ }
+
+let g:neoformat_enabled_ocaml = ['ocamlformat']
+
+" }}}
+
+" Ocaml - Archive {{{
 
 " Quick setup for VIM
 " -------------------
