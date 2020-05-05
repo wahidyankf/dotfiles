@@ -749,8 +749,27 @@ let g:taboo_renamed_tab_format=" |> %N %l%m (%W) "
 let g:taboo_tabline=1
 
 " }}}
+"
+" Plugin - Vim Rest Console {{{
+let g:vrc_auto_format_response_patterns = {
+  \ 'json': 'python3 -m json.tool',
+  \ 'xml': 'xmllint --format -',
+\}
+let g:vrc_curl_opts = {
+  \ '-sS': '',
+  \ '--connect-timeout': 10,
+  \ '-i': '',
+  \ '--max-time': 60,
+  \ '-k': '',
+\}
 
-" Plugin - CoC {{{
+" }}}
+
+" ============================================================
+" Languages
+" ============================================================
+
+" Language Server - CoC {{{
 
 let g:coc_global_extensions=[
             \ 'coc-css',
@@ -925,22 +944,7 @@ nnoremap <leader>w :w<cr>
 
 " }}}
 
-" Plugin - Vim Rest Console {{{
-let g:vrc_auto_format_response_patterns = {
-  \ 'json': 'python3 -m json.tool',
-  \ 'xml': 'xmllint --format -',
-\}
-let g:vrc_curl_opts = {
-  \ '-sS': '',
-  \ '--connect-timeout': 10,
-  \ '-i': '',
-  \ '--max-time': 60,
-  \ '-k': '',
-\}
-
-" }}}
-
-" Plugin - Vim-Go {{{
+" Language - Go {{{
 
 let g:go_auto_type_info = 1
 let g:go_def_mode='gopls'
@@ -955,11 +959,15 @@ let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_info_mode='gopls'
 let g:go_metalinter_autosave = 1
-" let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
 let g:go_metalinter_deadline = "5s"
-" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+
+
+let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
 let g:go_metalinter_enabled = ['vet', 'errcheck']
+
+" to also enable lint
+" let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
+" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
 
 " run :GoBuild or :GoTestCompile based on the go file
@@ -972,76 +980,44 @@ function! s:build_go_files()
   endif
 endfunction
 
-augroup vim_go
-    autocmd!
+augroup goLang
+  autocmd!
 
-    function! SetGoIndentation()
-      setlocal noexpandtab tabstop=4 shiftwidth=4
-    endfunction
+  function! SetGoIndentation()
+    setlocal noexpandtab tabstop=4 shiftwidth=4
+  endfunction
 
-    function! SetGoMapping()
-      nmap <localleader>bq  <bs>qq
-      nmap <localleader>rr  <Plug>(go-run)
-      nmap <localleader>r  <Plug>(go-run-split)
-      nmap <localleader>rt  <Plug>(go-run-tab)
-      nmap <localleader>rs  <Plug>(go-run-split)
-      nmap <localleader>rv  <Plug>(go-run-vertical)
-      nmap <localleader>rq  <bs>bqj
-      nmap <localleader>rvq  <bs>bql
-      nmap <localleader>rsq  <bs>bqj
-      nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
-      nmap <localleader>tr  <Plug>(go-test)
-      nmap <localleader>tt  <Plug>(go-alternate-edit)
-      nmap <localleader>ts  <Plug>(go-alternate-split)
-      nmap <localleader>tv  <Plug>(go-alternate-vertical)
-      nmap <localleader>tc <Plug>(go-coverage-toggle)
-      nmap <localleader>l <Plug>(go-metalinter)
-      nmap <localleader>i <Plug>(go-info)
-      nnoremap <localleader>s :GoPlay<cr>
-    endfunction
+  function! SetGoMapping()
+    nmap <localleader>bq  <bs>qq
+    nmap <localleader>rr  <Plug>(go-run)
+    nmap <localleader>r  <Plug>(go-run-split)
+    nmap <localleader>rt  <Plug>(go-run-tab)
+    nmap <localleader>rs  <Plug>(go-run-split)
+    nmap <localleader>rv  <Plug>(go-run-vertical)
+    nmap <localleader>rq  <bs>bqj
+    nmap <localleader>rvq  <bs>bql
+    nmap <localleader>rsq  <bs>bqj
+    nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
+    nmap <localleader>tr  <Plug>(go-test)
+    nmap <localleader>tt  <Plug>(go-alternate-edit)
+    nmap <localleader>ts  <Plug>(go-alternate-split)
+    nmap <localleader>tv  <Plug>(go-alternate-vertical)
+    nmap <localleader>tc <Plug>(go-coverage-toggle)
+    nmap <localleader>l <Plug>(go-metalinter)
+    nmap <localleader>i <Plug>(go-info)
+    nnoremap <localleader>s :GoPlay<cr>
+  endfunction
 
 
-    " make newly opened buffer not folded when first opened
-    " the folding is kinda meh if we use it with fold
-    autocmd BufNewFile,BufRead *.go call SetGoIndentation()
-    autocmd FileType go call SetGoMapping()
+  " make newly opened buffer not folded when first opened
+  " the folding is kinda meh if we use it with fold
+  autocmd BufNewFile,BufRead *.go call SetGoIndentation()
+  autocmd FileType go call SetGoMapping()
 augroup END
 
 " }}}
 
-" Plugin - Elixir {{{
-
-" augroup elixirsetup
-  " au!
-  " autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
-  " autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
-" augroup END
-
-" }}}
-
-" Rogu {{{
-
-" make sure `:echo has('terminal')` returns 1
-function! s:Rogu(args) abort
-  execute ':terminal rogu' a:args
-endfunction
-
-com! -nargs=? Rogu :execute s:Rogu(<q-args>)
-
-" }}}
-
-" Vim Markdown {{{
-
-let g:vim_markdown_conceal_code_blocks = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_no_extensions_in_markdown = 1
-let g:vim_markdown_follow_anchor = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
-
-" }}}
-
-" Ocaml {{{
+" Language - Ocaml {{{
 
 let g:neoformat_ocaml_ocamlformat = {
             \ 'exe': 'ocamlformat',
@@ -1052,10 +1028,32 @@ let g:neoformat_ocaml_ocamlformat = {
 
 let g:neoformat_enabled_ocaml = ['ocamlformat']
 
-augroup ocamlfmt
+augroup ocamlLang
   autocmd!
   autocmd BufWritePre *.ml :Neoformat
 augroup END
 
 " }}}
+
+" Language - Elixir {{{
+
+augroup elixirLang
+  au!
+  autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
+  autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
+augroup END
+
+" }}}
+
+" Language - Markdown {{{
+
+let g:vim_markdown_conceal_code_blocks = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+
+" }}}
+
 
