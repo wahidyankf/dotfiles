@@ -939,7 +939,7 @@ nnoremap <silent> <bs>colr :<c-u>CocListResume<cr>
 nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
-nnoremap <localleader>w :Format<cr>:w<cr>
+" nnoremap <localleader>w :Format<cr>:w<cr>
 nnoremap <leader>w :w<cr>
 
 " }}}
