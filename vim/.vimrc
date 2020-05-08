@@ -39,9 +39,13 @@ augroup END
 
 set autoread
 
-" https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
-au FocusGained,BufEnter * :silent! !
-au FocusLost,WinLeave * :silent! w
+augroup vim_autoread
+  " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
+  
+  autocmd!
+  autocmd FocusGained,BufEnter * :silent! !
+  autocmd FocusLost,WinLeave * :silent! w
+augroup END
 
 " }}}
 
