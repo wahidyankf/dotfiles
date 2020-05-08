@@ -35,6 +35,14 @@ augroup vim_cd
     autocmd BufEnter * silent! cd %:p:h
 augroup END
 
+" autoread
+
+set autoread
+
+" https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
+au FocusGained,BufEnter * :silent! !
+au FocusLost,WinLeave * :silent! w
+
 " }}}
 
 " VIM Plug {{{
@@ -939,8 +947,8 @@ nnoremap <silent> <bs>colr :<c-u>CocListResume<cr>
 nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
-nnoremap <localleader>w :Format<cr>:w<cr>
-" nnoremap <localleader>w :w<cr>
+" nnoremap <localleader>w :Format<cr>:w<cr>
+nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
 
 " }}}
