@@ -1050,6 +1050,20 @@ augroup END
 
 " }}}
 
+" Language - Haskell {{{
+
+" autoread
+" augroup vim_autoread_haskell
+  " " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
+" 
+  " autocmd!
+  " autocmd FileType haskell set autoread
+  " autocmd FocusGained,BufEnter *.hs :silent! !
+  " autocmd FocusLost,WinLeave *.hs :silent! w
+" augroup END
+
+" }}}
+
 " Language - Elixir {{{
 
 augroup elixirLang
