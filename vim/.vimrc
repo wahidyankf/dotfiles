@@ -35,18 +35,6 @@ augroup vim_cd
     autocmd BufEnter * silent! cd %:p:h
 augroup END
 
-" autoread
-
-set autoread
-
-augroup vim_autoread
-  " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
-  
-  autocmd!
-  autocmd FocusGained,BufEnter * :silent! !
-  autocmd FocusLost,WinLeave * :silent! w
-augroup END
-
 " }}}
 
 " VIM Plug {{{
@@ -1044,6 +1032,20 @@ let g:neoformat_enabled_ocaml = ['ocamlformat']
 augroup ocamlLang
   autocmd!
   autocmd BufWritePre *.ml :Neoformat
+augroup END
+
+" }}}
+
+" Language - Reason {{{
+
+" autoread
+augroup vim_autoread_reason
+  " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
+
+  autocmd!
+  autocmd FileType reason set autoread
+  autocmd FocusGained,BufEnter *.re :silent! !
+  autocmd FocusLost,WinLeave *.re :silent! w
 augroup END
 
 " }}}
