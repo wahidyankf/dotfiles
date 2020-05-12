@@ -71,6 +71,7 @@ Plug 'Twinside/vim-haskellFold'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'sbdchd/neoformat'
+Plug 'sotte/presenting.vim'
 
 call plug#end()
 
@@ -207,6 +208,7 @@ augroup filetype_vim
     autocmd FileType reason setlocal foldmethod=syntax
     autocmd FileType go setlocal foldmethod=manual
     autocmd FileType vim setlocal foldmethod=marker
+    autocmd BufRead *.md normal zR
 augroup END
 
 " }}}
@@ -423,6 +425,11 @@ nnoremap <bs>zs :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <bs>zt :CDProjectRoot<cr>:tabnew term://zsh<cr>
 tnoremap <C-[> <C-\><C-n>
 
+" book
+nnoremap <bs>cbt :tabnew ~/wkf-book/README.md<cr>
+nnoremap <bs>cbv :vsp ~/wkf-book/README.md<cr>
+nnoremap <bs>cbs :sp ~/wkf-book/README.md<cr>
+
 " }}}
 
 " Key-Bindings - Buffer management {{{
@@ -523,6 +530,13 @@ nnoremap <bs>ssl :mks! ~/.vim/sessions/learn-session.vim<cr>
 nnoremap <bs>sll :source ~/.vim/sessions/learn-session.vim<cr>
 " SessionSaveLearnQuit
 nnoremap <bs>sslq :mks! ~/.vim/sessions/learn-session.vim<cr>:qa!<cr>
+
+" SessionSaveBook
+nnoremap <bs>ssb :mks! ~/.vim/sessions/book-session.vim<cr>
+" SessionLoadBook
+nnoremap <bs>slb :source ~/.vim/sessions/book-session.vim<cr>
+" SessionSaveBookQuit
+nnoremap <bs>ssbq :mks! ~/.vim/sessions/book-session.vim<cr>:qa!<cr>
 
 " }}}
 
@@ -765,6 +779,14 @@ let g:vrc_curl_opts = {
 
 " }}}
 
+" Plugin - Presenting.vim {{{
+
+nnoremap <bs>ps :PresentingStart<cr>
+
+au FileType md let b:presenting_slide_separator = '\v(^|\n)\#'
+
+" }}}
+
 " ============================================================
 " Languages
 " ============================================================
@@ -939,8 +961,8 @@ nnoremap <silent> <bs>colr :<c-u>CocListResume<cr>
 nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
-" nnoremap <localleader>w :Format<cr>:w<cr>
-nnoremap <localleader>w :w<cr>
+nnoremap <localleader>w :Format<cr>:w<cr>
+" nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
 
 " }}}
@@ -1082,6 +1104,7 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_fenced_languages = ['js=javascript', 'hs=haskell']
 
 " }}}
 
