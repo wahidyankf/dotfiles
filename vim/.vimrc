@@ -205,7 +205,7 @@ let g:netrw_localrmdir='rm -r'
 augroup filetype_vim
     autocmd!
     autocmd FileType javascript setlocal foldmethod=syntax
-    " autocmd FileType reason setlocal foldmethod=syntax
+    autocmd FileType reason setlocal foldmethod=syntax
     autocmd FileType go setlocal foldmethod=manual
     autocmd FileType vim setlocal foldmethod=marker
     autocmd BufRead *.md normal zR
@@ -452,7 +452,7 @@ nnoremap <bs>e :e<cr>
 nnoremap <bs>bdoe :bufdo e<cr>
 
 " print pwd
-nnoremap <bs>i :pwd<cr>
+nnoremap <bs>i :echo expand('%:p')<cr>
 
 " bdext
 nnoremap <bs>bde :BDExt 
@@ -471,6 +471,8 @@ nnoremap <bs>burc :bufdo set undoreload=0<cr>:bufdo e<cr>:bufdo set undoreload=1
 
 " windo e
 nnoremap <bs>wde :windo e<cr>
+nnoremap <bs>- :sp<cr>
+nnoremap <bs>\ :vsp<cr>
 
 " }}}
 
