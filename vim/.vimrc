@@ -368,6 +368,10 @@ nnoremap <bs>ctlt :tabnew ~/.config/tmuxinator/learn.yml<cr>
 nnoremap <bs>ctlv :vsp ~/.config/tmuxinator/learn.yml<cr>
 nnoremap <bs>ctls :sp ~/.config/tmuxinator/learn.yml<cr>
 
+nnoremap <bs>ctbt :tabnew ~/.config/tmuxinator/book.yml<cr>
+nnoremap <bs>ctbv :vsp ~/.config/tmuxinator/book.yml<cr>
+nnoremap <bs>ctbs :sp ~/.config/tmuxinator/book.yml<cr>
+
 nnoremap <bs>ctpt :tabnew ~/.config/tmuxinator/prod.yml<cr>
 nnoremap <bs>ctpv :vsp ~/.config/tmuxinator/prod.yml<cr>
 nnoremap <bs>ctps :sp ~/.config/tmuxinator/prod.yml<cr>
