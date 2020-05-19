@@ -209,6 +209,7 @@ augroup filetype_vim
     autocmd FileType go setlocal foldmethod=manual
     autocmd FileType vim setlocal foldmethod=marker
     autocmd BufRead *.md normal zR
+    autocmd BufRead *.re normal zR
 augroup END
 
 " }}}
