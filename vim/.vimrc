@@ -478,6 +478,7 @@ nnoremap <bs>burc :bufdo set undoreload=0<cr>:bufdo e<cr>:bufdo set undoreload=1
 nnoremap <bs>wde :windo e<cr>
 nnoremap <bs>- :sp<cr>
 nnoremap <bs>\ :vsp<cr>
+nnoremap <c-c><c-o> :vertical wincmd f<CR>
 
 " }}}
 
