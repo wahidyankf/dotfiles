@@ -72,6 +72,9 @@ Plug 'plasticboy/vim-markdown'
 Plug 'sbdchd/neoformat'
 Plug 'sotte/presenting.vim'
 Plug 'roman/golden-ratio'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+
 
 call plug#end()
 
@@ -150,6 +153,7 @@ autocmd FileType go set autowrite
 
 set encoding=UTF-8
 
+filetype plugin on
 " enable file type based indentation
 filetype plugin indent on
 " respect indentation when starting a new line
@@ -985,135 +989,6 @@ nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 nnoremap <localleader>w :Format<cr>:w<cr>
 " nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
-
-" }}}
-
-" Language - Go {{{
-
-let g:go_auto_type_info = 1
-let g:go_def_mode='gopls'
-let g:go_diagnostics_enabled = 1
-let g:go_doc_popup_window = 1
-let g:go_fmt_experimental = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_info_mode='gopls'
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_deadline = "5s"
-
-
-let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
-let g:go_metalinter_enabled = ['vet', 'errcheck']
-
-" to also enable lint
-" let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
-" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-
-
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-augroup goLang
-  autocmd!
-
-  function! SetGoIndentation()
-    setlocal noexpandtab tabstop=4 shiftwidth=4
-  endfunction
-
-  function! SetGoMapping()
-    nmap <localleader>bq  <bs>qq
-    nmap <localleader>rr  <Plug>(go-run)
-    nmap <localleader>r  <Plug>(go-run-split)
-    nmap <localleader>rt  <Plug>(go-run-tab)
-    nmap <localleader>rs  <Plug>(go-run-split)
-    nmap <localleader>rv  <Plug>(go-run-vertical)
-    nmap <localleader>rq  <bs>bqj
-    nmap <localleader>rvq  <bs>bql
-    nmap <localleader>rsq  <bs>bqj
-    nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
-    nmap <localleader>tr  <Plug>(go-test)
-    nmap <localleader>tt  <Plug>(go-alternate-edit)
-    nmap <localleader>ts  <Plug>(go-alternate-split)
-    nmap <localleader>tv  <Plug>(go-alternate-vertical)
-    nmap <localleader>tc <Plug>(go-coverage-toggle)
-    nmap <localleader>l <Plug>(go-metalinter)
-    nmap <localleader>i <Plug>(go-info)
-    nnoremap <localleader>s :GoPlay<cr>
-  endfunction
-
-
-  " make newly opened buffer not folded when first opened
-  " the folding is kinda meh if we use it with fold
-  autocmd BufNewFile,BufRead *.go call SetGoIndentation()
-  autocmd FileType go call SetGoMapping()
-augroup END
-
-" }}}
-
-" Language - Ocaml {{{
-
-let g:neoformat_ocaml_ocamlformat = {
-            \ 'exe': 'ocamlformat',
-            \ 'no_append': 1,
-            \ 'stdin': 1,
-            \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
-            \ }
-
-let g:neoformat_enabled_ocaml = ['ocamlformat']
-
-augroup ocamlLang
-  autocmd!
-  autocmd BufWritePre *.ml :Neoformat
-augroup END
-
-" }}}
-
-" Language - Reason {{{
-
-" autoread
-augroup vim_autoread_reason
-  " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
-
-  autocmd!
-  autocmd FileType reason set autoread
-  autocmd FocusGained,BufEnter *.re :silent! !
-  autocmd FocusLost,WinLeave *.re :silent! w
-augroup END
-
-" }}}
-
-" Language - Haskell {{{
-
-" autoread
-" augroup vim_autoread_haskell
-  " " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
-" 
-  " autocmd!
-  " autocmd FileType haskell set autoread
-  " autocmd FocusGained,BufEnter *.hs :silent! !
-  " autocmd FocusLost,WinLeave *.hs :silent! w
-" augroup END
-
-" }}}
-
-" Language - Elixir {{{
-
-augroup elixirLang
-  au!
-  autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
-  autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
-augroup END
 
 " }}}
 
