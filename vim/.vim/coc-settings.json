@@ -1,0 +1,52 @@
+{
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.jumpCommand": "split",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "json"
+  ],
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.maxWindowHeight": 200,
+  "diagnostic.errorSign": "☠!",
+  "diagnostic.infoSign": "ⓘ ",
+  "diagnostic.hintSign": "🔍",
+  "flow.enable": true,
+  "flow.useNPMPackagedFlow": true,
+  "git.enableGutters": false,
+  "json.format.enable": false,
+  "list.extendedSearchMode": true,
+  "tsserver.enableJavascript": true,
+  "languageserver": {
+    "flow": {
+      "command": "flow",
+      "args": ["lsp"],
+      "filetypes": ["javascript", "javascriptreact"],
+      "initializationOptions": {},
+      "requireRootPattern": true,
+      "settings": {},
+      "rootPatterns": [".flowconfig"]
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    },
+    "ocaml": {
+      "command": "ocaml-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["ocaml"],
+      "rootPatterns": [".merlin"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  }
+}
