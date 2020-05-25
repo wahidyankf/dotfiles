@@ -12,7 +12,8 @@
 " - grep/ripgrep from the nearest project root
 
 " ============================================================
-" BASIC SETTINGS ============================================================
+" BASIC SETTINGS 
+" ============================================================
 
 " AUTOCMD {{{
 
@@ -554,10 +555,10 @@ nnoremap <bs>ssbq :mks! ~/.vim/sessions/book-session.vim<cr>:qa!<cr>
 
 " Key-Bindings - Quick Fix {{{
 
-nnoremap <leader>fn :cnext<CR>
-nnoremap <leader>fp :cprevious<CR>
-nnoremap <leader>fq :cclose<CR>
-nnoremap <leader>fe :copen<CR>
+nnoremap <localleader>fn :cnext<CR>
+nnoremap <localleader>fp :cprevious<CR>
+nnoremap <localleader>fc :cclose<CR>
+nnoremap <localleader>fo :copen<CR>
 
 " }}}
 
