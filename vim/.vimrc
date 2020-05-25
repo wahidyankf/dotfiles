@@ -2,6 +2,8 @@
 " NOTES
 " ============================================================
 
+" after plugin ./wkf-devbox/vim/.vim/after/ftplugin/reason.vim
+
 " when to use regular mapping:
 " - when we want to utilize existing mapping (e.g. <Plug>)
 
@@ -41,40 +43,40 @@ augroup END
 
 call plug#begin()
 
+Plug 'Twinside/vim-haskellFold'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'diepm/vim-rest-console'
 Plug 'easymotion/vim-easymotion'
+Plug 'elixir-editors/vim-elixir'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'figitaki/vim-dune'
+Plug 'gcmt/taboo.vim'
+Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'jpalardy/vim-slime'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovimhaskell/haskell-vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'reasonml-editor/vim-reason-plus'
+Plug 'roman/golden-ratio'
 Plug 'ryanoasis/vim-devicons'
+Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'sotte/presenting.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
-Plug 'morhetz/gruvbox'
-Plug 'figitaki/vim-dune'
-Plug 'jpalardy/vim-slime'
-Plug 'gcmt/taboo.vim'
-Plug 'diepm/vim-rest-console'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'jiangmiao/auto-pairs'
-Plug 'elixir-editors/vim-elixir'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'Twinside/vim-haskellFold'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'sbdchd/neoformat'
-Plug 'sotte/presenting.vim'
-Plug 'roman/golden-ratio'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
 
 
 call plug#end()
@@ -945,9 +947,9 @@ nmap <silent> <c-d> <Plug>(coc-range-select)
 xmap <silent> <c-d> <Plug>(coc-range-select)
 
 function! Format()
-    let linenumber = line(".")
+    let cursorpos = getpos(".")
     call CocAction('format')
-    call cursor(linenumber, 0)
+    call cursor(cursorpos[1], cursorpos[2])
 endfunction
 
 " Use `:Format` to format current buffer
@@ -988,7 +990,6 @@ nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
 nnoremap <localleader>w :Format<cr>:w<cr>
-" nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
 
 " }}}
@@ -1005,3 +1006,14 @@ let g:vim_markdown_fenced_languages = ['js=javascript', 'hs=haskell']
 
 " }}}
 
+" Language - ReasonML {{{
+function! BsReFormat()
+    let cursorpos = getpos(".")
+    silent execute "!" . "bsrefmt --in-place" . " " . bufname("%")
+    silent execute "e"
+    call cursor(cursorpos[1], cursorpos[2])
+endfunction
+
+" Use `:Format` to format current buffer
+command! -nargs=0 BsReFormat :call BsReFormat()
+" }}}
