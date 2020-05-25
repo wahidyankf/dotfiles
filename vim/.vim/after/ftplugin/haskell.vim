@@ -1,5 +1,4 @@
 nnoremap <buffer> <localleader>l :Dispatch ghc -fwarn-incomplete-patterns % -e 'return ()'<cr>
-" nnoremap <buffer> <localleader>w :Format<cr>:w<cr>:Dispatch ghc -fwarn-incomplete-patterns % -e 'return ()'<cr>
 nnoremap <buffer> <localleader>w :Format<cr>:w<cr>:Make<cr>
 
 set makeprg=ghc\ -fwarn-incomplete-patterns\ %\ -e\ 'return()'
