@@ -2,6 +2,8 @@
 " NOTES
 " ============================================================
 
+" after plugin ./wkf-devbox/vim/.vim/after/ftplugin/reason.vim
+
 " when to use regular mapping:
 " - when we want to utilize existing mapping (e.g. <Plug>)
 
@@ -945,9 +947,9 @@ nmap <silent> <c-d> <Plug>(coc-range-select)
 xmap <silent> <c-d> <Plug>(coc-range-select)
 
 function! Format()
-    let linenumber = line(".")
+    let cursorpos = getpos(".")
     call CocAction('format')
-    call cursor(linenumber, 0)
+    call cursor(cursorpos[1], cursorpos[2])
 endfunction
 
 " Use `:Format` to format current buffer
@@ -988,7 +990,6 @@ nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
 
 " Modify leader w to format and save
 nnoremap <localleader>w :Format<cr>:w<cr>
-" nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
 
 " }}}
@@ -1005,3 +1006,14 @@ let g:vim_markdown_fenced_languages = ['js=javascript', 'hs=haskell']
 
 " }}}
 
+" Language - ReasonML {{{
+function! BsReFormat()
+    let cursorpos = getpos(".")
+    silent execute "!" . "bsrefmt --in-place" . " " . bufname("%")
+    silent execute "e"
+    call cursor(cursorpos[1], cursorpos[2])
+endfunction
+
+" Use `:Format` to format current buffer
+command! -nargs=0 BsReFormat :call BsReFormat()
+" }}}
