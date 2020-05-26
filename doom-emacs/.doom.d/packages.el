@@ -44,7 +44,40 @@
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
 ;(unpin! pinned-package)
+
 ;; ...or multiple packages
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+(package! wakatime-mode)
+
+;; -*- no-byte-compile: t; -*-
+;;; completion/lsp/packages.el
+
+(when (package! lsp-mode)
+  (package! lsp-ui)
+  (package! company-lsp)
+  (package! dap-mode)
+  (package! reason-mode)
+
+  (when (featurep! +javascript)
+    (package! lsp-typescript
+      :recipe (:fetcher
+               github
+               :repo "emacs-lsp/lsp-javascript"
+               :files ("lsp-typescript.el")))
+    (package! tide :disable t))
+
+  (when (featurep! +css)
+    (package! lsp-css
+      :recipe (:fetcher
+               github
+               :repo "emacs-lsp/lsp-css")))
+
+
+  (when (featurep! +ocaml)
+    (package! lsp-ocaml))
+
+  (when (featurep! +sh)
+    (package! company-shell :disable t)))
