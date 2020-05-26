@@ -814,7 +814,7 @@ nmap <C-w>- <Plug>(golden_ratio_resize)
 nnoremap <C-w>+ <C-w><Bar><C-w>_
 
 " }}}
-
+ 
 " ============================================================
 " Languages
 " ============================================================
@@ -837,6 +837,9 @@ let g:coc_global_extensions=[
             \ 'coc-elixir',
             \ 'coc-yaml', 
             \ ]
+
+" setup prettier command
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -1004,6 +1007,16 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_fenced_languages = ['js=javascript', 'hs=haskell']
 
+function! MarkdownFormat()
+    let cursorpos = getpos(".")
+    silent execute "!" . "prettier --write --parser markdown" . " " . bufname("%")
+    silent execute "e"
+    call cursor(cursorpos[1], cursorpos[2])
+endfunction
+
+" Use `:Format` to format current buffer
+command! -nargs=0 MarkdownFormat :call MarkdownFormat()
+" 
 " }}}
 
 " Language - ReasonML {{{
