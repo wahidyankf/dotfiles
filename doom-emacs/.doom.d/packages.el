@@ -51,7 +51,6 @@
 ;(unpin! t)
 
 (package! wakatime-mode)
-(package! exec-path-from-shell)
 (package! org-tree-slide)
 (package! deadgrep)
 
@@ -77,7 +76,6 @@
       :recipe (:fetcher
                github
                :repo "emacs-lsp/lsp-css")))
-
 
 ;;  (when (featurep! +ocaml)
 ;;    (package! lsp-ocaml))
