@@ -54,6 +54,8 @@
 
 (package! exec-path-from-shell)
 
+(package! org-tree-slide)
+
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/lsp/packages.el
 

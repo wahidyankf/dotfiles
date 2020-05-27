@@ -29,7 +29,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/wkf-org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -120,7 +120,19 @@
 (when (featurep! +sh)
   (after! sh-script
     (lsp-define-stdio-client lsp-sh
-                            "sh"
                             #'projectile-project-root
                             '("bash-language-server" "start"))
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
+
+;; my own customization start here
+
+(defun wkf-gd ()
+  (interactive)
+  (+lookup/definition (doom-thing-at-point-or-region))
+  (evil-window-split)
+  (evil-jump-backward-swap)
+  (evil-window-down 1)
+  (recenter)
+)
+
+(define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
