@@ -51,20 +51,31 @@
 ;;
 ;; You can 
 
-;;; completion/lsp/config.el -*- lexical-binding: t; -*-
 
-(global-wakatime-mode)
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
+
+(use-package! exec-path-from-shell
+  :hook (after-init . exec-path-from-shell-initialize))
 
 (use-package! lsp-mode
   :hook
   (reason-mode . lsp)
   :config
   (lsp-register-client
- (make-lsp-client :new-connection (lsp-stdio-connection "~/.doom.d/rls-macos/reason-language-server")
+    (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
+                  :major-modes '(tuareg-mode)
+                  :notification-handlers (ht ("client/registerCapability" 'ignore))
+                  :priority 1
+                  :server-id 'ocaml-ls))
+  :config
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-stdio-connection "~/.doom.d/rls-macos/reason-language-server")
                   :major-modes '(reason-mode)
                   :notification-handlers (ht ("client/registerCapability" 'ignore))
                   :priority 1
-                  :server-id 'reason-ls))
+                  :server-id 'reason-ls)
+    )
   :commands (lsp-mode lsp-define-stdio-client)
   )
 

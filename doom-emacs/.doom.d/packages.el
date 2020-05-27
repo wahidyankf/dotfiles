@@ -52,6 +52,8 @@
 
 (package! wakatime-mode)
 
+(package! exec-path-from-shell)
+
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/lsp/packages.el
 
@@ -76,8 +78,8 @@
                :repo "emacs-lsp/lsp-css")))
 
 
-  (when (featurep! +ocaml)
-    (package! lsp-ocaml))
+;;  (when (featurep! +ocaml)
+;;    (package! lsp-ocaml))
 
   (when (featurep! +sh)
     (package! company-shell :disable t)))
