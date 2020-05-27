@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Wahidyan Kresna Fridayoka"
@@ -49,8 +48,6 @@
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
 ;; This will open documentation for it, including demos of how they are used.
 ;;
-;; You can 
-
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
@@ -124,7 +121,9 @@
                             '("bash-language-server" "start"))
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
 
+;; ----------
 ;; my own customization start here
+;; ----------
 
 (defun wkf-gd ()
   (interactive)
@@ -135,4 +134,10 @@
   (recenter)
 )
 
+;; key map normal mode
+
+(define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
+
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
+(define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)
+(define-key evil-normal-state-map (kbd ",dgr") 'deadgrep-restart)

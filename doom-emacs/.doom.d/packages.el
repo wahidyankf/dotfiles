@@ -51,10 +51,9 @@
 ;(unpin! t)
 
 (package! wakatime-mode)
-
 (package! exec-path-from-shell)
-
 (package! org-tree-slide)
+(package! deadgrep)
 
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/lsp/packages.el
