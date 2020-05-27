@@ -134,10 +134,10 @@
   (recenter)
 )
 
-;; key map normal mode
-
-(define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
-
-(define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
+;; deadgrep
 (define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)
 (define-key evil-normal-state-map (kbd ",dgr") 'deadgrep-restart)
+
+;; code
+(define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
+(define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
