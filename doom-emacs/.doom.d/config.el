@@ -9,9 +9,6 @@
 
 (setq display-line-numbers-type 'relative)
 
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
-
 (defun wkf-evil-window-vsplit ()
   (interactive)
   (evil-window-vsplit)
@@ -28,7 +25,16 @@
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
+(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+
 (define-key evil-normal-state-map (kbd ",w") 'save-buffer)
+(define-key evil-normal-state-map (kbd ",q") 'delete-window)
+
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
 
 (use-package! lsp-mode
   :hook

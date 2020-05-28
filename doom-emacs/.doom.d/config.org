@@ -66,14 +66,8 @@ To get information about any of these functions/macros, move the cursor over the
 
 
 
-* Wakatime
-
-#+BEGIN_SRC emacs-lisp
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
-#+END_SRC
-
-* General Evil
+* General
+** Utility Functions
 
 #+BEGIN_SRC emacs-lisp
 (defun wkf-evil-window-vsplit ()
@@ -87,16 +81,38 @@ To get information about any of these functions/macros, move the cursor over the
   (evil-window-split)
   (evil-window-down 1)
   )
+#+END_SRC
 
+** Window
+
+#+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
-
-(define-key evil-normal-state-map (kbd ",w") 'save-buffer)
 #+END_SRC
 
-* LSP Mode
+** Frame
 
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+#+END_SRC
+
+** Editing
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd ",w") 'save-buffer)
+(define-key evil-normal-state-map (kbd ",q") 'delete-window)
+#+END_SRC
+
+* Wakatime
+#+BEGIN_SRC emacs-lisp
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
+#+END_SRC
+* LSP Mode
 ** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
@@ -211,9 +227,7 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
 #+END_SRC
 
-
 * Org Mode
-
 #+BEGIN_SRC emacs-lisp
 (defun wkf-org-open-at-point ()
   (interactive)
@@ -225,7 +239,6 @@ To get information about any of these functions/macros, move the cursor over the
 
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 #+END_SRC
-
 * DeadGrep
 
 #+BEGIN_SRC emacs-lisp
