@@ -120,8 +120,11 @@
   (recenter)
 )
 
+;; glance doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
+;; Go to Definition
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gdef)
+;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
 
 (setq org-directory "~/wkf-org/")
