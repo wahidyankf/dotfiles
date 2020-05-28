@@ -2,9 +2,7 @@
 
 Place your private configuration here! Remember, you do not need to run =doom sync= after modifying this file!
 
-* Doom Emacs - Settings
-
-** User Data
+* User Data
 
 Some functionality uses this to identify you, e.g.GPG configuration, email clients, file templates and snippets.
 
@@ -13,7 +11,9 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
       user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
 
-** Theme
+* Theme
+
+** Font
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here
 are the three important ones:
@@ -37,23 +37,24 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 (setq doom-font (font-spec :family "Dank Mono" :size 12))
 #+END_SRC
 
+** Template
+
 There are two ways to load a theme.Both assume the theme is installed and available.You can either set =doom-theme= or manually load a theme with the =load-theme= function. This is the default:
 
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-one)
 #+END_SRC
 
-If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
-
-#+BEGIN_SRC emacs-lisp
-(setq org-directory "~/wkf-org/")
-#+END_SRC
 
 This determines the style of line numbers in effect. If set to =nil=, line numbers are disabled. For relative line numbers, set this to =relative=.
+
+** Line Numbering
 
 #+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type 'relative)
 #+END_SRC
+
+** Doom Message
 
 Here are some additional functions / macros that could help you configure Doom:
 - =load!= for loading external *.el files relative to this one
@@ -62,19 +63,60 @@ Here are some additional functions / macros that could help you configure Doom:
 - =add-load-path!= for adding directories to the =load-path=, relative to this file.Emacs searches the=load-path= when you load packages with =require= or =use-package=.
 - =map!= for binding new keys
 
-To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
+** Display
 
+#+BEGIN_SRC emacs-lisp
+(display-time-mode)
+(display-battery-mode)
+#+END_SRC
 
+* General
+** Utility Functions
+
+#+BEGIN_SRC emacs-lisp
+(defun wkf-evil-window-vsplit ()
+  (interactive)
+  (evil-window-vsplit)
+  (evil-window-right 1)
+  )
+
+(defun wkf-evil-window-split ()
+  (interactive)
+  (evil-window-split)
+  (evil-window-down 1)
+  )
+#+END_SRC
+
+** Window
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+#+END_SRC
+
+** Frame
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+#+END_SRC
+
+** Editing
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd ",w") 'save-buffer)
+(define-key evil-normal-state-map (kbd ",q") 'delete-window)
+#+END_SRC
 
 * Wakatime
-
 #+BEGIN_SRC emacs-lisp
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
 #+END_SRC
-
-* LSP
-
+* LSP Mode
 ** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
@@ -124,7 +166,6 @@ To get information about any of these functions/macros, move the cursor over the
   (setq company-lsp-enable-recompletion t))
 #+END_SRC
 
-
 ** DAP Mode
 
 #+BEGIN_SRC emacs-lisp
@@ -173,7 +214,9 @@ To get information about any of these functions/macros, move the cursor over the
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
 #+END_SRC
 
-** My Custom Implementation
+** Misc
+
+To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
 #+BEGIN_SRC emacs-lisp
 (defun wkf-gd ()
@@ -182,6 +225,7 @@ To get information about any of these functions/macros, move the cursor over the
   (evil-window-split)
   (evil-jump-backward-swap)
   (evil-window-down 1)
+  (balance-windows)
   (recenter)
 )
 
@@ -191,17 +235,27 @@ To get information about any of these functions/macros, move the cursor over the
 
 * Org Mode
 
+** Directory
+
+If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
+
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/wkf-org/")
+#+END_SRC
+
+** Open at Point
+
 #+BEGIN_SRC emacs-lisp
 (defun wkf-org-open-at-point ()
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)
   (org-open-at-point)
+  (balance-windows)
   )
 
-(evil-define-key 'normal org-mode-map (kbd "C-c C-o") 'wkf-org-open-at-point)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 #+END_SRC
-
 * DeadGrep
 
 #+BEGIN_SRC emacs-lisp

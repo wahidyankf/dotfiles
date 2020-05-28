@@ -5,9 +5,34 @@
 
 (setq doom-theme 'doom-one)
 
-(setq org-directory "~/wkf-org/")
-
 (setq display-line-numbers-type 'relative)
+
+(display-time-mode)
+(display-battery-mode)
+
+(defun wkf-evil-window-vsplit ()
+  (interactive)
+  (evil-window-vsplit)
+  (evil-window-right 1)
+  )
+
+(defun wkf-evil-window-split ()
+  (interactive)
+  (evil-window-split)
+  (evil-window-down 1)
+  )
+
+(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+
+(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+
+(define-key evil-normal-state-map (kbd ",w") 'save-buffer)
+(define-key evil-normal-state-map (kbd ",q") 'delete-window)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
@@ -83,20 +108,24 @@
   (evil-window-split)
   (evil-jump-backward-swap)
   (evil-window-down 1)
+  (balance-windows)
   (recenter)
 )
 
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
 
+(setq org-directory "~/wkf-org/")
+
 (defun wkf-org-open-at-point ()
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)
   (org-open-at-point)
+  (balance-windows)
   )
 
-(evil-define-key 'normal org-mode-map (kbd "C-c C-o") 'wkf-org-open-at-point)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 
 (define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)
 (define-key evil-normal-state-map (kbd ",dgr") 'deadgrep-restart)
