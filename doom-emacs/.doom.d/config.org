@@ -1,4 +1,4 @@
-#+TITLE: WKF Doom Emac's Config
+#+TITLE: WKF - Doom Emacs - Config
 
 Place your private configuration here! Remember, you do not need to run =doom sync= after modifying this file!
 
@@ -161,14 +161,14 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
 #+END_SRC
 
-* Plugins - Wakatime
+* Plugin - Wakatime
 
 #+BEGIN_SRC emacs-lisp
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
 #+END_SRC
 
-* Plugins - LSP Mode
+* Plugin - LSP Mode
 ** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
@@ -313,8 +313,7 @@ To get information about any of these functions/macros, move the cursor over the
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
 #+END_SRC
 
-* Plugins - Org Mode
-
+* Plugin - Org Mode
 ** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
@@ -336,8 +335,7 @@ If you use =org= and don't want your org files in the default location below, ch
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 #+END_SRC
 
-
-* Plugins - DeadGrep
+* Plugin - DeadGrep
 
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)
