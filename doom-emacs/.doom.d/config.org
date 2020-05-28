@@ -1,4 +1,4 @@
-#+TITLE: Config
+#+TITLE: WKF Doom Emac's Config
 
 Place your private configuration here! Remember, you do not need to run =doom sync= after modifying this file!
 
@@ -43,7 +43,6 @@ There are two ways to load a theme.Both assume the theme is installed and availa
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-one)
 #+END_SRC
-
 
 This determines the style of line numbers in effect. If set to =nil=, line numbers are disabled. For relative line numbers, set this to =relative=.
 
