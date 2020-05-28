@@ -1,6 +1,8 @@
 (setq user-full-name "Wahidyan Kresna Fridayoka"
       user-mail-address "wahidyankf@gmail.com")
 
+(setq doom-font (font-spec :family "Dank Mono" :size 12))
+
 (setq doom-theme 'doom-one)
 
 (setq org-directory "~/wkf-org/")
