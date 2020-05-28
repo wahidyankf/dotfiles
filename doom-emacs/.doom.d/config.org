@@ -210,7 +210,7 @@ To get information about any of these functions/macros, move the cursor over the
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
 #+END_SRC
 
-** My Config
+** Misc
 
 #+BEGIN_SRC emacs-lisp
 (defun wkf-gd ()
