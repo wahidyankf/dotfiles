@@ -77,8 +77,5 @@
                github
                :repo "emacs-lsp/lsp-css")))
 
-;;  (when (featurep! +ocaml)
-;;    (package! lsp-ocaml))
-
   (when (featurep! +sh)
     (package! company-shell :disable t)))
