@@ -102,7 +102,7 @@
                             '("bash-language-server" "start"))
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
 
-(defun wkf-gd ()
+(defun wkf-gdef ()
   (interactive)
   (+lookup/definition (doom-thing-at-point-or-region))
   (evil-window-split)
@@ -112,8 +112,17 @@
   (recenter)
 )
 
+(defun wkf-gdoc ()
+  (interactive)
+  (+lookup/documentation (doom-thing-at-point-or-region))
+  (evil-window-down 1)
+  (balance-windows)
+  (recenter)
+)
+
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
-(define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
+(define-key evil-normal-state-map (kbd ",gd") 'wkf-gdef)
+(define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
 
 (setq org-directory "~/wkf-org/")
 
@@ -122,8 +131,7 @@
   (evil-window-vsplit)
   (evil-window-right 1)
   (org-open-at-point)
-  (balance-windows)
-  )
+  (balance-windows))
 
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 

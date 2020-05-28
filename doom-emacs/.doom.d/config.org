@@ -12,7 +12,6 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 #+END_SRC
 
 * Theme
-
 ** Font
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here
@@ -29,8 +28,7 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 #+BEGIN_EXAMPLE emacs-lisp
 (setq doom-font
   (font-spec :family "monospace" :size 12 :weight 'semi-light)
-  doom-variable-pitch-font (font-spec :family "sans" :size 13)
-  )
+  doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+End_example
 
 #+BEGIN_SRC emacs-lisp
@@ -63,7 +61,7 @@ Here are some additional functions / macros that could help you configure Doom:
 - =add-load-path!= for adding directories to the =load-path=, relative to this file.Emacs searches the=load-path= when you load packages with =require= or =use-package=.
 - =map!= for binding new keys
 
-** Display
+** Doom Modeline
 
 #+BEGIN_SRC emacs-lisp
 (display-time-mode)
@@ -219,7 +217,7 @@ Here are some additional functions / macros that could help you configure Doom:
 To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
 #+BEGIN_SRC emacs-lisp
-(defun wkf-gd ()
+(defun wkf-gdef ()
   (interactive)
   (+lookup/definition (doom-thing-at-point-or-region))
   (evil-window-split)
@@ -229,12 +227,23 @@ To get information about any of these functions/macros, move the cursor over the
   (recenter)
 )
 
+(defun wkf-gdoc ()
+  (interactive)
+  (+lookup/documentation (doom-thing-at-point-or-region))
+  (evil-window-down 1)
+  (balance-windows)
+  (recenter)
+)
+
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
-(define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
+(define-key evil-normal-state-map (kbd ",gd") 'wkf-gdef)
+(define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
 #+END_SRC
 
-* Org Mode
+#+RESULTS:
+: wkf-gdoc
 
+* Org Mode
 ** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
@@ -251,8 +260,7 @@ If you use =org= and don't want your org files in the default location below, ch
   (evil-window-vsplit)
   (evil-window-right 1)
   (org-open-at-point)
-  (balance-windows)
-  )
+  (balance-windows))
 
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 #+END_SRC
