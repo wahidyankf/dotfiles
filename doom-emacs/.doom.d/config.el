@@ -89,5 +89,14 @@
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
 
+(defun wkf-org-open-at-point ()
+  (interactive)
+  (evil-window-vsplit)
+  (evil-window-right 1)
+  (org-open-at-point)
+  )
+
+(evil-define-key 'normal org-mode-map (kbd "C-c C-o") 'wkf-org-open-at-point)
+
 (define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)
 (define-key evil-normal-state-map (kbd ",dgr") 'deadgrep-restart)

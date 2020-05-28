@@ -189,6 +189,19 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gd)
 #+END_SRC
 
+* Org Mode
+
+#+BEGIN_SRC emacs-lisp
+(defun wkf-org-open-at-point ()
+  (interactive)
+  (evil-window-vsplit)
+  (evil-window-right 1)
+  (org-open-at-point)
+  )
+
+(evil-define-key 'normal org-mode-map (kbd "C-c C-o") 'wkf-org-open-at-point)
+#+END_SRC
+
 * DeadGrep
 
 #+BEGIN_SRC emacs-lisp
