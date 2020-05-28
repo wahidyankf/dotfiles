@@ -12,6 +12,7 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 #+END_SRC
 
 * Theme
+
 ** Font
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here
@@ -52,6 +53,12 @@ This determines the style of line numbers in effect. If set to =nil=, line numbe
 (setq display-line-numbers-type 'relative)
 #+END_SRC
 
+** Cursor
+
+#+BEGIN_SRC emacs-lisp
+(blink-cursor-mode 1)
+#+END_SRC
+
 ** Doom Message
 
 Here are some additional functions / macros that could help you configure Doom:
@@ -68,24 +75,48 @@ Here are some additional functions / macros that could help you configure Doom:
 (display-battery-mode)
 #+END_SRC
 
-* General
-** Utility Functions
+* Utility Functions
 
 #+BEGIN_SRC emacs-lisp
 (defun wkf-evil-window-vsplit ()
   (interactive)
   (evil-window-vsplit)
-  (evil-window-right 1)
-  )
+  (evil-window-right 1))
 
 (defun wkf-evil-window-split ()
   (interactive)
   (evil-window-split)
-  (evil-window-down 1)
-  )
+  (evil-window-down 1))
+
+(defun wkf-windows-rebalance ()
+  (interactive)
+  (balance-windows)
+  (recenter))
+
+(defun wkf-find-file (filename)
+  (interactive)
+  (wkf-evil-window-vsplit)
+  (find-file filename)
+  (wkf-windows-rebalance))
+
+(defun wkf-find-zshrc ()
+  (interactive)
+  (wkf-find-file "~/.zshrc"))
+
+(defun wkf-find-emacs-init ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/init.el"))
+
+(defun wkf-find-emacs-package ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/packages.el"))
+
+(defun wkf-find-emacs-config ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/config.org"))
 #+END_SRC
 
-** Window
+* Window
 
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
@@ -93,7 +124,7 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 #+END_SRC
 
-** Frame
+* Frame
 
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
@@ -102,20 +133,34 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
 #+END_SRC
 
-** Editing
+* File
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> cz") 'wkf-find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> cei") 'wkf-find-emacs-init)
+(define-key evil-normal-state-map (kbd "<backspace> cep") 'wkf-find-emacs-package)
+(define-key evil-normal-state-map (kbd "<backspace> cec") 'wkf-find-emacs-config)
+#+END_SRC
+
+* Editing
 
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd ",w") 'save-buffer)
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
 #+END_SRC
 
-* Wakatime
+* Plugins
+
+** Wakatime
+
 #+BEGIN_SRC emacs-lisp
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
 #+END_SRC
-* LSP Mode
+
 ** LSP Mode
+
+*** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-mode
@@ -140,7 +185,7 @@ Here are some additional functions / macros that could help you configure Doom:
   )
 #+END_SRC
 
-** LSP UI
+*** LSP UI
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-ui
@@ -154,7 +199,7 @@ Here are some additional functions / macros that could help you configure Doom:
          lsp-ui-sideline-ignore-duplicate t))
 #+END_SRC
 
-** Company LSP
+*** Company LSP
 
 #+BEGIN_SRC emacs-lisp
 (use-package! company-lsp
@@ -164,7 +209,7 @@ Here are some additional functions / macros that could help you configure Doom:
   (setq company-lsp-enable-recompletion t))
 #+END_SRC
 
-** DAP Mode
+*** DAP Mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package! dap-mode
@@ -174,7 +219,7 @@ Here are some additional functions / macros that could help you configure Doom:
   (dap-ui-mode t))
 #+END_SRC
 
-** ReasonML
+*** ReasonML
 
 #+BEGIN_SRC emacs-lisp
 (use-package! reason-mode
@@ -185,7 +230,7 @@ Here are some additional functions / macros that could help you configure Doom:
                      (refmt)))))
 #+END_SRC
 
-** TypeScript
+*** TypeScript
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-typescript
@@ -193,7 +238,7 @@ Here are some additional functions / macros that could help you configure Doom:
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
-** CSS
+*** CSS
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-css
@@ -201,7 +246,7 @@ Here are some additional functions / macros that could help you configure Doom:
   :hook ((css-mode less-mode scss-mode) . lsp-css-enable))
 #+END_SRC
 
-** Sh
+*** Sh
 
 #+BEGIN_SRC emacs-lisp
 (when (featurep! +sh)
@@ -212,7 +257,7 @@ Here are some additional functions / macros that could help you configure Doom:
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
 #+END_SRC
 
-** Misc
+*** Misc
 
 To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
@@ -243,11 +288,7 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
 #+END_SRC
 
-#+RESULTS:
-: wkf-gdoc
-
-* Org Mode
-** Directory
+*** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
 
@@ -267,7 +308,8 @@ If you use =org= and don't want your org files in the default location below, ch
 
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 #+END_SRC
-* DeadGrep
+
+** DeadGrep
 
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)

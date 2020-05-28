@@ -7,20 +7,47 @@
 
 (setq display-line-numbers-type 'relative)
 
+(blink-cursor-mode 1)
+
 (display-time-mode)
 (display-battery-mode)
 
 (defun wkf-evil-window-vsplit ()
   (interactive)
   (evil-window-vsplit)
-  (evil-window-right 1)
-  )
+  (evil-window-right 1))
 
 (defun wkf-evil-window-split ()
   (interactive)
   (evil-window-split)
-  (evil-window-down 1)
-  )
+  (evil-window-down 1))
+
+(defun wkf-windows-rebalance ()
+  (interactive)
+  (balance-windows)
+  (recenter))
+
+(defun wkf-find-file (filename)
+  (interactive)
+  (wkf-evil-window-vsplit)
+  (find-file filename)
+  (wkf-windows-rebalance))
+
+(defun wkf-find-zshrc ()
+  (interactive)
+  (wkf-find-file "~/.zshrc"))
+
+(defun wkf-find-emacs-init ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/init.el"))
+
+(defun wkf-find-emacs-package ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/packages.el"))
+
+(defun wkf-find-emacs-config ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/config.org"))
 
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
@@ -30,6 +57,11 @@
 (define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
 (define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
 (define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+
+(define-key evil-normal-state-map (kbd "<backspace> cz") 'wkf-find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> cei") 'wkf-find-emacs-init)
+(define-key evil-normal-state-map (kbd "<backspace> cep") 'wkf-find-emacs-package)
+(define-key evil-normal-state-map (kbd "<backspace> cec") 'wkf-find-emacs-config)
 
 (define-key evil-normal-state-map (kbd ",w") 'save-buffer)
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
