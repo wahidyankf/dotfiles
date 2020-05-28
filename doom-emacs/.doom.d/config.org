@@ -46,6 +46,12 @@ There are two ways to load a theme.Both assume the theme is installed and availa
 
 This determines the style of line numbers in effect. If set to =nil=, line numbers are disabled. For relative line numbers, set this to =relative=.
 
+** StartUp
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+END_SRC
+
 ** Line Numbering
 
 #+BEGIN_SRC emacs-lisp
@@ -74,7 +80,17 @@ Here are some additional functions / macros that could help you configure Doom:
 (display-battery-mode)
 #+END_SRC
 
-* Utility Functions
+* Frame
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+#+END_SRC
+
+
+* Window
 
 #+BEGIN_SRC emacs-lisp
 (defun wkf-evil-window-vsplit ()
@@ -87,6 +103,14 @@ Here are some additional functions / macros that could help you configure Doom:
   (evil-window-split)
   (evil-window-down 1))
 
+(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+#+END_SRC
+
+* File
+
+#+BEGIN_SRC emacs-lisp
 (defun wkf-windows-rebalance ()
   (interactive)
   (balance-windows)
@@ -113,58 +137,48 @@ Here are some additional functions / macros that could help you configure Doom:
 (defun wkf-find-emacs-config ()
   (interactive)
   (wkf-find-file "~/.doom.d/config.org"))
-#+END_SRC
 
-* Window
+(defun wkf-find-emacs-scratchpad ()
+  (interactive)
+  (wkf-find-file "~/.doom.d/scratch.el"))
 
-#+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
-(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
-#+END_SRC
-
-* Frame
-
-#+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
-(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
-(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
-(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
-#+END_SRC
-
-* File
-
-#+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd "<backspace> cz") 'wkf-find-zshrc)
 (define-key evil-normal-state-map (kbd "<backspace> cei") 'wkf-find-emacs-init)
 (define-key evil-normal-state-map (kbd "<backspace> cep") 'wkf-find-emacs-package)
 (define-key evil-normal-state-map (kbd "<backspace> cec") 'wkf-find-emacs-config)
+(define-key evil-normal-state-map (kbd "<backspace> ces") 'wkf-find-emacs-scratchpad)
 #+END_SRC
 
 * Editing
 
 #+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd ",w") 'save-buffer)
+(defun wkf-save-buffer ()
+  (interactive)
+  (when (and (equal lsp-mode t) (not (equal major-mode 'reason-mode))) (lsp-format-buffer))
+  (save-buffer))
+
+(define-key evil-normal-state-map (kbd ",w") 'wkf-save-buffer)
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
 #+END_SRC
 
-* Plugins
-
-** Wakatime
+* Plugins - Wakatime
 
 #+BEGIN_SRC emacs-lisp
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
 #+END_SRC
 
+* Plugins - LSP Mode
 ** LSP Mode
-
-*** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-mode
   :hook
   (reason-mode . lsp)
+  :hook
+  (haskell-mode . lsp)
+  :hook
+  (tuareg-mode . lsp)
   :config
   (lsp-register-client
     (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
@@ -180,11 +194,13 @@ Here are some additional functions / macros that could help you configure Doom:
                   :priority 1
                   :server-id 'reason-ls)
     )
+  :config
+  (setq lsp-lens-auto-enable t)
   :commands (lsp-mode lsp-define-stdio-client)
   )
 #+END_SRC
 
-*** LSP UI
+** LSP UI
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-ui
@@ -194,11 +210,11 @@ Here are some additional functions / macros that could help you configure Doom:
                         :definition #'lsp-ui-peek-find-definitions
                         :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 16
-         lsp-ui-doc-max-width 50
-         lsp-ui-sideline-ignore-duplicate t))
+        lsp-ui-doc-max-width 50
+        lsp-ui-sideline-ignore-duplicate t))
 #+END_SRC
 
-*** Company LSP
+** Company LSP
 
 #+BEGIN_SRC emacs-lisp
 (use-package! company-lsp
@@ -208,55 +224,7 @@ Here are some additional functions / macros that could help you configure Doom:
   (setq company-lsp-enable-recompletion t))
 #+END_SRC
 
-*** DAP Mode
-
-#+BEGIN_SRC emacs-lisp
-(use-package! dap-mode
-  :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
-#+END_SRC
-
-*** ReasonML
-
-#+BEGIN_SRC emacs-lisp
-(use-package! reason-mode
-  :mode "\\.re$"
-  :hook
-  (before-save . (lambda ()
-                   (when (equal major-mode 'reason-mode)
-                     (refmt)))))
-#+END_SRC
-
-*** TypeScript
-
-#+BEGIN_SRC emacs-lisp
-(use-package! lsp-typescript
-  :when (featurep! +javascript)
-  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
-#+END_SRC
-
-*** CSS
-
-#+BEGIN_SRC emacs-lisp
-(use-package! lsp-css
-  :when (featurep! +css)
-  :hook ((css-mode less-mode scss-mode) . lsp-css-enable))
-#+END_SRC
-
-*** Sh
-
-#+BEGIN_SRC emacs-lisp
-(when (featurep! +sh)
-  (after! sh-script
-    (lsp-define-stdio-client lsp-sh
-                            #'projectile-project-root
-                            '("bash-language-server" "start"))
-    (add-hook 'sh-mode-hook #'lsp-sh-enable)))
-#+END_SRC
-
-*** Misc
+** Intellisense
 
 To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
@@ -287,7 +255,67 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
 #+END_SRC
 
-*** Directory
+** Haskell
+
+#+BEGIN_SRC emacs-lisp
+(use-package! lsp-haskell
+  :after lsp-mode
+  :config
+  (setq lsp-haskell-process-path-hie "hie-wrapper")
+  (lsp-haskell-set-formatter-floskell))
+#+END_SRC
+
+** ReasonML
+
+#+BEGIN_SRC emacs-lisp
+(use-package! reason-mode
+  :mode "\\.re$"
+  :hook
+  (before-save . (lambda ()
+                   (when (equal major-mode 'reason-mode)
+                     (refmt)))))
+#+END_SRC
+
+** DAP Mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package! dap-mode
+  :after lsp-mode
+  :config
+  (dap-mode t)
+  (dap-ui-mode t))
+#+END_SRC
+
+** TypeScript
+
+#+BEGIN_SRC emacs-lisp
+(use-package! lsp-typescript
+  :when (featurep! +javascript)
+  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
+#+END_SRC
+
+** CSS
+
+#+BEGIN_SRC emacs-lisp
+(use-package! lsp-css
+  :when (featurep! +css)
+  :hook ((css-mode less-mode scss-mode) . lsp-css-enable))
+#+END_SRC
+
+** Sh
+
+#+BEGIN_SRC emacs-lisp
+(when (featurep! +sh)
+  (after! sh-script
+    (lsp-define-stdio-client lsp-sh
+                            #'projectile-project-root
+                            '("bash-language-server" "start"))
+    (add-hook 'sh-mode-hook #'lsp-sh-enable)))
+#+END_SRC
+
+* Plugins - Org Mode
+
+** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
 
@@ -308,7 +336,8 @@ If you use =org= and don't want your org files in the default location below, ch
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 #+END_SRC
 
-** DeadGrep
+
+* Plugins - DeadGrep
 
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)

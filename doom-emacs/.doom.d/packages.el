@@ -53,6 +53,9 @@
 (package! wakatime-mode)
 (package! org-tree-slide)
 (package! deadgrep)
+(package! tuareg)
+(package! utop)
+(package! merlin)
 
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/lsp/packages.el
@@ -61,6 +64,7 @@
   (package! lsp-ui)
   (package! company-lsp)
   (package! dap-mode)
+  (package! lsp-haskell)
   (package! reason-mode)
 
   (when (featurep! +javascript)

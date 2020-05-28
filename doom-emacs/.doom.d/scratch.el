@@ -2,4 +2,6 @@
 
 (message "Hello world!")
 
-(+ 1 2)
+
+
+(equal major-mode 'haskell-mode)
