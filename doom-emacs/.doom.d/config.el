@@ -17,10 +17,10 @@
 (display-time-mode)
 (display-battery-mode)
 
-(define-key evil-normal-state-map (kbd "<backspace> fn") 'make-frame-command)
-(define-key evil-normal-state-map (kbd "<backspace> fo") 'other-frame)
-(define-key evil-normal-state-map (kbd "<backspace> fdd") 'delete-frame)
-(define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
+(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> f o") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
 (defun wkf-evil-window-vsplit ()
   (interactive)
@@ -32,9 +32,9 @@
   (evil-window-split)
   (evil-window-down 1))
 
-(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
-(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+(define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf-evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf-evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
 
 (define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
 (define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
@@ -70,19 +70,19 @@
   (interactive)
   (wkf-find-file "~/.doom.d/scratch.el"))
 
-(define-key evil-normal-state-map (kbd "<backspace> cz") 'wkf-find-zshrc)
-(define-key evil-normal-state-map (kbd "<backspace> cei") 'wkf-find-emacs-init)
-(define-key evil-normal-state-map (kbd "<backspace> cep") 'wkf-find-emacs-package)
-(define-key evil-normal-state-map (kbd "<backspace> cec") 'wkf-find-emacs-config)
-(define-key evil-normal-state-map (kbd "<backspace> ces") 'wkf-find-emacs-scratchpad)
+(define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf-find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf-find-emacs-init)
+(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf-find-emacs-package)
+(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf-find-emacs-config)
+(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf-find-emacs-scratchpad)
 
 (defun wkf-save-buffer ()
   (interactive)
   (when (and (equal lsp-mode t) (not (equal major-mode 'reason-mode))) (lsp-format-buffer))
   (save-buffer))
 
-(define-key evil-normal-state-map (kbd ",w") 'wkf-save-buffer)
-(define-key evil-normal-state-map (kbd ",q") 'delete-window)
+(define-key evil-normal-state-map (kbd ", w") 'wkf-save-buffer)
+(define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
@@ -151,13 +151,13 @@
 ;; glance doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 ;; Go to Definition
-(define-key evil-normal-state-map (kbd ",gd") 'wkf-gdef)
+(define-key evil-normal-state-map (kbd ", g d") 'wkf-gdef)
 ;; Go to doKumentation
-(define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
+(define-key evil-normal-state-map (kbd ", g k") 'wkf-gdoc)
 ;; compile
-(define-key evil-normal-state-map (kbd ",C") 'compile)
+(define-key evil-normal-state-map (kbd ", C") 'compile)
 ;; recompile
-(define-key evil-normal-state-map (kbd ",c") 'recompile)
+(define-key evil-normal-state-map (kbd ", c") 'recompile)
 
 (use-package! lsp-haskell
   :after lsp-mode
@@ -206,5 +206,9 @@
 
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
 
-(define-key evil-normal-state-map (kbd ",dgg") 'deadgrep)
-(define-key evil-normal-state-map (kbd ",dgr") 'deadgrep-restart)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> p p") 'org-tree-slide-mode)
+(evil-define-key 'normal org-mode-map (kbd "s->") 'org-tree-slide-move-next-tree)
+(evil-define-key 'normal org-mode-map (kbd "s-<") 'org-tree-slide-move-previous-tree)
+
+(define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
+(define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
