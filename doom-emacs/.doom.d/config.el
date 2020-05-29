@@ -148,6 +148,10 @@
 (define-key evil-normal-state-map (kbd ",gd") 'wkf-gdef)
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ",gk") 'wkf-gdoc)
+;; compile
+(define-key evil-normal-state-map (kbd ",C") 'compile)
+;; recompile
+(define-key evil-normal-state-map (kbd ",c") 'recompile)
 
 (use-package! lsp-haskell
   :after lsp-mode
