@@ -22,66 +22,66 @@
 (define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
-(defun wkf-evil-window-vsplit ()
+(defun wkf/evil-window-vsplit ()
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1))
 
-(defun wkf-evil-window-split ()
+(defun wkf/evil-window-split ()
   (interactive)
   (evil-window-split)
   (evil-window-down 1))
 
-(define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf-evil-window-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf-evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf/evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf/evil-window-split)
 (define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
 
 (define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
 (define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 
-(defun wkf-windows-rebalance ()
+(defun wkf/windows-rebalance ()
   (interactive)
   (balance-windows)
   (recenter))
 
-(defun wkf-find-file (filename)
+(defun wkf/find-file (filename)
   (interactive)
-  (wkf-evil-window-vsplit)
+  (wkf/evil-window-vsplit)
   (find-file filename)
-  (wkf-windows-rebalance))
+  (wkf/windows-rebalance))
 
-(defun wkf-find-zshrc ()
+(defun wkf/find-zshrc ()
   (interactive)
-  (wkf-find-file "~/.zshrc"))
+  (wkf/find-file "~/.zshrc"))
 
-(defun wkf-find-emacs-init ()
+(defun wkf/find-emacs-init ()
   (interactive)
-  (wkf-find-file "~/.doom.d/init.el"))
+  (wkf/find-file "~/.doom.d/init.el"))
 
-(defun wkf-find-emacs-package ()
+(defun wkf/find-emacs-package ()
   (interactive)
-  (wkf-find-file "~/.doom.d/packages.el"))
+  (wkf/find-file "~/.doom.d/packages.el"))
 
-(defun wkf-find-emacs-config ()
+(defun wkf/find-emacs-config ()
   (interactive)
-  (wkf-find-file "~/.doom.d/config.org"))
+  (wkf/find-file "~/.doom.d/config.org"))
 
-(defun wkf-find-emacs-scratchpad ()
+(defun wkf/find-emacs-scratchpad ()
   (interactive)
-  (wkf-find-file "~/.doom.d/scratch.el"))
+  (wkf/find-file "~/.doom.d/scratch.el"))
 
-(define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf-find-zshrc)
-(define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf-find-emacs-init)
-(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf-find-emacs-package)
-(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf-find-emacs-config)
-(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf-find-emacs-scratchpad)
+(define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf/find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
+(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-package)
+(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config)
+(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratchpad)
 
-(defun wkf-save-buffer ()
+(defun wkf/save-buffer ()
   (interactive)
   (when (and (equal lsp-mode t) (not (equal major-mode 'reason-mode))) (lsp-format-buffer))
   (save-buffer))
 
-(define-key evil-normal-state-map (kbd ", w") 'wkf-save-buffer)
+(define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 (use-package! wakatime-mode
@@ -130,7 +130,7 @@
   (set-company-backend! 'lsp-mode 'company-lsp)
   (setq company-lsp-enable-recompletion t))
 
-(defun wkf-gdef ()
+(defun wkf/gdef ()
   (interactive)
   (+lookup/definition (doom-thing-at-point-or-region))
   (evil-window-split)
@@ -140,7 +140,7 @@
   (recenter)
 )
 
-(defun wkf-gdoc ()
+(defun wkf/gdoc ()
   (interactive)
   (+lookup/documentation (doom-thing-at-point-or-region))
   (evil-window-down 1)
@@ -151,9 +151,9 @@
 ;; glance doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 ;; Go to Definition
-(define-key evil-normal-state-map (kbd ", g d") 'wkf-gdef)
+(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
 ;; Go to doKumentation
-(define-key evil-normal-state-map (kbd ", g k") 'wkf-gdoc)
+(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 ;; compile
 (define-key evil-normal-state-map (kbd ", C") 'compile)
 ;; recompile
@@ -197,14 +197,14 @@
 
 (setq org-directory "~/wkf-org/")
 
-(defun wkf-org-open-at-point ()
+(defun wkf/org-open-at-point ()
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)
   (org-open-at-point)
   (balance-windows))
 
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf-org-open-at-point)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf/org-open-at-point)
 
 (evil-define-key 'normal org-mode-map (kbd "<backspace> p p") 'org-tree-slide-mode)
 (evil-define-key 'normal org-mode-map (kbd "s->") 'org-tree-slide-move-next-tree)
