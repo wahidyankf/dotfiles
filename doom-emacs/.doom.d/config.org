@@ -78,9 +78,13 @@ Here are some additional functions / macros that could help you configure Doom:
 * Frame
 
 #+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
-(define-key evil-normal-state-map (kbd "<backspace> f o") 'other-frame)
+;; Frame Make
+(define-key evil-normal-state-map (kbd "<backspace> f m") 'make-frame-command)
+;; Frame Z (cycle)
+(define-key evil-normal-state-map (kbd "<backspace> f z") 'other-frame)
+;; Frame Delete Delete (current)
 (define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
+;; Frame Delete Other
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 #+END_SRC
 
@@ -99,15 +103,20 @@ Here are some additional functions / macros that could help you configure Doom:
   (evil-window-split)
   (evil-window-down 1))
 
+;; | (vertical)
 (define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf/evil-window-vsplit)
+;; - (horizontal)
 (define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf/evil-window-split)
+;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
 #+END_SRC
 
 * Terminal
 
 #+BEGIN_SRC emacs-lisp
+;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
+;; Terminal (max)
 (define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 #+END_SRC
 
@@ -137,26 +146,38 @@ Here are some additional functions / macros that could help you configure Doom:
   (interactive)
   (wkf/find-file "~/.doom.d/init.el"))
 
-(defun wkf/find-emacs-package ()
+(defun wkf/find-emacs-packages ()
   "Open my packages.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/packages.el"))
 
-(defun wkf/find-emacs-config ()
+(defun wkf/find-emacs-config-org ()
   "Open my config.org in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/config.org"))
 
-(defun wkf/find-emacs-scratchpad ()
+(defun wkf/find-emacs-config-el ()
+  "Open my config.org in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/config.el"))
+
+(defun wkf/find-emacs-scratch ()
   "Open my scratch.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/scratch.el"))
 
+;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf/find-zshrc)
+;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
-(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-package)
-(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config)
-(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratchpad)
+;; Config Emacs Packages.el
+(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
+;; Config Emacs Config.org
+(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
+;; Config Emacs Config.el (compiled version)
+(define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
+;; Config Emacs Scratch.el
+(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 #+END_SRC
 
 ** Editing
@@ -174,7 +195,9 @@ Here are some additional functions / macros that could help you configure Doom:
                (save-buffer))
       (save-buffer))))
 
+;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 #+END_SRC
 
@@ -264,7 +287,7 @@ To get information about any of these functions/macros, move the cursor over the
   (balance-windows)
   (recenter))
 
-;; glance doKumentation
+;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 ;; Go to Definition
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
@@ -344,6 +367,14 @@ If you use =org= and don't want your org files in the default location below, ch
 (setq org-directory "~/wkf-org/")
 #+END_SRC
 
+** Images
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook 'org-display-user-inline-images)
+(add-hook 'org-mode-hook 'org-display-inline-images)
+(add-hook 'org-mode-hook 'org-redisplay-inline-images)
+#+END_SRC
+
 ** Open at Point
 
 #+BEGIN_SRC emacs-lisp
@@ -355,16 +386,28 @@ If you use =org= and don't want your org files in the default location below, ch
   (org-open-at-point)
   (balance-windows))
 
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf/org-open-at-point)
+;; Org Open
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o o") 'wkf/org-open-at-point)
 #+END_SRC
 
 ** Org Tree Slide
 
 #+BEGIN_SRC emacs-lisp
-(evil-define-key 'normal org-mode-map (kbd "<backspace> p p") 'org-tree-slide-mode)
-(evil-define-key 'normal org-mode-map (kbd "s->") 'org-tree-slide-move-next-tree)
-(evil-define-key 'normal org-mode-map (kbd "s-<") 'org-tree-slide-move-previous-tree)
+;; Org Presentation
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
+;; Org Images toggle(z)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
+;; Org Images yes
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
+;; Org Images no
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
+;; >
+(evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
+;; <
+(evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 #+END_SRC
+
+#+RESULTS:
 
 * Plugin - DeadGrep
 

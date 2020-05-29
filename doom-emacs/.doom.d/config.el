@@ -4,7 +4,8 @@
 
 (setq doom-theme 'doom-one)
 
-(setq doom-font (font-spec :family "Dank Mono" :size 12))
+(setq doom-font (font-spec :family "Dank Mono"
+                           :size 12))
 
 (blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
@@ -14,9 +15,13 @@
 (display-time-mode)
 (display-battery-mode)
 
-(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
-(define-key evil-normal-state-map (kbd "<backspace> f o") 'other-frame)
+;; Frame Make
+(define-key evil-normal-state-map (kbd "<backspace> f m") 'make-frame-command)
+;; Frame Z (cycle)
+(define-key evil-normal-state-map (kbd "<backspace> f z") 'other-frame)
+;; Frame Delete Delete (current)
 (define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
+;; Frame Delete Other
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
 (defun wkf/evil-window-vsplit ()
@@ -31,11 +36,16 @@
   (evil-window-split)
   (evil-window-down 1))
 
+;; | (vertical)
 (define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf/evil-window-vsplit)
+;; - (horizontal)
 (define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf/evil-window-split)
+;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
 
+;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
+;; Terminal (max)
 (define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 
 (defun wkf/windows-rebalance ()
@@ -61,26 +71,38 @@
   (interactive)
   (wkf/find-file "~/.doom.d/init.el"))
 
-(defun wkf/find-emacs-package ()
+(defun wkf/find-emacs-packages ()
   "Open my packages.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/packages.el"))
 
-(defun wkf/find-emacs-config ()
+(defun wkf/find-emacs-config-org ()
   "Open my config.org in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/config.org"))
 
-(defun wkf/find-emacs-scratchpad ()
+(defun wkf/find-emacs-config-el ()
+  "Open my config.org in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/config.el"))
+
+(defun wkf/find-emacs-scratch ()
   "Open my scratch.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/scratch.el"))
 
+;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf/find-zshrc)
+;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
-(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-package)
-(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config)
-(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratchpad)
+;; Config Emacs Packages.el
+(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
+;; Config Emacs Config.org
+(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
+;; Config Emacs Config.el (compiled version)
+(define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
+;; Config Emacs Scratch.el
+(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
 (defun wkf/save-buffer ()
   "Save current buffer with custom lsp formatting"
@@ -94,7 +116,9 @@
                (save-buffer))
       (save-buffer))))
 
+;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 ;; Git Wkf Update All
@@ -134,7 +158,7 @@
   (balance-windows)
   (recenter))
 
-;; glance doKumentation
+;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 ;; Go to Definition
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
@@ -178,6 +202,10 @@
 
 (setq org-directory "~/wkf-org/")
 
+(add-hook 'org-mode-hook 'org-display-user-inline-images)
+(add-hook 'org-mode-hook 'org-display-inline-images)
+(add-hook 'org-mode-hook 'org-redisplay-inline-images)
+
 (defun wkf/org-open-at-point ()
   "Put org-mode's open at point's content to the right vertical split"
   (interactive)
@@ -186,11 +214,21 @@
   (org-open-at-point)
   (balance-windows))
 
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o") 'wkf/org-open-at-point)
+;; Org Open
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o o") 'wkf/org-open-at-point)
 
-(evil-define-key 'normal org-mode-map (kbd "<backspace> p p") 'org-tree-slide-mode)
-(evil-define-key 'normal org-mode-map (kbd "s->") 'org-tree-slide-move-next-tree)
-(evil-define-key 'normal org-mode-map (kbd "s-<") 'org-tree-slide-move-previous-tree)
+;; Org Presentation
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
+;; Org Images toggle(z)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
+;; Org Images yes
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
+;; Org Images no
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
+;; >
+(evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
+;; <
+(evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 
 (define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
 (define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
