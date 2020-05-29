@@ -229,6 +229,18 @@
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
   (kbd "<backspace> o s ' , w : q"))
 
+(defun wkf/org-src-elisp ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp :results silent")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "<f8>sel") 'wkf/org-src-elisp)
+
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 (add-hook 'org-mode-hook 'org-display-inline-images)
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
