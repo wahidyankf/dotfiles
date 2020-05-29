@@ -2,6 +2,9 @@
 
 (message "Hello world!")
 
-
-
 (equal major-mode 'haskell-mode)
+
+(setq-default show-trailing-whitespace t)
+(setq show-trailing-whitespace t)
+
+(message load-path)

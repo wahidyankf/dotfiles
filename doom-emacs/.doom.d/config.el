@@ -1,15 +1,18 @@
 (setq user-full-name "Wahidyan Kresna Fridayoka"
       user-mail-address "wahidyankf@gmail.com")
 
-(setq doom-font (font-spec :family "Dank Mono" :size 12))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (setq doom-theme 'doom-one)
 
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(setq doom-font (font-spec :family "Dank Mono" :size 12))
 
+(blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
+(setq-default indicate-empty-lines t)
+(setq-default show-trailing-whitespace t)
 
-(blink-cursor-mode 1)
+
 
 (display-time-mode)
 (display-battery-mode)
@@ -189,6 +192,8 @@
                             #'projectile-project-root
                             '("bash-language-server" "start"))
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
+
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
 (setq org-directory "~/wkf-org/")
 

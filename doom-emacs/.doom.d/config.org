@@ -12,6 +12,22 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 #+END_SRC
 
 * Theme
+** StartUp
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+END_SRC
+
+** Template
+
+There are two ways to load a theme.Both assume the theme is installed and available.You can either set =doom-theme= or manually load a theme with the =load-theme= function. This is the default:
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-theme 'doom-one)
+#+END_SRC
+
+This determines the style of line numbers in effect. If set to =nil=, line numbers are disabled. For relative line numbers, set this to =relative=.
+
 ** Font
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here
@@ -35,32 +51,18 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 (setq doom-font (font-spec :family "Dank Mono" :size 12))
 #+END_SRC
 
-** Template
-
-There are two ways to load a theme.Both assume the theme is installed and available.You can either set =doom-theme= or manually load a theme with the =load-theme= function. This is the default:
+** Editor
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-one)
-#+END_SRC
-
-This determines the style of line numbers in effect. If set to =nil=, line numbers are disabled. For relative line numbers, set this to =relative=.
-
-** StartUp
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-#+END_SRC
-
-** Line Numbering
-
-#+BEGIN_SRC emacs-lisp
+(blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
+(setq-default indicate-empty-lines t)
+(setq-default show-trailing-whitespace t)
 #+END_SRC
 
 ** Cursor
 
 #+BEGIN_SRC emacs-lisp
-(blink-cursor-mode 1)
 #+END_SRC
 
 ** Doom Message
@@ -320,6 +322,12 @@ To get information about any of these functions/macros, move the cursor over the
                             #'projectile-project-root
                             '("bash-language-server" "start"))
     (add-hook 'sh-mode-hook #'lsp-sh-enable)))
+#+END_SRC
+
+** Emacs Lisp
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
 * Plugin - Org Mode
