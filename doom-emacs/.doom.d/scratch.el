@@ -1,10 +1,13 @@
 ;;; ~/Dropbox/wkf-devbox/doom-emacs/.doom.d/scratch.el -*- lexical-binding: t; -*-
 
-(message "Hello world!")
+(defun wkf/save-buffer ()
+  "Save current buffer with custom lsp formatting"
+  (interactive)
+  (if (and (equal lsp-mode t)
+           (not (equal major-mode 'reason-mode)))
+      (progn (lsp-format-buffer)
+             (save-buffer))
+    (save-buffer)))
 
-(equal major-mode 'haskell-mode)
-
-(setq-default show-trailing-whitespace t)
-(setq show-trailing-whitespace t)
-
-(message load-path)
+(define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+(define-key evil-normal-state-map (kbd ", q") 'delete-window)
