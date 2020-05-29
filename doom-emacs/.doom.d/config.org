@@ -217,7 +217,7 @@ Here are some additional functions / macros that could help you configure Doom:
 #+END_SRC
 
 * Plugin - LSP Mode
-** COMMENT LSP Mode
+** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package! lsp-mode

@@ -127,6 +127,26 @@
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
 
+(use-package! lsp-mode
+  :hook (reason-mode . lsp)
+  :hook (haskell-mode . lsp)
+  :hook (tuareg-mode . lsp)
+  :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
+                                                :major-modes '(tuareg-mode)
+                                                :notification-handlers (ht ("client/registerCapability"
+                                                                            'ignore))
+                                                :priority 1
+                                                :server-id 'ocaml-ls))
+  :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection
+                                                                 "~/.doom.d/rls-macos/reason-language-server")
+                                                :major-modes '(reason-mode)
+                                                :notification-handlers (ht ("client/registerCapability"
+                                                                            'ignore))
+                                                :priority 1
+                                                :server-id 'reason-ls))
+  :config (setq lsp-lens-auto-enable t)
+  :commands (lsp-mode lsp-define-stdio-client))
+
 (use-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :config (set-lookup-handlers! 'lsp-ui-mode

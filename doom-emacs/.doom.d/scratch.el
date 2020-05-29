@@ -11,3 +11,9 @@
 
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
+
+(blink-cursor-mode t)
+
+(+ 1 2)
+
+(message "ibe jomblo, barusan diajak ngobrol sama mantan gebetannya yang baru jadian")
