@@ -110,9 +110,6 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
 #+END_SRC
 
-#+RESULTS:
-: balance-windows
-
 * Terminal
 
 #+BEGIN_SRC emacs-lisp
@@ -167,9 +164,6 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config)
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratchpad)
 #+END_SRC
-
-#+RESULTS:
-: wkf/find-emacs-scratchpad
 
 * Editing
 
