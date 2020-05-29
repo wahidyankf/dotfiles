@@ -161,6 +161,13 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
 #+END_SRC
 
+* Terminal
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
+(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
+#+END_SRC
+
 * Plugin - Wakatime
 
 #+BEGIN_SRC emacs-lisp
@@ -258,9 +265,6 @@ To get information about any of these functions/macros, move the cursor over the
 ;; recompile
 (define-key evil-normal-state-map (kbd ",c") 'recompile)
 #+END_SRC
-
-#+RESULTS:
-: recompile
 
 ** Haskell
 
