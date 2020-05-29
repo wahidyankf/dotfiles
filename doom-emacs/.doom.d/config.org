@@ -201,9 +201,6 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 #+END_SRC
 
-#+RESULTS:
-: delete-window
-
 * Git
 
 #+BEGIN_SRC emacs-lisp
@@ -367,12 +364,30 @@ If you use =org= and don't want your org files in the default location below, ch
 (setq org-directory "~/wkf-org/")
 #+END_SRC
 
+** Editing
+
+#+BEGIN_SRC emacs-lisp
+;; Org SRC Edit
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o s '") 'org-edit-special)
+
+;; Org SRC Format
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
+  (kbd "<backspace> o s ' , w : q"))
+#+END_SRC
+
 ** Images
 
 #+BEGIN_SRC emacs-lisp
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 (add-hook 'org-mode-hook 'org-display-inline-images)
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
+
+;; Org Images toggle(z)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
+;; Org Images yes
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
+;; Org Images no
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
 #+END_SRC
 
 ** Open at Point
@@ -395,19 +410,11 @@ If you use =org= and don't want your org files in the default location below, ch
 #+BEGIN_SRC emacs-lisp
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
-;; Org Images toggle(z)
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
-;; Org Images yes
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
-;; Org Images no
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
 ;; >
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 #+END_SRC
-
-#+RESULTS:
 
 * Plugin - DeadGrep
 

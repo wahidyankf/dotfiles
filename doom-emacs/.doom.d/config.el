@@ -4,8 +4,7 @@
 
 (setq doom-theme 'doom-one)
 
-(setq doom-font (font-spec :family "Dank Mono"
-                           :size 12))
+(setq doom-font (font-spec :family "Dank Mono" :size 12))
 
 (blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
@@ -202,9 +201,23 @@
 
 (setq org-directory "~/wkf-org/")
 
+;; Org SRC Edit
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o s '") 'org-edit-special)
+
+;; Org SRC Format
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
+  (kbd "<backspace> o s ' , w : q"))
+
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 (add-hook 'org-mode-hook 'org-display-inline-images)
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
+
+;; Org Images toggle(z)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
+;; Org Images yes
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
+;; Org Images no
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
 
 (defun wkf/org-open-at-point ()
   "Put org-mode's open at point's content to the right vertical split"
@@ -219,12 +232,6 @@
 
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
-;; Org Images toggle(z)
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
-;; Org Images yes
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
-;; Org Images no
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
 ;; >
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
 ;; <
