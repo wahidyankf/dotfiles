@@ -6,14 +6,14 @@ Place your private configuration here! Remember, you do not need to run =doom sy
 
 Some functionality uses this to identify you, e.g.GPG configuration, email clients, file templates and snippets.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
 
 * Theme
 ** StartUp
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 #+END_SRC
 
@@ -21,7 +21,7 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 
 There are two ways to load a theme.Both assume the theme is installed and available.You can either set =doom-theme= or manually load a theme with the =load-theme= function. This is the default:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (setq doom-theme 'doom-one)
 #+END_SRC
 
@@ -40,19 +40,20 @@ are the three important ones:
 
 They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= font string. You generally only need these two:
 
-#+BEGIN_EXAMPLE emacs-lisp
+#+BEGIN_EXAMPLE emacs-lisp :results silent
 (setq doom-font
   (font-spec :family "monospace" :size 12 :weight 'semi-light)
   doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+End_example
 
-#+BEGIN_SRC emacs-lisp
-(setq doom-font (font-spec :family "Dank Mono" :size 12))
+#+BEGIN_SRC emacs-lisp :results silent
+(setq doom-font (font-spec :family "Dank Mono"
+                           :size 12))
 #+END_SRC
 
 ** Editor
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
 (setq-default indicate-empty-lines t)
@@ -70,14 +71,14 @@ Here are some additional functions / macros that could help you configure Doom:
 
 *** Doom Modeline
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (display-time-mode)
 (display-battery-mode)
 #+END_SRC
 
 * Frame
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 ;; Frame Make
 (define-key evil-normal-state-map (kbd "<backspace> f m") 'make-frame-command)
 ;; Frame Z (cycle)
@@ -90,7 +91,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 * Window
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/evil-window-vsplit ()
   "VSplit then focus on the right pane"
   (interactive)
@@ -113,7 +114,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 * Terminal
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
 ;; Terminal (max)
@@ -122,7 +123,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 ** File
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/windows-rebalance ()
   "Balance window then recenter"
   (interactive)
@@ -182,7 +183,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 ** Editing
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/save-buffer ()
   "Save current buffer with custom lsp formatting"
   (interactive)
@@ -203,7 +204,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 * Git
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 ;; Git Wkf Update All
 (define-key evil-normal-state-map (kbd "<backspace> g w u a")
   (kbd "SPC o t git_wkf_update_all <return>"))
@@ -211,7 +212,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 * Plugin - Wakatime
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
 #+END_SRC
@@ -219,7 +220,7 @@ Here are some additional functions / macros that could help you configure Doom:
 * Plugin - LSP Mode
 ** LSP Mode
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-mode
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
@@ -243,7 +244,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 ** LSP UI
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :config (set-lookup-handlers! 'lsp-ui-mode
@@ -254,7 +255,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 ** Company LSP
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! company-lsp
   :after lsp-mode
   :config (set-company-backend! 'lsp-mode 'company-lsp)
@@ -265,7 +266,7 @@ Here are some additional functions / macros that could help you configure Doom:
 
 To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/gdef ()
   "Open +lookup/definition in the split window below"
   (interactive)
@@ -298,7 +299,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 ** Haskell
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-haskell
   :after lsp-mode
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
@@ -307,7 +308,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 ** ReasonML
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! reason-mode
   :mode "\\.re$"
   :hook (before-save . (lambda ()
@@ -317,13 +318,13 @@ To get information about any of these functions/macros, move the cursor over the
 
 ** Emacs Lisp
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
 ** DAP Mode
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! dap-mode
   :after lsp-mode
   :config (dap-mode t)
@@ -332,7 +333,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 ** TypeScript
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
@@ -340,7 +341,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 ** CSS
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-css
   :when (featurep! +css)
   :hook ((css-mode less-mode scss-mode) . lsp-css-enable))
@@ -348,7 +349,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 ** Sh
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (when (featurep! +sh)
   (after! sh-script (lsp-define-stdio-client lsp-sh #'projectile-project-root '("bash-language-server"
                                                                                 "start"))
@@ -360,13 +361,13 @@ To get information about any of these functions/macros, move the cursor over the
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (setq org-directory "~/wkf-org/")
 #+END_SRC
 
 ** Editing
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 ;; Org SRC Edit
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s '") 'org-edit-special)
 
@@ -377,7 +378,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 ** Images
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 (add-hook 'org-mode-hook 'org-display-inline-images)
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
@@ -392,7 +393,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 ** Open at Point
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/org-open-at-point ()
   "Put org-mode's open at point's content to the right vertical split"
   (interactive)
@@ -407,7 +408,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 ** Org Tree Slide
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
 ;; >
@@ -418,7 +419,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 * Plugin - DeadGrep
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
 (define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
 #+END_SRC

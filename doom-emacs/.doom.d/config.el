@@ -4,7 +4,8 @@
 
 (setq doom-theme 'doom-one)
 
-(setq doom-font (font-spec :family "Dank Mono" :size 12))
+(setq doom-font (font-spec :family "Dank Mono"
+                           :size 12))
 
 (blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
