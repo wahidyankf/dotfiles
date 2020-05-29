@@ -12,8 +12,6 @@
 (setq-default indicate-empty-lines t)
 (setq-default show-trailing-whitespace t)
 
-
-
 (display-time-mode)
 (display-battery-mode)
 

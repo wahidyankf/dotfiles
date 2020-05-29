@@ -60,11 +60,6 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 (setq-default show-trailing-whitespace t)
 #+END_SRC
 
-** Cursor
-
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
-
 ** Doom Message
 
 Here are some additional functions / macros that could help you configure Doom:
