@@ -23,11 +23,13 @@
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
 (defun wkf/evil-window-vsplit ()
+  "VSplit then focus on the right pane"
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1))
 
 (defun wkf/evil-window-split ()
+  "Split then focus on the bottom pane"
   (interactive)
   (evil-window-split)
   (evil-window-down 1))
@@ -40,33 +42,40 @@
 (define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 
 (defun wkf/windows-rebalance ()
+  "Balance window then recenter"
   (interactive)
   (balance-windows)
   (recenter))
 
 (defun wkf/find-file (filename)
+  "Search filename and open it in the right vertical split"
   (interactive)
   (wkf/evil-window-vsplit)
   (find-file filename)
   (wkf/windows-rebalance))
 
 (defun wkf/find-zshrc ()
+  "Open my zshrc in the right vertical split"
   (interactive)
   (wkf/find-file "~/.zshrc"))
 
 (defun wkf/find-emacs-init ()
+  "Open my init.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/init.el"))
 
 (defun wkf/find-emacs-package ()
+  "Open my packages.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/packages.el"))
 
 (defun wkf/find-emacs-config ()
+  "Open my config.org in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/config.org"))
 
 (defun wkf/find-emacs-scratchpad ()
+  "Open my scratch.el in the right vertical split"
   (interactive)
   (wkf/find-file "~/.doom.d/scratch.el"))
 
@@ -77,12 +86,16 @@
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratchpad)
 
 (defun wkf/save-buffer ()
+  "Save current buffer with custom lsp formatting"
   (interactive)
   (when (and (equal lsp-mode t) (not (equal major-mode 'reason-mode))) (lsp-format-buffer))
   (save-buffer))
 
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
+
+;; Git Wkf Update All
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") (kbd "SPC o t git_wkf_update_all <return>"))
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
@@ -131,6 +144,7 @@
   (setq company-lsp-enable-recompletion t))
 
 (defun wkf/gdef ()
+  "Open +lookup/definition in the split window below"
   (interactive)
   (+lookup/definition (doom-thing-at-point-or-region))
   (evil-window-split)
@@ -141,6 +155,7 @@
 )
 
 (defun wkf/gdoc ()
+  "Open +lookup/documentation in the mini buffer"
   (interactive)
   (+lookup/documentation (doom-thing-at-point-or-region))
   (evil-window-down 1)
@@ -198,6 +213,7 @@
 (setq org-directory "~/wkf-org/")
 
 (defun wkf/org-open-at-point ()
+  "Put open at point to the right vertical split"
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)
