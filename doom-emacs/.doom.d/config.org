@@ -368,7 +368,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 #+BEGIN_SRC emacs-lisp
 (defun wkf/org-open-at-point ()
-  "Put open at point to the right vertical split"
+  "Put org-mode's open at point's content to the right vertical split"
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)

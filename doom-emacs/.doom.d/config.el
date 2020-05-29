@@ -213,7 +213,7 @@
 (setq org-directory "~/wkf-org/")
 
 (defun wkf/org-open-at-point ()
-  "Put open at point to the right vertical split"
+  "Put org-mode's open at point's content to the right vertical split"
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)
