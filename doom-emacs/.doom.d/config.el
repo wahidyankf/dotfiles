@@ -33,6 +33,9 @@
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
+(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
+(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
+
 (defun wkf-windows-rebalance ()
   (interactive)
   (balance-windows)
@@ -77,9 +80,6 @@
 
 (define-key evil-normal-state-map (kbd ",w") 'wkf-save-buffer)
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
-
-(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
-(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))

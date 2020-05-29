@@ -12,7 +12,6 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 #+END_SRC
 
 * Theme
-
 ** Font
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here
@@ -89,7 +88,6 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> fdo") 'delete-other-frames)
 #+END_SRC
 
-
 * Window
 
 #+BEGIN_SRC emacs-lisp
@@ -106,6 +104,13 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf-evil-window-vsplit)
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf-evil-window-split)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+#+END_SRC
+
+* Terminal
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
+(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 #+END_SRC
 
 * File
@@ -159,13 +164,6 @@ Here are some additional functions / macros that could help you configure Doom:
 
 (define-key evil-normal-state-map (kbd ",w") 'wkf-save-buffer)
 (define-key evil-normal-state-map (kbd ",q") 'delete-window)
-#+END_SRC
-
-* Terminal
-
-#+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
-(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
 #+END_SRC
 
 * Plugin - Wakatime
