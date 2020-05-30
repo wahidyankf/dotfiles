@@ -48,7 +48,7 @@
 (defun wkf/evil-window-close-bottom-most ()
   "Close the bottom-most pane"
   (interactive)
-  (delete-windows-on "compilation"))
+  (delete-windows-on "*compilation*"))
 
 (defun wkf/evil-window-close-up-most ()
   "Close the up-most pane"
