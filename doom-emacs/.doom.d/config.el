@@ -1,5 +1,8 @@
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 
+(setq shell-file-name "zsh")
+(setq shell-command-switch "-ic")
+
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (setq doom-theme 'doom-one)
@@ -66,6 +69,11 @@
   (interactive)
   (wkf/find-file "~/.zshrc"))
 
+(defun wkf/find-zprofile ()
+  "Open my zprofile in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.zprofile"))
+
 (defun wkf/find-emacs-init ()
   "Open my init.el in the right vertical split"
   (interactive)
@@ -92,7 +100,9 @@
   (wkf/find-file "~/.doom.d/scratch.el"))
 
 ;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf/find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> c z r") 'wkf/find-zshrc)
+;; Config ZSH Profile
+(define-key evil-normal-state-map (kbd "<backspace> c z p") 'wkf/find-zprofile)
 ;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
 ;; Config Emacs Packages.el
@@ -107,23 +117,29 @@
 (defun wkf/save-buffer ()
   "Save current buffer with custom lsp formatting"
   (interactive)
-  (if (and (equal major-mode 'lsp-mode)
-           (not (equal major-mode 'reason-mode)))
-      (progn (lsp-format-buffer)
-             (save-buffer))
-    (if (equal major-mode 'emacs-lisp-mode)
-        (progn (elisp-format-buffer)
-               (save-buffer))
-      (save-buffer))))
+  (cond ((bound-and-true-p lsp-mode)
+         (cond ((equal major-mode 'reason-mode)
+                (lsp-format-buffer))
+               (t (progn (lsp-format-buffer)))))
+        ((equal major-mode 'emacs-lisp-mode)
+         (progn (elisp-format-buffer)))
+        (t nil))
+  (save-buffer))
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+
 ;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 ;; Git Wkf Update All
-(define-key evil-normal-state-map (kbd "<backspace> g w u a")
-  (kbd "SPC o t git_wkf_update_all <return>"))
+(defun wkf/git-wkf-update-all ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format "git_wkf_update_all"))
+                      (get-buffer-process output-buffer))))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
@@ -194,11 +210,22 @@
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
   (lsp-haskell-set-formatter-floskell))
 
+;; Git Wkf Update All
+(defun wkf/haskell-compile ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format
+                                "ghc -fwarn-incomplete-patterns %s -e \"return \(\)\"; echo finished"
+                                (buffer-file-name)))
+                      (get-buffer-process output-buffer))))))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", C") 'wkf/haskell-compile)
+
 (use-package! reason-mode
   :mode "\\.re$"
   :hook (before-save . (lambda ()
                          (when (equal major-mode 'reason-mode)
-                           (refmt)))))
+                          (refmt)))))
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 

@@ -10,6 +10,16 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
 
+
+* Shell
+
+Make sure eshell and mx-compile use zsh (copied alias)
+
+#+BEGIN_SRC emacs-lisp :results silent
+(setq shell-file-name "zsh")
+(setq shell-command-switch "-ic")
+#+END_SRC
+
 * Theme
 ** StartUp
 
@@ -141,6 +151,11 @@ Here are some additional functions / macros that could help you configure Doom:
   (interactive)
   (wkf/find-file "~/.zshrc"))
 
+(defun wkf/find-zprofile ()
+  "Open my zprofile in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.zprofile"))
+
 (defun wkf/find-emacs-init ()
   "Open my init.el in the right vertical split"
   (interactive)
@@ -167,7 +182,9 @@ Here are some additional functions / macros that could help you configure Doom:
   (wkf/find-file "~/.doom.d/scratch.el"))
 
 ;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf/find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> c z r") 'wkf/find-zshrc)
+;; Config ZSH Profile
+(define-key evil-normal-state-map (kbd "<backspace> c z p") 'wkf/find-zprofile)
 ;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
 ;; Config Emacs Packages.el
@@ -180,23 +197,24 @@ Here are some additional functions / macros that could help you configure Doom:
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 #+END_SRC
 
-** Editing
+**  Editing
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/save-buffer ()
   "Save current buffer with custom lsp formatting"
   (interactive)
-  (if (and (equal major-mode 'lsp-mode)
-           (not (equal major-mode 'reason-mode)))
-      (progn (lsp-format-buffer)
-             (save-buffer))
-    (if (equal major-mode 'emacs-lisp-mode)
-        (progn (elisp-format-buffer)
-               (save-buffer))
-      (save-buffer))))
+  (cond ((bound-and-true-p lsp-mode)
+         (cond ((equal major-mode 'reason-mode)
+                (lsp-format-buffer))
+               (t (progn (lsp-format-buffer)))))
+        ((equal major-mode 'emacs-lisp-mode)
+         (progn (elisp-format-buffer)))
+        (t nil))
+  (save-buffer))
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+
 ;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 #+END_SRC
@@ -205,8 +223,13 @@ Here are some additional functions / macros that could help you configure Doom:
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; Git Wkf Update All
-(define-key evil-normal-state-map (kbd "<backspace> g w u a")
-  (kbd "SPC o t git_wkf_update_all <return>"))
+(defun wkf/git-wkf-update-all ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format "git_wkf_update_all"))
+                      (get-buffer-process output-buffer))))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 #+END_SRC
 
 * Plugin - Wakatime
@@ -303,6 +326,17 @@ To get information about any of these functions/macros, move the cursor over the
   :after lsp-mode
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
   (lsp-haskell-set-formatter-floskell))
+
+;; Git Wkf Update All
+(defun wkf/haskell-compile ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format
+                                "ghc -fwarn-incomplete-patterns %s -e \"return \(\)\"; echo finished"
+                                (buffer-file-name)))
+                      (get-buffer-process output-buffer))))))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", C") 'wkf/haskell-compile)
 #+END_SRC
 
 ** ReasonML
@@ -312,7 +346,7 @@ To get information about any of these functions/macros, move the cursor over the
   :mode "\\.re$"
   :hook (before-save . (lambda ()
                          (when (equal major-mode 'reason-mode)
-                           (refmt)))))
+                          (refmt)))))
 #+END_SRC
 
 ** Emacs Lisp
@@ -438,3 +472,4 @@ If you use =org= and don't want your org files in the default location below, ch
 (define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
 (define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
 #+END_SRC
+
