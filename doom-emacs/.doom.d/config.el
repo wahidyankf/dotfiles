@@ -39,29 +39,6 @@
   (evil-window-split)
   (evil-window-down 1))
 
-(defun wkf/evil-window-close-left-most ()
-  "Close the left-most pane"
-  (interactive)
-  (evil-window-left 10)
-  (evil-window-delete))
-
-(defun wkf/evil-window-close-bottom-most ()
-  "Close the bottom-most pane"
-  (interactive)
-  (delete-windows-on "*compilation*"))
-
-(defun wkf/evil-window-close-up-most ()
-  "Close the up-most pane"
-  (interactive)
-  (evil-window-up 10)
-  (evil-window-delete))
-
-(defun wkf/evil-window-close-right-most ()
-  "Close the right-most pane"
-  (interactive)
-  (evil-window-right 10)
-  (evil-window-delete))
-
 ;; | (vertical)
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/evil-window-vsplit)
 ;; - (horizontal)
@@ -69,20 +46,62 @@
 ;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
-;; quit H
-(define-key evil-normal-state-map (kbd "<backspace> qH") 'wkf/evil-window-close-left-most)
-;; quit J
-(define-key evil-normal-state-map (kbd "<backspace> qJ") 'wkf/evil-window-close-bottom-most)
-;; quit K
-(define-key evil-normal-state-map (kbd "<backspace> qK") 'wkf/evil-window-close-up-most)
-;; quit L
-(define-key evil-normal-state-map (kbd "<backspace> qL") 'wkf/evil-window-close-right-most)
+(defun wkf/evil-window-close-left ()
+  "Close the left pane"
+  (interactive)
+  (evil-window-left 1)
+  (evil-window-delete))
 
-;; Get current buffer name
+(defun wkf/evil-window-close-bottom ()
+  "Close the bottom pane"
+  (interactive)
+  (evil-window-down 1)
+  (delete-window))
+
+(defun wkf/evil-window-close-up ()
+  "Close the up pane"
+  (interactive)
+  (evil-window-up 1)
+  (evil-window-delete))
+
+(defun wkf/evil-window-close-right ()
+  "Close the right pane"
+  (interactive)
+  (evil-window-right 1)
+  (evil-window-delete))
+
+;; quit h
+(define-key evil-normal-state-map (kbd "<backspace> q h") 'wkf/evil-window-close-left)
+
+;; quit j
+(define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/evil-window-close-bottom)
+
+;; quit k
+(define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/evil-window-close-up)
+
+;; quit l
+(define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/evil-window-close-right)
+
+(defun wkf/evil-window-close-compilation-window ()
+  "Close compilation pane"
+  (interactive)
+  (delete-windows-on "*compilation*"))
+
+;; compile
+(define-key evil-normal-state-map (kbd ", c C") 'compile)
+
+;; recompile
+(define-key evil-normal-state-map (kbd ", c c") 'recompile)
+
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c q") 'wkf/evil-window-close-compilation-window)
+
+;; Get current pane info
 (define-key evil-normal-state-map (kbd "<backspace> bi")
   (lambda ()
     (interactive)
-    (message (buffer-name))))
+    (message (format "b: %s, p: %s" (buffer-name)
+                     (buffer-file-name)))))
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
@@ -256,10 +275,6 @@
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
-;; compile
-(define-key evil-normal-state-map (kbd ", C") 'compile)
-;; recompile
-(define-key evil-normal-state-map (kbd ", c") 'recompile)
 
 (use-package! lsp-haskell
   :after lsp-mode
