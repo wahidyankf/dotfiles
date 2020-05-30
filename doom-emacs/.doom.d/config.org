@@ -10,15 +10,14 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
 
+
+* Shell
+
+Make sure eshell and mx-compile use zsh (copied alias)
+
 #+BEGIN_SRC emacs-lisp
 (setq shell-file-name "zsh")
 (setq shell-command-switch "-ic")
-;; (use-package! exec-path-from-shell
-;;   :hook (after-init . exec-path-from-shell-initialize))
-
-;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
-;;   (setenv "PATH" path)
-;;   (setq exec-path (append (split-string-and-unquote path ":") exec-path)))
 #+END_SRC
 
 #+RESULTS:

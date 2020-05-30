@@ -2,12 +2,6 @@
 
 (setq shell-file-name "zsh")
 (setq shell-command-switch "-ic")
-;; (use-package! exec-path-from-shell
-;;   :hook (after-init . exec-path-from-shell-initialize))
-
-;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
-;;   (setenv "PATH" path)
-;;   (setq exec-path (append (split-string-and-unquote path ":") exec-path)))
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
