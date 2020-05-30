@@ -553,6 +553,8 @@ If you use =org= and don't want your org files in the default location below, ch
 * Plugin - DeadGrep
 
 #+BEGIN_SRC emacs-lisp :results silent
-(define-key evil-normal-state-map (kbd ", s s") 'deadgrep)
-(define-key evil-normal-state-map (kbd ", s r") 'deadgrep-restart)
+;; search Search
+(define-key evil-normal-state-map (kbd ", s S") 'deadgrep)
+;; search restart
+(define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
 #+END_SRC

@@ -369,5 +369,7 @@
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 
-(define-key evil-normal-state-map (kbd ", s s") 'deadgrep)
-(define-key evil-normal-state-map (kbd ", s r") 'deadgrep-restart)
+;; search Search
+(define-key evil-normal-state-map (kbd ", s S") 'deadgrep)
+;; search restart
+(define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
