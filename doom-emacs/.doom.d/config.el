@@ -39,12 +39,156 @@
   (evil-window-split)
   (evil-window-down 1))
 
+(defun wkf/evil-window-close-left-most ()
+  "Close the left-most pane"
+  (interactive)
+  (evil-window-left 10)
+  (evil-window-delete))
+
+(defun wkf/evil-window-close-bottom-most ()
+  "Close the bottom-most pane"
+  (interactive)
+  (evil-window-down 10)
+  (evil-window-delete)
+  (kbd (",q")))
+
+(defun wkf/evil-window-close-up-most ()
+  "Close the up-most pane"
+  (interactive)
+  (evil-window-up 10)
+  (evil-window-delete))
+
+(defun wkf/evil-window-close-right-most ()
+  "Close the right-most pane"
+  (interactive)
+  (evil-window-right 10)
+  (evil-window-delete))
+
 ;; | (vertical)
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/evil-window-vsplit)
 ;; - (horizontal)
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/evil-window-split)
 ;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+
+;; quit H
+(define-key evil-normal-state-map (kbd "<backspace> qH") 'wkf/evil-window-close-left-most)
+;; quit J
+(define-key evil-normal-state-map (kbd "<backspace> qJ") 'wkf/evil-window-close-bottom-most)
+;; quit K
+(define-key evil-normal-state-map (kbd "<backspace> qK") 'wkf/evil-window-close-up-most)
+;; quit L
+(define-key evil-normal-state-map (kbd "<backspace> qL") 'wkf/evil-window-close-right-most)
+
+;; quit L
+(define-key evil-normal-state-map (kbd "<backspace> bi")
+  (lambda ()
+    (interactive)
+    (message (buffer-name))))
+
+(defun wkf/vterm-open-vertical ()
+  "Open vterm in vertical split"
+  (interactive)
+  (evil-normal-state)
+  (wkf/evil-window-vsplit)
+  (+vterm/here (buffer-name)))
+
+(defun wkf/vterm-open-horizontal ()
+  "Open vterm in vertical split"
+  (interactive)
+  (evil-normal-state)
+  (wkf/evil-window-split)
+  (+vterm/here (buffer-name)))
+
+;; terminal (mini)
+(define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
+;; Terminal (max)
+(define-key evil-normal-state-map (kbd "<backspace> t T") '+vterm/here)
+;; Terminal Vertical
+(define-key evil-normal-state-map (kbd "<backspace> t v") 'wkf/vterm-open-vertical)
+;; Terminal Horizontal
+(define-key evil-normal-state-map (kbd "<backspace> t x") 'wkf/vterm-open-horizontal)
+
+(defun wkf/windows-rebalance ()
+  "Balance window then recenter"
+  (interactive)
+  (balance-windows)
+  (recenter))
+
+(defun wkf/find-file (filename)
+  "Search filename and open it in the right vertical split"
+  (interactive)
+  (wkf/evil-window-vsplit)
+  (find-file filename)
+  (wkf/windows-rebalance))
+
+(defun wkf/find-zshrc ()
+  "Open my zshrc in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.zshrc"))
+
+(defun wkf/find-zprofile ()
+  "Open my zprofile in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.zprofile"))
+
+(defun wkf/find-emacs-init ()
+  "Open my init.el in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/init.el"))
+
+(defun wkf/find-emacs-packages ()
+  "Open my packages.el in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/packages.el"))
+
+(defun wkf/find-emacs-config-org ()
+  "Open my config.org in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/config.org"))
+
+(defun wkf/find-emacs-config-el ()
+  "Open my config.org in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/config.el"))
+
+(defun wkf/find-emacs-scratch ()
+  "Open my scratch.el in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.doom.d/scratch.el"))
+
+;; Config ZSH
+(define-key evil-normal-state-map (kbd "<backspace> c z r") 'wkf/find-zshrc)
+;; Config ZSH Profile
+(define-key evil-normal-state-map (kbd "<backspace> c z p") 'wkf/find-zprofile)
+;; Config Emacs Init.el
+(define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
+;; Config Emacs Packages.el
+(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
+;; Config Emacs Config.org
+(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
+;; Config Emacs Config.el (compiled version)
+(define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
+;; Config Emacs Scratch.el
+(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
+
+(defun wkf/save-buffer ()
+  "Save current buffer with custom lsp formatting"
+  (interactive)
+  (cond ((bound-and-true-p lsp-mode)
+         (cond ((equal major-mode 'reason-mode)
+                (lsp-format-buffer))
+               (t (lsp-format-buffer))))
+        ((equal major-mode 'emacs-lisp-mode)
+         (elisp-format-buffer))
+        (t nil))
+  (save-buffer))
+
+;; Write
+(define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+
+;; Quit
+(define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
