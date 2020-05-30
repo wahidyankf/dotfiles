@@ -290,7 +290,7 @@
                                 (buffer-file-name)))
                       (get-buffer-process output-buffer))))))
 
-(evil-define-key 'normal haskell-mode-map (kbd ", C") 'wkf/haskell-compile)
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 
 (use-package! reason-mode
   :mode "\\.re$"
