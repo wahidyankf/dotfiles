@@ -197,22 +197,21 @@
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
-;; TODO: use manual refmt for reason-mode
-(defun wkf/save-buffer ()
-  "Save current buffer with custom lsp formatting"
-  (interactive)
-  (cond ((bound-and-true-p lsp-mode)
-         (cond ((equal major-mode 'reason-mode)
-                (progn (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+(defun wkf/save-buffer () 
+  "Save current buffer with custom lsp formatting" 
+  (interactive) 
+  (cond ((bound-and-true-p lsp-mode) 
+         (cond ((equal major-mode 'reason-mode) 
+                (progn (let* ((output-buffer (generate-new-buffer "*Async shell command*")) 
                               (proc (progn (compile (format "bsrefmt --in-place %s"
-                                                            (buffer-file-name)))
-                                           (get-buffer-process output-buffer)
-                                           (revert-buffer)))))))
-               (t (progn (lsp-format-buffer)
-                         (save-buffer)))))
-        ((equal major-mode 'emacs-lisp-mode)
-         (progn (elisp-format-buffer)
-                (save-buffer)))
+                                                            (buffer-file-name))) 
+                                           (get-buffer-process output-buffer))))) 
+                       (save-buffer))) 
+               (t (progn (lsp-format-buffer) 
+                         (save-buffer))))) 
+        ((equal major-mode 'emacs-lisp-mode) 
+         (progn (elisp-format-buffer) 
+                (save-buffer))) 
         (t (save-buffer))))
 
 ;; Write
@@ -232,6 +231,9 @@
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
+
+(setq gc-cons-threshold 200000000)
+(setq read-process-output-max (* 1024 1024))
 
 (use-package! lsp-mode
   :hook (reason-mode . lsp)
@@ -306,18 +308,10 @@
 
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 
-(use-package! reason-mode
-  :mode "\\.re$"
-  ;;   :hook (before-save . (lambda ()
-  ;;                          (when (equal major-mode 'reason-mode) nil
-  ;;  (shell-command-to-string (format "bsrefmt --in-place %s"
-  ;;                                 (buffer-file-name)))
-  ;; (call-process-shell-command (format "bsrefmt --in-place %s"
-  ;;                                  (buffer-file-name)) nil
-  ;;                                    "*Shell Command Output*" t)
-  ;;
-  ;; )))
-  )
+(use-package! reason-mode 
+  :mode "\\.re$" 
+  :hook (before-save . (lambda () 
+                         (if (equal major-mode 'reason-mode) nil))))
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
