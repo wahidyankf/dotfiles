@@ -1,7 +1,9 @@
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 
-(use-package! exec-path-from-shell
-  :hook (after-init . exec-path-from-shell-initialize))
+(setq shell-file-name "zsh")
+(setq shell-command-switch "-ic")
+;; (use-package! exec-path-from-shell
+;;   :hook (after-init . exec-path-from-shell-initialize))
 
 ;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
 ;;   (setenv "PATH" path)
