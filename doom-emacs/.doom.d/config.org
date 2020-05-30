@@ -221,7 +221,6 @@ Here are some additional functions / macros that could help you configure Doom:
 
 * Git
 
-
 #+BEGIN_SRC emacs-lisp :results silent
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
