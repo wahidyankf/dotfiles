@@ -94,6 +94,11 @@
   (interactive)
   (delete-windows-on "*compilation*"))
 
+(defun wkf/evil-window-show-compilation ()
+  "Close compilation pane"
+  (interactive)
+  (display-buffer "*compilation*"))
+
 ;; compile
 (define-key evil-normal-state-map (kbd ", c C") 'compile)
 
@@ -102,6 +107,9 @@
 
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c q") 'wkf/evil-window-close-compilation)
+
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c o") 'wkf/evil-window-show-compilation)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
