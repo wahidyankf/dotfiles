@@ -1,5 +1,12 @@
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 
+(use-package! exec-path-from-shell
+  :hook (after-init . exec-path-from-shell-initialize))
+
+;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
+;;   (setenv "PATH" path)
+;;   (setq exec-path (append (split-string-and-unquote path ":") exec-path)))
+
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (setq doom-theme 'doom-one)
@@ -66,6 +73,11 @@
   (interactive)
   (wkf/find-file "~/.zshrc"))
 
+(defun wkf/find-zprofile ()
+  "Open my zprofile in the right vertical split"
+  (interactive)
+  (wkf/find-file "~/.zprofile"))
+
 (defun wkf/find-emacs-init ()
   "Open my init.el in the right vertical split"
   (interactive)
@@ -92,7 +104,9 @@
   (wkf/find-file "~/.doom.d/scratch.el"))
 
 ;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z") 'wkf/find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> c z r") 'wkf/find-zshrc)
+;; Config ZSH Profile
+(define-key evil-normal-state-map (kbd "<backspace> c z p") 'wkf/find-zprofile)
 ;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
 ;; Config Emacs Packages.el

@@ -19,9 +19,6 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 ;;   (setq exec-path (append (split-string-and-unquote path ":") exec-path)))
 #+END_SRC
 
-#+RESULTS:
-| stty | stdin isn't a terminal |
-
 * Theme
 ** StartUp
 
