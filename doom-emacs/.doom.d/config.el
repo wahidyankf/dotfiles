@@ -203,7 +203,11 @@
   (interactive)
   (cond ((bound-and-true-p lsp-mode)
          (cond ((equal major-mode 'reason-mode)
-                (progn (save-buffer)))
+                (progn (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+                              (proc (progn (compile (format "bsrefmt --in-place %s"
+                                                            (buffer-file-name)))
+                                           (get-buffer-process output-buffer)
+                                           (revert-buffer)))))))
                (t (progn (lsp-format-buffer)
                          (save-buffer)))))
         ((equal major-mode 'emacs-lisp-mode)
@@ -304,11 +308,16 @@
 
 (use-package! reason-mode
   :mode "\\.re$"
-  :hook (before-save . (lambda ()
-                         (when (equal major-mode 'reason-mode)
-                           (call-process-shell-command (format "bsrefmt --in-place %s"
-                                                               (buffer-file-name)) nil
-                                                               "*Shell Command Output*" t)))))
+  ;;   :hook (before-save . (lambda ()
+  ;;                          (when (equal major-mode 'reason-mode) nil
+  ;;  (shell-command-to-string (format "bsrefmt --in-place %s"
+  ;;                                 (buffer-file-name)))
+  ;; (call-process-shell-command (format "bsrefmt --in-place %s"
+  ;;                                  (buffer-file-name)) nil
+  ;;                                    "*Shell Command Output*" t)
+  ;;
+  ;; )))
+  )
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
