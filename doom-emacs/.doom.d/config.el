@@ -82,7 +82,14 @@
 ;; quit l
 (define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/evil-window-close-right)
 
-(defun wkf/evil-window-close-compilation-window ()
+;; Get current pane info
+(define-key evil-normal-state-map (kbd "<backspace> b i")
+  (lambda ()
+    (interactive)
+    (message (format "b: %s, p: %s" (buffer-name)
+                     (buffer-file-name)))))
+
+(defun wkf/evil-window-close-compilation ()
   "Close compilation pane"
   (interactive)
   (delete-windows-on "*compilation*"))
@@ -94,14 +101,7 @@
 (define-key evil-normal-state-map (kbd ", c c") 'recompile)
 
 ;; quit compilation
-(define-key evil-normal-state-map (kbd ", c q") 'wkf/evil-window-close-compilation-window)
-
-;; Get current pane info
-(define-key evil-normal-state-map (kbd "<backspace> bi")
-  (lambda ()
-    (interactive)
-    (message (format "b: %s, p: %s" (buffer-name)
-                     (buffer-file-name)))))
+(define-key evil-normal-state-map (kbd ", c q") 'wkf/evil-window-close-compilation)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
@@ -117,6 +117,11 @@
   (wkf/evil-window-split)
   (+vterm/here (buffer-name)))
 
+(defun wkf/vterm-close-main ()
+  "Close vterm pane"
+  (interactive)
+  (delete-windows-on "*doom:vterm-popup:main*"))
+
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
 ;; Terminal (max)
@@ -125,6 +130,8 @@
 (define-key evil-normal-state-map (kbd "<backspace> t v") 'wkf/vterm-open-vertical)
 ;; Terminal Horizontal
 (define-key evil-normal-state-map (kbd "<backspace> t x") 'wkf/vterm-open-horizontal)
+;; Terminal main Close
+(define-key evil-normal-state-map (kbd "<backspace> t q") 'wkf/vterm-close-main)
 
 (defun wkf/windows-rebalance ()
   "Balance window then recenter"
@@ -143,11 +150,6 @@
   "Open my zshrc in the right vertical split"
   (interactive)
   (wkf/find-file "~/.zshrc"))
-
-(defun wkf/find-zprofile ()
-  "Open my zprofile in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.zprofile"))
 
 (defun wkf/find-emacs-init ()
   "Open my init.el in the right vertical split"
@@ -175,9 +177,7 @@
   (wkf/find-file "~/.doom.d/scratch.el"))
 
 ;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z r") 'wkf/find-zshrc)
-;; Config ZSH Profile
-(define-key evil-normal-state-map (kbd "<backspace> c z p") 'wkf/find-zprofile)
+(define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
 ;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
 ;; Config Emacs Packages.el
@@ -189,6 +189,7 @@
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
+;; TODO: use manual refmt for reason-mode
 (defun wkf/save-buffer ()
   "Save current buffer with custom lsp formatting"
   (interactive)
@@ -321,7 +322,7 @@
 (setq org-directory "~/wkf-org/")
 
 ;; Org SRC Edit
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o s '") 'org-edit-special)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o s e") 'org-edit-special)
 
 ;; Org SRC Format
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
@@ -337,14 +338,14 @@
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "<f8>sel") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "`sel") 'wkf/org-src-elisp)
 
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 (add-hook 'org-mode-hook 'org-display-inline-images)
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
 
 ;; Org Images toggle(z)
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i z") 'org-toggle-inline-images)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o i i") 'org-toggle-inline-images)
 ;; Org Images yes
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
 ;; Org Images no
@@ -368,5 +369,5 @@
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 
-(define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
-(define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
+(define-key evil-normal-state-map (kbd ", s s") 'deadgrep)
+(define-key evil-normal-state-map (kbd ", s r") 'deadgrep-restart)
