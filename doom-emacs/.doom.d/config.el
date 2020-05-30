@@ -27,60 +27,60 @@
 ;; Frame Delete Other
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
-(defun wkf/evil-window-vsplit ()
+(defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1))
 
-(defun wkf/evil-window-split ()
+(defun wkf/window-split ()
   "Split then focus on the bottom pane"
   (interactive)
   (evil-window-split)
   (evil-window-down 1))
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/window-vsplit)
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/window-split)
 ;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
-(defun wkf/evil-window-close-left ()
+(defun wkf/window-close-left ()
   "Close the left pane"
   (interactive)
   (evil-window-left 1)
   (evil-window-delete))
 
-(defun wkf/evil-window-close-bottom ()
+(defun wkf/window-close-bottom ()
   "Close the bottom pane"
   (interactive)
   (evil-window-down 1)
   (delete-window))
 
-(defun wkf/evil-window-close-up ()
+(defun wkf/window-close-up ()
   "Close the up pane"
   (interactive)
   (evil-window-up 1)
   (evil-window-delete))
 
-(defun wkf/evil-window-close-right ()
+(defun wkf/window-close-right ()
   "Close the right pane"
   (interactive)
   (evil-window-right 1)
   (evil-window-delete))
 
 ;; quit h
-(define-key evil-normal-state-map (kbd "<backspace> q h") 'wkf/evil-window-close-left)
+(define-key evil-normal-state-map (kbd "<backspace> q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/evil-window-close-bottom)
+(define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/window-close-bottom)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/evil-window-close-up)
+(define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/window-close-up)
 
 ;; quit l
-(define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/evil-window-close-right)
+(define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
 
 ;; Get current pane info
 (define-key evil-normal-state-map (kbd "<backspace> b i")
@@ -89,12 +89,12 @@
     (message (format "b: %s, p: %s" (buffer-name)
                      (buffer-file-name)))))
 
-(defun wkf/evil-window-close-compilation ()
+(defun wkf/window-close-compilation ()
   "Close compilation pane"
   (interactive)
   (delete-windows-on "*compilation*"))
 
-(defun wkf/evil-window-show-compilation ()
+(defun wkf/window-show-compilation ()
   "Close compilation pane"
   (interactive)
   (display-buffer "*compilation*"))
@@ -106,23 +106,23 @@
 (define-key evil-normal-state-map (kbd ", c c") 'recompile)
 
 ;; quit compilation
-(define-key evil-normal-state-map (kbd ", c q") 'wkf/evil-window-close-compilation)
+(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
 
 ;; quit compilation
-(define-key evil-normal-state-map (kbd ", c o") 'wkf/evil-window-show-compilation)
+(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
   (interactive)
   (evil-normal-state)
-  (wkf/evil-window-vsplit)
+  (wkf/window-vsplit)
   (+vterm/here (buffer-name)))
 
 (defun wkf/vterm-open-horizontal ()
   "Open vterm in vertical split"
   (interactive)
   (evil-normal-state)
-  (wkf/evil-window-split)
+  (wkf/window-split)
   (+vterm/here (buffer-name)))
 
 (defun wkf/vterm-close-main ()
@@ -150,7 +150,7 @@
 (defun wkf/find-file (filename)
   "Search filename and open it in the right vertical split"
   (interactive)
-  (wkf/evil-window-vsplit)
+  (wkf/window-vsplit)
   (find-file filename)
   (wkf/windows-rebalance))
 
