@@ -203,12 +203,13 @@
   (interactive)
   (cond ((bound-and-true-p lsp-mode)
          (cond ((equal major-mode 'reason-mode)
-                (lsp-format-buffer))
-               (t (lsp-format-buffer))))
+                (progn (save-buffer)))
+               (t (progn (lsp-format-buffer)
+                         (save-buffer)))))
         ((equal major-mode 'emacs-lisp-mode)
-         (elisp-format-buffer))
-        (t nil))
-  (save-buffer))
+         (progn (elisp-format-buffer)
+                (save-buffer)))
+        (t (save-buffer))))
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
@@ -305,7 +306,9 @@
   :mode "\\.re$"
   :hook (before-save . (lambda ()
                          (when (equal major-mode 'reason-mode)
-                          (refmt)))))
+                           (call-process-shell-command (format "bsrefmt --in-place %s"
+                                                               (buffer-file-name)) nil
+                                                               "*Shell Command Output*" t)))))
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
@@ -334,7 +337,7 @@
 
 ;; Org SRC Format
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
-  (kbd "<backspace> o s ' , w : q"))
+  (kbd "<backspace> o s e , w : q"))
 
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"

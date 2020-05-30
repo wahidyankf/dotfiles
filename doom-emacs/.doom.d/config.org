@@ -301,12 +301,13 @@ Show battery and time on the bottom.
   (interactive)
   (cond ((bound-and-true-p lsp-mode)
          (cond ((equal major-mode 'reason-mode)
-                (lsp-format-buffer))
-               (t (lsp-format-buffer))))
+                (progn (save-buffer)))
+               (t (progn (lsp-format-buffer)
+                         (save-buffer)))))
         ((equal major-mode 'emacs-lisp-mode)
-         (elisp-format-buffer))
-        (t nil))
-  (save-buffer))
+         (progn (elisp-format-buffer)
+                (save-buffer)))
+        (t (save-buffer))))
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
@@ -438,7 +439,9 @@ To get information about any of these functions/macros, move the cursor over the
   :mode "\\.re$"
   :hook (before-save . (lambda ()
                          (when (equal major-mode 'reason-mode)
-                          (refmt)))))
+                           (call-process-shell-command (format "bsrefmt --in-place %s"
+                                                               (buffer-file-name)) nil
+                                                               "*Shell Command Output*" t)))))
 #+END_SRC
 
 ** Emacs Lisp
@@ -498,7 +501,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 ;; Org SRC Format
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
-  (kbd "<backspace> o s ' , w : q"))
+  (kbd "<backspace> o s e , w : q"))
 #+END_SRC
 
 ** Snippet
