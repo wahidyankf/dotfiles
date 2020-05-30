@@ -136,7 +136,7 @@
 (defun wkf/git-wkf-update-all ()
   (interactive)
   (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
-         (proc (progn (async-shell-command "git_wkf_update_all; echo finished" output-buffer)
+         (proc (progn (compile (format "git_wkf_update_all"))
                       (get-buffer-process output-buffer))))))
 
 (define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
@@ -209,6 +209,17 @@
   :after lsp-mode
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
   (lsp-haskell-set-formatter-floskell))
+
+;; Git Wkf Update All
+(defun wkf/haskell-compile ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format
+                                "ghc -fwarn-incomplete-patterns %s -e \"return \(\)\"; echo finished"
+                                (buffer-file-name)))
+                      (get-buffer-process output-buffer))))))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", C") 'wkf/haskell-compile)
 
 (use-package! reason-mode
   :mode "\\.re$"
@@ -288,20 +299,3 @@
 
 (define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
 (define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
-
-;; Git Wkf Update All
-(defun wkf/git-wkf-update-all ()
-  (interactive)
-  (defun do-something (process signal)
-    (when (memq (process-status process)
-                '(exit signal))
-      (message "Do something!")
-      (shell-command-sentinel process signal)))
-  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
-         (proc (progn (async-shell-command "sleep 10; echo Finished" output-buffer)
-                      (get-buffer-process output-buffer))))
-    (if (process-live-p proc)
-        (set-process-sentinel proc #'do-something)
-      (message "No process running."))))
-
-(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
