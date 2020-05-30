@@ -226,8 +226,10 @@ Here are some additional functions / macros that could help you configure Doom:
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; Git Wkf Update All
+;; (define-key evil-normal-state-map (kbd "<backspace> g w u a")
+;;   (kbd "SPC o t git_wkf_update_all <return>"))
 (define-key evil-normal-state-map (kbd "<backspace> g w u a")
-  (kbd "SPC o t git_wkf_update_all <return>"))
+  (async-shell-command "git_wkf_update_all"))
 #+END_SRC
 
 * Plugin - Wakatime

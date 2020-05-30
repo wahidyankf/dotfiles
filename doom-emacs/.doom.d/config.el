@@ -133,8 +133,10 @@
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 ;; Git Wkf Update All
+;; (define-key evil-normal-state-map (kbd "<backspace> g w u a")
+;;   (kbd "SPC o t git_wkf_update_all <return>"))
 (define-key evil-normal-state-map (kbd "<backspace> g w u a")
-  (kbd "SPC o t git_wkf_update_all <return>"))
+  (async-shell-command "git_wkf_update_all"))
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
