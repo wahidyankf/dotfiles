@@ -133,10 +133,13 @@
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
 
 ;; Git Wkf Update All
-;; (define-key evil-normal-state-map (kbd "<backspace> g w u a")
-;;   (kbd "SPC o t git_wkf_update_all <return>"))
-(define-key evil-normal-state-map (kbd "<backspace> g w u a")
-  (async-shell-command "git_wkf_update_all"))
+(defun wkf/git-wkf-update-all ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (async-shell-command "git_wkf_update_all; echo finished" output-buffer)
+                      (get-buffer-process output-buffer))))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
@@ -285,3 +288,20 @@
 
 (define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
 (define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
+
+;; Git Wkf Update All
+(defun wkf/git-wkf-update-all ()
+  (interactive)
+  (defun do-something (process signal)
+    (when (memq (process-status process)
+                '(exit signal))
+      (message "Do something!")
+      (shell-command-sentinel process signal)))
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (async-shell-command "sleep 10; echo Finished" output-buffer)
+                      (get-buffer-process output-buffer))))
+    (if (process-live-p proc)
+        (set-process-sentinel proc #'do-something)
+      (message "No process running."))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)

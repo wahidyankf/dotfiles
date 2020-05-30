@@ -15,13 +15,10 @@ Some functionality uses this to identify you, e.g.GPG configuration, email clien
 
 Make sure eshell and mx-compile use zsh (copied alias)
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (setq shell-file-name "zsh")
 (setq shell-command-switch "-ic")
 #+END_SRC
-
-#+RESULTS:
-| stty | stdin isn't a terminal |
 
 * Theme
 ** StartUp
@@ -224,12 +221,16 @@ Here are some additional functions / macros that could help you configure Doom:
 
 * Git
 
+
 #+BEGIN_SRC emacs-lisp :results silent
 ;; Git Wkf Update All
-;; (define-key evil-normal-state-map (kbd "<backspace> g w u a")
-;;   (kbd "SPC o t git_wkf_update_all <return>"))
-(define-key evil-normal-state-map (kbd "<backspace> g w u a")
-  (async-shell-command "git_wkf_update_all"))
+(defun wkf/git-wkf-update-all ()
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (async-shell-command "git_wkf_update_all; echo finished" output-buffer)
+                      (get-buffer-process output-buffer))))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 #+END_SRC
 
 * Plugin - Wakatime
@@ -460,4 +461,27 @@ If you use =org= and don't want your org files in the default location below, ch
 #+BEGIN_SRC emacs-lisp :results silent
 (define-key evil-normal-state-map (kbd ", d g g") 'deadgrep)
 (define-key evil-normal-state-map (kbd ", d g r") 'deadgrep-restart)
+#+END_SRC
+
+* Template
+
+** Async Process
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; Git Wkf Update All
+(defun wkf/git-wkf-update-all ()
+  (interactive)
+  (defun do-something (process signal)
+    (when (memq (process-status process)
+                '(exit signal))
+      (message "Do something!")
+      (shell-command-sentinel process signal)))
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (async-shell-command "sleep 10; echo Finished" output-buffer)
+                      (get-buffer-process output-buffer))))
+    (if (process-live-p proc)
+        (set-process-sentinel proc #'do-something)
+      (message "No process running."))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 #+END_SRC
