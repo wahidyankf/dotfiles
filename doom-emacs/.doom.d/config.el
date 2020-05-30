@@ -18,10 +18,10 @@
 (display-time-mode)
 (display-battery-mode)
 
-;; Frame Make
-(define-key evil-normal-state-map (kbd "<backspace> f m") 'make-frame-command)
-;; Frame Z (cycle)
-(define-key evil-normal-state-map (kbd "<backspace> f z") 'other-frame)
+;; Frame New
+(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
+;; Frame Frame (cycle)
+(define-key evil-normal-state-map (kbd "<backspace> f f") 'other-frame)
 ;; Frame Delete Delete (current)
 (define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
 ;; Frame Delete Other
@@ -40,97 +40,11 @@
   (evil-window-down 1))
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf/evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/evil-window-vsplit)
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf/evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/evil-window-split)
 ;; = (equal)
-(define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
-
-;; terminal (mini)
-(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
-;; Terminal (max)
-(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
-
-(defun wkf/windows-rebalance ()
-  "Balance window then recenter"
-  (interactive)
-  (balance-windows)
-  (recenter))
-
-(defun wkf/find-file (filename)
-  "Search filename and open it in the right vertical split"
-  (interactive)
-  (wkf/evil-window-vsplit)
-  (find-file filename)
-  (wkf/windows-rebalance))
-
-(defun wkf/find-zshrc ()
-  "Open my zshrc in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.zshrc"))
-
-(defun wkf/find-zprofile ()
-  "Open my zprofile in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.zprofile"))
-
-(defun wkf/find-emacs-init ()
-  "Open my init.el in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.doom.d/init.el"))
-
-(defun wkf/find-emacs-packages ()
-  "Open my packages.el in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.doom.d/packages.el"))
-
-(defun wkf/find-emacs-config-org ()
-  "Open my config.org in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.doom.d/config.org"))
-
-(defun wkf/find-emacs-config-el ()
-  "Open my config.org in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.doom.d/config.el"))
-
-(defun wkf/find-emacs-scratch ()
-  "Open my scratch.el in the right vertical split"
-  (interactive)
-  (wkf/find-file "~/.doom.d/scratch.el"))
-
-;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z r") 'wkf/find-zshrc)
-;; Config ZSH Profile
-(define-key evil-normal-state-map (kbd "<backspace> c z p") 'wkf/find-zprofile)
-;; Config Emacs Init.el
-(define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
-;; Config Emacs Packages.el
-(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
-;; Config Emacs Config.org
-(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
-;; Config Emacs Config.el (compiled version)
-(define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
-;; Config Emacs Scratch.el
-(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
-
-(defun wkf/save-buffer ()
-  "Save current buffer with custom lsp formatting"
-  (interactive)
-  (cond ((bound-and-true-p lsp-mode)
-         (cond ((equal major-mode 'reason-mode)
-                (lsp-format-buffer))
-               (t (progn (lsp-format-buffer)))))
-        ((equal major-mode 'emacs-lisp-mode)
-         (progn (elisp-format-buffer)))
-        (t nil))
-  (save-buffer))
-
-;; Write
-(define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
-
-;; Quit
-(define-key evil-normal-state-map (kbd ", q") 'delete-window)
+(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()

@@ -1,15 +1,14 @@
 #+TITLE: WKF - Doom Emacs - Config
 
-Place your private configuration here! Remember, you do not need to run =doom sync= after modifying this file!
+Place our private configuration here! Remember, we do not need to run =doom sync= after modifying this file!
 
 * User Data
 
-Some functionality uses this to identify you, e.g.GPG configuration, email clients, file templates and snippets.
+Some functionality uses this to identify us (e.g.GPG configuration, email clients, file templates and snippets).
 
 #+BEGIN_SRC emacs-lisp :results silent
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
-
 
 * Shell
 
@@ -23,21 +22,23 @@ Make sure eshell and mx-compile use zsh (copied alias)
 * Theme
 ** StartUp
 
+Make emacs fullscreen on startup.
+
 #+BEGIN_SRC emacs-lisp :results silent
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 #+END_SRC
 
 ** Template
 
-There are two ways to load a theme.Both assume the theme is installed and available.You can either set =doom-theme= or manually load a theme with the =load-theme= function. This is the default:
+There are two ways to load a theme. Both assume the theme is installed and available. We can either set =doom-theme= or manually load a theme with the =load-theme= function. This is the default:
 
 #+BEGIN_SRC emacs-lisp :results silent
 (setq doom-theme 'doom-one)
 #+END_SRC
 
-This determines the style of line numbers in effect. If set to =nil=, line numbers are disabled. For relative line numbers, set this to =relative=.
-
 ** Font
+
+*** Explanation
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here are the three important ones:
 
@@ -55,12 +56,16 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
   doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+End_example
 
+*** Setup
+
 #+BEGIN_SRC emacs-lisp :results silent
 (setq doom-font (font-spec :family "Dank Mono"
                            :size 12))
 #+END_SRC
 
 ** Editor
+
+Setup text editor's preference.
 
 #+BEGIN_SRC emacs-lisp :results silent
 (blink-cursor-mode t)
@@ -69,16 +74,9 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 (setq-default show-trailing-whitespace t)
 #+END_SRC
 
-** Doom Message
+** Doom Modeline
 
-Here are some additional functions / macros that could help you configure Doom:
-- =load!= for loading external *.el files relative to this one
-- =use-package= for configuring packages
-  - =after!= for running code after a package has loaded
-- =add-load-path!= for adding directories to the =load-path=, relative to this file.Emacs searches the=load-path= when you load packages with =require= or =use-package=.
-- =map!= for binding new keys
-
-*** Doom Modeline
+Show battery and time on the bottom.
 
 #+BEGIN_SRC emacs-lisp :results silent
 (display-time-mode)
@@ -88,10 +86,10 @@ Here are some additional functions / macros that could help you configure Doom:
 * Frame
 
 #+BEGIN_SRC emacs-lisp :results silent
-;; Frame Make
-(define-key evil-normal-state-map (kbd "<backspace> f m") 'make-frame-command)
-;; Frame Z (cycle)
-(define-key evil-normal-state-map (kbd "<backspace> f z") 'other-frame)
+;; Frame New
+(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
+;; Frame Frame (cycle)
+(define-key evil-normal-state-map (kbd "<backspace> f f") 'other-frame)
 ;; Frame Delete Delete (current)
 (define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
 ;; Frame Delete Other
@@ -114,20 +112,38 @@ Here are some additional functions / macros that could help you configure Doom:
   (evil-window-down 1))
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd "<backspace> \\ ") 'wkf/evil-window-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/evil-window-vsplit)
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd "<backspace> - ") 'wkf/evil-window-split)
+(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/evil-window-split)
 ;; = (equal)
-(define-key evil-normal-state-map (kbd "<backspace> = ") 'balance-windows)
+(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 #+END_SRC
 
-* Terminal
+* COMMENT Terminal
 
 #+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/vterm-open-vertical ()
+  (interactive)
+  (evil-normal-state)
+  (evil-window-vsplit)
+  (evil-window-right 1)
+  (+vterm/here))
+
+(defun wkf/vterm-open-horizontal ()
+  (interactive)
+  (evil-normal-state)
+  (evil-window-split)
+  (evil-window-bottom 1)
+  (+vterm/here))
+
 ;; terminal (mini)
-(define-key evil-normal-state-map (kbd "<backspace> t") '+vterm/toggle)
+(define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
 ;; Terminal (max)
-(define-key evil-normal-state-map (kbd "<backspace> T") '+vterm/here)
+(define-key evil-normal-state-map (kbd "<backspace> t T") '+vterm/here)
+;; Terminal Vertical
+(define-key evil-normal-state-map (kbd "<backspace> t v") 'wkf/vterm-open-vertical)
+;; Terminal Horizontal
+(define-key evil-normal-state-map (kbd "<backspace> t x") '+vterm/here)
 #+END_SRC
 
 ** File
