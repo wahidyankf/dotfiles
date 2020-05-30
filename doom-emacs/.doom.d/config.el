@@ -48,9 +48,7 @@
 (defun wkf/evil-window-close-bottom-most ()
   "Close the bottom-most pane"
   (interactive)
-  (evil-window-down 10)
-  (evil-window-delete)
-  (kbd (",q")))
+  (delete-windows-on "compilation"))
 
 (defun wkf/evil-window-close-up-most ()
   "Close the up-most pane"
@@ -80,7 +78,7 @@
 ;; quit L
 (define-key evil-normal-state-map (kbd "<backspace> qL") 'wkf/evil-window-close-right-most)
 
-;; quit L
+;; Get current buffer name
 (define-key evil-normal-state-map (kbd "<backspace> bi")
   (lambda ()
     (interactive)

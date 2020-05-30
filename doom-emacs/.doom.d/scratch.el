@@ -14,3 +14,5 @@
 
 (define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
+
+(delete-window)
