@@ -122,7 +122,12 @@
   :size 0.17)
 
 (set-popup-rule! "^\\*Org"
-  :size 0.5)
+  :size 0.6)
+
+(defun wkf/pop-up-size (size)
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.5))
 
 (defun wkf/pop-up-size-xl ()
   (interactive)
@@ -143,6 +148,9 @@
   (interactive)
   (set-popup-rule! "^\\*"
     :size 0.15))
+
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
@@ -255,7 +263,7 @@
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
 ;; Quit
-(define-key evil-normal-state-map (kbd ", q") 'delete-window)
+(define-key evil-normal-state-map (kbd "<backspace> q") 'delete-window)
 
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
