@@ -411,7 +411,7 @@ Change popup rule to be smaller
   :hook (after-init . global-wakatime-mode))
 #+END_SRC
 
-* Plugin - LSP Mode
+* Coding Experience
 ** LSP Mode
 
 #+BEGIN_SRC emacs-lisp :results silent
