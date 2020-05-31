@@ -47,25 +47,25 @@
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
 (defun wkf/window-close-left ()
-  "Close the left pane"
+  "Close the pane on the left"
   (interactive)
   (evil-window-left 1)
   (evil-window-delete))
 
-(defun wkf/window-close-bottom ()
-  "Close the bottom pane"
+(defun wkf/window-close-below ()
+  "Close the pane below"
   (interactive)
   (evil-window-down 1)
   (delete-window))
 
-(defun wkf/window-close-up ()
-  "Close the up pane"
+(defun wkf/window-close-above ()
+  "Close the pane above"
   (interactive)
   (evil-window-up 1)
   (evil-window-delete))
 
 (defun wkf/window-close-right ()
-  "Close the right pane"
+  "Close the pane on the right"
   (interactive)
   (evil-window-right 1)
   (evil-window-delete))
@@ -74,10 +74,10 @@
 (define-key evil-normal-state-map (kbd "<backspace> q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/window-close-bottom)
+(define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/window-close-below)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/window-close-up)
+(define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/window-close-above)
 
 ;; quit l
 (define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
