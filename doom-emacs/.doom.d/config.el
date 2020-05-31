@@ -197,21 +197,17 @@
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
-(defun wkf/save-buffer () 
-  "Save current buffer with custom lsp formatting" 
-  (interactive) 
-  (cond ((bound-and-true-p lsp-mode) 
-         (cond ((equal major-mode 'reason-mode) 
-                (progn (let* ((output-buffer (generate-new-buffer "*Async shell command*")) 
-                              (proc (progn (compile (format "bsrefmt --in-place %s"
-                                                            (buffer-file-name))) 
-                                           (get-buffer-process output-buffer))))) 
-                       (save-buffer))) 
-               (t (progn (lsp-format-buffer) 
-                         (save-buffer))))) 
-        ((equal major-mode 'emacs-lisp-mode) 
-         (progn (elisp-format-buffer) 
-                (save-buffer))) 
+(defun wkf/save-buffer ()
+  "Save current buffer with custom lsp formatting"
+  (interactive)
+  (cond ((bound-and-true-p lsp-mode)
+         (cond ((equal major-mode 'reason-mode)
+                (save-buffer))
+               (t (progn (lsp-format-buffer)
+                         (save-buffer)))))
+        ((equal major-mode 'emacs-lisp-mode)
+         (progn (elisp-format-buffer)
+                (save-buffer)))
         (t (save-buffer))))
 
 ;; Write
@@ -234,6 +230,8 @@
 
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
+(setq lsp-idle-delay 0.500)
+(setq lsp-prefer-capf t)
 
 (use-package! lsp-mode
   :hook (reason-mode . lsp)
@@ -254,6 +252,8 @@
                                                 :server-id 'reason-ls))
   :config (setq lsp-lens-auto-enable t)
   :commands (lsp-mode lsp-define-stdio-client))
+
+(define-key evil-normal-state-map (kbd ", f") 'lsp-format-buffer)
 
 (use-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
