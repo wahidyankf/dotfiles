@@ -657,13 +657,25 @@ If you use =org= and don't want your org files in the default location below, ch
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
 #+END_SRC
-* TODO
+* Get Done List
 ** Language Essentials
 *** LSP golang
-*** LSP JS
-*** LSP TS
+*** LSP Bash
+*** LSP Clojure
+*** LSP Docker
 *** LSP Flow
+*** LSP HTML
+*** LSP JS
+*** LSP JSON
+*** LSP Java
+*** LSP Python
+*** LSP Rust
+*** LSP TS
+*** LSP YAML
 ** Tooling
-*** Projectile-related stuff
-*** Magit-related stuff
-*** REST Client
+*** Projectile-related
+*** Magit-related
+*** REST client
+*** Terminal dashboard
+** Private Project
+*** Book/Podcast workflow
