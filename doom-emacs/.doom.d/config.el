@@ -118,7 +118,7 @@
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
-(set-popup-rule! "^\\*"
+(set-popup-rule! "^\\*compilation"
   :size 0.15)
 
 (set-popup-rule! "^\\*Org"

@@ -210,7 +210,7 @@ Show battery and time on the bottom.
 Change popup rule to be smaller
 
 #+BEGIN_SRC emacs-lisp :results silent
-(set-popup-rule! "^\\*"
+(set-popup-rule! "^\\*compilation"
   :size 0.15)
 
 (set-popup-rule! "^\\*Org"
