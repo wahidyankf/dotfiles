@@ -98,7 +98,7 @@
   (delete-windows-on "*compilation*"))
 
 (defun wkf/window-show-compilation ()
-  "Close compilation pane"
+  "Show compilation pane"
   (interactive)
   (display-buffer "*compilation*"))
 
@@ -125,8 +125,8 @@
 (after! org (set-popup-rule! "^\\*Org Src"
               :size .6))
 
-(defun wkf/pop-up-size (size)
-  ;; change default popup size
+(defun wkf/popup-size (size)
+  "Change default popup size"
   (interactive)
   (cond ((equal size "xxl")
          (set-popup-rule! "^\\*"
@@ -144,34 +144,34 @@
          (set-popup-rule! "^\\*"
            :size 0.15))))
 
+;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
-  ;; change default popup size to XXL (0.6)
   '(lambda ()
-     (wkf/pop-up-size "xxl")))
+     (wkf/popup-size "xxl")))
 
 ;; change default popup size to XL (0.5)
 (define-key evil-normal-state-map (kbd "<backspace> p s 4")
   '(lambda ()
      (interactive)
-     (wkf/pop-up-size "xl")))
+     (wkf/popup-size "xl")))
 
 ;; change default popup size to L (0.35)
 (define-key evil-normal-state-map (kbd "<backspace> p s 3")
   '(lambda ()
      (interactive)
-     (wkf/pop-up-size "l")))
+     (wkf/popup-size "l")))
 
 ;; change default popup size to M (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 2")
   '(lambda ()
      (interactive)
-     (wkf/pop-up-size "m")))
+     (wkf/popup-size "m")))
 
 ;; change default popup size to S (0.15)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
   '(lambda ()
      (interactive)
-     (wkf/pop-up-size "s")))
+     (wkf/popup-size "s")))
 
 ;; popup q
 (define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
@@ -291,6 +291,7 @@
 
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
+  "auto-update all of my essential git repos"
   (interactive)
   (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
          (proc (progn (compile (format "git_wkf_update_all"))
@@ -370,6 +371,7 @@
 
 ;; Git Wkf Update All
 (defun wkf/haskell-compile ()
+  "Compile haskell project (add exhaustiveness-check)"
   (interactive)
   (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
          (proc (progn (compile (format
@@ -380,6 +382,7 @@
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 
 (defun wkf/ocaml-compile ()
+  "Compile ocaml project"
   (interactive)
   (compile (format "dune build")))
 
