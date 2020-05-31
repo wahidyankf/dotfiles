@@ -99,17 +99,22 @@
   (interactive)
   (display-buffer "*compilation*"))
 
-;; compile
+;; compilation Compile
 (define-key evil-normal-state-map (kbd ", c C") 'compile)
 
-;; recompile
+;; compilation compilation
 (define-key evil-normal-state-map (kbd ", c c") 'recompile)
 
-;; quit compilation
+;; compilation open
 (define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
 
-;; quit compilation
+;; compilation quit
 (define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
+
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
@@ -216,25 +221,6 @@
   (wkf/buffer-format)
   (cond ((equal major-mode 'reason-mode) nil)
         (t (save-buffer))))
-
-(defun my-compilation-finish-function (buffer desc)
-  (message "Buffer %s: %s" buffer desc))
-(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
-
-;; Helper for compilation. Close the compilation window if
-;; there was no error at all.
-(defun compilation-exit-autoclose (status code msg)
-  ;; If M-x compile exists with a 0
-  (when (and (eq status 'exit)
-             (zerop code))
-    ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-    (bury-buffer)
-    ;; and delete the *compilation* window
-    (delete-window (get-buffer-window (get-buffer "*compilation*"))))
-  ;; Always return the anticipated result of compilation-exit-message-function
-  (cons msg code))
-;; Specify my function (maybe I should have done a lambda function)
-(setq compilation-exit-message-function 'compilation-exit-autoclose)
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
