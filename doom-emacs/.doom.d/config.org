@@ -234,11 +234,34 @@ Change popup rule to be smaller
          (set-popup-rule! "^\\*"
            :size 0.17))))
 
-;; change default popup to xxl
+;; change default popup to XXL
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
   '(lambda ()
-     (interactive)
      (wkf/pop-up-size "xxl")))
+
+;; change default popup to XL
+(define-key evil-normal-state-map (kbd "<backspace> p s 4")
+  '(lambda ()
+     (interactive)
+     (wkf/pop-up-size "xl")))
+
+;; change default popup to L
+(define-key evil-normal-state-map (kbd "<backspace> p s 3")
+  '(lambda ()
+     (interactive)
+     (wkf/pop-up-size "l")))
+
+;; change default popup to M
+(define-key evil-normal-state-map (kbd "<backspace> p s 2")
+  '(lambda ()
+     (interactive)
+     (wkf/pop-up-size "m")))
+
+;; change default popup to S
+(define-key evil-normal-state-map (kbd "<backspace> p s 1")
+  '(lambda ()
+     (interactive)
+     (wkf/pop-up-size "s")))
 #+END_SRC
 
 * Terminal
