@@ -118,7 +118,31 @@
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
-(set-popup-rule! "^\\*" :size 0.15)
+(set-popup-rule! "^\\*"
+  :size 0.15)
+
+(set-popup-rule! "^\\*Org"
+  :size 0.5)
+
+(defun wkf/pop-up-size-xl ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.5))
+
+(defun wkf/pop-up-size-l ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.35))
+
+(defun wkf/pop-up-size-m ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.25))
+
+(defun wkf/pop-up-size-s ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.15))
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"

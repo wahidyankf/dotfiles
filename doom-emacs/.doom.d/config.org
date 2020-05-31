@@ -210,7 +210,31 @@ Show battery and time on the bottom.
 Change popup rule to be smaller
 
 #+BEGIN_SRC emacs-lisp :results silent
-(set-popup-rule! "^\\*" :size 0.15)
+(set-popup-rule! "^\\*"
+  :size 0.15)
+
+(set-popup-rule! "^\\*Org"
+  :size 0.5)
+
+(defun wkf/pop-up-size-xl ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.5))
+
+(defun wkf/pop-up-size-l ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.35))
+
+(defun wkf/pop-up-size-m ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.25))
+
+(defun wkf/pop-up-size-s ()
+  (interactive)
+  (set-popup-rule! "^\\*"
+    :size 0.15))
 #+END_SRC
 
 * Terminal
