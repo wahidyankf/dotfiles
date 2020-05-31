@@ -119,10 +119,9 @@
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.17)
+  :size 0.15)
 
-(set-popup-rule! "^\\*Org"
-  :size 0.6)
+(after! org (set-popup-rule! "^\\*Org Src" :size .6))
 
 (defun wkf/pop-up-size (size)
   (interactive)
@@ -140,32 +139,32 @@
            :size 0.25))
         ((equal size "s")
          (set-popup-rule! "^\\*"
-           :size 0.17))))
+           :size 0.15))))
 
-;; change default popup to XXL
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
+;; change default popup size to XXL (0.6)
   '(lambda ()
      (wkf/pop-up-size "xxl")))
 
-;; change default popup to XL
+;; change default popup size to XL (0.5)
 (define-key evil-normal-state-map (kbd "<backspace> p s 4")
   '(lambda ()
      (interactive)
      (wkf/pop-up-size "xl")))
 
-;; change default popup to L
+;; change default popup size to L (0.35)
 (define-key evil-normal-state-map (kbd "<backspace> p s 3")
   '(lambda ()
      (interactive)
      (wkf/pop-up-size "l")))
 
-;; change default popup to M
+;; change default popup size to M (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 2")
   '(lambda ()
      (interactive)
      (wkf/pop-up-size "m")))
 
-;; change default popup to S
+;; change default popup size to S (0.15)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
   '(lambda ()
      (interactive)
