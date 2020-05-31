@@ -89,6 +89,8 @@
     (message (format "b: %s, p: %s" (buffer-name)
                      (buffer-file-name)))))
 
+(define-key evil-normal-state-map (kbd ", e e") 'revert-buffer)
+
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
   (interactive)
@@ -218,9 +220,9 @@
 (defun wkf/buffer-save-and-format ()
   "Format current buffer"
   (interactive)
-  (wkf/buffer-format)
   (cond ((equal major-mode 'reason-mode) nil)
-        (t (save-buffer))))
+        (t (wkf/buffer-format)))
+  (save-buffer))
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
