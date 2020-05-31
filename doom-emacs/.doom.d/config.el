@@ -118,7 +118,7 @@
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
-(set-popup-rule! "^\\*" :size 0.2)
+(set-popup-rule! "^\\*" :size 0.15)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
@@ -210,9 +210,7 @@
   "Format current buffer"
   (interactive)
   (cond ((equal major-mode 'reason-mode)
-         (progn (compile (format "bsrefmt --in-place %s" (buffer-file-name)))
-                ;;                (wkf/window-close-compilation)
-                ))
+         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
         ((equal major-mode 'emacs-lisp-mode)
@@ -326,14 +324,9 @@
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 
 (use-package! reason-mode
-  :mode "\\.re$")
-;; :hook (before-save . (lambda ()
-;;                         (if (equal major-mode 'reason-mode) nil)))
-;; :config (add-hook 'reason-mode-hook '(lambda ()
-;;                                       (progn (auto-revert-mode)))))
-;; (add-hook 'reason-mode-hook (lambda ()
-;;                               (progn (auto-revert-mode)
-;;                                      (auto-revert-use-notify nil) )))
+  :mode "\\.re$"
+  :hook (before-save . (lambda ()
+                         (if (equal major-mode 'reason-mode) nil))))
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
