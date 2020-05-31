@@ -119,7 +119,7 @@
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.15)
+  :size 0.17)
 
 (set-popup-rule! "^\\*Org"
   :size 0.5)

@@ -211,7 +211,7 @@ Change popup rule to be smaller
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*compilation"
-  :size 0.15)
+  :size 0.17)
 
 (set-popup-rule! "^\\*Org"
   :size 0.5)
