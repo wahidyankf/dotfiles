@@ -295,21 +295,26 @@ Show battery and time on the bottom.
 **  Editing
 
 #+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/save-buffer ()
-  "Save current buffer with custom lsp formatting"
+(defun wkf/buffer-format ()
+  "Format current buffer"
   (interactive)
-  (cond ((bound-and-true-p lsp-mode)
-         (cond ((equal major-mode 'reason-mode)
-                (save-buffer))
-               (t (progn (lsp-format-buffer)
-                         (save-buffer)))))
+  (cond ((equal major-mode 'reason-mode)
+         (progn (compile (format "git_wkf_update_all"))))
+        ((bound-and-true-p lsp-mode)
+         (lsp-format-buffer))
         ((equal major-mode 'emacs-lisp-mode)
-         (progn (elisp-format-buffer)
-                (save-buffer)))
+         (elisp-format-buffer))
+        (t nil)))
+
+(defun wkf/buffer-save-and-format ()
+  "Format current buffer"
+  (interactive)
+  (wkf/buffer-format)
+  (cond ((equal major-mode 'reason-mode) nil)
         (t (save-buffer))))
 
 ;; Write
-(define-key evil-normal-state-map (kbd ", w") 'wkf/save-buffer)
+(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 
 ;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
