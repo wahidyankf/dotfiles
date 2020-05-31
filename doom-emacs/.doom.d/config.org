@@ -37,7 +37,6 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 #+END_SRC
 
 ** Font
-
 *** Explanation
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here are the three important ones:
@@ -390,7 +389,7 @@ Change popup rule to be smaller
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
 ;; Quit
-(define-key evil-normal-state-map (kbd "<backspace> q") 'delete-window)
+(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
 #+END_SRC
 
 * Git
@@ -512,6 +511,16 @@ To get information about any of these functions/macros, move the cursor over the
                       (get-buffer-process output-buffer))))))
 
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
+#+END_SRC
+
+** OCaml
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/ocaml-compile ()
+  (interactive)
+  (compile (format "dune build")))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
 #+END_SRC
 
 ** ReasonML
@@ -648,3 +657,8 @@ If you use =org= and don't want your org files in the default location below, ch
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
 #+END_SRC
+* TODO
+** LSP golang
+** LSP JS
+** LSP TS
+** LSP Flow

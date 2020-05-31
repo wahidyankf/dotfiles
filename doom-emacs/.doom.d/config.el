@@ -286,7 +286,7 @@
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
 ;; Quit
-(define-key evil-normal-state-map (kbd "<backspace> q") 'delete-window)
+(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
 
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
@@ -377,6 +377,12 @@
                       (get-buffer-process output-buffer))))))
 
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
+
+(defun wkf/ocaml-compile ()
+  (interactive)
+  (compile (format "dune build")))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
 
 (use-package! reason-mode
   :mode "\\.re$"
