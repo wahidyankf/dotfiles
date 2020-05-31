@@ -57,10 +57,6 @@
 (package! utop)
 (package! merlin)
 (package! elisp-format)
-;; (package! exec-path-from-shell)
-
-;; -*- no-byte-compile: t; -*-
-;;; completion/lsp/packages.el
 
 (when (package! lsp-mode)
   (package! lsp-ui)
