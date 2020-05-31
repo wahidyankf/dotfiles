@@ -124,6 +124,7 @@
 (after! org (set-popup-rule! "^\\*Org Src" :size .6))
 
 (defun wkf/pop-up-size (size)
+;; change default popup size
   (interactive)
   (cond ((equal size "xxl")
          (set-popup-rule! "^\\*"
@@ -178,7 +179,7 @@
   (+vterm/here (buffer-name)))
 
 (defun wkf/vterm-open-horizontal ()
-  "Open vterm in vertical split"
+  "Open vterm in horizontal split"
   (interactive)
   (evil-normal-state)
   (wkf/window-split)
@@ -207,39 +208,39 @@
   (recenter))
 
 (defun wkf/find-file (filename)
-  "Search filename and open it in the right vertical split"
+  "Search filename and open it in the right vsp"
   (interactive)
   (wkf/window-vsplit)
   (find-file filename)
   (wkf/windows-rebalance))
 
 (defun wkf/find-zshrc ()
-  "Open my zshrc in the right vertical split"
+  "Open my zshrc in the right vsp"
   (interactive)
   (wkf/find-file "~/.zshrc"))
 
 (defun wkf/find-emacs-init ()
-  "Open my init.el in the right vertical split"
+  "Open my init.el in the right vsp"
   (interactive)
   (wkf/find-file "~/.doom.d/init.el"))
 
 (defun wkf/find-emacs-packages ()
-  "Open my packages.el in the right vertical split"
+  "Open my packages.el in the right vsp"
   (interactive)
   (wkf/find-file "~/.doom.d/packages.el"))
 
 (defun wkf/find-emacs-config-org ()
-  "Open my config.org in the right vertical split"
+  "Open my config.org in the right vsp"
   (interactive)
   (wkf/find-file "~/.doom.d/config.org"))
 
 (defun wkf/find-emacs-config-el ()
-  "Open my config.org in the right vertical split"
+  "Open my config.org in the right vsp"
   (interactive)
   (wkf/find-file "~/.doom.d/config.el"))
 
 (defun wkf/find-emacs-scratch ()
-  "Open my scratch.el in the right vertical split"
+  "Open my scratch.el in the right vsp"
   (interactive)
   (wkf/find-file "~/.doom.d/scratch.el"))
 
@@ -431,7 +432,7 @@
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
 
 (defun wkf/org-open-at-point ()
-  "Put org-mode's open at point's content to the right vertical split"
+  "Put org-mode's open at point's content to the right vsp"
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1)
