@@ -299,7 +299,9 @@ Show battery and time on the bottom.
   "Format current buffer"
   (interactive)
   (cond ((equal major-mode 'reason-mode)
-         (progn (compile (format "git_wkf_update_all"))))
+         (progn (compile (format "bsrefmt --in-place %s" (buffer-file-name)))
+                ;;                (wkf/window-close-compilation)
+                ))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
         ((equal major-mode 'emacs-lisp-mode)
@@ -315,6 +317,9 @@ Show battery and time on the bottom.
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
+
+;; Format
+(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
 ;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
@@ -368,8 +373,6 @@ Show battery and time on the bottom.
                                                 :server-id 'reason-ls))
   :config (setq lsp-lens-auto-enable t)
   :commands (lsp-mode lsp-define-stdio-client))
-
-(define-key evil-normal-state-map (kbd ", f") 'lsp-format-buffer)
 #+END_SRC
 
 ** LSP UI
@@ -447,10 +450,15 @@ To get information about any of these functions/macros, move the cursor over the
 
 
 #+BEGIN_SRC emacs-lisp :results silent
-(use-package! reason-mode 
-  :mode "\\.re$" 
-  :hook (before-save . (lambda () 
-                         (if (equal major-mode 'reason-mode) nil))))
+(use-package! reason-mode
+  :mode "\\.re$")
+;; :hook (before-save . (lambda ()
+;;                         (if (equal major-mode 'reason-mode) nil)))
+;; :config (add-hook 'reason-mode-hook '(lambda ()
+;;                                       (progn (auto-revert-mode)))))
+;; (add-hook 'reason-mode-hook (lambda ()
+;;                               (progn (auto-revert-mode)
+;;                                      (auto-revert-use-notify nil) )))
 #+END_SRC
 
 ** Emacs Lisp

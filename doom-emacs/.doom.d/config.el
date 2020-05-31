@@ -201,7 +201,9 @@
   "Format current buffer"
   (interactive)
   (cond ((equal major-mode 'reason-mode)
-         (progn (compile (format "git_wkf_update_all"))))
+         (progn (compile (format "bsrefmt --in-place %s" (buffer-file-name)))
+                ;;                (wkf/window-close-compilation)
+                ))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
         ((equal major-mode 'emacs-lisp-mode)
@@ -217,6 +219,9 @@
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
+
+;; Format
+(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
 ;; Quit
 (define-key evil-normal-state-map (kbd ", q") 'delete-window)
@@ -257,8 +262,6 @@
                                                 :server-id 'reason-ls))
   :config (setq lsp-lens-auto-enable t)
   :commands (lsp-mode lsp-define-stdio-client))
-
-(define-key evil-normal-state-map (kbd ", f") 'lsp-format-buffer)
 
 (use-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -313,10 +316,15 @@
 
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 
-(use-package! reason-mode 
-  :mode "\\.re$" 
-  :hook (before-save . (lambda () 
-                         (if (equal major-mode 'reason-mode) nil))))
+(use-package! reason-mode
+  :mode "\\.re$")
+;; :hook (before-save . (lambda ()
+;;                         (if (equal major-mode 'reason-mode) nil)))
+;; :config (add-hook 'reason-mode-hook '(lambda ()
+;;                                       (progn (auto-revert-mode)))))
+;; (add-hook 'reason-mode-hook (lambda ()
+;;                               (progn (auto-revert-mode)
+;;                                      (auto-revert-use-notify nil) )))
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
