@@ -217,6 +217,10 @@
   (cond ((equal major-mode 'reason-mode) nil)
         (t (save-buffer))))
 
+(defun my-compilation-finish-function (buffer desc)
+  (message "Buffer %s: %s" buffer desc))
+(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
+
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 
