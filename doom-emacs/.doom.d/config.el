@@ -382,7 +382,7 @@
   (interactive)
   (compile (format "dune build")))
 
-(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
+(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile)
 
 (use-package! reason-mode
   :mode "\\.re$"
