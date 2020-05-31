@@ -672,6 +672,7 @@ If you use =org= and don't want your org files in the default location below, ch
 *** LSP Rust
 *** LSP TS
 *** LSP YAML
+*** LSP Elixir
 ** Tooling
 *** Projectile-related
 *** Magit-related
