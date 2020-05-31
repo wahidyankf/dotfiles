@@ -118,6 +118,8 @@
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 
+(set-popup-rule! "^\\*" :size 0.2)
+
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
   (interactive)

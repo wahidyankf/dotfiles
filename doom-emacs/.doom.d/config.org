@@ -205,6 +205,12 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
 #+END_SRC
 
+** Pop Up
+
+#+BEGIN_SRC emacs-lisp :results silent
+(set-popup-rule! "^\\*" :size 0.2)
+#+END_SRC
+
 * Terminal
 
 #+BEGIN_SRC emacs-lisp :results silent
