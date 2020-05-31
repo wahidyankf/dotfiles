@@ -5,7 +5,8 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(setq doom-theme 'doom-one)
+;; default: doom-one
+(setq doom-theme 'doom-gruvbox)
 
 (setq doom-font (font-spec :family "Dank Mono"
                            :size 12))
