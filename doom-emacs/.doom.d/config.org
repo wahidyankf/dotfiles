@@ -96,7 +96,6 @@ Show battery and time on the bottom.
 #+END_SRC
 
 * Pane
-
 ** Splitting
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -520,7 +519,7 @@ To get information about any of these functions/macros, move the cursor over the
   (interactive)
   (compile (format "dune build")))
 
-(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile)
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
 #+END_SRC
 
 ** ReasonML
@@ -538,6 +537,7 @@ To get information about any of these functions/macros, move the cursor over the
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
+** --- Copy Paste it from somewhere, will need to check it later ---
 ** DAP Mode
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -658,7 +658,12 @@ If you use =org= and don't want your org files in the default location below, ch
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
 #+END_SRC
 * TODO
-** LSP golang
-** LSP JS
-** LSP TS
-** LSP Flow
+** Language Essentials
+*** LSP golang
+*** LSP JS
+*** LSP TS
+*** LSP Flow
+** Tooling
+*** Projectile-related stuff
+*** Magit-related stuff
+*** REST Client
