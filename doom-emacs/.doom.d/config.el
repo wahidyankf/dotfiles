@@ -126,31 +126,27 @@
 
 (defun wkf/pop-up-size (size)
   (interactive)
-  (set-popup-rule! "^\\*"
-    :size 0.5))
+  (cond ((equal size "xxl")
+         (set-popup-rule! "^\\*"
+           :size 0.6))
+        ((equal size "xl")
+         (set-popup-rule! "^\\*"
+           :size 0.5))
+        ((equal size "l")
+         (set-popup-rule! "^\\*"
+           :size 0.35))
+        ((equal size "m")
+         (set-popup-rule! "^\\*"
+           :size 0.25))
+        ((equal size "s")
+         (set-popup-rule! "^\\*"
+           :size 0.17))))
 
-(defun wkf/pop-up-size-xl ()
-  (interactive)
-  (set-popup-rule! "^\\*"
-    :size 0.5))
-
-(defun wkf/pop-up-size-l ()
-  (interactive)
-  (set-popup-rule! "^\\*"
-    :size 0.35))
-
-(defun wkf/pop-up-size-m ()
-  (interactive)
-  (set-popup-rule! "^\\*"
-    :size 0.25))
-
-(defun wkf/pop-up-size-s ()
-  (interactive)
-  (set-popup-rule! "^\\*"
-    :size 0.15))
-
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
+;; change default popup to xxl
+(define-key evil-normal-state-map (kbd "<backspace> p s 5")
+  '(lambda ()
+     (interactive)
+     (wkf/pop-up-size "xxl")))
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
