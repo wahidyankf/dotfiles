@@ -121,10 +121,11 @@
 (set-popup-rule! "^\\*compilation"
   :size 0.15)
 
-(after! org (set-popup-rule! "^\\*Org Src" :size .6))
+(after! org (set-popup-rule! "^\\*Org Src"
+              :size .6))
 
 (defun wkf/pop-up-size (size)
-;; change default popup size
+  ;; change default popup size
   (interactive)
   (cond ((equal size "xxl")
          (set-popup-rule! "^\\*"
@@ -143,7 +144,7 @@
            :size 0.15))))
 
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
-;; change default popup size to XXL (0.6)
+  ;; change default popup size to XXL (0.6)
   '(lambda ()
      (wkf/pop-up-size "xxl")))
 
@@ -170,6 +171,9 @@
   '(lambda ()
      (interactive)
      (wkf/pop-up-size "s")))
+
+;; popup q
+(define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
