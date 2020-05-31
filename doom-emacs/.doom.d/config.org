@@ -659,19 +659,22 @@ If you use =org= and don't want your org files in the default location below, ch
 #+END_SRC
 * Get Done List
 ** Language Essentials
+*** Map show all diagnosis key-binding
+*** Show language error on bottom info
+
+buffer name *format-all-errors*
+
 *** Golang
 *** Bash
 *** Clojure
 *** Docker
-*** Flow
+*** Flow-Type
 *** HTML
 *** JS
-*** JSON
 *** Java
 *** Python
 *** Rust
 *** TS
-*** YAML
 *** Elixir
 ** Tooling
 *** Projectile-related
