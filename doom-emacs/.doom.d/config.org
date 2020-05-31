@@ -659,20 +659,20 @@ If you use =org= and don't want your org files in the default location below, ch
 #+END_SRC
 * Get Done List
 ** Language Essentials
-*** LSP golang
-*** LSP Bash
-*** LSP Clojure
-*** LSP Docker
-*** LSP Flow
-*** LSP HTML
-*** LSP JS
-*** LSP JSON
-*** LSP Java
-*** LSP Python
-*** LSP Rust
-*** LSP TS
-*** LSP YAML
-*** LSP Elixir
+*** Golang
+*** Bash
+*** Clojure
+*** Docker
+*** Flow
+*** HTML
+*** JS
+*** JSON
+*** Java
+*** Python
+*** Rust
+*** TS
+*** YAML
+*** Elixir
 ** Tooling
 *** Projectile-related
 *** Magit-related
