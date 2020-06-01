@@ -215,11 +215,26 @@ Show battery and time on the bottom.
 
 ** Pop Up
 
-Change popup rule to be smaller
+Overide default pop up rule
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*compilation"
   :size 0.15)
+
+(set-popup-rule! "^\\*doom:vterm-"
+  :size 0.15)
+
+(set-popup-rule! "^\\*format-all-errors"
+  :size 0.15
+  :side 'bottom)
+
+(set-popup-rule! "^\\*Flycheck errors"
+  :size 0.15
+  :side 'bottom)
+
+(set-popup-rule! "^\\*Anaconda"
+  :size 0.25
+  :side 'bottom)
 
 (after! org (set-popup-rule! "^\\*Org Src"
               :size .6))
@@ -675,21 +690,15 @@ If you use =org= and don't want your org files in the default location below, ch
 ** Key Binding
 *** show all diagnosis
 ** Language Essentials
-*** Show language error on bottom info
-
-buffer name *format-all-errors*
-
 *** Golang
 *** Bash
 *** Clojure
 *** Docker
 *** Flow-Type
 *** HTML
-*** JS
 *** Java
 *** Python
 *** Rust
-*** TS
 *** Elixir
 ** Tooling
 *** Projectile-related

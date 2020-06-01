@@ -133,6 +133,21 @@
 (set-popup-rule! "^\\*compilation"
   :size 0.15)
 
+(set-popup-rule! "^\\*doom:vterm-"
+  :size 0.15)
+
+(set-popup-rule! "^\\*format-all-errors"
+  :size 0.15
+  :side 'bottom)
+
+(set-popup-rule! "^\\*Flycheck errors"
+  :size 0.15
+  :side 'bottom)
+
+(set-popup-rule! "^\\*Anaconda"
+  :size 0.25
+  :side 'bottom)
+
 (after! org (set-popup-rule! "^\\*Org Src"
               :size .6))
 
