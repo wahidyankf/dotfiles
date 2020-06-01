@@ -704,23 +704,3 @@ If you use =org= and don't want your org files in the default location below, ch
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
 #+END_SRC
-
-* Get Done List
-** Language Essentials
-*** Golang
-*** Bash
-*** Clojure
-*** Docker
-*** Flow-Type
-*** HTML
-*** Java
-*** Rust
-*** Elixir
-** Tooling
-*** Projectile-related
-*** Magit-related
-*** REST client
-*** Terminal dashboard
-*** Integrate help for key-binding
-** Private Project
-*** Book/Podcast workflow
