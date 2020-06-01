@@ -57,6 +57,7 @@
 (package! utop)
 (package! merlin)
 (package! elisp-format)
+(package! py-yapf)
 
 (when (package! lsp-mode)
   (package! lsp-ui)
@@ -64,6 +65,7 @@
   (package! dap-mode)
   (package! lsp-haskell)
   (package! reason-mode)
+  (package! lsp-python-ms)
   (when (featurep! +javascript)
     (package! lsp-typescript
       :recipe (:fetcher github

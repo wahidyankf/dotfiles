@@ -293,6 +293,8 @@
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+        ((equal major-mode 'python-mode)
+         (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
         ((equal major-mode 'emacs-lisp-mode)
@@ -337,6 +339,7 @@
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
+  :hook (python-mode . lsp)
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
@@ -421,14 +424,18 @@
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
+(use-package! lsp-typescript
+  :when (featurep! +javascript)
+  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
+
+(use-package! lsp-python-ms
+  :after lsp-mode
+  :config (setq lsp-python-ms-auto-install-server t))
+
 (use-package! dap-mode
   :after lsp-mode
   :config (dap-mode t)
   (dap-ui-mode t))
-
-(use-package! lsp-typescript
-  :when (featurep! +javascript)
-  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 
 (use-package! lsp-css
   :when (featurep! +css)

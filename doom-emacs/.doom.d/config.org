@@ -393,6 +393,8 @@ Overide default pop up rule
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+        ((equal major-mode 'python-mode)
+         (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
         ((equal major-mode 'emacs-lisp-mode)
@@ -450,6 +452,7 @@ Overide default pop up rule
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
+  :hook (python-mode . lsp)
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
@@ -565,6 +568,22 @@ To get information about any of these functions/macros, move the cursor over the
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
+** TypeScript
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package! lsp-typescript
+  :when (featurep! +javascript)
+  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
+#+END_SRC
+
+** Python
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package! lsp-python-ms
+  :after lsp-mode
+  :config (setq lsp-python-ms-auto-install-server t))
+#+END_SRC
+
 ** --- Copy Paste it from somewhere, will need to check it later ---
 ** DAP Mode
 
@@ -573,14 +592,6 @@ To get information about any of these functions/macros, move the cursor over the
   :after lsp-mode
   :config (dap-mode t)
   (dap-ui-mode t))
-#+END_SRC
-
-** TypeScript
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! lsp-typescript
-  :when (featurep! +javascript)
-  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
 ** CSS
@@ -697,7 +708,6 @@ If you use =org= and don't want your org files in the default location below, ch
 *** Flow-Type
 *** HTML
 *** Java
-*** Python
 *** Rust
 *** Elixir
 ** Tooling
