@@ -1,8 +1,6 @@
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 
-(setq shell-file-name "zsh")
-(setq shell-command-switch "-ic")
-
+;; make emacs fullscreen on startup.
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; default: doom-one
@@ -83,6 +81,9 @@
 ;; quit l
 (define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
 
+;; Quit
+(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
+
 (defun wkf/buffer-close-all ()
   "Kill all buffer except current."
   (interactive)
@@ -102,37 +103,6 @@
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
 (define-key evil-normal-state-map (kbd ", e e") 'revert-buffer)
-
-(defun wkf/window-close-compilation ()
-  "Close compilation pane"
-  (interactive)
-  (delete-windows-on "*compilation*")
-  (delete-windows-on "*Flycheck errors*"))
-
-(defun wkf/window-show-compilation ()
-  "Show compilation pane"
-  (interactive)
-  (display-buffer "*compilation*"))
-
-;; compilation Compile
-(define-key evil-normal-state-map (kbd ", c C") 'compile)
-
-;; compilation compilation
-(define-key evil-normal-state-map (kbd ", c c") 'recompile)
-
-;; compilation open
-(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
-
-;; compilation quit
-(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
-
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
-
-;; code diagnosis
-(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
 
 (set-popup-rule! "^\\*compilation"
   :size 0.15)
@@ -205,6 +175,9 @@
 
 ;; popup q
 (define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
+
+(setq shell-file-name "zsh")
+(setq shell-command-switch "-ic")
 
 (defun wkf/vterm-open-vertical ()
   "Open vterm in vertical split"
@@ -292,45 +265,6 @@
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
-(defun wkf/buffer-format ()
-  "Format current buffer"
-  (interactive)
-  (cond ((equal major-mode 'reason-mode)
-         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
-        ((equal major-mode 'python-mode)
-         (py-yapf-buffer))
-        ((bound-and-true-p lsp-mode)
-         (lsp-format-buffer))
-        ((equal major-mode 'emacs-lisp-mode)
-         (elisp-format-buffer))
-        (t nil)))
-
-(defun wkf/buffer-save-and-format ()
-  "Format current buffer"
-  (interactive)
-  (cond ((equal major-mode 'reason-mode) nil)
-        (t (wkf/buffer-format)))
-  (save-buffer))
-
-;; Write
-(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
-
-;; Format
-(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
-
-;; Quit
-(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
-
-;; Git Wkf Update All
-(defun wkf/git-wkf-update-all ()
-  "auto-update all of my essential git repos"
-  (interactive)
-  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
-         (proc (progn (compile (format "git_wkf_update_all"))
-                      (get-buffer-process output-buffer))))))
-
-(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
-
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
 (setq lsp-idle-delay 0.500)
@@ -393,6 +327,77 @@
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 
+(defun wkf/window-close-compilation ()
+  "Close compilation pane"
+  (interactive)
+  (delete-windows-on "*compilation*")
+  (delete-windows-on "*Flycheck errors*"))
+
+(defun wkf/window-show-compilation ()
+  "Show compilation pane"
+  (interactive)
+  (display-buffer "*compilation*"))
+
+;; compilation Compile
+(define-key evil-normal-state-map (kbd ", c C") 'compile)
+
+;; compilation compilation
+(define-key evil-normal-state-map (kbd ", c c") 'recompile)
+
+;; compilation open
+(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
+
+;; compilation quit
+(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
+
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
+
+;; code diagnosis
+(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
+
+(defun wkf/buffer-format ()
+  "Format current buffer"
+  (interactive)
+  (cond ((equal major-mode 'reason-mode)
+         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+        ((equal major-mode 'python-mode)
+         (py-yapf-buffer))
+        ((bound-and-true-p lsp-mode)
+         (lsp-format-buffer))
+        ((equal major-mode 'emacs-lisp-mode)
+         (elisp-format-buffer))
+        (t nil)))
+
+(defun wkf/buffer-save-and-format ()
+  "Format current buffer"
+  (interactive)
+  (cond ((equal major-mode 'reason-mode) nil)
+        (t (wkf/buffer-format)))
+  (save-buffer))
+
+;; Write
+(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
+
+;; Format
+(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
+
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+
+(use-package! reason-mode
+  :mode "\\.re$"
+  :hook (before-save . (lambda ()
+                         (if (equal major-mode 'reason-mode) nil))))
+
+(defun wkf/ocaml-compile ()
+  "Compile ocaml project"
+  (interactive)
+  (compile (format "dune build")))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
+
 (use-package! lsp-haskell
   :after lsp-mode
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
@@ -410,26 +415,9 @@
 
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 
-(defun wkf/ocaml-compile ()
-  "Compile ocaml project"
-  (interactive)
-  (compile (format "dune build")))
-
-(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
-
-(use-package! reason-mode
-  :mode "\\.re$"
-  :hook (before-save . (lambda ()
-                         (if (equal major-mode 'reason-mode) nil))))
-
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
-
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
 
 (setq org-directory "~/wkf-org/")
 
@@ -480,6 +468,19 @@
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
+
+;; Git Wkf Update All
+(defun wkf/git-wkf-update-all ()
+  "auto-update all of my essential git repos"
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format "git_wkf_update_all"))
+                      (get-buffer-process output-buffer))))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
+
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
 
 ;; search Search
 (define-key evil-normal-state-map (kbd ", s S") 'deadgrep)

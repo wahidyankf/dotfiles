@@ -1,7 +1,5 @@
 #+TITLE: WKF - Doom Emacs - Config
 
-Place our private configuration here! Remember, we do not need to run =doom sync= after modifying this file!
-
 * User Data
 
 Some functionality uses this to identify us (e.g.GPG configuration, email clients, file templates and snippets).
@@ -10,27 +8,13 @@ Some functionality uses this to identify us (e.g.GPG configuration, email client
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
 
-* Shell
-
-Make sure eshell and mx-compile use zsh (copied alias)
-
-#+BEGIN_SRC emacs-lisp :results silent
-(setq shell-file-name "zsh")
-(setq shell-command-switch "-ic")
-#+END_SRC
-
-* StartUp
-
-Make emacs fullscreen on startup.
-
-#+BEGIN_SRC emacs-lisp :results silent
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-#+END_SRC
-
 * Theming
 ** Base
 
 #+BEGIN_SRC emacs-lisp :results silent
+;; make emacs fullscreen on startup.
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
 ;; default: doom-one
 (setq doom-theme 'doom-gruvbox)
 #+END_SRC
@@ -81,7 +65,8 @@ Show battery and time on the bottom.
 (display-battery-mode)
 #+END_SRC
 
-* Frame
+* Window Management
+** Frame
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; Frame New
@@ -94,8 +79,8 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 #+END_SRC
 
-* Pane
-** Splitting
+** Window
+*** Splitting
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/window-vsplit ()
@@ -118,7 +103,7 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 #+END_SRC
 
-** Closing
+*** Closing
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/window-close-left ()
@@ -156,6 +141,9 @@ Show battery and time on the bottom.
 
 ;; quit l
 (define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
+
+;; Quit
+(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
 #+END_SRC
 
 ** Buffer
@@ -182,48 +170,7 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd ", e e") 'revert-buffer)
 #+END_SRC
 
-** [#C] Compilation
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/window-close-compilation ()
-  "Close compilation pane"
-  (interactive)
-  (delete-windows-on "*compilation*")
-  (delete-windows-on "*Flycheck errors*"))
-
-(defun wkf/window-show-compilation ()
-  "Show compilation pane"
-  (interactive)
-  (display-buffer "*compilation*"))
-
-;; compilation Compile
-(define-key evil-normal-state-map (kbd ", c C") 'compile)
-
-;; compilation compilation
-(define-key evil-normal-state-map (kbd ", c c") 'recompile)
-
-;; compilation open
-(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
-
-;; compilation quit
-(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
-
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
-#+END_SRC
-
-** Compilation
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; code diagnosis
-(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
-#+END_SRC
-
 ** Pop Up
-
-Overide default pop up rule
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*compilation"
@@ -300,6 +247,16 @@ Overide default pop up rule
 #+END_SRC
 
 * Terminal
+** Enviroment
+
+Make sure eshell and mx-compile use zsh (copied alias)
+
+#+BEGIN_SRC emacs-lisp :results silent
+(setq shell-file-name "zsh")
+(setq shell-command-switch "-ic")
+#+END_SRC
+
+** Management
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/vterm-open-vertical ()
@@ -333,7 +290,8 @@ Overide default pop up rule
 (define-key evil-normal-state-map (kbd "<backspace> t q") 'wkf/vterm-close-main)
 #+END_SRC
 
-** File
+* File
+** Config
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/windows-rebalance ()
@@ -391,53 +349,6 @@ Overide default pop up rule
 (define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
-#+END_SRC
-
-**  Editing
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/buffer-format ()
-  "Format current buffer"
-  (interactive)
-  (cond ((equal major-mode 'reason-mode)
-         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
-        ((equal major-mode 'python-mode)
-         (py-yapf-buffer))
-        ((bound-and-true-p lsp-mode)
-         (lsp-format-buffer))
-        ((equal major-mode 'emacs-lisp-mode)
-         (elisp-format-buffer))
-        (t nil)))
-
-(defun wkf/buffer-save-and-format ()
-  "Format current buffer"
-  (interactive)
-  (cond ((equal major-mode 'reason-mode) nil)
-        (t (wkf/buffer-format)))
-  (save-buffer))
-
-;; Write
-(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
-
-;; Format
-(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
-
-;; Quit
-(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
-#+END_SRC
-
-* Git
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; Git Wkf Update All
-(defun wkf/git-wkf-update-all ()
-  "auto-update all of my essential git repos"
-  (interactive)
-  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
-         (proc (progn (compile (format "git_wkf_update_all"))
-                      (get-buffer-process output-buffer))))))
-
-(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 #+END_SRC
 
 * Coding Experience
@@ -522,7 +433,102 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 #+END_SRC
 
+*** Compilation
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/window-close-compilation ()
+  "Close compilation pane"
+  (interactive)
+  (delete-windows-on "*compilation*")
+  (delete-windows-on "*Flycheck errors*"))
+
+(defun wkf/window-show-compilation ()
+  "Show compilation pane"
+  (interactive)
+  (display-buffer "*compilation*"))
+
+;; compilation Compile
+(define-key evil-normal-state-map (kbd ", c C") 'compile)
+
+;; compilation compilation
+(define-key evil-normal-state-map (kbd ", c c") 'recompile)
+
+;; compilation open
+(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
+
+;; compilation quit
+(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
+
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
+;; quit compilation
+(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
+#+END_SRC
+
+*** Error Reporting
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; code diagnosis
+(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
+#+END_SRC
+
+*** Save and Format
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/buffer-format ()
+  "Format current buffer"
+  (interactive)
+  (cond ((equal major-mode 'reason-mode)
+         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+        ((equal major-mode 'python-mode)
+         (py-yapf-buffer))
+        ((bound-and-true-p lsp-mode)
+         (lsp-format-buffer))
+        ((equal major-mode 'emacs-lisp-mode)
+         (elisp-format-buffer))
+        (t nil)))
+
+(defun wkf/buffer-save-and-format ()
+  "Format current buffer"
+  (interactive)
+  (cond ((equal major-mode 'reason-mode) nil)
+        (t (wkf/buffer-format)))
+  (save-buffer))
+
+;; Write
+(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
+
+;; Format
+(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
+#+END_SRC
+
 ** Language
+*** Emacs Lisp
+
+#+BEGIN_SRC emacs-lisp :results silent
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+#+END_SRC
+
+*** ReasonML
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package! reason-mode
+  :mode "\\.re$"
+  :hook (before-save . (lambda ()
+                         (if (equal major-mode 'reason-mode) nil))))
+#+END_SRC
+
+*** OCaml
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/ocaml-compile ()
+  "Compile ocaml project"
+  (interactive)
+  (compile (format "dune build")))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
+#+END_SRC
+
 *** Haskell
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -544,32 +550,6 @@ To get information about any of these functions/macros, move the cursor over the
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 #+END_SRC
 
-*** OCaml
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/ocaml-compile ()
-  "Compile ocaml project"
-  (interactive)
-  (compile (format "dune build")))
-
-(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
-#+END_SRC
-
-*** ReasonML
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! reason-mode
-  :mode "\\.re$"
-  :hook (before-save . (lambda ()
-                         (if (equal major-mode 'reason-mode) nil))))
-#+END_SRC
-
-*** Emacs Lisp
-
-#+BEGIN_SRC emacs-lisp :results silent
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-#+END_SRC
-
 *** TypeScript
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -578,14 +558,7 @@ To get information about any of these functions/macros, move the cursor over the
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
-* Plugin - Wakatime
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
-#+END_SRC
-
-* Plugin - Org Mode
+* Org Mode
 ** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
@@ -662,7 +635,29 @@ If you use =org= and don't want your org files in the default location below, ch
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 #+END_SRC
 
-* Plugin - DeadGrep
+* Git
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; Git Wkf Update All
+(defun wkf/git-wkf-update-all ()
+  "auto-update all of my essential git repos"
+  (interactive)
+  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
+         (proc (progn (compile (format "git_wkf_update_all"))
+                      (get-buffer-process output-buffer))))))
+
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
+#+END_SRC
+
+* Plugins
+** Wakatime
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
+#+END_SRC
+
+** DeadGrep
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; search Search
