@@ -62,7 +62,6 @@
 (when (package! lsp-mode)
   (package! lsp-ui)
   (package! company-lsp)
-  (package! dap-mode)
   (package! lsp-haskell)
   (package! reason-mode)
   (package! lsp-python-ms)

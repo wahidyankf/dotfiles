@@ -592,33 +592,6 @@ To get information about any of these functions/macros, move the cursor over the
   :config (setq lsp-python-ms-auto-install-server t))
 #+END_SRC
 
-** --- Copy Paste it from somewhere, will need to check it later ---
-** DAP Mode
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! dap-mode
-  :after lsp-mode
-  :config (dap-mode t)
-  (dap-ui-mode t))
-#+END_SRC
-
-** CSS
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! lsp-css
-  :when (featurep! +css)
-  :hook ((css-mode less-mode scss-mode) . lsp-css-enable))
-#+END_SRC
-
-** Sh
-
-#+BEGIN_SRC emacs-lisp :results silent
-(when (featurep! +sh)
-  (after! sh-script (lsp-define-stdio-client lsp-sh #'projectile-project-root '("bash-language-server"
-                                                                                "start"))
-    (add-hook 'sh-mode-hook #'lsp-sh-enable)))
-#+END_SRC
-
 * Plugin - Org Mode
 ** Directory
 

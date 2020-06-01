@@ -436,20 +436,6 @@
   :after lsp-mode
   :config (setq lsp-python-ms-auto-install-server t))
 
-(use-package! dap-mode
-  :after lsp-mode
-  :config (dap-mode t)
-  (dap-ui-mode t))
-
-(use-package! lsp-css
-  :when (featurep! +css)
-  :hook ((css-mode less-mode scss-mode) . lsp-css-enable))
-
-(when (featurep! +sh)
-  (after! sh-script (lsp-define-stdio-client lsp-sh #'projectile-project-root '("bash-language-server"
-                                                                                "start"))
-    (add-hook 'sh-mode-hook #'lsp-sh-enable)))
-
 (setq org-directory "~/wkf-org/")
 
 ;; Org SRC Edit
