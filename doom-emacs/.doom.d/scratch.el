@@ -1,0 +1,1 @@
+(blink-cursor-mode t)
