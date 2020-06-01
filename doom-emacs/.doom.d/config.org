@@ -706,8 +706,6 @@ If you use =org= and don't want your org files in the default location below, ch
 #+END_SRC
 
 * Get Done List
-** Key Binding
-*** show all diagnosis
 ** Language Essentials
 *** Golang
 *** Bash
