@@ -106,7 +106,8 @@
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
   (interactive)
-  (delete-windows-on "*compilation*"))
+  (delete-windows-on "*compilation*")
+  (delete-windows-on "*Flycheck errors*"))
 
 (defun wkf/window-show-compilation ()
   "Show compilation pane"
@@ -129,6 +130,9 @@
 (define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
+
+;; code diagnosis
+(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
 
 (set-popup-rule! "^\\*compilation"
   :size 0.15)

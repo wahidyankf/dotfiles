@@ -182,13 +182,14 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd ", e e") 'revert-buffer)
 #+END_SRC
 
-** Compilation
+** [#C] Compilation
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
   (interactive)
-  (delete-windows-on "*compilation*"))
+  (delete-windows-on "*compilation*")
+  (delete-windows-on "*Flycheck errors*"))
 
 (defun wkf/window-show-compilation ()
   "Show compilation pane"
@@ -211,6 +212,13 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
 ;; quit compilation
 (define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
+#+END_SRC
+
+** Compilation
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; code diagnosis
+(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
 #+END_SRC
 
 ** Pop Up
