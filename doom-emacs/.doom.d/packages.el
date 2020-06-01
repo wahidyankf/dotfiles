@@ -64,7 +64,6 @@
   (package! company-lsp)
   (package! lsp-haskell)
   (package! reason-mode)
-  (package! lsp-python-ms)
   (when (featurep! +javascript)
     (package! lsp-typescript
       :recipe (:fetcher github

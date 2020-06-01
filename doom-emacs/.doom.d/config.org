@@ -460,7 +460,6 @@ Overide default pop up rule
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
-  :hook (python-mode . lsp)
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
@@ -582,14 +581,6 @@ To get information about any of these functions/macros, move the cursor over the
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
-#+END_SRC
-
-** Python
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! lsp-python-ms
-  :after lsp-mode
-  :config (setq lsp-python-ms-auto-install-server t))
 #+END_SRC
 
 * Plugin - Org Mode

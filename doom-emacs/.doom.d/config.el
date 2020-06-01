@@ -343,7 +343,6 @@
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
-  :hook (python-mode . lsp)
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
@@ -431,10 +430,6 @@
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
-
-(use-package! lsp-python-ms
-  :after lsp-mode
-  :config (setq lsp-python-ms-auto-install-server t))
 
 (setq org-directory "~/wkf-org/")
 
