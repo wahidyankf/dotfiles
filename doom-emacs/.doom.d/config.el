@@ -331,9 +331,6 @@
 
 (define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
-
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
 (setq lsp-idle-delay 0.500)
@@ -430,6 +427,9 @@
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
+
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
 
 (setq org-directory "~/wkf-org/")
 

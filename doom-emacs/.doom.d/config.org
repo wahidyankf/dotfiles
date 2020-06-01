@@ -440,15 +440,9 @@ Overide default pop up rule
 (define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 #+END_SRC
 
-* Plugin - Wakatime
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! wakatime-mode
-  :hook (after-init . global-wakatime-mode))
-#+END_SRC
-
 * Coding Experience
-** LSP Mode
+** Base
+*** LSP Mode
 
 #+BEGIN_SRC emacs-lisp :results silent
 (setq gc-cons-threshold 200000000)
@@ -477,7 +471,7 @@ Overide default pop up rule
   :commands (lsp-mode lsp-define-stdio-client))
 #+END_SRC
 
-** LSP UI
+*** LSP UI
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-ui
@@ -488,7 +482,7 @@ Overide default pop up rule
   (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t))
 #+END_SRC
 
-** Company LSP
+*** Company LSP
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! company-lsp
@@ -497,7 +491,7 @@ Overide default pop up rule
   (setq company-lsp-enable-recompletion t))
 #+END_SRC
 
-** Intellisense
+*** Intellisense
 
 To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
@@ -528,7 +522,8 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 #+END_SRC
 
-** Haskell
+** Language
+*** Haskell
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-haskell
@@ -549,7 +544,7 @@ To get information about any of these functions/macros, move the cursor over the
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
 #+END_SRC
 
-** OCaml
+*** OCaml
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/ocaml-compile ()
@@ -560,7 +555,7 @@ To get information about any of these functions/macros, move the cursor over the
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
 #+END_SRC
 
-** ReasonML
+*** ReasonML
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! reason-mode
@@ -569,18 +564,25 @@ To get information about any of these functions/macros, move the cursor over the
                          (if (equal major-mode 'reason-mode) nil))))
 #+END_SRC
 
-** Emacs Lisp
+*** Emacs Lisp
 
 #+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
-** TypeScript
+*** TypeScript
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
+#+END_SRC
+
+* Plugin - Wakatime
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package! wakatime-mode
+  :hook (after-init . global-wakatime-mode))
 #+END_SRC
 
 * Plugin - Org Mode
