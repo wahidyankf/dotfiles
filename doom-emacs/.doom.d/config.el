@@ -314,12 +314,16 @@
 (defun wkf/gdef ()
   "Open +lookup/definition in the split window below"
   (interactive)
-  (+lookup/definition (doom-thing-at-point-or-region))
-  (evil-window-split)
-  (evil-jump-backward-swap)
-  (evil-window-down 1)
-  (balance-windows)
-  (recenter))
+  (cond ((equal major-mode 'reason-mode)
+         (progn (make-frame-command)
+                (evil-goto-definition)
+                (recenter)))
+        (t (progn (+lookup/definition (doom-thing-at-point-or-region))
+                  (evil-window-split)
+                  (evil-jump-backward-swap)
+                  (evil-window-down 1)
+                  (balance-windows)
+                  (recenter)))))
 
 (defun wkf/gdoc ()
   "Open +lookup/documentation in the mini buffer"
@@ -331,6 +335,8 @@
 
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
+;; Go to Definition
+(define-key evil-normal-state-map (kbd "g d") 'evil-goto-definition)
 ;; Go to Definition
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
 ;; Go to doKumentation
