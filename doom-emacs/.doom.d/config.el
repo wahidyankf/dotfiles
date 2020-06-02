@@ -396,15 +396,15 @@
   (interactive)
   (compile (format "dune build")))
 
-(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/ocaml-compile)
+(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile)
 
 (use-package! lsp-haskell
   :after lsp-mode
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
   (lsp-haskell-set-formatter-floskell))
 
-;; Git Wkf Update All
-(defun wkf/haskell-compile ()
+;; type check haskell code for exhaustiveness
+(defun wkf/haskell-typecheck ()
   "Compile haskell project (add exhaustiveness-check)"
   (interactive)
   (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
@@ -413,7 +413,14 @@
                                 (buffer-file-name)))
                       (get-buffer-process output-buffer))))))
 
-(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-compile)
+;; run current haskell file
+(defun wkf/haskell-compile-and-run ()
+  "Run current haskell file"
+  (interactive)
+  (compile (format "ghc %s && %s" (buffer-file-name) (file-name-sans-extension buffer-file-name))))
+
+(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-typecheck)
+(evil-define-key 'normal haskell-mode-map (kbd ", r") 'wkf/haskell-compile-and-run)
 
 (use-package! lsp-typescript
   :when (featurep! +javascript)
