@@ -105,17 +105,25 @@
 (define-key evil-normal-state-map (kbd ", e e") 'revert-buffer)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.15)
+  :size 0.18)
 
 (set-popup-rule! "^\\*doom:vterm-"
-  :size 0.15)
+  :size 0.18)
 
 (set-popup-rule! "^\\*format-all-errors"
-  :size 0.15
+  :size 0.18
   :side 'bottom)
 
 (set-popup-rule! "^\\*Flycheck errors"
-  :size 0.15
+  :size 0.18
+  :side 'bottom)
+
+(set-popup-rule! "^\\*eshell"
+  :size 0.18
+  :side 'bottom)
+
+(set-popup-rule! "^\\*terminal"
+  :size 0.18
   :side 'bottom)
 
 (set-popup-rule! "^\\*Anaconda"
@@ -142,7 +150,7 @@
            :size 0.25))
         ((equal size "s")
          (set-popup-rule! "^\\*"
-           :size 0.15))))
+           :size 0.18))))
 
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
@@ -167,7 +175,7 @@
      (interactive)
      (wkf/popup-size "m")))
 
-;; change default popup size to S (0.15)
+;; change default popup size to S (0.18)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
   '(lambda ()
      (interactive)
@@ -413,13 +421,17 @@
                                 (buffer-file-name)))
                       (get-buffer-process output-buffer))))))
 
-;; run current haskell file
+;; run current haskell file in compile window
 (defun wkf/haskell-compile-and-run ()
   "Run current haskell file"
   (interactive)
-  (compile (format "ghc %s && %s" (buffer-file-name) (file-name-sans-extension buffer-file-name))))
+  (compile (format "ghc %s && %s" (buffer-file-name)
+                   (file-name-sans-extension buffer-file-name))))
 
+;; typecheck haskell code
 (evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-typecheck)
+
+;; run haskell code
 (evil-define-key 'normal haskell-mode-map (kbd ", r") 'wkf/haskell-compile-and-run)
 
 (use-package! lsp-typescript
