@@ -102,36 +102,37 @@
 
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
-(define-key evil-normal-state-map (kbd ", e e") 'revert-buffer)
+(define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.18)
+  :size 0.20)
+
+(set-popup-rule! "^\\*Org Src"
+              :size .6)
 
 (set-popup-rule! "^\\*doom:vterm-"
-  :size 0.18)
+  :size 0.20)
 
 (set-popup-rule! "^\\*format-all-errors"
-  :size 0.18
+  :size 0.20
   :side 'bottom)
 
 (set-popup-rule! "^\\*Flycheck errors"
-  :size 0.18
+  :size 0.20
   :side 'bottom)
 
 (set-popup-rule! "^\\*eshell"
-  :size 0.18
+  :size 0.20
   :side 'bottom)
 
 (set-popup-rule! "^\\*terminal"
-  :size 0.18
+  :size 0.20
   :side 'bottom)
 
 (set-popup-rule! "^\\*Anaconda"
   :size 0.25
   :side 'bottom)
 
-(after! org (set-popup-rule! "^\\*Org Src"
-              :size .6))
 
 (defun wkf/popup-size (size)
   "Change default popup size"
@@ -150,7 +151,7 @@
            :size 0.25))
         ((equal size "s")
          (set-popup-rule! "^\\*"
-           :size 0.18))))
+           :size 0.20))))
 
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
@@ -175,7 +176,7 @@
      (interactive)
      (wkf/popup-size "m")))
 
-;; change default popup size to S (0.18)
+;; change default popup size to S (0.20)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
   '(lambda ()
      (interactive)
@@ -346,10 +347,22 @@
   (interactive)
   (display-buffer "*compilation*"))
 
+(defun wkf/error-next ()
+  (interactive)
+  (cond ((equal (buffer-name) "*compilation*")
+         (compilation-next-error 1))
+        (t (flycheck-next-error))))
+
+(defun wkf/error-previous ()
+  (interactive)
+  (cond ((equal (buffer-name) "*compilation*")
+         (compilation-previous-error 1))
+        (t (flycheck-previous-error))))
+
 ;; compilation Compile
 (define-key evil-normal-state-map (kbd ", c C") 'compile)
 
-;; compilation compilation
+;; compilation repeeat last
 (define-key evil-normal-state-map (kbd ", c c") 'recompile)
 
 ;; compilation open
@@ -358,10 +371,11 @@
 ;; compilation quit
 (define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
 
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c n") 'compilation-next-error)
-;; quit compilation
-(define-key evil-normal-state-map (kbd ", c p") 'compilation-previous-error)
+;; error next
+(define-key evil-normal-state-map (kbd ", c n") 'wkf/error-next)
+
+;; error previous
+(define-key evil-normal-state-map (kbd ", c p") 'wkf/error-previous)
 
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
@@ -440,7 +454,7 @@
 
 (setq org-directory "~/wkf-org/")
 
-;; Org SRC Edit
+;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s e") 'org-edit-special)
 
 ;; Org SRC Format
