@@ -102,7 +102,7 @@
 
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
-(define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
+(define-key evil-normal-state-map (kbd "<backspace> b b") 'revert-buffer)
 
 (set-popup-rule! "^\\*compilation"
   :size 0.20)
