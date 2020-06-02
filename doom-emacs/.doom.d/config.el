@@ -6,23 +6,31 @@
 ;; default: doom-one
 (setq doom-theme 'doom-gruvbox)
 
+;; the mighty dank-mono
 (setq doom-font (font-spec :family "Dank Mono"
                            :size 12))
 
 (blink-cursor-mode t)
+
 (setq display-line-numbers-type 'relative)
+
 (setq-default indicate-empty-lines t)
+
 (setq-default show-trailing-whitespace t)
 
 (display-time-mode)
+
 (display-battery-mode)
 
 ;; Frame New
 (define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
+
 ;; Frame Frame (cycle)
 (define-key evil-normal-state-map (kbd "<backspace> f f") 'other-frame)
+
 ;; Frame Delete Delete (current)
 (define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
+
 ;; Frame Delete Other
 (define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
@@ -40,8 +48,10 @@
 
 ;; | (vertical)
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/window-vsplit)
+
 ;; - (horizontal)
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/window-split)
+
 ;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
@@ -81,7 +91,7 @@
 ;; quit l
 (define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
 
-;; Quit
+;; quit current
 (define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
 
 (defun wkf/buffer-close-all ()
@@ -97,12 +107,14 @@
   (message (format "b: %s, p: %s" (buffer-name)
                    (buffer-file-name))))
 
-;; Get current pane info
+;; Get current buffer's info
 (define-key evil-normal-state-map (kbd "<backspace> b i") 'wkf/buffer-info)
 
-(define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
-
+;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd "<backspace> b b") 'revert-buffer)
+
+;; Close all buffers except current
+(define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
 (set-popup-rule! "^\\*compilation"
   :size 0.20)
@@ -132,7 +144,6 @@
 (set-popup-rule! "^\\*Anaconda"
   :size 0.25
   :side 'bottom)
-
 
 (defun wkf/popup-size (size)
   "Change default popup size"
@@ -209,12 +220,16 @@
 
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
+
 ;; Terminal (max)
 (define-key evil-normal-state-map (kbd "<backspace> t T") '+vterm/here)
+
 ;; Terminal Vertical
 (define-key evil-normal-state-map (kbd "<backspace> t v") 'wkf/vterm-open-vertical)
+
 ;; Terminal Horizontal
 (define-key evil-normal-state-map (kbd "<backspace> t x") 'wkf/vterm-open-horizontal)
+
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd "<backspace> t q") 'wkf/vterm-close-main)
 
@@ -263,14 +278,19 @@
 
 ;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
+
 ;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
+
 ;; Config Emacs Packages.el
 (define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
+
 ;; Config Emacs Config.org
 (define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
+
 ;; Config Emacs Config.el (compiled version)
 (define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
+
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
@@ -335,10 +355,13 @@
 
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
-;; Go to Definition
+
+;; Go to Definition in current pane
 (define-key evil-normal-state-map (kbd "g d") 'evil-goto-definition)
-;; Go to Definition
+
+;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
+
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 
@@ -354,12 +377,14 @@
   (display-buffer "*compilation*"))
 
 (defun wkf/error-next ()
+  "Go to next error"
   (interactive)
   (cond ((equal (buffer-name) "*compilation*")
          (compilation-next-error 1))
         (t (flycheck-next-error))))
 
 (defun wkf/error-previous ()
+  "Go to previous error"
   (interactive)
   (cond ((equal (buffer-name) "*compilation*")
          (compilation-previous-error 1))
@@ -480,13 +505,17 @@
 (evil-define-key 'normal org-mode-map (kbd "`sel") 'wkf/org-src-elisp)
 
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
+
 (add-hook 'org-mode-hook 'org-display-inline-images)
+
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
 
 ;; Org Images toggle(z)
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o i i") 'org-toggle-inline-images)
+
 ;; Org Images yes
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
+
 ;; Org Images no
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
 
@@ -503,8 +532,10 @@
 
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
+
 ;; >
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
+
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
 
@@ -523,5 +554,6 @@
 
 ;; search Search
 (define-key evil-normal-state-map (kbd ", s S") 'deadgrep)
+
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
