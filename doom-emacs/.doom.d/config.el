@@ -18,6 +18,9 @@
 
 (setq-default show-trailing-whitespace t)
 
+;; noh
+(define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
+
 (display-time-mode)
 
 (display-battery-mode)
@@ -117,28 +120,28 @@
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.20)
+  :size 0.25)
 
 (set-popup-rule! "^\\*Org Src"
-              :size .6)
+  :size .6)
 
 (set-popup-rule! "^\\*doom:vterm-"
-  :size 0.20)
+  :size 0.25)
 
 (set-popup-rule! "^\\*format-all-errors"
-  :size 0.20
+  :size 0.25
   :side 'bottom)
 
 (set-popup-rule! "^\\*Flycheck errors"
-  :size 0.20
+  :size 0.25
   :side 'bottom)
 
 (set-popup-rule! "^\\*eshell"
-  :size 0.20
+  :size 0.25
   :side 'bottom)
 
 (set-popup-rule! "^\\*terminal"
-  :size 0.20
+  :size 0.25
   :side 'bottom)
 
 (set-popup-rule! "^\\*Anaconda"
@@ -148,21 +151,18 @@
 (defun wkf/popup-size (size)
   "Change default popup size"
   (interactive)
-  (cond ((equal size "xxl")
+  (cond ((equal size "xl")
          (set-popup-rule! "^\\*"
            :size 0.6))
-        ((equal size "xl")
-         (set-popup-rule! "^\\*"
-           :size 0.5))
         ((equal size "l")
          (set-popup-rule! "^\\*"
-           :size 0.35))
+           :size 0.5))
         ((equal size "m")
          (set-popup-rule! "^\\*"
-           :size 0.25))
+           :size 0.35))
         ((equal size "s")
          (set-popup-rule! "^\\*"
-           :size 0.20))))
+           :size 0.25))))
 
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
@@ -187,7 +187,7 @@
      (interactive)
      (wkf/popup-size "m")))
 
-;; change default popup size to S (0.20)
+;; change default popup size to S (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
   '(lambda ()
      (interactive)
