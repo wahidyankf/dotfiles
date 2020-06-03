@@ -577,15 +577,58 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
 #+END_SRC
 
+*** Compilation
+
+**** Mnemonic
+
+#+BEGIN_EXAMPLE
+;; raw compile
+
+C -> compile Custom
+c . -> compile with last command
+
+;; compile
+
+c c -> compile file
+c r -> compile and run file
+c q -> compile quick file
+b d -> build dev file
+b r -> build release file
+
+c C -> compile project
+c R -> compile and run project
+c Q -> compile quick project
+b D -> build dev project
+b R -> build release project
+
+r -> run file
+R -> run project
+#+END_EXAMPLE
+
+**** Commons
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile Custom
+(define-key evil-normal-state-map (kbd ", C") 'compile)
+
+;; compile compile (repeat)
+(define-key evil-normal-state-map (kbd ", c .") 'recompile)
+#+END_SRC
+
+
 ** Languages
-*** Setup and Utils
-**** Emacs Lisp
+
+*** Emacs Lisp
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
-**** ReasonML
+*** ReasonML
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! reason-mode
@@ -594,7 +637,9 @@ To get information about any of these functions/macros, move the cursor over the
                          (if (equal major-mode 'reason-mode) nil))))
 #+END_SRC
 
-**** OCaml
+*** OCaml
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/ocaml-compile-project ()
@@ -603,7 +648,17 @@ To get information about any of these functions/macros, move the cursor over the
   (compile (format "dune build")))
 #+END_SRC
 
-**** Haskell
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+#+END_SRC
+
+
+*** Haskell
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-haskell
@@ -630,7 +685,20 @@ To get information about any of these functions/macros, move the cursor over the
 
 #+END_SRC
 
-**** TypeScript
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile quick (typecheck) current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
+
+;; compile and run current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
+#+END_SRC
+
+
+*** TypeScript
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-typescript
@@ -638,7 +706,9 @@ To get information about any of these functions/macros, move the cursor over the
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
-**** Python
+*** Python
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*Anaconda"
@@ -646,7 +716,9 @@ To get information about any of these functions/macros, move the cursor over the
   :side 'bottom)
 #+END_SRC
 
-**** Elixir
+*** Elixir
+
+**** Setup and Utils
 
 More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
 
@@ -676,9 +748,19 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
   :size 0.2)
 #+END_SRC
 
-**** Rust
+
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; run current file
+(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
+#+END_SRC
+
+*** Rust
 
 More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
+
+**** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/rust-compile-file ()
@@ -731,69 +813,7 @@ More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
   (compile "cargo check"))
 #+END_SRC
 
-*** Compilation
-
-**** Mnemonic
-
-#+BEGIN_EXAMPLE
-;; raw compile
-
-C -> compile Custom
-c . -> compile with last command
-
-;; compile
-
-c c -> compile file
-c r -> compile and run file
-c q -> compile quick file
-b d -> build dev file
-b r -> build release file
-
-c C -> compile project
-c R -> compile and run project
-c Q -> compile quick project
-b D -> build dev project
-b R -> build release project
-
-r -> run file
-R -> run project
-#+END_EXAMPLE
-
-**** Commons
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; compile Custom
-(define-key evil-normal-state-map (kbd ", C") 'compile)
-
-;; compile compile (repeat)
-(define-key evil-normal-state-map (kbd ", c .") 'recompile)
-#+END_SRC
-
-**** OCaml
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; compile project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
-#+END_SRC
-
-**** Haskell
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; compile quick (typecheck) current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
-
-;; compile and run current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
-#+END_SRC
-
-**** Elixir
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; run current file
-(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
-#+END_SRC
-
-**** Rust
+**** Keybindings
 
 File
 

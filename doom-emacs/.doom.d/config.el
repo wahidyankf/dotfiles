@@ -456,6 +456,12 @@
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
 
+;; compile Custom
+(define-key evil-normal-state-map (kbd ", C") 'compile)
+
+;; compile compile (repeat)
+(define-key evil-normal-state-map (kbd ", c .") 'recompile)
+
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
 (use-package! reason-mode
@@ -467,6 +473,9 @@
   "Compile ocaml project"
   (interactive)
   (compile (format "dune build")))
+
+;; compile project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
 
 (use-package! lsp-haskell
   :after lsp-mode
@@ -489,6 +498,12 @@
   (interactive)
   (compile (format "ghc %s && %s" (buffer-file-name)
                    (file-name-sans-extension buffer-file-name))))
+
+;; compile quick (typecheck) current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
+
+;; compile and run current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
 
 (use-package! lsp-typescript
   :when (featurep! +javascript)
@@ -521,6 +536,9 @@
 
 (set-popup-rule! "^\\*alchemist"
   :size 0.2)
+
+;; run current file
+(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
 
 (defun wkf/rust-compile-file ()
   "compile current rust file"
@@ -570,24 +588,6 @@
   "check current rust project"
   (interactive)
   (compile "cargo check"))
-
-;; compile Custom
-(define-key evil-normal-state-map (kbd ", C") 'compile)
-
-;; compile compile (repeat)
-(define-key evil-normal-state-map (kbd ", c .") 'recompile)
-
-;; compile project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
-
-;; compile quick (typecheck) current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
-
-;; compile and run current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
-
-;; run current file
-(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
 
 ;; compile - compile - file
 (evil-define-key 'normal rustic-mode-map (kbd ", c c") 'wkf/rust-compile-file)
