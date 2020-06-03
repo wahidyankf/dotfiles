@@ -522,6 +522,55 @@
 (set-popup-rule! "^\\*alchemist"
   :size 0.2)
 
+(defun wkf/rust-compile-file ()
+  "compile current rust file"
+  (interactive)
+  (compile (format "rustc %s" (buffer-file-name))))
+
+(defun wkf/rust-compile-project ()
+  "compile current rust project - development"
+  (interactive)
+  (compile "cargo build"))
+
+;; ---
+
+(defun wkf/rust-build-development-project ()
+  "build current rust project (development)"
+  (interactive)
+  (compile "cargo build"))
+
+(defun wkf/rust-build-release-project ()
+  "build current rust project (release)"
+  (interactive)
+  (compile "cargo build --release"))
+
+;; ---
+
+(defun wkf/rust-run-file ()
+  "run current rust file"
+  (interactive)
+  (compile (format "%s" (file-name-sans-extension buffer-file-name))))
+
+;; ---
+
+(defun wkf/rust-compile-and-run-file ()
+  "compile and run current rust file"
+  (interactive)
+  (compile (format "rustc %s && %s" (buffer-file-name)
+                   (file-name-sans-extension buffer-file-name))))
+
+(defun wkf/rust-compile-and-run-project ()
+  "compile and run current rust project"
+  (interactive)
+  (compile "cargo run"))
+
+;; ---
+
+(defun wkf/rust-quick-check-project ()
+  "check current rust project"
+  (interactive)
+  (compile "cargo check"))
+
 ;; compile Custom
 (define-key evil-normal-state-map (kbd ", C") 'compile)
 

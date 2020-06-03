@@ -676,11 +676,11 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
   :size 0.2)
 #+END_SRC
 
-**** COMMENT Rust
+**** Rust
 
 More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/rust-compile-file ()
   "compile current rust file"
   (interactive)
@@ -730,10 +730,6 @@ More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
   (interactive)
   (compile "cargo check"))
 #+END_SRC
-
-#+RESULTS:
-: wkf/rust-quick-check-project
-
 
 *** Compilation
 
