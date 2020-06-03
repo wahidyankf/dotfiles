@@ -464,7 +464,8 @@
   (interactive)
   (compile (format "dune build")))
 
-(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile)
+;; compile project
+(evil-define-key 'normal tuareg-mode-map (kbd ", c p") 'wkf/ocaml-compile)
 
 (use-package! lsp-haskell
   :after lsp-mode
@@ -488,11 +489,11 @@
   (compile (format "ghc %s && %s" (buffer-file-name)
                    (file-name-sans-extension buffer-file-name))))
 
-;; typecheck haskell code
-(evil-define-key 'normal haskell-mode-map (kbd ", c C") 'wkf/haskell-typecheck)
+;; compile (typecheck only) current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c f") 'wkf/haskell-typecheck)
 
-;; run haskell code
-(evil-define-key 'normal haskell-mode-map (kbd ", r") 'wkf/haskell-compile-and-run)
+;; compile and run current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c r f") 'wkf/haskell-compile-and-run)
 
 (use-package! lsp-typescript
   :when (featurep! +javascript)
@@ -526,11 +527,32 @@
 (set-popup-rule! "^\\*alchemist"
   :size 0.2)
 
-;; TODO: compile elixir code
-;; (evil-define-key 'normal elixir-mode-map (kbd ", c C") 'wkf/elixir-typecheck)
+;; run current file
+(evil-define-key 'normal elixir-mode-map (kbd ", r f") 'alchemist-eval-buffer)
 
-;; run current buffer
-(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
+(defun wkf/rust-compile-file ()
+  "compile current rust file"
+  (interactive)
+  (compile (format "rustc %s" (buffer-file-name))))
+
+(defun wkf/rust-run-file ()
+  "run current rust file"
+  (interactive)
+  (compile (format "%s" (file-name-sans-extension buffer-file-name))))
+
+(defun wkf/rust-compile-and-run-file ()
+  "compile and run current rust file"
+  (interactive)
+  (compile (format "rustc %s && %s" (buffer-file-name) (file-name-sans-extension buffer-file-name))))
+
+;; compile current file
+(evil-define-key 'normal rustic-mode-map (kbd ", c f") 'wkf/rust-compile-file)
+
+;; run current file
+(evil-define-key 'normal rustic-mode-map (kbd ", r f") 'wkf/rust-run-file)
+
+;; compile and run current file
+(evil-define-key 'normal rustic-mode-map (kbd ", c r f") 'wkf/rust-compile-and-run-file)
 
 (setq org-directory "~/wkf-org/")
 
