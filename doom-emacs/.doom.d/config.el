@@ -544,6 +544,11 @@
   (interactive)
   (compile (format "rustc %s" (buffer-file-name))))
 
+(defun wkf/rust-compile-project ()
+  "compile current rust project"
+  (interactive)
+  (compile (format "cargo build")))
+
 (defun wkf/rust-run-file ()
   "run current rust file"
   (interactive)
@@ -552,16 +557,36 @@
 (defun wkf/rust-compile-and-run-file ()
   "compile and run current rust file"
   (interactive)
-  (compile (format "rustc %s && %s" (buffer-file-name) (file-name-sans-extension buffer-file-name))))
+  (compile (format "rustc %s && %s" (buffer-file-name)
+                   (file-name-sans-extension buffer-file-name))))
+
+(defun wkf/rust-compile-and-run-project ()
+  "compile and run current rust project"
+  (interactive)
+  (compile (format "cargo run")))
+
+(defun wkf/rust-check-project ()
+  "check current rust project"
+  (interactive)
+  (compile (format "cargo check")))
 
 ;; compile current file
 (evil-define-key 'normal rustic-mode-map (kbd ", c f") 'wkf/rust-compile-file)
+
+;; compile current project
+(evil-define-key 'normal rustic-mode-map (kbd ", c p") 'wkf/rust-compile-project)
+
+;; quickcheck current project
+(evil-define-key 'normal rustic-mode-map (kbd ", c q p") 'wkf/rust-check-project)
 
 ;; run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", r f") 'wkf/rust-run-file)
 
 ;; compile and run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", c r f") 'wkf/rust-compile-and-run-file)
+
+;; compile and run current project
+(evil-define-key 'normal rustic-mode-map (kbd ", c r p") 'wkf/rust-compile-and-run-project)
 
 (setq org-directory "~/wkf-org/")
 

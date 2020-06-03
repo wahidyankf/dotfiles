@@ -585,11 +585,15 @@ To get information about any of these functions/macros, move the cursor over the
 ** Languages
 *** Emacs Lisp
 
+**** Setup
+
 #+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
 *** ReasonML
+
+**** Setup
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! reason-mode
@@ -600,17 +604,26 @@ To get information about any of these functions/macros, move the cursor over the
 
 *** OCaml
 
+**** Utils
+
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/ocaml-compile ()
   "Compile ocaml project"
   (interactive)
   (compile (format "dune build")))
 
+#+END_SRC
+
+**** Setup
+
+#+BEGIN_SRC emacs-lisp :results silent
 ;; compile project
 (evil-define-key 'normal tuareg-mode-map (kbd ", c p") 'wkf/ocaml-compile)
 #+END_SRC
 
 *** Haskell
+
+**** Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-haskell
@@ -635,6 +648,11 @@ To get information about any of these functions/macros, move the cursor over the
   (compile (format "ghc %s && %s" (buffer-file-name)
                    (file-name-sans-extension buffer-file-name))))
 
+#+END_SRC
+
+**** Setup
+
+#+BEGIN_SRC emacs-lisp :results silent
 ;; compile (typecheck only) current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c f") 'wkf/haskell-typecheck)
 
@@ -662,6 +680,8 @@ To get information about any of these functions/macros, move the cursor over the
 
 More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
 
+**** Utils
+
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/update-elixir-language-server ()
   "Update elixir language server's binary"
@@ -682,6 +702,11 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
   (map! :map elixir-mode-map
         :nv "m" alchemist-mode-keymap))
 
+#+END_SRC
+
+**** Setup
+
+#+BEGIN_SRC emacs-lisp :results silent
 (use-package! exunit)
 
 (set-popup-rule! "^\\*alchemist"
@@ -695,11 +720,18 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 
 More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 
+**** Utils
+
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/rust-compile-file ()
   "compile current rust file"
   (interactive)
   (compile (format "rustc %s" (buffer-file-name))))
+
+(defun wkf/rust-compile-project ()
+  "compile current rust project"
+  (interactive)
+  (compile (format "cargo build")))
 
 (defun wkf/rust-run-file ()
   "run current rust file"
@@ -709,16 +741,41 @@ More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 (defun wkf/rust-compile-and-run-file ()
   "compile and run current rust file"
   (interactive)
-  (compile (format "rustc %s && %s" (buffer-file-name) (file-name-sans-extension buffer-file-name))))
+  (compile (format "rustc %s && %s" (buffer-file-name)
+                   (file-name-sans-extension buffer-file-name))))
 
+(defun wkf/rust-compile-and-run-project ()
+  "compile and run current rust project"
+  (interactive)
+  (compile (format "cargo run")))
+
+(defun wkf/rust-check-project ()
+  "check current rust project"
+  (interactive)
+  (compile (format "cargo check")))
+
+#+END_SRC
+
+**** Setup
+
+#+BEGIN_SRC emacs-lisp :results silent
 ;; compile current file
 (evil-define-key 'normal rustic-mode-map (kbd ", c f") 'wkf/rust-compile-file)
+
+;; compile current project
+(evil-define-key 'normal rustic-mode-map (kbd ", c p") 'wkf/rust-compile-project)
+
+;; quickcheck current project
+(evil-define-key 'normal rustic-mode-map (kbd ", c q p") 'wkf/rust-check-project)
 
 ;; run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", r f") 'wkf/rust-run-file)
 
 ;; compile and run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", c r f") 'wkf/rust-compile-and-run-file)
+
+;; compile and run current project
+(evil-define-key 'normal rustic-mode-map (kbd ", c r p") 'wkf/rust-compile-and-run-project)
 #+END_SRC
 * Org Mode
 ** Directory
