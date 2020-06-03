@@ -497,61 +497,6 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 #+END_SRC
 
-*** Compilation
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/window-close-compilation ()
-  "Close compilation pane"
-  (interactive)
-  (delete-windows-on "*compilation*")
-  (delete-windows-on "*Flycheck errors*"))
-
-(defun wkf/window-show-compilation ()
-  "Show compilation pane"
-  (interactive)
-  (display-buffer "*compilation*"))
-
-(defun wkf/error-next ()
-  "Go to next error"
-  (interactive)
-  (cond ((equal (buffer-name) "*compilation*")
-         (compilation-next-error 1))
-        (t (flycheck-next-error))))
-
-(defun wkf/error-previous ()
-  "Go to previous error"
-  (interactive)
-  (cond ((equal (buffer-name) "*compilation*")
-         (compilation-previous-error 1))
-        (t (flycheck-previous-error))))
-
-;; compilation Compile
-(define-key evil-normal-state-map (kbd ", c C") 'compile)
-
-;; compilation repeeat last
-(define-key evil-normal-state-map (kbd ", c c") 'recompile)
-
-;; compilation open
-(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
-
-;; compilation quit
-(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
-
-;; error next
-(define-key evil-normal-state-map (kbd ", c n") 'wkf/error-next)
-
-;; error previous
-(define-key evil-normal-state-map (kbd ", c p") 'wkf/error-previous)
-
-#+END_SRC
-
-*** Error Reporting
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; code diagnosis
-(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
-#+END_SRC
-
 *** Save and Format
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -582,18 +527,65 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 #+END_SRC
 
-** Languages
-*** Emacs Lisp
+*** Compilation
 
-**** Setup
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/window-close-compilation ()
+  "Close compilation pane"
+  (interactive)
+  (delete-windows-on "*compilation*")
+  (delete-windows-on "*Flycheck errors*"))
+
+(defun wkf/window-show-compilation ()
+  "Show compilation pane"
+  (interactive)
+  (display-buffer "*compilation*"))
+
+(defun wkf/error-next ()
+  "Go to next error"
+  (interactive)
+  (cond ((equal (buffer-name) "*compilation*")
+         (compilation-next-error 1))
+        (t (flycheck-next-error))))
+
+(defun wkf/error-previous ()
+  "Go to previous error"
+  (interactive)
+  (cond ((equal (buffer-name) "*compilation*")
+         (compilation-previous-error 1))
+        (t (flycheck-previous-error))))
+
+
+;; compilation window quit
+(define-key evil-normal-state-map (kbd ", c w q") 'wkf/window-close-compilation)
+
+;; compilation window open
+(define-key evil-normal-state-map (kbd ", c w e") 'wkf/window-show-compilation)
+
+;; error next
+(define-key evil-normal-state-map (kbd ", e n") 'wkf/error-next)
+
+;; error previous
+(define-key evil-normal-state-map (kbd ", e p") 'wkf/error-previous)
+
+#+END_SRC
+
+*** Error Reporting
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; code diagnosis
+(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
+#+END_SRC
+
+** Languages
+*** Setup and Utils
+**** Emacs Lisp
 
 #+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
-*** ReasonML
-
-**** Setup
+**** ReasonML
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! reason-mode
@@ -602,28 +594,16 @@ To get information about any of these functions/macros, move the cursor over the
                          (if (equal major-mode 'reason-mode) nil))))
 #+END_SRC
 
-*** OCaml
-
-**** Utils
+**** OCaml
 
 #+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/ocaml-compile ()
+(defun wkf/ocaml-compile-project ()
   "Compile ocaml project"
   (interactive)
   (compile (format "dune build")))
-
 #+END_SRC
 
-**** Setup
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; compile project
-(evil-define-key 'normal tuareg-mode-map (kbd ", c p") 'wkf/ocaml-compile)
-#+END_SRC
-
-*** Haskell
-
-**** Utils
+**** Haskell
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-haskell
@@ -632,7 +612,7 @@ To get information about any of these functions/macros, move the cursor over the
   (lsp-haskell-set-formatter-floskell))
 
 ;; type check haskell code for exhaustiveness
-(defun wkf/haskell-typecheck ()
+(defun wkf/haskell-typecheck-file ()
   "Compile haskell project (add exhaustiveness-check)"
   (interactive)
   (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
@@ -642,7 +622,7 @@ To get information about any of these functions/macros, move the cursor over the
                       (get-buffer-process output-buffer))))))
 
 ;; run current haskell file in compile window
-(defun wkf/haskell-compile-and-run ()
+(defun wkf/haskell-compile-and-run-file ()
   "Run current haskell file"
   (interactive)
   (compile (format "ghc %s && %s" (buffer-file-name)
@@ -650,17 +630,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 #+END_SRC
 
-**** Setup
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; compile (typecheck only) current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c f") 'wkf/haskell-typecheck)
-
-;; compile and run current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c r f") 'wkf/haskell-compile-and-run)
-#+END_SRC
-
-*** TypeScript
+**** TypeScript
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-typescript
@@ -668,7 +638,7 @@ To get information about any of these functions/macros, move the cursor over the
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
-*** Python
+**** Python
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*Anaconda"
@@ -676,11 +646,9 @@ To get information about any of these functions/macros, move the cursor over the
   :side 'bottom)
 #+END_SRC
 
-*** Elixir
+**** Elixir
 
 More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
-
-**** Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/update-elixir-language-server ()
@@ -702,41 +670,47 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
   (map! :map elixir-mode-map
         :nv "m" alchemist-mode-keymap))
 
-#+END_SRC
-
-**** Setup
-
-#+BEGIN_SRC emacs-lisp :results silent
 (use-package! exunit)
 
 (set-popup-rule! "^\\*alchemist"
   :size 0.2)
-
-;; run current file
-(evil-define-key 'normal elixir-mode-map (kbd ", r f") 'alchemist-eval-buffer)
 #+END_SRC
 
-*** Rust
+**** COMMENT Rust
 
 More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 
-**** Utils
-
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp
 (defun wkf/rust-compile-file ()
   "compile current rust file"
   (interactive)
   (compile (format "rustc %s" (buffer-file-name))))
 
 (defun wkf/rust-compile-project ()
-  "compile current rust project"
+  "compile current rust project - development"
   (interactive)
-  (compile (format "cargo build")))
+  (compile "cargo build"))
+
+;; ---
+
+(defun wkf/rust-build-development-project ()
+  "build current rust project (development)"
+  (interactive)
+  (compile "cargo build"))
+
+(defun wkf/rust-build-release-project ()
+  "build current rust project (release)"
+  (interactive)
+  (compile "cargo build --release"))
+
+;; ---
 
 (defun wkf/rust-run-file ()
   "run current rust file"
   (interactive)
   (compile (format "%s" (file-name-sans-extension buffer-file-name))))
+
+;; ---
 
 (defun wkf/rust-compile-and-run-file ()
   "compile and run current rust file"
@@ -747,36 +721,116 @@ More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 (defun wkf/rust-compile-and-run-project ()
   "compile and run current rust project"
   (interactive)
-  (compile (format "cargo run")))
+  (compile "cargo run"))
 
-(defun wkf/rust-check-project ()
+;; ---
+
+(defun wkf/rust-quick-check-project ()
   "check current rust project"
   (interactive)
-  (compile (format "cargo check")))
-
+  (compile "cargo check"))
 #+END_SRC
 
-**** Setup
+#+RESULTS:
+: wkf/rust-quick-check-project
+
+
+*** Compilation
+
+**** Mnemonic
+
+#+BEGIN_EXAMPLE
+;; raw compile
+
+C -> compile Custom
+c . -> compile with last command
+
+;; compile
+
+c c -> compile file
+c r -> compile and run file
+c q -> compile quick file
+b d -> build dev file
+b r -> build release file
+
+c C -> compile project
+c R -> compile and run project
+c Q -> compile quick project
+b D -> build dev project
+b R -> build release project
+
+r -> run file
+R -> run project
+#+END_EXAMPLE
+
+**** Commons
 
 #+BEGIN_SRC emacs-lisp :results silent
-;; compile current file
-(evil-define-key 'normal rustic-mode-map (kbd ", c f") 'wkf/rust-compile-file)
+;; compile Custom
+(define-key evil-normal-state-map (kbd ", C") 'compile)
 
-;; compile current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c p") 'wkf/rust-compile-project)
+;; compile compile (repeat)
+(define-key evil-normal-state-map (kbd ", c .") 'recompile)
+#+END_SRC
 
-;; quickcheck current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c q p") 'wkf/rust-check-project)
+**** OCaml
 
-;; run current file
-(evil-define-key 'normal rustic-mode-map (kbd ", r f") 'wkf/rust-run-file)
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+#+END_SRC
+
+**** Haskell
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile quick (typecheck) current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
 
 ;; compile and run current file
-(evil-define-key 'normal rustic-mode-map (kbd ", c r f") 'wkf/rust-compile-and-run-file)
+(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
+#+END_SRC
+
+**** Elixir
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; run current file
+(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
+#+END_SRC
+
+**** Rust
+
+File
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile - compile - file
+(evil-define-key 'normal rustic-mode-map (kbd ", c c") 'wkf/rust-compile-file)
+
+;; compile and run current file
+(evil-define-key 'normal rustic-mode-map (kbd ", c r") 'wkf/rust-compile-and-run-file)
+
+;; run current file
+(evil-define-key 'normal rustic-mode-map (kbd ", r") 'wkf/rust-run-file)
+#+END_SRC
+
+Project
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile - compile - file
+(evil-define-key 'normal rustic-mode-map (kbd ", c C") 'wkf/rust-compile-project)
+
+;; compile quick project
+(evil-define-key 'normal rustic-mode-map (kbd ", c Q") 'wkf/rust-quick-check-project)
 
 ;; compile and run current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c r p") 'wkf/rust-compile-and-run-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", c R") 'wkf/rust-compile-and-run-project)
+
+;; build - release - project
+(evil-define-key 'normal rustic-mode-map (kbd ", b R") 'wkf/rust-build-release-project-release)
+
+;; build - development - project
+(evil-define-key 'normal rustic-mode-map (kbd ", b D") 'wkf/rust-build-development-project)
 #+END_SRC
+
 * Org Mode
 ** Directory
 

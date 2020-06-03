@@ -389,52 +389,6 @@
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
 
-(defun wkf/window-close-compilation ()
-  "Close compilation pane"
-  (interactive)
-  (delete-windows-on "*compilation*")
-  (delete-windows-on "*Flycheck errors*"))
-
-(defun wkf/window-show-compilation ()
-  "Show compilation pane"
-  (interactive)
-  (display-buffer "*compilation*"))
-
-(defun wkf/error-next ()
-  "Go to next error"
-  (interactive)
-  (cond ((equal (buffer-name) "*compilation*")
-         (compilation-next-error 1))
-        (t (flycheck-next-error))))
-
-(defun wkf/error-previous ()
-  "Go to previous error"
-  (interactive)
-  (cond ((equal (buffer-name) "*compilation*")
-         (compilation-previous-error 1))
-        (t (flycheck-previous-error))))
-
-;; compilation Compile
-(define-key evil-normal-state-map (kbd ", c C") 'compile)
-
-;; compilation repeeat last
-(define-key evil-normal-state-map (kbd ", c c") 'recompile)
-
-;; compilation open
-(define-key evil-normal-state-map (kbd ", c q") 'wkf/window-close-compilation)
-
-;; compilation quit
-(define-key evil-normal-state-map (kbd ", c o") 'wkf/window-show-compilation)
-
-;; error next
-(define-key evil-normal-state-map (kbd ", c n") 'wkf/error-next)
-
-;; error previous
-(define-key evil-normal-state-map (kbd ", c p") 'wkf/error-previous)
-
-;; code diagnosis
-(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
-
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
@@ -461,6 +415,47 @@
 ;; Format
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
+(defun wkf/window-close-compilation ()
+  "Close compilation pane"
+  (interactive)
+  (delete-windows-on "*compilation*")
+  (delete-windows-on "*Flycheck errors*"))
+
+(defun wkf/window-show-compilation ()
+  "Show compilation pane"
+  (interactive)
+  (display-buffer "*compilation*"))
+
+(defun wkf/error-next ()
+  "Go to next error"
+  (interactive)
+  (cond ((equal (buffer-name) "*compilation*")
+         (compilation-next-error 1))
+        (t (flycheck-next-error))))
+
+(defun wkf/error-previous ()
+  "Go to previous error"
+  (interactive)
+  (cond ((equal (buffer-name) "*compilation*")
+         (compilation-previous-error 1))
+        (t (flycheck-previous-error))))
+
+
+;; compilation window quit
+(define-key evil-normal-state-map (kbd ", c w q") 'wkf/window-close-compilation)
+
+;; compilation window open
+(define-key evil-normal-state-map (kbd ", c w e") 'wkf/window-show-compilation)
+
+;; error next
+(define-key evil-normal-state-map (kbd ", e n") 'wkf/error-next)
+
+;; error previous
+(define-key evil-normal-state-map (kbd ", e p") 'wkf/error-previous)
+
+;; code diagnosis
+(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
+
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
 (use-package! reason-mode
@@ -468,13 +463,10 @@
   :hook (before-save . (lambda ()
                          (if (equal major-mode 'reason-mode) nil))))
 
-(defun wkf/ocaml-compile ()
+(defun wkf/ocaml-compile-project ()
   "Compile ocaml project"
   (interactive)
   (compile (format "dune build")))
-
-;; compile project
-(evil-define-key 'normal tuareg-mode-map (kbd ", c p") 'wkf/ocaml-compile)
 
 (use-package! lsp-haskell
   :after lsp-mode
@@ -482,7 +474,7 @@
   (lsp-haskell-set-formatter-floskell))
 
 ;; type check haskell code for exhaustiveness
-(defun wkf/haskell-typecheck ()
+(defun wkf/haskell-typecheck-file ()
   "Compile haskell project (add exhaustiveness-check)"
   (interactive)
   (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
@@ -492,17 +484,11 @@
                       (get-buffer-process output-buffer))))))
 
 ;; run current haskell file in compile window
-(defun wkf/haskell-compile-and-run ()
+(defun wkf/haskell-compile-and-run-file ()
   "Run current haskell file"
   (interactive)
   (compile (format "ghc %s && %s" (buffer-file-name)
                    (file-name-sans-extension buffer-file-name))))
-
-;; compile (typecheck only) current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c f") 'wkf/haskell-typecheck)
-
-;; compile and run current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c r f") 'wkf/haskell-compile-and-run)
 
 (use-package! lsp-typescript
   :when (featurep! +javascript)
@@ -536,57 +522,47 @@
 (set-popup-rule! "^\\*alchemist"
   :size 0.2)
 
-;; run current file
-(evil-define-key 'normal elixir-mode-map (kbd ", r f") 'alchemist-eval-buffer)
+;; compile Custom
+(define-key evil-normal-state-map (kbd ", C") 'compile)
 
-(defun wkf/rust-compile-file ()
-  "compile current rust file"
-  (interactive)
-  (compile (format "rustc %s" (buffer-file-name))))
+;; compile compile (repeat)
+(define-key evil-normal-state-map (kbd ", c .") 'recompile)
 
-(defun wkf/rust-compile-project ()
-  "compile current rust project"
-  (interactive)
-  (compile (format "cargo build")))
+;; compile project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
 
-(defun wkf/rust-run-file ()
-  "run current rust file"
-  (interactive)
-  (compile (format "%s" (file-name-sans-extension buffer-file-name))))
-
-(defun wkf/rust-compile-and-run-file ()
-  "compile and run current rust file"
-  (interactive)
-  (compile (format "rustc %s && %s" (buffer-file-name)
-                   (file-name-sans-extension buffer-file-name))))
-
-(defun wkf/rust-compile-and-run-project ()
-  "compile and run current rust project"
-  (interactive)
-  (compile (format "cargo run")))
-
-(defun wkf/rust-check-project ()
-  "check current rust project"
-  (interactive)
-  (compile (format "cargo check")))
-
-;; compile current file
-(evil-define-key 'normal rustic-mode-map (kbd ", c f") 'wkf/rust-compile-file)
-
-;; compile current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c p") 'wkf/rust-compile-project)
-
-;; quickcheck current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c q p") 'wkf/rust-check-project)
-
-;; run current file
-(evil-define-key 'normal rustic-mode-map (kbd ", r f") 'wkf/rust-run-file)
+;; compile quick (typecheck) current file
+(evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
 
 ;; compile and run current file
-(evil-define-key 'normal rustic-mode-map (kbd ", c r f") 'wkf/rust-compile-and-run-file)
+(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
+
+;; run current file
+(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
+
+;; compile - compile - file
+(evil-define-key 'normal rustic-mode-map (kbd ", c c") 'wkf/rust-compile-file)
+
+;; compile and run current file
+(evil-define-key 'normal rustic-mode-map (kbd ", c r") 'wkf/rust-compile-and-run-file)
+
+;; run current file
+(evil-define-key 'normal rustic-mode-map (kbd ", r") 'wkf/rust-run-file)
+
+;; compile - compile - file
+(evil-define-key 'normal rustic-mode-map (kbd ", c C") 'wkf/rust-compile-project)
+
+;; compile quick project
+(evil-define-key 'normal rustic-mode-map (kbd ", c Q") 'wkf/rust-quick-check-project)
 
 ;; compile and run current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c r p") 'wkf/rust-compile-and-run-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", c R") 'wkf/rust-compile-and-run-project)
+
+;; build - release - project
+(evil-define-key 'normal rustic-mode-map (kbd ", b R") 'wkf/rust-build-release-project-release)
+
+;; build - development - project
+(evil-define-key 'normal rustic-mode-map (kbd ", b D") 'wkf/rust-build-development-project)
 
 (setq org-directory "~/wkf-org/")
 
