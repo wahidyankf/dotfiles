@@ -52,11 +52,20 @@
 ;; | (vertical)
 (define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/window-vsplit)
 
+;; | (vertical)
+(define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
+
 ;; - (horizontal)
 (define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/window-split)
 
+;; - (horizontal)
+(define-key evil-normal-state-map (kbd ", -") 'wkf/window-split)
+
 ;; = (equal)
 (define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
+
+;; = (equal)
+(define-key evil-normal-state-map (kbd ", =") 'balance-windows)
 
 (defun wkf/window-close-left ()
   "Close the pane on the left"
