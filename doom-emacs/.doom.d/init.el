@@ -29,7 +29,7 @@
        ;;fill-column       ; a `fill-column' indicator
        hl-todo     ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
-       ;rindent-guides   ; highlighted indent columns
+                                        ;rindent-guides   ; highlighted indent columns
        ;;minimap         ; show a map of the code on the side
        modeline    ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash         ; blink cursor line after big motions
@@ -102,7 +102,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
-       ;;elixir            ; erlang done right
+       (elixir +lsp)                ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp                       ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age

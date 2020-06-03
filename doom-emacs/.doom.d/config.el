@@ -303,6 +303,7 @@
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
+  :hook (elixir-mode . lsp)
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
@@ -316,6 +317,23 @@
                                                                             'ignore))
                                                 :priority 1
                                                 :server-id 'reason-ls))
+  :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection
+                                                                 "~/.doom.d/elixir-ls/release/language_server.sh")
+                                                :major-modes '(elixir-mode)
+                                                :notification-handlers (ht ("client/registerCapability"
+                                                                            'ignore))
+                                                :priority 1
+                                                :initialized-fn (lambda (workspace)
+                                                                  (with-lsp-workspace workspace (let
+                                                                                                    ((config
+                                                                                                      `(:elixirLS
+                                                                                                        (:mixEnv
+                                                                                                         "dev"
+                                                                                                         :dialyzerEnabled
+                                                                                                         :json-false))))
+                                                                                                  (lsp--set-configuration
+                                                                                                   config))))
+                                                :server-id 'elixir-ls))
   :config (setq lsp-lens-auto-enable t)
   :commands (lsp-mode lsp-define-stdio-client))
 
@@ -482,6 +500,8 @@
 (use-package! lsp-typescript
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
+
+
 
 (setq org-directory "~/wkf-org/")
 

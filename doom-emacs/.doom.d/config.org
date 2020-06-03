@@ -395,6 +395,7 @@ Make sure eshell and mx-compile use zsh (copied alias)
   :hook (reason-mode . lsp)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
+  :hook (elixir-mode . lsp)
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
@@ -408,6 +409,23 @@ Make sure eshell and mx-compile use zsh (copied alias)
                                                                             'ignore))
                                                 :priority 1
                                                 :server-id 'reason-ls))
+  :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection
+                                                                 "~/.doom.d/elixir-ls/release/language_server.sh")
+                                                :major-modes '(elixir-mode)
+                                                :notification-handlers (ht ("client/registerCapability"
+                                                                            'ignore))
+                                                :priority 1
+                                                :initialized-fn (lambda (workspace)
+                                                                  (with-lsp-workspace workspace (let
+                                                                                                    ((config
+                                                                                                      `(:elixirLS
+                                                                                                        (:mixEnv
+                                                                                                         "dev"
+                                                                                                         :dialyzerEnabled
+                                                                                                         :json-false))))
+                                                                                                  (lsp--set-configuration
+                                                                                                   config))))
+                                                :server-id 'elixir-ls))
   :config (setq lsp-lens-auto-enable t)
   :commands (lsp-mode lsp-define-stdio-client))
 #+END_SRC
@@ -625,6 +643,13 @@ To get information about any of these functions/macros, move the cursor over the
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
+*** Elixis
+
+More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]]
+
+#+BEGIN_SRC emacs-lisp :results silent
+
+#+END_SRC
 * Org Mode
 ** Directory
 
