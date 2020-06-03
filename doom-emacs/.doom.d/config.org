@@ -683,6 +683,7 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 ;; run current buffer
 (evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
 #+END_SRC
+
 * Org Mode
 ** Directory
 
