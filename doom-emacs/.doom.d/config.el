@@ -556,6 +556,14 @@
 
 (setq org-directory "~/wkf-org/")
 
+(defun wkf/find-org-index ()
+  "Open my org index in the right vsp"
+  (interactive)
+  (wkf/find-file "~/wkf-org/index.org"))
+
+;; Open index file
+(define-key evil-normal-state-map (kbd "<backspace> o e i") 'wkf/find-org-index)
+
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s e") 'org-edit-special)
 
