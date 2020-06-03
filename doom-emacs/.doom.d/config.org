@@ -214,10 +214,6 @@ Show battery and time on the bottom.
   :size 0.25
   :side 'bottom)
 
-(set-popup-rule! "^\\*Anaconda"
-  :size 0.25
-  :side 'bottom)
-
 (defun wkf/popup-size (size)
   "Change default popup size"
   (interactive)
@@ -438,7 +434,8 @@ Make sure eshell and mx-compile use zsh (copied alias)
   :config (set-lookup-handlers! 'lsp-ui-mode
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
-  (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t))
+  (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t)
+  (flycheck-credo-setup))
 #+END_SRC
 
 *** Company LSP
@@ -576,7 +573,7 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 #+END_SRC
 
-** Language
+** Languages
 *** Emacs Lisp
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -643,11 +640,41 @@ To get information about any of these functions/macros, move the cursor over the
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
-*** Elixis
-
-More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]]
+*** Python
 
 #+BEGIN_SRC emacs-lisp :results silent
+(set-popup-rule! "^\\*Anaconda"
+  :size 0.25
+  :side 'bottom)
+#+END_SRC
+
+*** Elixir
+
+More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package! alchemist
+  :after elixir-mode
+  :hook (elixir-mode . alchemist-mode)
+  :config (set-lookup-handlers! 'elixir-mode
+            :definition #'alchemist-goto-definition-at-point
+            :documentation #'alchemist-help-search-at-point)
+  (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
+  (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
+  (setq alchemist-mix-env "dev")
+  (setq alchemist-hooks-compile-on-save t)
+  (map! :map elixir-mode-map
+        :nv "m" alchemist-mode-keymap))
+
+(use-package! exunit)
+
+(set-popup-rule! "^\\*alchemist" :size 0.2)
+
+;; TODO: compile elixir code
+;; (evil-define-key 'normal elixir-mode-map (kbd ", c C") 'wkf/elixir-typecheck)
+
+;; run current buffer
+(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
 
 #+END_SRC
 * Org Mode

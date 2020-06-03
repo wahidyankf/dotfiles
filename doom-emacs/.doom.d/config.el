@@ -144,10 +144,6 @@
   :size 0.25
   :side 'bottom)
 
-(set-popup-rule! "^\\*Anaconda"
-  :size 0.25
-  :side 'bottom)
-
 (defun wkf/popup-size (size)
   "Change default popup size"
   (interactive)
@@ -342,7 +338,8 @@
   :config (set-lookup-handlers! 'lsp-ui-mode
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
-  (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t))
+  (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t)
+  (flycheck-credo-setup))
 
 (use-package! company-lsp
   :after lsp-mode
@@ -501,7 +498,32 @@
   :when (featurep! +javascript)
   :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 
+(set-popup-rule! "^\\*Anaconda"
+  :size 0.25
+  :side 'bottom)
 
+(use-package! alchemist
+  :after elixir-mode
+  :hook (elixir-mode . alchemist-mode)
+  :config (set-lookup-handlers! 'elixir-mode
+            :definition #'alchemist-goto-definition-at-point
+            :documentation #'alchemist-help-search-at-point)
+  (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
+  (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
+  (setq alchemist-mix-env "dev")
+  (setq alchemist-hooks-compile-on-save t)
+  (map! :map elixir-mode-map
+        :nv "m" alchemist-mode-keymap))
+
+(use-package! exunit)
+
+(set-popup-rule! "^\\*alchemist" :size 0.2)
+
+;; TODO: compile elixir code
+;; (evil-define-key 'normal elixir-mode-map (kbd ", c C") 'wkf/elixir-typecheck)
+
+;; run current buffer
+(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
 
 (setq org-directory "~/wkf-org/")
 

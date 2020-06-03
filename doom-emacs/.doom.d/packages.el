@@ -58,6 +58,11 @@
 (package! merlin)
 (package! elisp-format)
 (package! py-yapf)
+(package! dap-mode)
+(package! exunit)
+(package! flycheck-credo)
+(package! elixir-mode)
+(package! alchemist)
 
 (when (package! lsp-mode)
   (package! lsp-ui)
