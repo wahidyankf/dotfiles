@@ -502,6 +502,12 @@
   :size 0.25
   :side 'bottom)
 
+(defun wkf/update-elixir-language-server ()
+  "Update elixir language server's binary"
+  (interactive)
+  (compile
+   "cd ~/.doom.d/elixir-ls && git reset --hard HEAD && git pull origin master && mix deps.get && mix elixir_ls.release"))
+
 (use-package! alchemist
   :after elixir-mode
   :hook (elixir-mode . alchemist-mode)
@@ -519,11 +525,6 @@
 
 (set-popup-rule! "^\\*alchemist"
   :size 0.2)
-
-(defun wkf/update-elixir-language-server ()
-  (interactive)
-  (compile
-   "cd ~/.doom.d/elixir-ls && git reset --hard HEAD && git pull origin master && mix deps.get && mix elixir_ls.release"))
 
 ;; TODO: compile elixir code
 ;; (evil-define-key 'normal elixir-mode-map (kbd ", c C") 'wkf/elixir-typecheck)
