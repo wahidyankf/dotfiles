@@ -364,8 +364,8 @@
                 (recenter)))
         (t (progn (+lookup/definition (doom-thing-at-point-or-region))
                   (evil-window-split)
-                  (evil-window-down 1)
                   (evil-jump-backward-swap)
+                  (evil-window-down 1)
                   (balance-windows)
                   (recenter)))))
 
