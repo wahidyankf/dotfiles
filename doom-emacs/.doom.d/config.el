@@ -474,8 +474,16 @@
   (interactive)
   (compile (format "dune build")))
 
+(defun wkf/ocaml-clean-project ()
+  "Clean ocaml project"
+  (interactive)
+  (compile (format "dune clean")))
+
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+
+;; clean ocaml project using dune
+(evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
 
 (use-package! lsp-haskell
   :after lsp-mode

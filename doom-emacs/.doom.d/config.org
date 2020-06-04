@@ -601,8 +601,15 @@ c Q -> compile quick project
 b D -> build dev project
 b R -> build release project
 
+;; run
+
 r -> run file
 R -> run project
+
+;; clean
+
+c l -> clean project
+c L -> hard clean project
 #+END_EXAMPLE
 
 **** Commons
@@ -637,6 +644,40 @@ R -> run project
 
 *** OCaml
 
+**** Prerequisite & Notes
+
+Install these using opam:
+
+***** [[https://github.com/ocaml/merlin][Merlin]]
+
+#+BEGIN_EXAMPLE sh :results output
+opam install merlin
+#+END_EXAMPLE
+
+***** [[https://github.com/ocaml-ppx/ocamlformat][ocamlformat]]
+
+#+BEGIN_EXAMPLE sh :results output
+opam install ocamlformat
+#+END_EXAMPLE
+
+***** [[https://github.com/ocaml/ocaml-lsp][OCaml LSP]]
+
+#+BEGIN_EXAMPLE sh :results output
+opam pin add ocaml-lsp-server https://github.com/ocaml/ocaml-lsp.git && opam install ocaml-lsp-server
+#+END_EXAMPLE
+
+***** Another goodies (optional)
+
+Basically following this: [[https://dev.realworldocaml.org/install.html][Real World OCaml - Installation]]
+
+#+BEGIN_EXAMPLE sh :results output
+opam install core utop && opam install async yojson core_extended core_bench cohttp async_graphics cryptokit menhir
+#+END_EXAMPLE
+
+***** Notes
+
+As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same time, thus, make sure that we are =opam switch=-ing to the correct version of opam
+
 **** Setup and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -644,6 +685,11 @@ R -> run project
   "Compile ocaml project"
   (interactive)
   (compile (format "dune build")))
+
+(defun wkf/ocaml-clean-project ()
+  "Clean ocaml project"
+  (interactive)
+  (compile (format "dune clean")))
 #+END_SRC
 
 **** Keybindings
@@ -651,6 +697,9 @@ R -> run project
 #+BEGIN_SRC emacs-lisp :results silent
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+
+;; clean ocaml project using dune
+(evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
 #+END_SRC
 
 
