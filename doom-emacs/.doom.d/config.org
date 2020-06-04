@@ -805,7 +805,17 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 
 *** Rust
 
-More info: [[https://github.com/brotzeit/rustic][Rustic Mode]]
+**** Prerequisite and Notes
+
+***** [[https://rustup.rs/][RustUp]]
+
+#+BEGIN_EXAMPLE
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#+END_EXAMPLE
+
+***** More info
+
+[[https://github.com/brotzeit/rustic][Rustic Mode]]
 
 **** Setup and Utils
 
