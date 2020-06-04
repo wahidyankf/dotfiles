@@ -461,13 +461,21 @@ Make sure eshell and mx-compile use zsh (copied alias)
 To get information about any of these functions/macros, move the cursor over the highlighted symbol at press =K= (non-evil users must press =C-c g k=). This will open documentation for it, including demos of how they are used.
 
 #+BEGIN_SRC emacs-lisp :results silent
-
 (defun wkf/gdef ()
   "Open +lookup/definition in the split window below"
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (progn (make-frame-command)
                 (evil-goto-definition)
+                (recenter)))
+        ((or
+          (equal major-mode 'js2-mode)
+          (equal major-mode 'typescript-mode))
+         (progn (+lookup/definition (doom-thing-at-point-or-region))
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (balance-windows)
                 (recenter)))
         (t (progn (+lookup/definition (doom-thing-at-point-or-region))
                   (evil-window-split)
@@ -488,7 +496,10 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 ;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd "g d") 'evil-goto-definition)
+(define-key evil-normal-state-map (kbd "g d") '+lookup/definition)
+
+;; Go to Dokumentation in current pane
+(define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
 
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
@@ -740,17 +751,6 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 ;; compile and run current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
-#+END_SRC
-
-
-*** TypeScript
-
-**** Setup and Utils
-
-#+BEGIN_SRC emacs-lisp :results silent
-(use-package! lsp-typescript
-  :when (featurep! +javascript)
-  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 #+END_SRC
 
 *** Python

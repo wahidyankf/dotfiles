@@ -362,6 +362,15 @@
          (progn (make-frame-command)
                 (evil-goto-definition)
                 (recenter)))
+        ((or
+          (equal major-mode 'js2-mode)
+          (equal major-mode 'typescript-mode))
+         (progn (+lookup/definition (doom-thing-at-point-or-region))
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (balance-windows)
+                (recenter)))
         (t (progn (+lookup/definition (doom-thing-at-point-or-region))
                   (evil-window-split)
                   (evil-jump-backward-swap)
@@ -381,7 +390,10 @@
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 ;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd "g d") 'evil-goto-definition)
+(define-key evil-normal-state-map (kbd "g d") '+lookup/definition)
+
+;; Go to Dokumentation in current pane
+(define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
 
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
@@ -512,10 +524,6 @@
 
 ;; compile and run current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
-
-(use-package! lsp-typescript
-  :when (featurep! +javascript)
-  :hook ((js2-mode typescript-mode) . lsp-typescript-enable))
 
 (set-popup-rule! "^\\*Anaconda"
   :size 0.25
