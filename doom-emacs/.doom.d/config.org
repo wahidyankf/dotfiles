@@ -655,7 +655,7 @@ c L -> hard clean project
 
 *** OCaml
 
-**** Prerequisite & Notes
+**** Setup
 
 Install these using opam:
 
@@ -805,7 +805,7 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 
 *** Rust
 
-**** Prerequisite and Notes
+**** Setup
 
 ***** [[https://github.com/rust-lang/rls][RLS (Rust Language Server)]]
 
