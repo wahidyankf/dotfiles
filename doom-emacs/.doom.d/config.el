@@ -642,6 +642,18 @@
 
 (evil-define-key 'normal org-mode-map (kbd "`sel") 'wkf/org-src-elisp)
 
+(defun wkf/org-src-elisp ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC sh :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "`ssh") 'wkf/org-src-elisp)
+
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 
 (add-hook 'org-mode-hook 'org-display-inline-images)
