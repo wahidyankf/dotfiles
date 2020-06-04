@@ -38,7 +38,7 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
   doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+End_example
 
-*** Setup
+*** Config
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; the mighty dank-mono
@@ -48,7 +48,7 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 
 ** Editor
 
-Setup text editor's preference.
+Config text editor's preference.
 
 #+BEGIN_SRC emacs-lisp :results silent
 (blink-cursor-mode t)
@@ -644,7 +644,7 @@ c L -> hard clean project
 
 *** ReasonML
 
-**** Setup and Utils
+**** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! reason-mode
@@ -689,7 +689,7 @@ opam install core utop && opam install async yojson core_extended core_bench coh
 
 As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same time, thus, make sure that we are =opam switch=-ing to the correct version of opam
 
-**** Setup and Utils
+**** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/ocaml-compile-project ()
@@ -716,7 +716,7 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 *** Haskell
 
-**** Setup and Utils
+**** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! lsp-haskell
@@ -755,7 +755,7 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 *** Python
 
-**** Setup and Utils
+**** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*Anaconda"
@@ -765,7 +765,7 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 *** Elixir
 
-**** Setup and Utils
+**** Config and Utils
 
 More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
 
@@ -834,7 +834,7 @@ rustup component add --toolchain nightly clippy
 
 [[https://github.com/brotzeit/rustic][Rustic Mode]]
 
-**** Setup and Utils
+**** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/rust-compile-file ()
