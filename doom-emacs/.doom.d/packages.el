@@ -63,6 +63,7 @@
 (package! flycheck-credo)
 (package! elixir-mode)
 (package! alchemist)
+(package! org-make-toc)
 
 (when (package! lsp-mode)
   (package! lsp-ui)

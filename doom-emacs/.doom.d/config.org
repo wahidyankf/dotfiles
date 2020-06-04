@@ -620,8 +620,6 @@ R -> run project
 
 *** Emacs Lisp
 
-**** Setup and Utils
-
 #+BEGIN_SRC emacs-lisp :results silent
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
