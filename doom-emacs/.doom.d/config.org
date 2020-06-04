@@ -829,10 +829,9 @@ rustup install nightly
 rustup component add --toolchain nightly clippy
 #+END_EXAMPLE
 
+***** Notes
 
-***** More info
-
-[[https://github.com/brotzeit/rustic][Rustic Mode]]
+Doom's Rust setup use rustic-mode. Here is the link to the docs: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 
 **** Config and Utils
 
