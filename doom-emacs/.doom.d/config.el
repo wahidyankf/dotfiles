@@ -668,8 +668,11 @@
 ;; Org Open
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o o") 'wkf/org-open-at-point)
 
-;; disable the change slide effect
+;; disable the change slide effect, it is just cheesy
 (setq org-tree-slide-slide-in-effect nil)
+
+;; disable the header
+(setq org-tree-slide-header nil)
 
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
@@ -685,6 +688,12 @@
   (lambda ()
     (interactive)
     (message "minify frame manually disabled in org-mode")))
+
+;; disable new buffer in org mode (to make the presentation slide-back miss-hit harmless)
+(evil-define-key 'normal org-mode-map (kbd "s-n")
+  (lambda ()
+    (interactive)
+    (message "create new buffer manually disabled in org-mode")))
 
 ;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
