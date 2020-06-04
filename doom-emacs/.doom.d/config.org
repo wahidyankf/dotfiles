@@ -807,11 +807,28 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 
 **** Prerequisite and Notes
 
+***** [[https://github.com/rust-lang/rls][RLS (Rust Language Server)]]
+
+RLS need to be installed first
+
+#+BEGIN_EXAMPLE
+rustup component add rls rust-analysis rust-src
+#+END_EXAMPLE
+
 ***** [[https://rustup.rs/][RustUp]]
 
 #+BEGIN_EXAMPLE
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 #+END_EXAMPLE
+
+***** Install the correct version of clippy
+
+#+BEGIN_EXAMPLE
+rustup install nightly
+
+rustup component add --toolchain nightly clippy
+#+END_EXAMPLE
+
 
 ***** More info
 
