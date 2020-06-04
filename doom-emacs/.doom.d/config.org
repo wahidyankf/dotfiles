@@ -929,6 +929,9 @@ If you use =org= and don't want your org files in the default location below, ch
 ** Org Tree Slide
 
 #+BEGIN_SRC emacs-lisp :results silent
+;; disable the change slide effect
+(setq org-tree-slide-slide-in-effect nil)
+
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
 
@@ -937,6 +940,12 @@ If you use =org= and don't want your org files in the default location below, ch
 
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
+
+;; disable minify in org mode (to make the presentation slide-back miss-hit harmless)
+(evil-define-key 'normal org-mode-map (kbd "s-m")
+  (lambda ()
+    (interactive)
+    (message "minify frame manually disabled in org-mode")))
 #+END_SRC
 
 * Git
