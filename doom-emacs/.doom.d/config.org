@@ -9,6 +9,7 @@ Some functionality uses this to identify us (e.g.GPG configuration, email client
 #+END_SRC
 
 * Theming
+
 ** Base
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -462,21 +463,39 @@ To get information about any of these functions/macros, move the cursor over the
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/gdef ()
+  "Look up definition in the current window"
+  (interactive)
+  (cond ((equal major-mode 'typescript-mode)
+         (evil-goto-definition))
+        (t (+lookup/definition (doom-thing-at-point-or-region)))))
+
+(defun wkf/gdef-split ()
   "Open +lookup/definition in the split window below"
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (progn (make-frame-command)
                 (evil-goto-definition)
                 (recenter)))
-        ((or
-          (equal major-mode 'js2-mode)
-          (equal major-mode 'typescript-mode))
+        ((equal major-mode 'typescript-mode)
+         (progn (evil-goto-definition)
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (balance-windows)
+                (recenter)))
+        ((equal major-mode 'js2-mode)
          (progn (+lookup/definition (doom-thing-at-point-or-region))
                 (evil-window-split)
                 (evil-jump-backward-swap)
                 (evil-window-down 1)
                 (balance-windows)
                 (recenter)))
+        ((equal major-mode 'rjsx-mode)
+         (progn (+lookup/definition (doom-thing-at-point-or-region))
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (balance-windows)))
         (t (progn (+lookup/definition (doom-thing-at-point-or-region))
                   (evil-window-split)
                   (evil-jump-backward-swap)
@@ -484,7 +503,7 @@ To get information about any of these functions/macros, move the cursor over the
                   (balance-windows)
                   (recenter)))))
 
-(defun wkf/gdoc ()
+(defun wkf/gdoc-split ()
   "Open +lookup/documentation in the mini buffer"
   (interactive)
   (+lookup/documentation (doom-thing-at-point-or-region))
@@ -496,16 +515,16 @@ To get information about any of these functions/macros, move the cursor over the
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 ;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd "g d") '+lookup/definition)
+(define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
 
 ;; Go to Dokumentation in current pane
 (define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
 
 ;; Go to Definition hsplit window
-(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
+(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
 
 ;; Go to doKumentation
-(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
+(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
 #+END_SRC
 
 *** Save and Format
@@ -982,6 +1001,10 @@ If you use =org= and don't want your org files in the default location below, ch
 ** Images
 
 #+BEGIN_SRC emacs-lisp :results silent
+;; (setq org-image-actual-width nil)
+
+(setq org-image-actual-width (/ (display-pixel-width) 3))
+
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 
 (add-hook 'org-mode-hook 'org-display-inline-images)

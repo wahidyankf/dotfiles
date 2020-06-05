@@ -356,21 +356,39 @@
   (setq company-lsp-enable-recompletion t))
 
 (defun wkf/gdef ()
+  "Look up definition in the current window"
+  (interactive)
+  (cond ((equal major-mode 'typescript-mode)
+         (evil-goto-definition))
+        (t (+lookup/definition (doom-thing-at-point-or-region)))))
+
+(defun wkf/gdef-split ()
   "Open +lookup/definition in the split window below"
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (progn (make-frame-command)
                 (evil-goto-definition)
                 (recenter)))
-        ((or
-          (equal major-mode 'js2-mode)
-          (equal major-mode 'typescript-mode))
+        ((equal major-mode 'typescript-mode)
+         (progn (evil-goto-definition)
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (balance-windows)
+                (recenter)))
+        ((equal major-mode 'js2-mode)
          (progn (+lookup/definition (doom-thing-at-point-or-region))
                 (evil-window-split)
                 (evil-jump-backward-swap)
                 (evil-window-down 1)
                 (balance-windows)
                 (recenter)))
+        ((equal major-mode 'rjsx-mode)
+         (progn (+lookup/definition (doom-thing-at-point-or-region))
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (balance-windows)))
         (t (progn (+lookup/definition (doom-thing-at-point-or-region))
                   (evil-window-split)
                   (evil-jump-backward-swap)
@@ -378,7 +396,7 @@
                   (balance-windows)
                   (recenter)))))
 
-(defun wkf/gdoc ()
+(defun wkf/gdoc-split ()
   "Open +lookup/documentation in the mini buffer"
   (interactive)
   (+lookup/documentation (doom-thing-at-point-or-region))
@@ -390,16 +408,16 @@
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 ;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd "g d") '+lookup/definition)
+(define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
 
 ;; Go to Dokumentation in current pane
 (define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
 
 ;; Go to Definition hsplit window
-(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
+(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
 
 ;; Go to doKumentation
-(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc)
+(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
 
 (defun wkf/buffer-format ()
   "Format current buffer"
@@ -669,6 +687,10 @@
          (evil-open-above 1)))
 
 (evil-define-key 'normal org-mode-map (kbd "`ssh") 'wkf/org-src-elisp)
+
+;; (setq org-image-actual-width nil)
+
+(setq org-image-actual-width (/ (display-pixel-width) 3))
 
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
 
