@@ -129,10 +129,8 @@
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.25)
-
-(set-popup-rule! "^\\*Org Src"
-  :size .6)
+  :size 0.25
+  :side 'bottom)
 
 (set-popup-rule! "^\\*doom:vterm-"
   :size 0.25)
@@ -153,10 +151,18 @@
   :size 0.25
   :side 'bottom)
 
+(add-hook 'org-mode-hook (lambda ()
+                           (set-popup-rule! "^\\*Org Src"
+                             :size .75
+                             :side 'bottom)))
+
 (defun wkf/popup-size (size)
   "Change default popup size"
   (interactive)
-  (cond ((equal size "xl")
+  (cond ((equal size "xxl")
+         (set-popup-rule! "^\\*"
+           :size 0.75))
+        ((equal size "xl")
          (set-popup-rule! "^\\*"
            :size 0.6))
         ((equal size "l")
@@ -171,32 +177,33 @@
 
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
-  '(lambda ()
-     (wkf/popup-size "xxl")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "xxl")))
 
 ;; change default popup size to XL (0.5)
 (define-key evil-normal-state-map (kbd "<backspace> p s 4")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "xl")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "xl")))
 
 ;; change default popup size to L (0.35)
 (define-key evil-normal-state-map (kbd "<backspace> p s 3")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "l")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "l")))
 
 ;; change default popup size to M (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 2")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "m")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "m")))
 
 ;; change default popup size to S (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "s")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "s")))
 
 ;; popup q
 (define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
@@ -362,6 +369,21 @@
          (evil-goto-definition))
         (t (+lookup/definition (doom-thing-at-point-or-region)))))
 
+(defun wkf/gdef-new-frame ()
+  "Open +lookup/definition in the new frame"
+  (interactive)
+  (make-frame-command)
+  (cond ((equal major-mode 'reason-mode)
+         (evil-goto-definition))
+        ((equal major-mode 'typescript-mode)
+         (evil-goto-definition))
+        ((equal major-mode 'js2-mode)
+         (+lookup/definition (doom-thing-at-point-or-region)))
+        ((equal major-mode 'rjsx-mode)
+         (+lookup/definition (doom-thing-at-point-or-region)))
+        (t (+lookup/definition (doom-thing-at-point-or-region))))
+  (recenter))
+
 (defun wkf/gdef-split ()
   "Open +lookup/definition in the split window below"
   (interactive)
@@ -415,6 +437,9 @@
 
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
+
+;; Go to Definition in the new frame
+(define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
 
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
@@ -646,16 +671,6 @@
 
 ;; build - development - project
 (evil-define-key 'normal rustic-mode-map (kbd ", b D") 'wkf/rust-build-development-project)
-
-(setq org-directory "~/wkf-org/")
-
-(defun wkf/find-org-index ()
-  "Open my org index in the right vsp"
-  (interactive)
-  (wkf/find-file "~/wkf-org/index.org"))
-
-;; Open index file
-(define-key evil-normal-state-map (kbd "<backspace> o e i") 'wkf/find-org-index)
 
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s e") 'org-edit-special)

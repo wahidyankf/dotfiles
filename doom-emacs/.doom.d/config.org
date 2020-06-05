@@ -200,10 +200,8 @@ Show battery and time on the bottom.
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*compilation"
-  :size 0.25)
-
-(set-popup-rule! "^\\*Org Src"
-  :size .6)
+  :size 0.25
+  :side 'bottom)
 
 (set-popup-rule! "^\\*doom:vterm-"
   :size 0.25)
@@ -224,10 +222,18 @@ Show battery and time on the bottom.
   :size 0.25
   :side 'bottom)
 
+(add-hook 'org-mode-hook (lambda ()
+                           (set-popup-rule! "^\\*Org Src"
+                             :size .75
+                             :side 'bottom)))
+
 (defun wkf/popup-size (size)
   "Change default popup size"
   (interactive)
-  (cond ((equal size "xl")
+  (cond ((equal size "xxl")
+         (set-popup-rule! "^\\*"
+           :size 0.75))
+        ((equal size "xl")
          (set-popup-rule! "^\\*"
            :size 0.6))
         ((equal size "l")
@@ -242,36 +248,39 @@ Show battery and time on the bottom.
 
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd "<backspace> p s 5")
-  '(lambda ()
-     (wkf/popup-size "xxl")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "xxl")))
 
 ;; change default popup size to XL (0.5)
 (define-key evil-normal-state-map (kbd "<backspace> p s 4")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "xl")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "xl")))
 
 ;; change default popup size to L (0.35)
 (define-key evil-normal-state-map (kbd "<backspace> p s 3")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "l")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "l")))
 
 ;; change default popup size to M (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 2")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "m")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "m")))
 
 ;; change default popup size to S (0.25)
 (define-key evil-normal-state-map (kbd "<backspace> p s 1")
-  '(lambda ()
-     (interactive)
-     (wkf/popup-size "s")))
+  (lambda ()
+    (interactive)
+    (wkf/popup-size "s")))
 
 ;; popup q
 (define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
 #+END_SRC
+
+#+RESULTS:
 
 * Terminal
 ** Enviroment
@@ -469,6 +478,21 @@ To get information about any of these functions/macros, move the cursor over the
          (evil-goto-definition))
         (t (+lookup/definition (doom-thing-at-point-or-region)))))
 
+(defun wkf/gdef-new-frame ()
+  "Open +lookup/definition in the new frame"
+  (interactive)
+  (make-frame-command)
+  (cond ((equal major-mode 'reason-mode)
+         (evil-goto-definition))
+        ((equal major-mode 'typescript-mode)
+         (evil-goto-definition))
+        ((equal major-mode 'js2-mode)
+         (+lookup/definition (doom-thing-at-point-or-region)))
+        ((equal major-mode 'rjsx-mode)
+         (+lookup/definition (doom-thing-at-point-or-region)))
+        (t (+lookup/definition (doom-thing-at-point-or-region))))
+  (recenter))
+
 (defun wkf/gdef-split ()
   "Open +lookup/definition in the split window below"
   (interactive)
@@ -522,6 +546,9 @@ To get information about any of these functions/macros, move the cursor over the
 
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
+
+;; Go to Definition in the new frame
+(define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
 
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
@@ -940,7 +967,7 @@ Project
 #+END_SRC
 
 * Org Mode
-** Directory
+** COMMENT Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
 
@@ -965,7 +992,6 @@ If you use =org= and don't want your org files in the default location below, ch
 ;; Org SRC Format
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
   (kbd "<backspace> o s e , w : q"))
-
 #+END_SRC
 
 #+RESULTS:
