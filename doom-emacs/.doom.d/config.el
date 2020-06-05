@@ -740,7 +740,16 @@
 (setq org-tree-slide-header nil)
 
 ;; Org Presentation
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'org-tree-slide-mode)
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o p")
+  (lambda ()
+    (interactive)
+    (if (bound-and-true-p org-tree-slide-mode)
+        (progn (org-tree-slide-mode)
+               (setq org-tree-slide-mode nil)
+               (display-line-numbers-mode 'relative))
+      (progn (org-tree-slide-mode)
+             (setq org-tree-slide-mode t)
+             (display-line-numbers-mode -1)))))
 
 ;; >
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
