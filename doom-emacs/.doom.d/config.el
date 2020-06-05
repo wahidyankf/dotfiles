@@ -743,13 +743,18 @@
   "Toggle org-mode presentation's mode"
   (interactive)
   (if (bound-and-true-p org-tree-slide-mode)
-      (progn (org-tree-slide-mode)
-             (setq org-tree-slide-mode nil)
-             (display-line-numbers-mode 'relative))
-    (progn (org-tree-slide-mode)
-           (setq org-tree-slide-mode t)
-           (display-line-numbers-mode -1))))
-
+      (progn
+        ;; disable presentation mode
+        (org-tree-slide-mode)
+        (setq org-tree-slide-mode nil)
+        (display-line-numbers-mode 'relative)
+        (doom-modeline-mode))
+    (progn
+      ;; enable presentation mode
+      (org-tree-slide-mode)
+      (setq org-tree-slide-mode t)
+      (display-line-numbers-mode -1)
+      (doom-modeline-mode -1))))
 
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'wkf/toggle-org-presentation)
