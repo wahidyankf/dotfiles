@@ -568,6 +568,22 @@
 ;; compile and run current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
 
+(defun wkf/ts-compile-project ()
+  "compile typescript project"
+  (interactive)
+  (compile (format "yarn tsc")))
+
+(defun wkf/ts-compile-and-run-file ()
+  "compile and run current typescript file"
+  (interactive)
+  (compile (format "yarn ts-node %s" (buffer-file-name))))
+
+;; compile quick (typecheck) project
+(evil-define-key 'normal typescript-mode-map (kbd ", c C") 'wkf/ts-compile-project)
+
+;; compile and run current file
+(evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
+
 (set-popup-rule! "^\\*Anaconda"
   :size 0.25
   :side 'bottom)
