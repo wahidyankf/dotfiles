@@ -672,6 +672,25 @@
 ;; build - development - project
 (evil-define-key 'normal rustic-mode-map (kbd ", b D") 'wkf/rust-build-development-project)
 
+(setq org-directory "~/wkf-org/")
+
+(add-hook 'org-mode-hook (lambda ()
+                           (set-popup-rule! "^\\*Org Src"
+                             :size .75
+                             :side 'bottom)
+                           (setq org-log-done 'time)
+                           (setq org-agenda-files (directory-files-recursively "~/wkf-org/"
+                                                                               "\\.org$")))
+)
+
+(defun wkf/find-org-index ()
+  "Open my org index in the right vsp"
+  (interactive)
+  (wkf/find-file "~/wkf-org/index.org"))
+
+;; Open index file
+(define-key evil-normal-state-map (kbd "<backspace> o e i") 'wkf/find-org-index)
+
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s e") 'org-edit-special)
 

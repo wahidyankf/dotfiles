@@ -280,8 +280,6 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
 #+END_SRC
 
-#+RESULTS:
-
 * Terminal
 ** Enviroment
 
@@ -679,7 +677,6 @@ c L -> hard clean project
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
 #+END_SRC
 
-
 ** Languages
 
 *** Emacs Lisp
@@ -967,12 +964,21 @@ Project
 #+END_SRC
 
 * Org Mode
-** COMMENT Directory
+** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
 
 #+BEGIN_SRC emacs-lisp :results silent
 (setq org-directory "~/wkf-org/")
+
+(add-hook 'org-mode-hook (lambda ()
+                           (set-popup-rule! "^\\*Org Src"
+                             :size .75
+                             :side 'bottom)
+                           (setq org-log-done 'time)
+                           (setq org-agenda-files (directory-files-recursively "~/wkf-org/"
+                                                                               "\\.org$")))
+)
 
 (defun wkf/find-org-index ()
   "Open my org index in the right vsp"
