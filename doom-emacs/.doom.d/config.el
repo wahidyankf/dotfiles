@@ -738,6 +738,20 @@
 
 (evil-define-key 'normal org-mode-map (kbd "`ssh") 'wkf/org-src-elisp)
 
+(defun wkf/js-comment-heading ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "// ---")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "// ---")
+         (evil-normal-state)
+         (evil-open-above 1)
+         (insert "// ")))
+
+(evil-define-key 'normal typescript-mode-map (kbd "`jsch") 'wkf/js-comment-heading)
+(evil-define-key 'normal js2-mode-map (kbd "`jsch") 'wkf/js-comment-heading)
+
 ;; (setq org-image-actual-width nil)
 
 (setq org-image-actual-width (/ (display-pixel-width) 3))
