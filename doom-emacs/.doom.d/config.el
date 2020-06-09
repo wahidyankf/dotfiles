@@ -584,13 +584,37 @@
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
 
+(defun wkf/go-compile-project ()
+  "compile current go project"
+  (interactive)
+  (compile (format "go build")))
+
+(defun wkf/go-compile-file ()
+  "compile current go file"
+  (interactive)
+  (compile (format "go build %s" (buffer-file-name))))
+
+(defun wkf/go-run-file ()
+  "run current go file"
+  (interactive)
+  (compile (file-name-sans-extension buffer-file-name)))
+
 (defun wkf/go-compile-and-run-file ()
   "compile and run current go file"
   (interactive)
   (compile (format "go run %s" (buffer-file-name))))
 
+;; compile current project
+(evil-define-key 'normal go-mode-map (kbd ", c C") 'wkf/go-compile-project)
+
+;; compile current file
+(evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
+
 ;; compile and run current file
 (evil-define-key 'normal go-mode-map (kbd ", c r") 'wkf/go-compile-and-run-file)
+
+;; run current file
+(evil-define-key 'normal go-mode-map (kbd ", r") 'wkf/go-run-file)
 
 (set-popup-rule! "^\\*Anaconda"
   :size 0.25
