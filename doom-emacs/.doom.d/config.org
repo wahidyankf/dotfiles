@@ -818,6 +818,21 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 (evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
 #+END_SRC
 
+
+*** Golang
+
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/go-compile-and-run-file ()
+  "compile and run current go file"
+  (interactive)
+  (compile (format "go run %s" (buffer-file-name))))
+
+;; compile and run current file
+(evil-define-key 'normal go-mode-map (kbd ", c r") 'wkf/go-compile-and-run-file)
+#+END_SRC
+
 *** Python
 
 **** Config and Utils
