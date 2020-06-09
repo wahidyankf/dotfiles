@@ -529,6 +529,11 @@
   (interactive)
   (compile (format "dune build")))
 
+(defun wkf/ocaml-compile-and-run-project ()
+  "Compile and run ocaml project"
+  (interactive)
+  (compile (format "dune exec ./main.exe")))
+
 (defun wkf/ocaml-clean-project ()
   "Clean ocaml project"
   (interactive)
@@ -536,6 +541,9 @@
 
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+
+;; compile and run project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c R") 'wkf/ocaml-compile-and-run-project)
 
 ;; clean ocaml project using dune
 (evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
