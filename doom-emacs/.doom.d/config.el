@@ -789,11 +789,14 @@
          (evil-open-below 1)
          (insert "// ---")
          (evil-normal-state)
+         (evil-open-below 1)
+         (evil-normal-state)
+         (evil-previous-line)
          (evil-open-above 1)
          (insert "// ")))
 
-(evil-define-key 'normal typescript-mode-map (kbd "`jsch") 'wkf/js-comment-heading)
-(evil-define-key 'normal js2-mode-map (kbd "`jsch") 'wkf/js-comment-heading)
+(evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+(evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
 
 ;; (setq org-image-actual-width nil)
 
