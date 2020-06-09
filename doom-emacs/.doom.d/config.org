@@ -1020,6 +1020,14 @@ If you use =org= and don't want your org files in the default location below, ch
 ;; Org SRC Format
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
   (kbd "<backspace> o s e , w : q"))
+
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o h h") 'org-insert-heading)
+
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o h s") 'org-insert-subheading)
+#+END_SRC
+
+#+RESULTS:
+
 #+END_SRC
 
 #+RESULTS:

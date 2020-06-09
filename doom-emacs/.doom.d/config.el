@@ -714,6 +714,10 @@
 (evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
   (kbd "<backspace> o s e , w : q"))
 
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o h h") 'org-insert-heading)
+
+(evil-define-key 'normal org-mode-map (kbd "<backspace> o h s") 'org-insert-subheading)
+
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"
   (interactive)
