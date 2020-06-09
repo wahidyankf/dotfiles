@@ -151,6 +151,10 @@
   :size 0.25
   :side 'bottom)
 
+(set-popup-rule! "^\\*info"
+  :size 0.40
+  :side 'right)
+
 (add-hook 'org-mode-hook (lambda ()
                            (set-popup-rule! "^\\*Org Src"
                              :size .75
