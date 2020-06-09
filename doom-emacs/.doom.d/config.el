@@ -128,6 +128,10 @@
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
 
+(setq-default left-margin-width 1 right-margin-width 1)
+(set-window-buffer nil (current-buffer))
+(add-hook! '+popup-buffer-mode-hook (set-window-margins (selected-window) 1 1))
+
 (set-popup-rule! "^\\*compilation"
   :size 0.25
   :side 'bottom)
