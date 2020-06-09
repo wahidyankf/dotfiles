@@ -152,7 +152,7 @@
   :side 'bottom)
 
 (set-popup-rule! "^\\*info"
-  :size 0.40
+  :size 0.45
   :side 'right)
 
 (add-hook 'org-mode-hook (lambda ()
