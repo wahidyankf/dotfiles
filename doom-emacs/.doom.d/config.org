@@ -1088,6 +1088,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 ** Snippet
 
+*** Emacs Lisp
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"
@@ -1099,10 +1100,14 @@ If you use =org= and don't want your org files in the default location below, ch
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "`sel") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` e l s") 'wkf/org-src-elisp)
+#+END_SRC
 
+*** Shell
+
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/org-src-elisp ()
-  "Insert Org SRC for elisp"
+  "Insert Org SRC for sh"
   (interactive)
   (progn (insert "#+BEGIN_SRC sh :results output")
          (evil-normal-state)
@@ -1111,7 +1116,23 @@ If you use =org= and don't want your org files in the default location below, ch
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "`ssh") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` s h s") 'wkf/org-src-elisp)
+#+END_SRC
+
+*** JavaScript
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/org-src-js ()
+  "Insert Org SRC for javascript"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC js :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "` j s s") 'wkf/org-src-js)
 
 (defun wkf/js-comment-heading ()
   "Insert comment in JS that looks like a heading"
@@ -1129,7 +1150,11 @@ If you use =org= and don't want your org files in the default location below, ch
 
 (evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
 (evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+#+END_SRC
 
+*** OCaml
+
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/ocaml-comment-heading ()
   "Insert comment in ocaml that looks like a heading"
   (interactive)

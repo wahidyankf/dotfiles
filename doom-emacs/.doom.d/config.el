@@ -775,10 +775,10 @@
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "`sel") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` e l s") 'wkf/org-src-elisp)
 
 (defun wkf/org-src-elisp ()
-  "Insert Org SRC for elisp"
+  "Insert Org SRC for sh"
   (interactive)
   (progn (insert "#+BEGIN_SRC sh :results output")
          (evil-normal-state)
@@ -787,7 +787,19 @@
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "`ssh") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` s h s") 'wkf/org-src-elisp)
+
+(defun wkf/org-src-js ()
+  "Insert Org SRC for javascript"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC js :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "` j s s") 'wkf/org-src-js)
 
 (defun wkf/js-comment-heading ()
   "Insert comment in JS that looks like a heading"
