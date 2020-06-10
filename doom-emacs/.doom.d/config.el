@@ -777,7 +777,7 @@
 
 (evil-define-key 'normal org-mode-map (kbd "` e l o s") 'wkf/org-src-elisp)
 
-(defun wkf/org-src-elisp ()
+(defun wkf/org-src-sh ()
   "Insert Org SRC for sh"
   (interactive)
   (progn (insert "#+BEGIN_SRC sh :results output")
@@ -787,7 +787,7 @@
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
 
 (defun wkf/org-src-js ()
   "Insert Org SRC for javascript"

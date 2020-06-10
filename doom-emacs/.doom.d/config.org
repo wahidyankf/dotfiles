@@ -1106,7 +1106,7 @@ If you use =org= and don't want your org files in the default location below, ch
 *** Shell
 
 #+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/org-src-elisp ()
+(defun wkf/org-src-sh ()
   "Insert Org SRC for sh"
   (interactive)
   (progn (insert "#+BEGIN_SRC sh :results output")
@@ -1116,7 +1116,7 @@ If you use =org= and don't want your org files in the default location below, ch
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
 #+END_SRC
 
 *** JavaScript
