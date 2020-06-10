@@ -790,7 +790,7 @@
 (evil-define-key 'normal org-mode-map (kbd "`ssh") 'wkf/org-src-elisp)
 
 (defun wkf/js-comment-heading ()
-  "Insert Org SRC for elisp"
+  "Insert comment in JS that looks like a heading"
   (interactive)
   (progn (insert "// ---")
          (evil-normal-state)
@@ -805,6 +805,16 @@
 
 (evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
 (evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+
+(defun wkf/ocaml-comment-heading ()
+  "Insert comment in ocaml that looks like a heading"
+  (interactive)
+  (insert "(* ---  --- *)")
+  (evil-normal-state)
+  (evil-backward-char 6)
+  (evil-insert-state))
+
+(evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
 
 ;; (setq org-image-actual-width nil)
 
