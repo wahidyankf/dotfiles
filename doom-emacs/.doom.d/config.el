@@ -768,6 +768,16 @@
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"
   (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(defun wkf/org-src-elisp-silent ()
+  "Insert Org SRC for elisp"
+  (interactive)
   (progn (insert "#+BEGIN_SRC emacs-lisp :results silent")
          (evil-normal-state)
          (evil-open-below 1)
@@ -775,7 +785,19 @@
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "` e l o s") 'wkf/org-src-elisp)
+(defun wkf/org-src-elisp-output ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "` e l o s i") 'wkf/org-src-elisp-silent)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s o") 'wkf/org-src-elisp-output)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s s") 'wkf/org-src-elisp)
 
 (defun wkf/org-src-sh ()
   "Insert Org SRC for sh"
