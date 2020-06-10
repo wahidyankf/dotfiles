@@ -1100,7 +1100,7 @@ If you use =org= and don't want your org files in the default location below, ch
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "` e l s") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s") 'wkf/org-src-elisp)
 #+END_SRC
 
 *** Shell
@@ -1116,7 +1116,7 @@ If you use =org= and don't want your org files in the default location below, ch
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "` s h s") 'wkf/org-src-elisp)
+(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-elisp)
 #+END_SRC
 
 *** JavaScript
@@ -1132,7 +1132,7 @@ If you use =org= and don't want your org files in the default location below, ch
          (evil-normal-state)
          (evil-open-above 1)))
 
-(evil-define-key 'normal org-mode-map (kbd "` j s s") 'wkf/org-src-js)
+(evil-define-key 'normal org-mode-map (kbd "` j s o s") 'wkf/org-src-js)
 
 (defun wkf/js-comment-heading ()
   "Insert comment in JS that looks like a heading"
