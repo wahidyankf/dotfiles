@@ -623,11 +623,10 @@
 (evil-define-key 'normal rjsx-mode-map (kbd ", c q") 'flow-status)
 (evil-define-key 'normal js2-mode-map (kbd ", c q") 'flow-status)
 
-;; enable flow minor mode on js2 mode
-(evil-define-key 'normal js2-mode-map (kbd ", m f") 'flow-minor-mode)
-
 ;; enable flow minor mode on rjsx mode
 (evil-define-key 'normal rjsx-mode-map (kbd ", m f") 'flow-minor-mode)
+;; enable flow minor mode on js2 mode
+(evil-define-key 'normal js2-mode-map (kbd ", m f") 'flow-minor-mode)
 
 (defun wkf/go-compile-project ()
   "compile current go project"
