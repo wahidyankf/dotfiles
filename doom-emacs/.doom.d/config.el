@@ -470,6 +470,8 @@
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+        ((bound-and-true-p flow-minor-mode)
+         (+format/buffer))
         ((equal major-mode 'python-mode)
          (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
