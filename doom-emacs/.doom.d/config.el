@@ -615,6 +615,10 @@
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
 
+(use-package! flow-js2-mode
+  :config (add-hook 'js2-mode-hook #'flow-js2-mode)
+  (add-hook 'rjsx-mode-hook #'flow-js2-mode))
+
 ;; See flow coverage
 (evil-define-key 'normal rjsx-mode-map (kbd ", t c") 'flow-minor-coverage)
 (evil-define-key 'normal js2-mode-map (kbd ", t c") 'flow-minor-coverage)

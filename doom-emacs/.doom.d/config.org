@@ -858,6 +858,10 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 **** Keybindings
 
 #+BEGIN_SRC emacs-lisp :results silent
+(use-package! flow-js2-mode
+  :config (add-hook 'js2-mode-hook #'flow-js2-mode)
+  (add-hook 'rjsx-mode-hook #'flow-js2-mode))
+
 ;; See flow coverage
 (evil-define-key 'normal rjsx-mode-map (kbd ", t c") 'flow-minor-coverage)
 (evil-define-key 'normal js2-mode-map (kbd ", t c") 'flow-minor-coverage)

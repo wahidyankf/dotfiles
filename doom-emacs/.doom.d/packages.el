@@ -65,7 +65,6 @@
 (package! alchemist)
 (package! org-make-toc)
 (package! flow-js2-mode)
-(package! flycheck-flow)
 
 (when (package! lsp-mode)
   (package! lsp-ui)
