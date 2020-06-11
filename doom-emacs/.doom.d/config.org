@@ -481,6 +481,9 @@ To get information about any of these functions/macros, move the cursor over the
   (interactive)
   (cond ((equal major-mode 'typescript-mode)
          (evil-goto-definition))
+        ((bound-and-true-p flow-minor-mode)
+         (progn     (flow-minor-jump-to-definition)
+                    (flow-minor-mode)))
         (t (+lookup/definition (doom-thing-at-point-or-region)))))
 
 (defun wkf/gdef-new-frame ()
@@ -489,6 +492,9 @@ To get information about any of these functions/macros, move the cursor over the
   (make-frame-command)
   (cond ((equal major-mode 'reason-mode)
          (evil-goto-definition))
+        ((bound-and-true-p flow-minor-mode)
+         (progn     (flow-minor-jump-to-definition)
+                    (flow-minor-mode)))
         ((equal major-mode 'typescript-mode)
          (evil-goto-definition))
         ((equal major-mode 'js2-mode)
@@ -504,6 +510,14 @@ To get information about any of these functions/macros, move the cursor over the
   (cond ((equal major-mode 'reason-mode)
          (progn (make-frame-command)
                 (evil-goto-definition)
+                (recenter)))
+        ((bound-and-true-p flow-minor-mode)
+         (progn (flow-minor-jump-to-definition)
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
+                (flow-minor-mode)
+                (balance-windows)
                 (recenter)))
         ((equal major-mode 'typescript-mode)
          (progn (evil-goto-definition)
@@ -653,7 +667,7 @@ c . -> compile with last command
 
 c c -> compile file
 c r -> compile and run file
-c q -> compile quick file
+c q -> compile quick check file
 b d -> build dev file
 b r -> build release file
 
