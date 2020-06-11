@@ -665,6 +665,10 @@ To get information about any of these functions/macros, move the cursor over the
 C -> compile Custom
 c . -> compile with last command
 
+;; test
+
+t c -> test coverage
+
 ;; compile
 
 c c -> compile file
@@ -849,6 +853,25 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 (evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
 #+END_SRC
 
+*** FlowType
+
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; See flow coverage
+(evil-define-key 'normal rjsx-mode-map (kbd ", t c") 'flow-minor-coverage)
+(evil-define-key 'normal js2-mode-map (kbd ", t c") 'flow-minor-coverage)
+
+;; See flow status
+(evil-define-key 'normal rjsx-mode-map (kbd ", c q") 'flow-status)
+(evil-define-key 'normal js2-mode-map (kbd ", c q") 'flow-status)
+
+;; enable flow minor mode on js2 mode
+(evil-define-key 'normal js2-mode-map (kbd ", m f") 'flow-minor-mode)
+
+;; enable flow minor mode on rjsx mode
+(evil-define-key 'normal rjsx-mode-map (kbd ", m f") 'flow-minor-mode)
+#+END_SRC
 
 *** Golang
 

@@ -615,6 +615,20 @@
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
 
+;; See flow coverage
+(evil-define-key 'normal rjsx-mode-map (kbd ", t c") 'flow-minor-coverage)
+(evil-define-key 'normal js2-mode-map (kbd ", t c") 'flow-minor-coverage)
+
+;; See flow status
+(evil-define-key 'normal rjsx-mode-map (kbd ", c q") 'flow-status)
+(evil-define-key 'normal js2-mode-map (kbd ", c q") 'flow-status)
+
+;; enable flow minor mode on js2 mode
+(evil-define-key 'normal js2-mode-map (kbd ", m f") 'flow-minor-mode)
+
+;; enable flow minor mode on rjsx mode
+(evil-define-key 'normal rjsx-mode-map (kbd ", m f") 'flow-minor-mode)
+
 (defun wkf/go-compile-project ()
   "compile current go project"
   (interactive)
