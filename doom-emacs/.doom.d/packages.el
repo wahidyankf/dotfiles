@@ -65,23 +65,24 @@
 (package! alchemist)
 (package! org-make-toc)
 (package! flow-js2-mode)
+(package! flycheck-flow)
 
-(when (package! lsp-mode) 
-  (package! lsp-ui) 
-  (package! company-lsp) 
-  (package! lsp-haskell) 
-  (package! reason-mode) 
-  (when (featurep! +javascript) 
-    (package! lsp-typescript 
-      :recipe (:fetcher github 
-               :repo "emacs-lsp/lsp-javascript" 
-               :files ("lsp-typescript.el"))) 
-    (package! tide 
-      :disable t)) 
-  (when (featurep! +css) 
-    (package! lsp-css 
-      :recipe (:fetcher github 
-               :repo "emacs-lsp/lsp-css"))) 
-  (when (featurep! +sh) 
-    (package! company-shell 
+(when (package! lsp-mode)
+  (package! lsp-ui)
+  (package! company-lsp)
+  (package! lsp-haskell)
+  (package! reason-mode)
+  (when (featurep! +javascript)
+    (package! lsp-typescript
+      :recipe (:fetcher github
+               :repo "emacs-lsp/lsp-javascript"
+               :files ("lsp-typescript.el")))
+    (package! tide
+      :disable t))
+  (when (featurep! +css)
+    (package! lsp-css
+      :recipe (:fetcher github
+               :repo "emacs-lsp/lsp-css")))
+  (when (featurep! +sh)
+    (package! company-shell
       :disable t)))
