@@ -241,7 +241,7 @@
 (defun wkf/vterm-close-compilation ()
   "Close interactive compilation pane"
   (interactive)
-  (delete-windows-on "vterm"))
+  (kill-matching-buffers "^\\vterm"))
 
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
