@@ -836,7 +836,6 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
                       (get-buffer-process output-buffer))))))
 
 (defun wkf/haskell-compile-and-run-file (is-interactive)
-  ;; run current haskell file
   "Run current haskell file"
   (interactive)
   (let ((compile-command (format "ghc %s && %s" (buffer-file-name)
@@ -873,16 +872,26 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   (interactive)
   (compile (format "yarn tsc")))
 
-(defun wkf/ts-compile-and-run-file ()
+(defun wkf/ts-compile-and-run-file (is-interactive)
   "compile and run current typescript file"
   (interactive)
-  (compile (format "yarn ts-node %s" (buffer-file-name))))
+  (let ((compile-command (format "yarn ts-node %s" (buffer-file-name))))
+    (if (equal is-interactive t)
+        (wkf/compile-interactively (format "%s\n" compile-command))
+      (compile compile-command))))
 
 ;; compile quick (typecheck) project
 (evil-define-key 'normal typescript-mode-map (kbd ", c C") 'wkf/ts-compile-project)
 
 ;; compile and run current file
-(evil-define-key 'normal typescript-mode-map (kbd ", c r") 'wkf/ts-compile-and-run-file)
+(evil-define-key 'normal typescript-mode-map (kbd ", c r r")
+  (lambda ()
+    (interactive)
+    (wkf/ts-compile-and-run-file nil)))
+(evil-define-key 'normal typescript-mode-map (kbd ", c r i")
+  (lambda ()
+    (interactive)
+    (wkf/ts-compile-and-run-file t)))
 #+END_SRC
 
 *** FlowType
@@ -923,27 +932,49 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   (interactive)
   (compile (format "go build %s" (buffer-file-name))))
 
-(defun wkf/go-run-file ()
-  "run current go file"
-  (interactive)
-  (compile (file-name-sans-extension buffer-file-name)))
-
-(defun wkf/go-compile-and-run-file ()
+(defun wkf/go-compile-and-run-file (is-interactive)
   "compile and run current go file"
   (interactive)
-  (compile (format "go run %s" (buffer-file-name))))
+  (let ((compile-command (format "go run %s" (buffer-file-name))))
+    (if (equal is-interactive t)
+        (wkf/compile-interactively (format "%s\n" compile-command))
+      (compile compile-command))))
+
+(defun wkf/go-run-file (is-interactive)
+  "run current go file"
+  (interactive)
+  (let ((compile-command (file-name-sans-extension buffer-file-name)))
+    (if (equal is-interactive t)
+        (wkf/compile-interactively (format "%s\n" compile-command))
+      (compile compile-command))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; compile and run current file
+(evil-define-key 'normal go-mode-map (kbd ", c r r")
+  (lambda ()
+    (interactive)
+    (wkf/go-compile-and-run-file nil)))
+(evil-define-key 'normal go-mode-map (kbd ", c r i")
+  (lambda ()
+    (interactive)
+    (wkf/go-compile-and-run-file t)))
+
+;; run current file
+(evil-define-key 'normal go-mode-map (kbd ", r r")
+  (lambda ()
+    (interactive)
+    (wkf/go-run-file nil)))
+(evil-define-key 'normal go-mode-map (kbd ", r i")
+  (lambda ()
+    (interactive)
+    (wkf/go-run-file t)))
 
 ;; compile current project
 (evil-define-key 'normal go-mode-map (kbd ", c C") 'wkf/go-compile-project)
 
 ;; compile current file
 (evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
-
-;; compile and run current file
-(evil-define-key 'normal go-mode-map (kbd ", c r") 'wkf/go-compile-and-run-file)
-
-;; run current file
-(evil-define-key 'normal go-mode-map (kbd ", r") 'wkf/go-run-file)
 #+END_SRC
 
 *** Python
@@ -993,7 +1024,7 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; run current file
-(evil-define-key 'normal elixir-mode-map (kbd ", r") 'alchemist-eval-buffer)
+(evil-define-key 'normal elixir-mode-map (kbd ", r r") 'alchemist-eval-buffer)
 #+END_SRC
 
 *** Rust
@@ -1088,10 +1119,10 @@ File
 (evil-define-key 'normal rustic-mode-map (kbd ", c c") 'wkf/rust-compile-file)
 
 ;; compile and run current file
-(evil-define-key 'normal rustic-mode-map (kbd ", c r") 'wkf/rust-compile-and-run-file)
+(evil-define-key 'normal rustic-mode-map (kbd ", c r r") 'wkf/rust-compile-and-run-file)
 
 ;; run current file
-(evil-define-key 'normal rustic-mode-map (kbd ", r") 'wkf/rust-run-file)
+(evil-define-key 'normal rustic-mode-map (kbd ", r r") 'wkf/rust-run-file)
 #+END_SRC
 
 Project
@@ -1104,7 +1135,7 @@ Project
 (evil-define-key 'normal rustic-mode-map (kbd ", c Q") 'wkf/rust-quick-check-project)
 
 ;; compile and run current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c R") 'wkf/rust-compile-and-run-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", c r R") 'wkf/rust-compile-and-run-project)
 
 ;; build - release - project
 (evil-define-key 'normal rustic-mode-map (kbd ", b R") 'wkf/rust-build-release-project-release)
