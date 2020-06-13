@@ -534,6 +534,12 @@
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
 
+(defun wkf/compile-interactively (cmd)
+  (interactive)
+  (progn (let ((term-buffer (vterm)))
+           (set-buffer term-buffer)
+           (term-send-raw-string cmd))))
+
 ;; compile Custom
 (define-key evil-normal-state-map (kbd ", C") 'compile)
 
@@ -552,10 +558,13 @@
   (interactive)
   (compile (format "dune build")))
 
-(defun wkf/ocaml-compile-and-run-project ()
+(defun wkf/ocaml-compile-and-run-project (is-interactive)
   "Compile and run ocaml project"
   (interactive)
-  (compile (format "dune exec ./main.exe")))
+  (let ((compile-command "dune exec ./main.exe"))
+    (if (equal is-interactive t)
+        (wkf/compile-interactively (format "%s\n" compile-command))
+      (compile compile-command))))
 
 (defun wkf/ocaml-clean-project ()
   "Clean ocaml project"
@@ -566,7 +575,15 @@
 (evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
 
 ;; compile and run project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c R") 'wkf/ocaml-compile-and-run-project)
+(evil-define-key 'normal tuareg-mode-map (kbd ", c r R")
+  (lambda ()
+     (interactive)
+     (wkf/ocaml-compile-and-run-project nil)))
+;; compile and run project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c r I")
+  (lambda ()
+     (interactive)
+     (wkf/ocaml-compile-and-run-project t)))
 
 ;; clean ocaml project using dune
 (evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
@@ -586,18 +603,28 @@
                                 (buffer-file-name)))
                       (get-buffer-process output-buffer))))))
 
-;; run current haskell file in compile window
-(defun wkf/haskell-compile-and-run-file ()
+(defun wkf/haskell-compile-and-run-file (is-interactive)
+  ;; run current haskell file
   "Run current haskell file"
   (interactive)
-  (compile (format "ghc %s && %s" (buffer-file-name)
-                   (file-name-sans-extension buffer-file-name))))
+  (let ((compile-command (format "ghc %s && %s" (buffer-file-name)
+                                 (file-name-sans-extension buffer-file-name))))
+    (if (equal is-interactive t)
+        (wkf/compile-interactively (format "%s\n" compile-command))
+      (compile compile-command))))
 
 ;; compile quick (typecheck) current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
 
 ;; compile and run current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c r") 'wkf/haskell-compile-and-run-file)
+(evil-define-key 'normal haskell-mode-map (kbd ", c r r")
+  (lambda ()
+    (interactive)
+    (wkf/haskell-compile-and-run-file nil)))
+(evil-define-key 'normal haskell-mode-map (kbd ", c r i")
+  (lambda ()
+    (interactive)
+    (wkf/haskell-compile-and-run-file t)))
 
 (defun wkf/ts-compile-project ()
   "compile typescript project"

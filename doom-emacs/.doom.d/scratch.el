@@ -1,55 +1,24 @@
-Error.t = FetchingDomicileError
-;;
-BioData.t = {
-email: Option | Error(msg) | Valid(email)
-...
-}
-;;
-InquiringBioData.t =
-{
-data: BioData.t
-error: Error.t
-}
-;;
-InquiringJobDataData.t = {
-jobData: JobData.t
-bioData: BioData.t
-activeStep: 0
-}
-;;
-InquiringJobData.t =
-{
-data: InquiringJobDataData.t
-error: Error.t
-}
-;;
-Interactive.t =
-| InquiringBioData      ;; biodata
-| InquiringJobData      ;; biodata + jobdata
-| InquiringConfirmation ;; biodata + jobdata + confirmation
-;;
-Interactive
-(Interactive.t)
-;;
-Initial
-FetchingDomicile
-Interactive()
-SubmittingData
-DataSubmitted
+;; (term "*terminal*")
+;; (with-current-buffer "*terminal*" (progn (term-send-input "ls")))
 
-ActiveStep.t =
-| InquiringBioData
-| InquiringJobData
-| InquiringConfirmation
+;; (progn (set-buffer "*terminal*")
+;;        (term-send-raw-string "ls -l\n"))
 
-State =
-| Initial
-| InquiringData = {
-jobData: Option(JobData.t)
-bioData: Option(BioData.t)
-confirmationData: Option(ConfirmationData.t)
-activeStep: ActiveStep.t
-error: Error.t
-}
-| SubmittingData
-| SuccessfullySubmitData
+;; (progn (let ((term-buffer (term "/usr/local/bin/zsh")))
+;; (progn (let ((term-buffer (vterm)))
+;; (set-buffer term-buffer)
+
+;; start up vi
+;; (term-send-raw-string "vi hello.txt\n")
+
+;; some line noise :P
+;;  (term-send-raw-string "ihello world\033:wq\n")
+
+;; quit our shell
+;;  (term-send-raw-string "exit")
+;; (term-send-raw-string "ls -al\n")))
+
+(progn (let ((term-buffer (vterm)))
+         (set-buffer term-buffer)
+         (term-send-raw-string "echo yo\n")
+         (term-send-raw-string "echo yes\n")))
