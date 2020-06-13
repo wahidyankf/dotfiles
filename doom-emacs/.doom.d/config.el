@@ -238,6 +238,11 @@
   (interactive)
   (delete-windows-on "*doom:vterm-popup:main*"))
 
+(defun wkf/vterm-close-compilation ()
+  "Close interactive compilation pane"
+  (interactive)
+  (delete-windows-on "vterm"))
+
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
 
@@ -251,7 +256,10 @@
 (define-key evil-normal-state-map (kbd "<backspace> t x") 'wkf/vterm-open-horizontal)
 
 ;; Terminal main Close
-(define-key evil-normal-state-map (kbd "<backspace> t q") 'wkf/vterm-close-main)
+(define-key evil-normal-state-map (kbd "<backspace> t q q") 'wkf/vterm-close-main)
+
+;; Terminal main Close
+(define-key evil-normal-state-map (kbd "<backspace> t q c") 'wkf/vterm-close-compilation)
 
 (defun wkf/windows-rebalance ()
   "Balance window then recenter"
@@ -538,7 +546,8 @@
   (interactive)
   (progn (let ((term-buffer (vterm)))
            (set-buffer term-buffer)
-           (term-send-raw-string cmd))))
+           (term-send-raw-string cmd)
+           (evil-normal-state))))
 
 ;; compile Custom
 (define-key evil-normal-state-map (kbd ", C") 'compile)
