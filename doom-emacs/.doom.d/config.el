@@ -702,13 +702,16 @@
         (wkf/compile-interactively (format "%s\n" compile-command))
       (compile compile-command))))
 
-(defun wkf/go-run-file (is-interactive)
-  "run current go file"
+(defun wkf/go-run-file-default ()
+  "run current go file - default"
+  (interactive)
+  (compile (file-name-sans-extension buffer-file-name)))
+
+(defun wkf/go-run-file-interactive ()
+  "run current go file - interactive"
   (interactive)
   (let ((compile-command (file-name-sans-extension buffer-file-name)))
-    (if (equal is-interactive t)
-        (wkf/compile-interactively (format "%s\n" compile-command))
-      (compile compile-command))))
+    (wkf/compile-interactively (format "%s\n" compile-command))))
 
 ;; compile and run current file
 (evil-define-key 'normal go-mode-map (kbd ", c r r")
@@ -721,14 +724,8 @@
     (wkf/go-compile-and-run-file t)))
 
 ;; run current file
-(evil-define-key 'normal go-mode-map (kbd ", r r")
-  (lambda ()
-    (interactive)
-    (wkf/go-run-file nil)))
-(evil-define-key 'normal go-mode-map (kbd ", r i")
-  (lambda ()
-    (interactive)
-    (wkf/go-run-file t)))
+(evil-define-key 'normal go-mode-map (kbd ", r r") 'wkf/go-run-file-default)
+(evil-define-key 'normal go-mode-map (kbd ", r i") 'wkf/go-run-file-interactive )
 
 ;; compile current project
 (evil-define-key 'normal go-mode-map (kbd ", c C") 'wkf/go-compile-project)
