@@ -618,27 +618,23 @@
                                 (buffer-file-name)))
                       (get-buffer-process output-buffer))))))
 
-(defun wkf/haskell-compile-and-run-file (is-interactive)
-  "Run current haskell file"
+(defun wkf/haskell-compile-and-run-file-default ()
+  "Run current haskell file - default"
   (interactive)
-  (let ((compile-command (format "ghc %s && %s" (buffer-file-name)
-                                 (file-name-sans-extension buffer-file-name))))
-    (if (equal is-interactive t)
-        (wkf/compile-interactively (format "%s\n" compile-command))
-      (compile compile-command))))
+  (compile  (format "ghc %s && %s" (buffer-file-name)
+                    (file-name-sans-extension buffer-file-name))))
+(defun wkf/haskell-compile-and-run-file-interactive ()
+  "Run current haskell file - interactive"
+  (interactive)
+  (wkf/compile-interactively (format "ghc %s && %s\n" (buffer-file-name)
+                                     (file-name-sans-extension buffer-file-name))))
 
 ;; compile quick (typecheck) current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
 
 ;; compile and run current file
-(evil-define-key 'normal haskell-mode-map (kbd ", c r r")
-  (lambda ()
-    (interactive)
-    (wkf/haskell-compile-and-run-file nil)))
-(evil-define-key 'normal haskell-mode-map (kbd ", c r i")
-  (lambda ()
-    (interactive)
-    (wkf/haskell-compile-and-run-file t)))
+(evil-define-key 'normal haskell-mode-map (kbd ", c r r") 'wkf/haskell-compile-and-run-file-default)
+(evil-define-key 'normal haskell-mode-map (kbd ", c r i") 'wkf/haskell-compile-and-run-file-interactive)
 
 (defun wkf/ts-compile-project ()
   "compile typescript project"
