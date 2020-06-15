@@ -715,8 +715,6 @@ r I -> run project interactively
 
 c l -> clean project
 c L -> hard clean project
-
-
 #+END_EXAMPLE
 
 **** Commons
