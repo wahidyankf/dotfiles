@@ -641,26 +641,21 @@
   (interactive)
   (compile (format "yarn tsc")))
 
-(defun wkf/ts-compile-and-run-file (is-interactive)
-  "compile and run current typescript file"
+(defun wkf/ts-compile-and-run-file-default ()
+  "compile and run current typescript file - default"
   (interactive)
-  (let ((compile-command (format "yarn ts-node %s" (buffer-file-name))))
-    (if (equal is-interactive t)
-        (wkf/compile-interactively (format "%s\n" compile-command))
-      (compile compile-command))))
+  (compile (format "yarn ts-node %s" (buffer-file-name))))
+(defun wkf/ts-compile-and-run-file-interactive ()
+  "compile and run current typescript file - interactive"
+  (interactive)
+  (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name))))
 
 ;; compile quick (typecheck) project
 (evil-define-key 'normal typescript-mode-map (kbd ", c C") 'wkf/ts-compile-project)
 
 ;; compile and run current file
-(evil-define-key 'normal typescript-mode-map (kbd ", c r r")
-  (lambda ()
-    (interactive)
-    (wkf/ts-compile-and-run-file nil)))
-(evil-define-key 'normal typescript-mode-map (kbd ", c r i")
-  (lambda ()
-    (interactive)
-    (wkf/ts-compile-and-run-file t)))
+(evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
+(evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/ts-compile-and-run-file-interactive)
 
 (use-package! flow-js2-mode
   :config (add-hook 'js2-mode-hook #'flow-js2-mode)
