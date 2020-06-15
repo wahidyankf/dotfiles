@@ -575,20 +575,19 @@
   (interactive)
   (compile (format "dune build")))
 
-(defun wkf/ocaml-compile-and-run-project-interactive ()
-  "Compile and run ocaml project - interactive"
-  (interactive)
-  (wkf/compile-interactively "dune exec ./main.exe\n"))
-
-(defun wkf/ocaml-compile-and-run-project-default ()
-  "Compile and run ocaml project - default"
-  (interactive)
-  (compile "dune exec ./main.exe"))
-
 (defun wkf/ocaml-clean-project ()
   "Clean ocaml project"
   (interactive)
   (compile (format "dune clean")))
+
+(defun wkf/ocaml-compile-and-run-project-interactive ()
+  "Compile and run ocaml project - interactive"
+  (interactive)
+  (wkf/compile-interactively "dune exec ./main.exe\n"))
+(defun wkf/ocaml-compile-and-run-project-default ()
+  "Compile and run ocaml project - default"
+  (interactive)
+  (compile "dune exec ./main.exe"))
 
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
@@ -694,19 +693,20 @@
   (interactive)
   (compile (format "go build %s" (buffer-file-name))))
 
-(defun wkf/go-compile-and-run-file (is-interactive)
-  "compile and run current go file"
+(defun wkf/go-compile-and-run-file-default ()
+  "compile and run current go file - default"
+  (interactive)
+  (compile (format "go run %s" (buffer-file-name))))
+(defun wkf/go-compile-and-run-file-interactive ()
+  "compile and run current go file - interactive"
   (interactive)
   (let ((compile-command (format "go run %s" (buffer-file-name))))
-    (if (equal is-interactive t)
-        (wkf/compile-interactively (format "%s\n" compile-command))
-      (compile compile-command))))
+    (wkf/compile-interactively (format "%s\n" compile-command))))
 
 (defun wkf/go-run-file-default ()
   "run current go file - default"
   (interactive)
   (compile (file-name-sans-extension buffer-file-name)))
-
 (defun wkf/go-run-file-interactive ()
   "run current go file - interactive"
   (interactive)
@@ -714,14 +714,8 @@
     (wkf/compile-interactively (format "%s\n" compile-command))))
 
 ;; compile and run current file
-(evil-define-key 'normal go-mode-map (kbd ", c r r")
-  (lambda ()
-    (interactive)
-    (wkf/go-compile-and-run-file nil)))
-(evil-define-key 'normal go-mode-map (kbd ", c r i")
-  (lambda ()
-    (interactive)
-    (wkf/go-compile-and-run-file t)))
+(evil-define-key 'normal go-mode-map (kbd ", c r r") 'wkf/go-compile-and-run-file-default)
+(evil-define-key 'normal go-mode-map (kbd ", c r i") 'wkf/go-compile-and-run-file-interactive)
 
 ;; run current file
 (evil-define-key 'normal go-mode-map (kbd ", r r") 'wkf/go-run-file-default)
