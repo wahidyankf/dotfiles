@@ -415,11 +415,11 @@ Make sure eshell and mx-compile use zsh (copied alias)
 * Project
 
 #+BEGIN_SRC emacs-lisp :results silent
-(projectile-register-project-type 'npm '("package.json")
-                                  :compile "yarn install"
-                                  :test "yarn test"
-                                  :run "yarn start"
-                                  :test-suffix ".test.js")
+;; (projectile-register-project-type 'npm '("package.json")
+;;                                   :compile "yarn install"
+;;                                   :test "yarn test"
+;;                                   :run "yarn start"
+;;                                   :test-suffix ".test.js")
 #+END_SRC
 
 * Coding Experience
@@ -671,7 +671,7 @@ To get information about any of these functions/macros, move the cursor over the
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; code diagnosis
-(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
+(define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
 #+END_SRC
 
 *** Compilation

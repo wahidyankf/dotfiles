@@ -324,11 +324,11 @@
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
-(projectile-register-project-type 'npm '("package.json")
-                                  :compile "yarn install"
-                                  :test "yarn test"
-                                  :run "yarn start"
-                                  :test-suffix ".test.js")
+;; (projectile-register-project-type 'npm '("package.json")
+;;                                   :compile "yarn install"
+;;                                   :test "yarn test"
+;;                                   :run "yarn start"
+;;                                   :test-suffix ".test.js")
 
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
@@ -548,7 +548,7 @@
 (define-key evil-normal-state-map (kbd ", e p") 'wkf/error-previous)
 
 ;; code diagnosis
-(define-key evil-normal-state-map (kbd ", c d") 'flycheck-list-errors)
+(define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
 
 (defun wkf/compile-interactively (cmd)
   (interactive)
