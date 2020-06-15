@@ -678,41 +678,53 @@ To get information about any of these functions/macros, move the cursor over the
 
 **** Mnemonic
 
-#+BEGIN_EXAMPLE
-;; raw compile
+***** Raw Compile
 
+#+BEGIN_EXAMPLE
 C -> compile Custom
 c . -> compile with last command
+#+END_EXAMPLE
 
-;; test
+***** Test
 
+#+BEGIN_EXAMPLE
 t c -> test coverage
+#+END_EXAMPLE
 
-;; compile
+***** Compile File
 
+#+BEGIN_EXAMPLE
 c c -> compile file
 c r r -> compile and run file
 c r i -> compile and run file interactively
 c q -> compile quick check file
-b d -> build dev file
-b r -> build release file
+c b d -> build dev file
+c b r -> build release file
+#+END_EXAMPLE
 
+***** Compile Project
+
+#+BEGIN_EXAMPLE
 c C -> compile project
 c r R -> compile and run project
 c r I -> compile and run project interactively
 c Q -> compile quick project
-b D -> build dev project
-b R -> build release project
+c b D -> build dev project
+c b R -> build release project
+#+END_EXAMPLE
 
-;; run
+***** Run
 
+#+BEGIN_EXAMPLE
 r r -> run file
 r i -> run file interactively
 r R -> run project
 r I -> run project interactively
+#+END_EXAMPLE
 
-;; clean
+***** Clean
 
+#+BEGIN_EXAMPLE
 c l -> clean project
 c L -> hard clean project
 #+END_EXAMPLE
