@@ -791,7 +791,7 @@ opam install core utop && opam install async yojson core_extended core_bench coh
 
 As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same time, thus, make sure that we are =opam switch=-ing to the correct version of opam
 
-**** Config and Utils
+**** Keybindings
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/ocaml-compile-project ()
@@ -814,8 +814,6 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   (compile "dune exec ./main.exe"))
 #+END_SRC
 
-**** Keybindings
-
 #+BEGIN_SRC emacs-lisp :results silent
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
@@ -832,7 +830,6 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 (evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
 #+END_SRC
 
-
 *** Haskell
 
 **** Config and Utils
@@ -842,6 +839,11 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   :after lsp-mode
   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
   (lsp-haskell-set-formatter-floskell))
+#+END_SRC
+
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
 
 ;; type check haskell code for exhaustiveness
 (defun wkf/haskell-typecheck-file ()
@@ -864,8 +866,6 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   (wkf/compile-interactively (format "ghc %s && %s\n" (buffer-file-name)
                                      (file-name-sans-extension buffer-file-name))))
 #+END_SRC
-
-**** Keybindings
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; compile quick (typecheck) current file
@@ -894,7 +894,9 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   "compile and run current typescript file - interactive"
   (interactive)
   (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name))))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp :results silent
 ;; compile quick (typecheck) project
 (evil-define-key 'normal typescript-mode-map (kbd ", c C") 'wkf/ts-compile-project)
 
@@ -905,13 +907,17 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 *** FlowType
 
-**** Keybindings
+**** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
 (use-package! flow-js2-mode
   :config (add-hook 'js2-mode-hook #'flow-js2-mode)
   (add-hook 'rjsx-mode-hook #'flow-js2-mode))
+#+END_SRC
 
+**** Keybindings
+
+#+BEGIN_SRC emacs-lisp :results silent
 ;; See flow coverage
 (evil-define-key 'normal rjsx-mode-map (kbd ", t c") 'flow-minor-coverage)
 (evil-define-key 'normal js2-mode-map (kbd ", t c") 'flow-minor-coverage)
@@ -1058,7 +1064,7 @@ rustup component add --toolchain nightly clippy
 
 Doom's Rust setup use rustic-mode. Here is the link to the docs: [[https://github.com/brotzeit/rustic][Rustic Mode]]
 
-**** Config and Utils
+**** Keybindings
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/rust-compile-file ()
@@ -1110,8 +1116,6 @@ Doom's Rust setup use rustic-mode. Here is the link to the docs: [[https://githu
   (interactive)
   (compile "cargo check"))
 #+END_SRC
-
-**** Keybindings
 
 File
 
