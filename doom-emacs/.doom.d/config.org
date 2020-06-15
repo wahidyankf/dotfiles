@@ -799,13 +799,15 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
   (interactive)
   (compile (format "dune build")))
 
-(defun wkf/ocaml-compile-and-run-project (is-interactive)
-  "Compile and run ocaml project"
+(defun wkf/ocaml-compile-and-run-project-interactive ()
+  "Compile and run ocaml project - interactive"
   (interactive)
-  (let ((compile-command "dune exec ./main.exe"))
-    (if (equal is-interactive t)
-        (wkf/compile-interactively (format "%s\n" compile-command))
-      (compile compile-command))))
+  (wkf/compile-interactively "dune exec ./main.exe\n"))
+
+(defun wkf/ocaml-compile-and-run-project-default ()
+  "Compile and run ocaml project - default"
+  (interactive)
+  (compile "dune exec ./main.exe"))
 
 (defun wkf/ocaml-clean-project ()
   "Clean ocaml project"
@@ -821,14 +823,11 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 ;; compile and run project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", c r R")
-  (lambda ()
-     (interactive)
-     (wkf/ocaml-compile-and-run-project nil)))
-;; compile and run project default
+  'wkf/ocaml-compile-and-run-project-default)
+
+;; compile and run project interactively
 (evil-define-key 'normal tuareg-mode-map (kbd ", c r I")
-  (lambda ()
-     (interactive)
-     (wkf/ocaml-compile-and-run-project t)))
+  'wkf/ocaml-compile-and-run-project-interactive)
 
 ;; clean ocaml project using dune
 (evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
