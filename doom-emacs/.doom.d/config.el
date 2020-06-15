@@ -124,6 +124,8 @@
 
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd "<backspace> b b") 'revert-buffer)
+;; Revert/Reload buffer
+(define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
 
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
@@ -321,6 +323,12 @@
 
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
+
+(projectile-register-project-type 'npm '("package.json")
+                                  :compile "yarn install"
+                                  :test "yarn test"
+                                  :run "yarn start"
+                                  :test-suffix ".test.js")
 
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
@@ -828,10 +836,10 @@
 (evil-define-key 'normal rustic-mode-map (kbd ", c r R") 'wkf/rust-compile-and-run-project)
 
 ;; build - release - project
-(evil-define-key 'normal rustic-mode-map (kbd ", b R") 'wkf/rust-build-release-project-release)
+(evil-define-key 'normal rustic-mode-map (kbd ", c b r") 'wkf/rust-build-release-project-release)
 
 ;; build - development - project
-(evil-define-key 'normal rustic-mode-map (kbd ", b D") 'wkf/rust-build-development-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", c b d") 'wkf/rust-build-development-project)
 
 (setq org-directory "~/wkf-org/")
 
