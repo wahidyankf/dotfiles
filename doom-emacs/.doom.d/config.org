@@ -335,6 +335,7 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd ", , s") '+workspace/save)
 (define-key evil-normal-state-map (kbd ", , x") '+workspace/kill-session)
 #+END_SRC
+
 * Terminal
 ** Enviroment
 
