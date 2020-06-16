@@ -596,6 +596,16 @@
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
 
+;; flycheck error - next
+(define-key evil-normal-state-map (kbd ", d ]") 'flycheck-next-error)
+;; flycheck error - next
+(define-key evil-normal-state-map (kbd "] g") 'flycheck-next-error)
+
+;; flycheck error - previous
+(define-key evil-normal-state-map (kbd ", d [") 'flycheck-previous-error)
+;; flycheck error - previous
+(define-key evil-normal-state-map (kbd "[ g") 'flycheck-previous-error)
+
 (defun wkf/compile-interactively (cmd)
   (interactive)
   (progn (let ((term-buffer (vterm)))
