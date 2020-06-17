@@ -527,16 +527,15 @@
 (which-key-add-key-based-replacements
   ", g" "goto")
 
-;; Go to Definition hsplit window
-(define-key evil-normal-state-map (kbd "g d") 'wkf/gdef-split)
 ;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
+(define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
+;; Go to Definition hsplit window
+(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
 
-;; Go to doKumentation
-(define-key evil-normal-state-map (kbd "g k") 'wkf/gdoc-split)
 ;; Go to Dokumentation in current pane
-(define-key evil-normal-state-map (kbd ", g k") '+lookup/documentation)
-
+(define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
+;; Go to doKumentation
+(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
 
 ;; Go to Definition in the new frame
 (define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
