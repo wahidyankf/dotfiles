@@ -525,21 +525,21 @@
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 (which-key-add-key-based-replacements
-  "<backspace> g" "goto")
+  ", g" "goto")
 
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef-split)
 ;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd "<backspace> g d") 'wkf/gdef)
+(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef)
 
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd "g k") 'wkf/gdoc-split)
 ;; Go to Dokumentation in current pane
-(define-key evil-normal-state-map (kbd "<backspace> g k") '+lookup/documentation)
+(define-key evil-normal-state-map (kbd ", g k") '+lookup/documentation)
 
 
 ;; Go to Definition in the new frame
-(define-key evil-normal-state-map (kbd "<backspace> g D") 'wkf/gdef-new-frame)
+(define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
 
 (defun wkf/buffer-format ()
   "Format current buffer"
@@ -1057,13 +1057,13 @@
                       (get-buffer-process output-buffer))))))
 
 (which-key-add-key-based-replacements
-  ", g" "git")
+  "<backspace> g" "git")
 (which-key-add-key-based-replacements
-  ", g w" "git-wkf")
+  "<backspace> g w" "git-wkf")
 (which-key-add-key-based-replacements
-  ", g w u" "git-wkf-update")
+  "<backspace> g w u" "git-wkf-update")
 
-(define-key evil-normal-state-map (kbd ", g w u a") 'wkf/git-wkf-update-all)
+(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"
