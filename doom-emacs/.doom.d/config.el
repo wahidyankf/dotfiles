@@ -19,23 +19,23 @@
 (setq-default show-trailing-whitespace t)
 
 ;; noh
-(define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
+(define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
 
 (display-time-mode)
 
 (display-battery-mode)
 
 ;; Frame New
-(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
+(define-key evil-normal-state-map (kbd ", f n") 'make-frame-command)
 
 ;; Frame Frame (cycle)
-(define-key evil-normal-state-map (kbd "<backspace> f f") 'other-frame)
+(define-key evil-normal-state-map (kbd ", f f") 'other-frame)
 
 ;; Frame Delete Delete (current)
-(define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
+(define-key evil-normal-state-map (kbd ", f d d") 'delete-frame)
 
 ;; Frame Delete Other
-(define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
+(define-key evil-normal-state-map (kbd ", f d o") 'delete-other-frames)
 
 (defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
@@ -50,19 +50,10 @@
   (evil-window-down 1))
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd "<backspace> \\") 'wkf/window-vsplit)
-
-;; | (vertical)
 (define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
 
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd "<backspace> -") 'wkf/window-split)
-
-;; - (horizontal)
 (define-key evil-normal-state-map (kbd ", -") 'wkf/window-split)
-
-;; = (equal)
-(define-key evil-normal-state-map (kbd "<backspace> =") 'balance-windows)
 
 ;; = (equal)
 (define-key evil-normal-state-map (kbd ", =") 'balance-windows)
@@ -92,23 +83,18 @@
   (evil-window-delete))
 
 ;; quit h
-(define-key evil-normal-state-map (kbd "<backspace> q h") 'wkf/window-close-left)
 (define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/window-close-below)
 (define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/window-close-above)
 (define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
 
 ;; quit l
-(define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
 (define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
 
 ;; quit current
-(define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
 (define-key evil-normal-state-map (kbd ", q q") 'delete-window)
 
 (defun wkf/buffer-close-all ()
@@ -125,15 +111,13 @@
                    (buffer-file-name))))
 
 ;; Get current buffer's info
-(define-key evil-normal-state-map (kbd "<backspace> b i") 'wkf/buffer-info)
+(define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
 
-;; Revert/Reload buffer
-(define-key evil-normal-state-map (kbd "<backspace> b b") 'revert-buffer)
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
 
 ;; Close all buffers except current
-(define-key evil-normal-state-map (kbd "<backspace> b c a") 'wkf/buffer-close-all)
+(define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
 
 (setq-default left-margin-width 1 right-margin-width 1)
 (set-window-buffer nil (current-buffer))
@@ -191,60 +175,37 @@
            :size 0.25))))
 
 ;; change default popup size to XXL (0.6)
-(define-key evil-normal-state-map (kbd "<backspace> p s 5")
+(define-key evil-normal-state-map (kbd ", p s 5")
   (lambda ()
     (interactive)
     (wkf/popup-size "xxl")))
 
 ;; change default popup size to XL (0.5)
-(define-key evil-normal-state-map (kbd "<backspace> p s 4")
+(define-key evil-normal-state-map (kbd ", p s 4")
   (lambda ()
     (interactive)
     (wkf/popup-size "xl")))
 
 ;; change default popup size to L (0.35)
-(define-key evil-normal-state-map (kbd "<backspace> p s 3")
+(define-key evil-normal-state-map (kbd ", p s 3")
   (lambda ()
     (interactive)
     (wkf/popup-size "l")))
 
 ;; change default popup size to M (0.25)
-(define-key evil-normal-state-map (kbd "<backspace> p s 2")
+(define-key evil-normal-state-map (kbd ", p s 2")
   (lambda ()
     (interactive)
     (wkf/popup-size "m")))
 
 ;; change default popup size to S (0.25)
-(define-key evil-normal-state-map (kbd "<backspace> p s 1")
+(define-key evil-normal-state-map (kbd ", p s 1")
   (lambda ()
     (interactive)
     (wkf/popup-size "s")))
 
 ;; popup q
-(define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
-
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> <backspace>") '+workspace/display)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 0") '+workspace/switch-to-final)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 1") '+workspace/switch-to-0)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 2") '+workspace/switch-to-1)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 3") '+workspace/switch-to-2)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 4") '+workspace/switch-to-3)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 5") '+workspace/switch-to-4)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 6") '+workspace/switch-to-5)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 7") '+workspace/switch-to-6)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 8") '+workspace/switch-to-7)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> 9") '+workspace/switch-to-8)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> R") '+workspace/restore-last-session)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> h") '+workspace/switch-left)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> l") '+workspace/switch-right)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> d") '+workspace/delete)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> o") '+workspace/load)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> n") '+workspace/new)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> r") '+workspace/rename)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> s") '+workspace/save)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> x") '+workspace/kill-session)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> H") '+workspace/swap-left)
-(define-key evil-normal-state-map (kbd "<backspace> <backspace> L") '+workspace/swap-right)
+(define-key evil-normal-state-map (kbd ", p q") '+popup/close-all)
 
 (define-key evil-normal-state-map (kbd ", , ,") '+workspace/display)
 (define-key evil-normal-state-map (kbd ", , 0") '+workspace/switch-to-final)
@@ -297,22 +258,22 @@
   (kill-matching-buffers "^\\vterm"))
 
 ;; terminal (mini)
-(define-key evil-normal-state-map (kbd "<backspace> t t") '+vterm/toggle)
+(define-key evil-normal-state-map (kbd ", t t") '+vterm/toggle)
 
 ;; Terminal (max)
-(define-key evil-normal-state-map (kbd "<backspace> t T") '+vterm/here)
+(define-key evil-normal-state-map (kbd ", t T") '+vterm/here)
 
 ;; Terminal Vertical
-(define-key evil-normal-state-map (kbd "<backspace> t v") 'wkf/vterm-open-vertical)
+(define-key evil-normal-state-map (kbd ", t v") 'wkf/vterm-open-vertical)
 
 ;; Terminal Horizontal
-(define-key evil-normal-state-map (kbd "<backspace> t x") 'wkf/vterm-open-horizontal)
+(define-key evil-normal-state-map (kbd ", t x") 'wkf/vterm-open-horizontal)
 
 ;; Terminal main Close
-(define-key evil-normal-state-map (kbd "<backspace> t q q") 'wkf/vterm-close-main)
+(define-key evil-normal-state-map (kbd ", t q q") 'wkf/vterm-close-main)
 
 ;; Terminal main Close
-(define-key evil-normal-state-map (kbd "<backspace> t q c") 'wkf/vterm-close-compilation)
+(define-key evil-normal-state-map (kbd ", t q c") 'wkf/vterm-close-compilation)
 
 (defun wkf/windows-rebalance ()
   "Balance window then recenter"
@@ -558,7 +519,7 @@
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 
 ;; Format
-(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
+(define-key evil-normal-state-map (kbd ", c f") 'wkf/buffer-format)
 
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
@@ -723,8 +684,8 @@
   (add-hook 'rjsx-mode-hook #'flow-js2-mode))
 
 ;; See flow coverage
-(evil-define-key 'normal rjsx-mode-map (kbd ", t c") 'flow-minor-coverage)
-(evil-define-key 'normal js2-mode-map (kbd ", t c") 'flow-minor-coverage)
+(evil-define-key 'normal rjsx-mode-map (kbd ", c t c") 'flow-minor-coverage)
+(evil-define-key 'normal js2-mode-map (kbd ", c t c") 'flow-minor-coverage)
 
 ;; See flow status
 (evil-define-key 'normal rjsx-mode-map (kbd ", c q") 'flow-status)
@@ -900,18 +861,18 @@
   (wkf/find-file "~/wkf-org/index.org"))
 
 ;; Open index file
-(define-key evil-normal-state-map (kbd "<backspace> o e i") 'wkf/find-org-index)
+(define-key evil-normal-state-map (kbd ", o e i") 'wkf/find-org-index)
 
 ;; Org SRC edit special
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o s e") 'org-edit-special)
+(evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
 
 ;; Org SRC Format
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o s f")
-  (kbd "<backspace> o s e , w : q"))
+(evil-define-key 'normal org-mode-map (kbd ", o s f")
+  (kbd ", o s e , w : q"))
 
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o h h") 'org-insert-heading)
+(evil-define-key 'normal org-mode-map (kbd ", o h h") 'org-insert-heading)
 
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o h s") 'org-insert-subheading)
+(evil-define-key 'normal org-mode-map (kbd ", o h s") 'org-insert-subheading)
 
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"
@@ -1009,13 +970,13 @@
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
 
 ;; Org Images toggle(z)
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i i") 'org-toggle-inline-images)
+(evil-define-key 'normal org-mode-map (kbd ", o i i") 'org-toggle-inline-images)
 
 ;; Org Images yes
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i y") 'org-display-inline-images)
+(evil-define-key 'normal org-mode-map (kbd ", o i y") 'org-display-inline-images)
 
 ;; Org Images no
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o i n") 'org-remove-inline-images)
+(evil-define-key 'normal org-mode-map (kbd ", o i n") 'org-remove-inline-images)
 
 (defun wkf/org-open-at-point ()
   "Put org-mode's open at point's content to the right vsp"
@@ -1026,7 +987,7 @@
   (balance-windows))
 
 ;; Org Open
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o o") 'wkf/org-open-at-point)
+(evil-define-key 'normal org-mode-map (kbd ", o o") 'wkf/org-open-at-point)
 
 ;; disable the change slide effect, it is just cheesy
 (setq org-tree-slide-slide-in-effect nil)
@@ -1052,7 +1013,7 @@
       (doom-modeline-mode -1))))
 
 ;; Org Presentation
-(evil-define-key 'normal org-mode-map (kbd "<backspace> o p") 'wkf/toggle-org-presentation)
+(evil-define-key 'normal org-mode-map (kbd ", o p") 'wkf/toggle-org-presentation)
 
 ;; >
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
