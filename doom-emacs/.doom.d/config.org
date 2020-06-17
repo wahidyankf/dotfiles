@@ -21,6 +21,7 @@ Some functionality uses this to identify us (e.g.GPG configuration, email client
 #+END_SRC
 
 ** Font
+
 *** Explanation
 
 Doom exposes five(optional) variables for controlling fonts in Doom.Here are the three important ones:
@@ -76,7 +77,9 @@ Show battery and time on the bottom.
 (display-battery-mode)
 #+END_SRC
 
+
 * Window Management
+
 ** Frame
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -99,6 +102,7 @@ Show battery and time on the bottom.
 #+END_SRC
 
 ** Window
+
 *** Splitting
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -341,6 +345,7 @@ Show battery and time on the bottom.
 #+END_SRC
 
 * Terminal
+
 ** Enviroment
 
 Make sure eshell and mx-compile use zsh (copied alias)
@@ -403,6 +408,7 @@ Make sure eshell and mx-compile use zsh (copied alias)
 #+END_SRC
 
 * File
+
 ** Config
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -478,7 +484,9 @@ Make sure eshell and mx-compile use zsh (copied alias)
 #+END_SRC
 
 * Coding Experience
+
 ** Base
+
 *** LSP Mode
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -1274,6 +1282,7 @@ Project
 #+END_SRC
 
 * Org Mode
+
 #+BEGIN_SRC emacs-lisp :results silent
 (which-key-add-key-based-replacements
   ", o" "org")
@@ -1327,8 +1336,6 @@ If you use =org= and don't want your org files in the default location below, ch
 
 (evil-define-key 'normal org-mode-map (kbd ", o h s") 'org-insert-subheading)
 #+END_SRC
-
-#+RESULTS:
 
 ** Images
 
@@ -1582,7 +1589,6 @@ If you use =org= and don't want your org files in the default location below, ch
 
 (evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
 #+END_SRC
-
 
 * Plugins
 ** Wakatime
