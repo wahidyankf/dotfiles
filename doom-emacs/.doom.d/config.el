@@ -107,6 +107,9 @@
 ;; quit current
 (define-key evil-normal-state-map (kbd ", q q") 'delete-window)
 
+;; quit compile
+(define-key evil-normal-state-map (kbd ", q c") 'wkf/window-close-compilation)
+
 (defun wkf/buffer-close-all ()
   "Kill all buffer except current."
   (interactive)
@@ -591,14 +594,8 @@
          (compilation-previous-error 1))
         (t (flycheck-previous-error))))
 
-(which-key-add-key-based-replacements
-  ", c w" "code-window")
-
-;; compilation window quit
-(define-key evil-normal-state-map (kbd ", c w q") 'wkf/window-close-compilation)
-
 ;; compilation window open
-(define-key evil-normal-state-map (kbd ", c w e") 'wkf/window-show-compilation)
+(define-key evil-normal-state-map (kbd ", c w") 'wkf/window-show-compilation)
 
 (which-key-add-key-based-replacements
   ", d c" "diagnosis-compilation")
