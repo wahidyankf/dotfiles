@@ -44,9 +44,6 @@
 ;; Frame Delete Other
 (define-key evil-normal-state-map (kbd ", f d o") 'delete-other-frames)
 
-(which-key-add-key-based-replacements
-  ", i" "window")
-
 (defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
   (interactive)
@@ -93,22 +90,22 @@
   (evil-window-delete))
 
 (which-key-add-key-based-replacements
-  ", i q" "window-quit")
+  ", q" "quit-window")
 
 ;; quit h
-(define-key evil-normal-state-map (kbd ", i q h") 'wkf/window-close-left)
+(define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd ", i q j") 'wkf/window-close-below)
+(define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd ", i q k") 'wkf/window-close-above)
+(define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
 
 ;; quit l
-(define-key evil-normal-state-map (kbd ", i q l") 'wkf/window-close-right)
+(define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
 
 ;; quit current
-(define-key evil-normal-state-map (kbd ", i q q") 'delete-window)
+(define-key evil-normal-state-map (kbd ", q q") 'delete-window)
 
 (defun wkf/buffer-close-all ()
   "Kill all buffer except current."

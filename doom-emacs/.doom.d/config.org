@@ -102,11 +102,6 @@ Show battery and time on the bottom.
 *** Splitting
 
 #+BEGIN_SRC emacs-lisp :results silent
-(which-key-add-key-based-replacements
-  ", i" "window")
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
   (interactive)
@@ -157,22 +152,22 @@ Show battery and time on the bottom.
   (evil-window-delete))
 
 (which-key-add-key-based-replacements
-  ", i q" "window-quit")
+  ", q" "quit-window")
 
 ;; quit h
-(define-key evil-normal-state-map (kbd ", i q h") 'wkf/window-close-left)
+(define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd ", i q j") 'wkf/window-close-below)
+(define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd ", i q k") 'wkf/window-close-above)
+(define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
 
 ;; quit l
-(define-key evil-normal-state-map (kbd ", i q l") 'wkf/window-close-right)
+(define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
 
 ;; quit current
-(define-key evil-normal-state-map (kbd ", i q q") 'delete-window)
+(define-key evil-normal-state-map (kbd ", q q") 'delete-window)
 #+END_SRC
 
 ** Buffer
