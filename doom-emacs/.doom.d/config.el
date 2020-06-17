@@ -93,18 +93,23 @@
 
 ;; quit h
 (define-key evil-normal-state-map (kbd "<backspace> q h") 'wkf/window-close-left)
+(define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
 
 ;; quit j
 (define-key evil-normal-state-map (kbd "<backspace> q j") 'wkf/window-close-below)
+(define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
 
 ;; quit k
 (define-key evil-normal-state-map (kbd "<backspace> q k") 'wkf/window-close-above)
+(define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
 
 ;; quit l
 (define-key evil-normal-state-map (kbd "<backspace> q l") 'wkf/window-close-right)
+(define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
 
 ;; quit current
 (define-key evil-normal-state-map (kbd "<backspace> q q") 'delete-window)
+(define-key evil-normal-state-map (kbd ", q q") 'delete-window)
 
 (defun wkf/buffer-close-all ()
   "Kill all buffer except current."
