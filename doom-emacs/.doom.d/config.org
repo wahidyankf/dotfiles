@@ -175,7 +175,6 @@ Show battery and time on the bottom.
 
 ;; quit compile
 (define-key evil-normal-state-map (kbd ", q c") 'wkf/window-close-compilation)
-
 #+END_SRC
 
 ** Buffer
@@ -208,7 +207,6 @@ Show battery and time on the bottom.
 
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
-
 #+END_SRC
 
 ** Pop Up
@@ -842,7 +840,7 @@ To get information about any of these functions/macros, move the cursor over the
   ", C r" "compile-and-run")
 
 (which-key-add-key-based-replacements
-  ", C q" "compile-and-run")
+  ", C q" "compile-quick")
 
 (which-key-add-key-based-replacements
   ", C b" "compile-build")

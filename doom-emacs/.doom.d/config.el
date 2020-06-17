@@ -651,7 +651,7 @@
   ", C r" "compile-and-run")
 
 (which-key-add-key-based-replacements
-  ", C q" "compile-and-run")
+  ", C q" "compile-quick")
 
 (which-key-add-key-based-replacements
   ", C b" "compile-build")
