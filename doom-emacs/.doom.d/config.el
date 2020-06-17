@@ -478,19 +478,19 @@
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
-;; Go to Definition in current pane
-(define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
 ;; Go to Definition hsplit window
-(define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
+(define-key evil-normal-state-map (kbd "g d") 'wkf/gdef-split)
+;; Go to Definition in current pane
+(define-key evil-normal-state-map (kbd "<backspace> g d") 'wkf/gdef)
 
-;; Go to Dokumentation in current pane
-(define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
 ;; Go to doKumentation
-(define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
+(define-key evil-normal-state-map (kbd "g k") 'wkf/gdoc-split)
+;; Go to Dokumentation in current pane
+(define-key evil-normal-state-map (kbd "<backspace> g k") '+lookup/documentation)
 
 
 ;; Go to Definition in the new frame
-(define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
+(define-key evil-normal-state-map (kbd "<backspace> g D") 'wkf/gdef-new-frame)
 
 (defun wkf/buffer-format ()
   "Format current buffer"
@@ -1040,7 +1040,7 @@
          (proc (progn (compile (format "git_wkf_update_all"))
                       (get-buffer-process output-buffer))))))
 
-(define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
+(define-key evil-normal-state-map (kbd ", g w u a") 'wkf/git-wkf-update-all)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
