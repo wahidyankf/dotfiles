@@ -18,12 +18,19 @@
 
 (setq-default show-trailing-whitespace t)
 
-;; noh
+(which-key-add-key-based-replacements
+  ", /" "search-nohl")
+
 (define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
 
 (display-time-mode)
 
 (display-battery-mode)
+
+(which-key-add-key-based-replacements
+  ", f" "frame")
+(which-key-add-key-based-replacements
+  ", f d" "frame-delete")
 
 ;; Frame New
 (define-key evil-normal-state-map (kbd ", f n") 'make-frame-command)
@@ -36,6 +43,9 @@
 
 ;; Frame Delete Other
 (define-key evil-normal-state-map (kbd ", f d o") 'delete-other-frames)
+
+(which-key-add-key-based-replacements
+  ", i" "window")
 
 (defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
@@ -50,13 +60,13 @@
   (evil-window-down 1))
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
+(define-key evil-normal-state-map (kbd ", i \\") 'wkf/window-vsplit)
 
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd ", -") 'wkf/window-split)
+(define-key evil-normal-state-map (kbd ", i -") 'wkf/window-split)
 
 ;; = (equal)
-(define-key evil-normal-state-map (kbd ", =") 'balance-windows)
+(define-key evil-normal-state-map (kbd ", i =") 'balance-windows)
 
 (defun wkf/window-close-left ()
   "Close the pane on the left"
@@ -82,20 +92,23 @@
   (evil-window-right 1)
   (evil-window-delete))
 
+(which-key-add-key-based-replacements
+  ", i q" "window-quit")
+
 ;; quit h
-(define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
+(define-key evil-normal-state-map (kbd ", i q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
+(define-key evil-normal-state-map (kbd ", i q j") 'wkf/window-close-below)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
+(define-key evil-normal-state-map (kbd ", i q k") 'wkf/window-close-above)
 
 ;; quit l
-(define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
+(define-key evil-normal-state-map (kbd ", i q l") 'wkf/window-close-right)
 
 ;; quit current
-(define-key evil-normal-state-map (kbd ", q q") 'delete-window)
+(define-key evil-normal-state-map (kbd ", i q q") 'delete-window)
 
 (defun wkf/buffer-close-all ()
   "Kill all buffer except current."
@@ -110,11 +123,17 @@
   (message (format "b: %s, p: %s" (buffer-name)
                    (buffer-file-name))))
 
+(which-key-add-key-based-replacements
+  ", b" "buffer")
+
 ;; Get current buffer's info
 (define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
 
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
+
+(which-key-add-key-based-replacements
+  ", b c" "buffer-close")
 
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
@@ -174,6 +193,21 @@
          (set-popup-rule! "^\\*"
            :size 0.25))))
 
+(which-key-add-key-based-replacements
+  ", p" "popup")
+(which-key-add-key-based-replacements
+  ", p s" "popup-size")
+(which-key-add-key-based-replacements
+  ", p s 1" "popup-size-s")
+(which-key-add-key-based-replacements
+  ", p s 2" "popup-size-m")
+(which-key-add-key-based-replacements
+  ", p s 3" "popup-size-l")
+(which-key-add-key-based-replacements
+  ", p s 4" "popup-size-xl")
+(which-key-add-key-based-replacements
+  ", p s 5" "popup-size-xxl")
+
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd ", p s 5")
   (lambda ()
@@ -206,6 +240,9 @@
 
 ;; popup q
 (define-key evil-normal-state-map (kbd ", p q") '+popup/close-all)
+
+(which-key-add-key-based-replacements
+  ", ," "workspace")
 
 (define-key evil-normal-state-map (kbd ", , ,") '+workspace/display)
 (define-key evil-normal-state-map (kbd ", , 0") '+workspace/switch-to-final)
@@ -257,6 +294,9 @@
   (interactive)
   (kill-matching-buffers "^\\vterm"))
 
+(which-key-add-key-based-replacements
+  ", t" "terminal")
+
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd ", t t") '+vterm/toggle)
 
@@ -268,6 +308,9 @@
 
 ;; Terminal Horizontal
 (define-key evil-normal-state-map (kbd ", t x") 'wkf/vterm-open-horizontal)
+
+(which-key-add-key-based-replacements
+  ", t q" "terminal-quit")
 
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd ", t q q") 'wkf/vterm-close-main)
@@ -318,6 +361,15 @@
   (interactive)
   (wkf/find-file "~/.doom.d/scratch.el"))
 
+(which-key-add-key-based-replacements
+  "<backspace> c" "config-open")
+
+(which-key-add-key-based-replacements
+  "<backspace> c z" "config-open-zshrc")
+
+(which-key-add-key-based-replacements
+  "<backspace> c e" "config-emacs")
+
 ;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
 
@@ -335,12 +387,6 @@
 
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
-
-;; (projectile-register-project-type 'npm '("package.json")
-;;                                   :compile "yarn install"
-;;                                   :test "yarn test"
-;;                                   :run "yarn start"
-;;                                   :test-suffix ".test.js")
 
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
@@ -478,6 +524,9 @@
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
+(which-key-add-key-based-replacements
+  "<backspace> g" "goto")
+
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef-split)
 ;; Go to Definition in current pane
@@ -545,6 +594,8 @@
          (compilation-previous-error 1))
         (t (flycheck-previous-error))))
 
+(which-key-add-key-based-replacements
+  ", c w" "code-window")
 
 ;; compilation window quit
 (define-key evil-normal-state-map (kbd ", c w q") 'wkf/window-close-compilation)
@@ -552,11 +603,17 @@
 ;; compilation window open
 (define-key evil-normal-state-map (kbd ", c w e") 'wkf/window-show-compilation)
 
+(which-key-add-key-based-replacements
+  ", d c" "diagnosis-compilation")
+
 ;; error next
-(define-key evil-normal-state-map (kbd ", e n") 'wkf/error-next)
+(define-key evil-normal-state-map (kbd ", d c n") 'wkf/error-next)
 
 ;; error previous
-(define-key evil-normal-state-map (kbd ", e p") 'wkf/error-previous)
+(define-key evil-normal-state-map (kbd ", d c p") 'wkf/error-previous)
+
+(which-key-add-key-based-replacements
+  ", d" "diagnosis")
 
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
@@ -571,15 +628,50 @@
 ;; flycheck error - previous
 (define-key evil-normal-state-map (kbd "[ g") 'flycheck-previous-error)
 
+(which-key-add-key-based-replacements
+  ", m" "mode")
+
+(which-key-add-key-based-replacements
+  ", c t" "compile-test")
+
+(which-key-add-key-based-replacements
+  ", c" "compile-file")
+
+(which-key-add-key-based-replacements
+  ", c r" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", c q" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", c b" "compile-build")
+
+(which-key-add-key-based-replacements
+  ", r" "run-file")
+
+;;
+
+(which-key-add-key-based-replacements
+  ", C" "compile-project")
+
+(which-key-add-key-based-replacements
+  ", C r" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", C q" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", C b" "compile-build")
+
+(which-key-add-key-based-replacements
+  ", R" "run-project")
+
 (defun wkf/compile-interactively (cmd)
   (interactive)
   (progn (let ((term-buffer (vterm)))
            (set-buffer term-buffer)
            (term-send-raw-string cmd)
            (evil-normal-state))))
-
-;; compile Custom
-(define-key evil-normal-state-map (kbd ", C") 'compile)
 
 ;; compile compile (repeat)
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
@@ -611,18 +703,18 @@
   (compile "dune exec ./main.exe"))
 
 ;; compile project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+(evil-define-key 'normal tuareg-mode-map (kbd ", C c") 'wkf/ocaml-compile-project)
 
 ;; compile and run project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c r R")
+(evil-define-key 'normal tuareg-mode-map (kbd ", C r r")
   'wkf/ocaml-compile-and-run-project-default)
 
 ;; compile and run project interactively
-(evil-define-key 'normal tuareg-mode-map (kbd ", c r I")
+(evil-define-key 'normal tuareg-mode-map (kbd ", C r i")
   'wkf/ocaml-compile-and-run-project-interactive)
 
 ;; clean ocaml project using dune
-(evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
+(evil-define-key 'normal tuareg-mode-map (kbd ", C l") 'wkf/ocaml-clean-project)
 
 (use-package! lsp-haskell
   :after lsp-mode
@@ -671,8 +763,8 @@
   (interactive)
   (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name))))
 
-;; compile quick (typecheck) project
-(evil-define-key 'normal typescript-mode-map (kbd ", c C") 'wkf/ts-compile-project)
+;; compile project
+(evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/ts-compile-project)
 
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
@@ -734,7 +826,7 @@
 (evil-define-key 'normal go-mode-map (kbd ", r i") 'wkf/go-run-file-interactive )
 
 ;; compile current project
-(evil-define-key 'normal go-mode-map (kbd ", c C") 'wkf/go-compile-project)
+(evil-define-key 'normal go-mode-map (kbd ", C c") 'wkf/go-compile-project)
 
 ;; compile current file
 (evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
@@ -829,19 +921,22 @@
 (evil-define-key 'normal rustic-mode-map (kbd ", r r") 'wkf/rust-run-file)
 
 ;; compile - compile - file
-(evil-define-key 'normal rustic-mode-map (kbd ", c C") 'wkf/rust-compile-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C c") 'wkf/rust-compile-project)
 
 ;; compile quick project
-(evil-define-key 'normal rustic-mode-map (kbd ", c Q") 'wkf/rust-quick-check-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C q") 'wkf/rust-quick-check-project)
 
 ;; compile and run current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c r R") 'wkf/rust-compile-and-run-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C r r") 'wkf/rust-compile-and-run-project)
 
 ;; build - release - project
 (evil-define-key 'normal rustic-mode-map (kbd ", c b r") 'wkf/rust-build-release-project-release)
 
 ;; build - development - project
 (evil-define-key 'normal rustic-mode-map (kbd ", c b d") 'wkf/rust-build-development-project)
+
+(which-key-add-key-based-replacements
+  ", o" "org")
 
 (setq org-directory "~/wkf-org/")
 
@@ -859,8 +954,14 @@
   (interactive)
   (wkf/find-file "~/wkf-org/index.org"))
 
+(which-key-add-key-based-replacements
+  ", o e" "org-edit")
+
 ;; Open index file
 (define-key evil-normal-state-map (kbd ", o e i") 'wkf/find-org-index)
+
+(which-key-add-key-based-replacements
+  ", o s" "org-src")
 
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
@@ -869,94 +970,12 @@
 (evil-define-key 'normal org-mode-map (kbd ", o s f")
   (kbd ", o s e , w : q"))
 
+(which-key-add-key-based-replacements
+  ", o h" "org-heading")
+
 (evil-define-key 'normal org-mode-map (kbd ", o h h") 'org-insert-heading)
 
 (evil-define-key 'normal org-mode-map (kbd ", o h s") 'org-insert-subheading)
-
-(defun wkf/org-src-elisp ()
-  "Insert Org SRC for elisp"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC emacs-lisp")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(defun wkf/org-src-elisp-silent ()
-  "Insert Org SRC for elisp"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC emacs-lisp :results silent")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(defun wkf/org-src-elisp-output ()
-  "Insert Org SRC for elisp"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC emacs-lisp :results output")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(evil-define-key 'normal org-mode-map (kbd "` e l o s i") 'wkf/org-src-elisp-silent)
-(evil-define-key 'normal org-mode-map (kbd "` e l o s o") 'wkf/org-src-elisp-output)
-(evil-define-key 'normal org-mode-map (kbd "` e l o s s") 'wkf/org-src-elisp)
-
-(defun wkf/org-src-sh ()
-  "Insert Org SRC for sh"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC sh :results output")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
-
-(defun wkf/org-src-js ()
-  "Insert Org SRC for javascript"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC js :results output")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(evil-define-key 'normal org-mode-map (kbd "` j s o s") 'wkf/org-src-js)
-
-(defun wkf/js-comment-heading ()
-  "Insert comment in JS that looks like a heading"
-  (interactive)
-  (progn (insert "// ---")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "// ---")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (evil-normal-state)
-         (evil-previous-line)
-         (evil-open-above 1)
-         (insert "// ")))
-
-(evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
-(evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
-
-(defun wkf/ocaml-comment-heading ()
-  "Insert comment in ocaml that looks like a heading"
-  (interactive)
-  (insert "(* ---  --- *)")
-  (evil-normal-state)
-  (evil-backward-char 6)
-  (evil-insert-state))
-
-(evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
 
 ;; (setq org-image-actual-width nil)
 
@@ -967,6 +986,9 @@
 (add-hook 'org-mode-hook 'org-display-inline-images)
 
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
+
+(which-key-add-key-based-replacements
+  ", o i" "org-inline-images")
 
 ;; Org Images toggle(z)
 (evil-define-key 'normal org-mode-map (kbd ", o i i") 'org-toggle-inline-images)
@@ -1040,13 +1062,151 @@
          (proc (progn (compile (format "git_wkf_update_all"))
                       (get-buffer-process output-buffer))))))
 
+(which-key-add-key-based-replacements
+  ", g" "git")
+(which-key-add-key-based-replacements
+  ", g w" "git-wkf")
+(which-key-add-key-based-replacements
+  ", g w u" "git-wkf-update")
+
 (define-key evil-normal-state-map (kbd ", g w u a") 'wkf/git-wkf-update-all)
+
+(defun wkf/org-src-elisp ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(defun wkf/org-src-elisp-silent ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp :results silent")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(defun wkf/org-src-elisp-output ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(which-key-add-key-based-replacements
+  "` e" "emacs")
+(which-key-add-key-based-replacements
+  "` e l" "emacs-lisp")
+(which-key-add-key-based-replacements
+  "` e l o" "emacs-lisp-org")
+(which-key-add-key-based-replacements
+  "` e l o s" "emacs-lisp-org-source")
+
+(evil-define-key 'normal org-mode-map (kbd "` e l o s i") 'wkf/org-src-elisp-silent)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s o") 'wkf/org-src-elisp-output)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s s") 'wkf/org-src-elisp)
+
+(defun wkf/org-src-sh ()
+  "Insert Org SRC for sh"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC sh :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(which-key-add-key-based-replacements
+  "` s" "shell")
+(which-key-add-key-based-replacements
+  "` s h" "shell")
+(which-key-add-key-based-replacements
+  "` s h o" "shell-org")
+(which-key-add-key-based-replacements
+  "` s h o s" "shell-org-source")
+
+(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
+
+(which-key-add-key-based-replacements
+  "` j" "javascript")
+(which-key-add-key-based-replacements
+  "` j s" "javascript")
+(which-key-add-key-based-replacements
+  "` j s o" "javascript-org")
+(which-key-add-key-based-replacements
+  "` j s o s" "javascript-org-source")
+
+(defun wkf/org-src-js ()
+  "Insert Org SRC for javascript"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC js :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "` j s o s") 'wkf/org-src-js)
+
+(defun wkf/js-comment-heading ()
+  "Insert comment in JS that looks like a heading"
+  (interactive)
+  (progn (insert "// ---")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "// ---")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (evil-normal-state)
+         (evil-previous-line)
+         (evil-open-above 1)
+         (insert "// ")))
+
+(which-key-add-key-based-replacements
+  "` j s c" "javascript-comment")
+(which-key-add-key-based-replacements
+  "` j s c h" "javascript-comment-heading")
+
+(evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+(evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+
+(which-key-add-key-based-replacements
+  "` m" "ocaml")
+(which-key-add-key-based-replacements
+  "` m l" "ocaml")
+(which-key-add-key-based-replacements
+  "` m l c" "ocaml-comment")
+(which-key-add-key-based-replacements
+  "` m l c h" "ocaml-comment-heading")
+
+(defun wkf/ocaml-comment-heading ()
+  "Insert comment in ocaml that looks like a heading"
+  (interactive)
+  (insert "(* ---  --- *)")
+  (evil-normal-state)
+  (evil-backward-char 6)
+  (evil-insert-state))
+
+(evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))
+
+(which-key-add-key-based-replacements
+  ", s" "search")
 
 ;; search Search
 (define-key evil-normal-state-map (kbd ", s S") 'deadgrep)
 
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
+
+(setq which-key-idle-delay 0.5)

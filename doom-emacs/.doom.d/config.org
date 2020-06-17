@@ -60,7 +60,9 @@ Config text editor's preference.
 
 (setq-default show-trailing-whitespace t)
 
-;; noh
+(which-key-add-key-based-replacements
+  ", /" "search-nohl")
+
 (define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
 #+END_SRC
 
@@ -78,6 +80,11 @@ Show battery and time on the bottom.
 ** Frame
 
 #+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", f" "frame")
+(which-key-add-key-based-replacements
+  ", f d" "frame-delete")
+
 ;; Frame New
 (define-key evil-normal-state-map (kbd ", f n") 'make-frame-command)
 
@@ -95,6 +102,11 @@ Show battery and time on the bottom.
 *** Splitting
 
 #+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", i" "window")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
   (interactive)
@@ -108,13 +120,13 @@ Show battery and time on the bottom.
   (evil-window-down 1))
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
+(define-key evil-normal-state-map (kbd ", i \\") 'wkf/window-vsplit)
 
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd ", -") 'wkf/window-split)
+(define-key evil-normal-state-map (kbd ", i -") 'wkf/window-split)
 
 ;; = (equal)
-(define-key evil-normal-state-map (kbd ", =") 'balance-windows)
+(define-key evil-normal-state-map (kbd ", i =") 'balance-windows)
 #+END_SRC
 
 *** Closing
@@ -144,20 +156,23 @@ Show battery and time on the bottom.
   (evil-window-right 1)
   (evil-window-delete))
 
+(which-key-add-key-based-replacements
+  ", i q" "window-quit")
+
 ;; quit h
-(define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
+(define-key evil-normal-state-map (kbd ", i q h") 'wkf/window-close-left)
 
 ;; quit j
-(define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
+(define-key evil-normal-state-map (kbd ", i q j") 'wkf/window-close-below)
 
 ;; quit k
-(define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
+(define-key evil-normal-state-map (kbd ", i q k") 'wkf/window-close-above)
 
 ;; quit l
-(define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
+(define-key evil-normal-state-map (kbd ", i q l") 'wkf/window-close-right)
 
 ;; quit current
-(define-key evil-normal-state-map (kbd ", q q") 'delete-window)
+(define-key evil-normal-state-map (kbd ", i q q") 'delete-window)
 #+END_SRC
 
 ** Buffer
@@ -176,11 +191,17 @@ Show battery and time on the bottom.
   (message (format "b: %s, p: %s" (buffer-name)
                    (buffer-file-name))))
 
+(which-key-add-key-based-replacements
+  ", b" "buffer")
+
 ;; Get current buffer's info
 (define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
 
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
+
+(which-key-add-key-based-replacements
+  ", b c" "buffer-close")
 
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
@@ -245,6 +266,21 @@ Show battery and time on the bottom.
          (set-popup-rule! "^\\*"
            :size 0.25))))
 
+(which-key-add-key-based-replacements
+  ", p" "popup")
+(which-key-add-key-based-replacements
+  ", p s" "popup-size")
+(which-key-add-key-based-replacements
+  ", p s 1" "popup-size-s")
+(which-key-add-key-based-replacements
+  ", p s 2" "popup-size-m")
+(which-key-add-key-based-replacements
+  ", p s 3" "popup-size-l")
+(which-key-add-key-based-replacements
+  ", p s 4" "popup-size-xl")
+(which-key-add-key-based-replacements
+  ", p s 5" "popup-size-xxl")
+
 ;; change default popup size to XXL (0.6)
 (define-key evil-normal-state-map (kbd ", p s 5")
   (lambda ()
@@ -282,6 +318,9 @@ Show battery and time on the bottom.
 ** Workspace
 
 #+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", ," "workspace")
+
 (define-key evil-normal-state-map (kbd ", , ,") '+workspace/display)
 (define-key evil-normal-state-map (kbd ", , 0") '+workspace/switch-to-final)
 (define-key evil-normal-state-map (kbd ", , 1") '+workspace/switch-to-0)
@@ -343,6 +382,9 @@ Make sure eshell and mx-compile use zsh (copied alias)
   (interactive)
   (kill-matching-buffers "^\\vterm"))
 
+(which-key-add-key-based-replacements
+  ", t" "terminal")
+
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd ", t t") '+vterm/toggle)
 
@@ -354,6 +396,9 @@ Make sure eshell and mx-compile use zsh (copied alias)
 
 ;; Terminal Horizontal
 (define-key evil-normal-state-map (kbd ", t x") 'wkf/vterm-open-horizontal)
+
+(which-key-add-key-based-replacements
+  ", t q" "terminal-quit")
 
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd ", t q q") 'wkf/vterm-close-main)
@@ -409,6 +454,15 @@ Make sure eshell and mx-compile use zsh (copied alias)
   (interactive)
   (wkf/find-file "~/.doom.d/scratch.el"))
 
+(which-key-add-key-based-replacements
+  "<backspace> c" "config-open")
+
+(which-key-add-key-based-replacements
+  "<backspace> c z" "config-open-zshrc")
+
+(which-key-add-key-based-replacements
+  "<backspace> c e" "config-emacs")
+
 ;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
 
@@ -426,16 +480,6 @@ Make sure eshell and mx-compile use zsh (copied alias)
 
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
-#+END_SRC
-
-* Project
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; (projectile-register-project-type 'npm '("package.json")
-;;                                   :compile "yarn install"
-;;                                   :test "yarn test"
-;;                                   :run "yarn start"
-;;                                   :test-suffix ".test.js")
 #+END_SRC
 
 * Coding Experience
@@ -593,6 +637,9 @@ To get information about any of these functions/macros, move the cursor over the
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
+(which-key-add-key-based-replacements
+  "<backspace> g" "goto")
+
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef-split)
 ;; Go to Definition in current pane
@@ -669,6 +716,8 @@ To get information about any of these functions/macros, move the cursor over the
          (compilation-previous-error 1))
         (t (flycheck-previous-error))))
 
+(which-key-add-key-based-replacements
+  ", c w" "code-window")
 
 ;; compilation window quit
 (define-key evil-normal-state-map (kbd ", c w q") 'wkf/window-close-compilation)
@@ -676,16 +725,22 @@ To get information about any of these functions/macros, move the cursor over the
 ;; compilation window open
 (define-key evil-normal-state-map (kbd ", c w e") 'wkf/window-show-compilation)
 
+(which-key-add-key-based-replacements
+  ", d c" "diagnosis-compilation")
+
 ;; error next
-(define-key evil-normal-state-map (kbd ", e n") 'wkf/error-next)
+(define-key evil-normal-state-map (kbd ", d c n") 'wkf/error-next)
 
 ;; error previous
-(define-key evil-normal-state-map (kbd ", e p") 'wkf/error-previous)
+(define-key evil-normal-state-map (kbd ", d c p") 'wkf/error-previous)
 #+END_SRC
 
 *** Error Reporting
 
 #+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", d" "diagnosis")
+
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
 
@@ -707,53 +762,94 @@ To get information about any of these functions/macros, move the cursor over the
 ***** Raw Compile
 
 #+BEGIN_EXAMPLE
-C -> compile Custom
-c . -> compile with last command
+, c . -> compile with last command
 #+END_EXAMPLE
 
 ***** Test
 
 #+BEGIN_EXAMPLE
-t c -> test coverage
+, c t c -> test coverage
 #+END_EXAMPLE
 
 ***** Compile File
 
 #+BEGIN_EXAMPLE
-c c -> compile file
-c r r -> compile and run file
-c r i -> compile and run file interactively
-c q -> compile quick check file
-c b d -> build dev file
-c b r -> build release file
+, c c -> compile file
+, c r r -> compile and run file
+, c r i -> compile and run file interactively
+, c q -> compile quick check file
+, c b d -> build dev file
+, c b r -> build release file
 #+END_EXAMPLE
 
 ***** Compile Project
 
 #+BEGIN_EXAMPLE
-c C -> compile project
-c r R -> compile and run project
-c r I -> compile and run project interactively
-c Q -> compile quick project
-c b D -> build dev project
-c b R -> build release project
+, C c -> compile project
+, C r r -> compile and run project
+, C r i -> compile and run project interactively
+, C q -> compile quick project
+, C b d -> build dev project
+, C b r -> build release project
 #+END_EXAMPLE
 
 ***** Run
 
 #+BEGIN_EXAMPLE
-r r -> run file
-r i -> run file interactively
-r R -> run project
-r I -> run project interactively
+, r r -> run file
+, r i -> run file interactively
+, R r -> run project
+, R i -> run project interactively
 #+END_EXAMPLE
 
 ***** Clean
 
 #+BEGIN_EXAMPLE
-c l -> clean project
-c L -> hard clean project
+, c l -> clean project
+, c L -> hard clean project
 #+END_EXAMPLE
+
+**** Which-Key
+
+#+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", m" "mode")
+
+(which-key-add-key-based-replacements
+  ", c t" "compile-test")
+
+(which-key-add-key-based-replacements
+  ", c" "compile-file")
+
+(which-key-add-key-based-replacements
+  ", c r" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", c q" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", c b" "compile-build")
+
+(which-key-add-key-based-replacements
+  ", r" "run-file")
+
+;;
+
+(which-key-add-key-based-replacements
+  ", C" "compile-project")
+
+(which-key-add-key-based-replacements
+  ", C r" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", C q" "compile-and-run")
+
+(which-key-add-key-based-replacements
+  ", C b" "compile-build")
+
+(which-key-add-key-based-replacements
+  ", R" "run-project")
+#+END_SRC
 
 **** Commons
 
@@ -764,9 +860,6 @@ c L -> hard clean project
            (set-buffer term-buffer)
            (term-send-raw-string cmd)
            (evil-normal-state))))
-
-;; compile Custom
-(define-key evil-normal-state-map (kbd ", C") 'compile)
 
 ;; compile compile (repeat)
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
@@ -852,18 +945,18 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; compile project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c C") 'wkf/ocaml-compile-project)
+(evil-define-key 'normal tuareg-mode-map (kbd ", C c") 'wkf/ocaml-compile-project)
 
 ;; compile and run project default
-(evil-define-key 'normal tuareg-mode-map (kbd ", c r R")
+(evil-define-key 'normal tuareg-mode-map (kbd ", C r r")
   'wkf/ocaml-compile-and-run-project-default)
 
 ;; compile and run project interactively
-(evil-define-key 'normal tuareg-mode-map (kbd ", c r I")
+(evil-define-key 'normal tuareg-mode-map (kbd ", C r i")
   'wkf/ocaml-compile-and-run-project-interactive)
 
 ;; clean ocaml project using dune
-(evil-define-key 'normal tuareg-mode-map (kbd ", c l") 'wkf/ocaml-clean-project)
+(evil-define-key 'normal tuareg-mode-map (kbd ", C l") 'wkf/ocaml-clean-project)
 #+END_SRC
 
 *** Haskell
@@ -933,8 +1026,8 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :results silent
-;; compile quick (typecheck) project
-(evil-define-key 'normal typescript-mode-map (kbd ", c C") 'wkf/ts-compile-project)
+;; compile project
+(evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/ts-compile-project)
 
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
@@ -1014,7 +1107,7 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 (evil-define-key 'normal go-mode-map (kbd ", r i") 'wkf/go-run-file-interactive )
 
 ;; compile current project
-(evil-define-key 'normal go-mode-map (kbd ", c C") 'wkf/go-compile-project)
+(evil-define-key 'normal go-mode-map (kbd ", C c") 'wkf/go-compile-project)
 
 ;; compile current file
 (evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
@@ -1170,13 +1263,13 @@ Project
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; compile - compile - file
-(evil-define-key 'normal rustic-mode-map (kbd ", c C") 'wkf/rust-compile-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C c") 'wkf/rust-compile-project)
 
 ;; compile quick project
-(evil-define-key 'normal rustic-mode-map (kbd ", c Q") 'wkf/rust-quick-check-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C q") 'wkf/rust-quick-check-project)
 
 ;; compile and run current project
-(evil-define-key 'normal rustic-mode-map (kbd ", c r R") 'wkf/rust-compile-and-run-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C r r") 'wkf/rust-compile-and-run-project)
 
 ;; build - release - project
 (evil-define-key 'normal rustic-mode-map (kbd ", c b r") 'wkf/rust-build-release-project-release)
@@ -1186,6 +1279,11 @@ Project
 #+END_SRC
 
 * Org Mode
+#+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", o" "org")
+#+END_SRC
+
 ** Directory
 
 If you use =org= and don't want your org files in the default location below, change =org-directory=. It must be set before org loads!
@@ -1207,6 +1305,9 @@ If you use =org= and don't want your org files in the default location below, ch
   (interactive)
   (wkf/find-file "~/wkf-org/index.org"))
 
+(which-key-add-key-based-replacements
+  ", o e" "org-edit")
+
 ;; Open index file
 (define-key evil-normal-state-map (kbd ", o e i") 'wkf/find-org-index)
 #+END_SRC
@@ -1214,6 +1315,9 @@ If you use =org= and don't want your org files in the default location below, ch
 ** Editing
 
 #+BEGIN_SRC emacs-lisp :results silent;; Org SRC Edit
+(which-key-add-key-based-replacements
+  ", o s" "org-src")
+
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
 
@@ -1221,118 +1325,15 @@ If you use =org= and don't want your org files in the default location below, ch
 (evil-define-key 'normal org-mode-map (kbd ", o s f")
   (kbd ", o s e , w : q"))
 
+(which-key-add-key-based-replacements
+  ", o h" "org-heading")
+
 (evil-define-key 'normal org-mode-map (kbd ", o h h") 'org-insert-heading)
 
 (evil-define-key 'normal org-mode-map (kbd ", o h s") 'org-insert-subheading)
 #+END_SRC
 
 #+RESULTS:
-
-#+END_SRC
-
-#+RESULTS:
-
-** Snippet
-
-*** Emacs Lisp
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/org-src-elisp ()
-  "Insert Org SRC for elisp"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC emacs-lisp")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(defun wkf/org-src-elisp-silent ()
-  "Insert Org SRC for elisp"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC emacs-lisp :results silent")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(defun wkf/org-src-elisp-output ()
-  "Insert Org SRC for elisp"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC emacs-lisp :results output")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(evil-define-key 'normal org-mode-map (kbd "` e l o s i") 'wkf/org-src-elisp-silent)
-(evil-define-key 'normal org-mode-map (kbd "` e l o s o") 'wkf/org-src-elisp-output)
-(evil-define-key 'normal org-mode-map (kbd "` e l o s s") 'wkf/org-src-elisp)
-#+END_SRC
-
-*** Shell
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/org-src-sh ()
-  "Insert Org SRC for sh"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC sh :results output")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
-#+END_SRC
-
-*** JavaScript
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/org-src-js ()
-  "Insert Org SRC for javascript"
-  (interactive)
-  (progn (insert "#+BEGIN_SRC js :results output")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "#+END_SRC")
-         (evil-normal-state)
-         (evil-open-above 1)))
-
-(evil-define-key 'normal org-mode-map (kbd "` j s o s") 'wkf/org-src-js)
-
-(defun wkf/js-comment-heading ()
-  "Insert comment in JS that looks like a heading"
-  (interactive)
-  (progn (insert "// ---")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (insert "// ---")
-         (evil-normal-state)
-         (evil-open-below 1)
-         (evil-normal-state)
-         (evil-previous-line)
-         (evil-open-above 1)
-         (insert "// ")))
-
-(evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
-(evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
-#+END_SRC
-
-*** OCaml
-
-#+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/ocaml-comment-heading ()
-  "Insert comment in ocaml that looks like a heading"
-  (interactive)
-  (insert "(* ---  --- *)")
-  (evil-normal-state)
-  (evil-backward-char 6)
-  (evil-insert-state))
-
-(evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
-#+END_SRC
 
 ** Images
 
@@ -1346,6 +1347,9 @@ If you use =org= and don't want your org files in the default location below, ch
 (add-hook 'org-mode-hook 'org-display-inline-images)
 
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
+
+(which-key-add-key-based-replacements
+  ", o i" "org-inline-images")
 
 ;; Org Images toggle(z)
 (evil-define-key 'normal org-mode-map (kbd ", o i i") 'org-toggle-inline-images)
@@ -1431,8 +1435,159 @@ If you use =org= and don't want your org files in the default location below, ch
          (proc (progn (compile (format "git_wkf_update_all"))
                       (get-buffer-process output-buffer))))))
 
+(which-key-add-key-based-replacements
+  ", g" "git")
+(which-key-add-key-based-replacements
+  ", g w" "git-wkf")
+(which-key-add-key-based-replacements
+  ", g w u" "git-wkf-update")
+
 (define-key evil-normal-state-map (kbd ", g w u a") 'wkf/git-wkf-update-all)
 #+END_SRC
+
+* Snippet
+
+** Emacs Lisp
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/org-src-elisp ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(defun wkf/org-src-elisp-silent ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp :results silent")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(defun wkf/org-src-elisp-output ()
+  "Insert Org SRC for elisp"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC emacs-lisp :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(which-key-add-key-based-replacements
+  "` e" "emacs")
+(which-key-add-key-based-replacements
+  "` e l" "emacs-lisp")
+(which-key-add-key-based-replacements
+  "` e l o" "emacs-lisp-org")
+(which-key-add-key-based-replacements
+  "` e l o s" "emacs-lisp-org-source")
+
+(evil-define-key 'normal org-mode-map (kbd "` e l o s i") 'wkf/org-src-elisp-silent)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s o") 'wkf/org-src-elisp-output)
+(evil-define-key 'normal org-mode-map (kbd "` e l o s s") 'wkf/org-src-elisp)
+#+END_SRC
+
+** Shell
+
+#+BEGIN_SRC emacs-lisp :results silent
+(defun wkf/org-src-sh ()
+  "Insert Org SRC for sh"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC sh :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(which-key-add-key-based-replacements
+  "` s" "shell")
+(which-key-add-key-based-replacements
+  "` s h" "shell")
+(which-key-add-key-based-replacements
+  "` s h o" "shell-org")
+(which-key-add-key-based-replacements
+  "` s h o s" "shell-org-source")
+
+(evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
+#+END_SRC
+
+** JavaScript
+
+#+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  "` j" "javascript")
+(which-key-add-key-based-replacements
+  "` j s" "javascript")
+(which-key-add-key-based-replacements
+  "` j s o" "javascript-org")
+(which-key-add-key-based-replacements
+  "` j s o s" "javascript-org-source")
+
+(defun wkf/org-src-js ()
+  "Insert Org SRC for javascript"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC js :results output")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(evil-define-key 'normal org-mode-map (kbd "` j s o s") 'wkf/org-src-js)
+
+(defun wkf/js-comment-heading ()
+  "Insert comment in JS that looks like a heading"
+  (interactive)
+  (progn (insert "// ---")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "// ---")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (evil-normal-state)
+         (evil-previous-line)
+         (evil-open-above 1)
+         (insert "// ")))
+
+(which-key-add-key-based-replacements
+  "` j s c" "javascript-comment")
+(which-key-add-key-based-replacements
+  "` j s c h" "javascript-comment-heading")
+
+(evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+(evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+#+END_SRC
+
+** OCaml
+
+#+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  "` m" "ocaml")
+(which-key-add-key-based-replacements
+  "` m l" "ocaml")
+(which-key-add-key-based-replacements
+  "` m l c" "ocaml-comment")
+(which-key-add-key-based-replacements
+  "` m l c h" "ocaml-comment-heading")
+
+(defun wkf/ocaml-comment-heading ()
+  "Insert comment in ocaml that looks like a heading"
+  (interactive)
+  (insert "(* ---  --- *)")
+  (evil-normal-state)
+  (evil-backward-char 6)
+  (evil-insert-state))
+
+(evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
+#+END_SRC
+
 
 * Plugins
 ** Wakatime
@@ -1445,9 +1600,18 @@ If you use =org= and don't want your org files in the default location below, ch
 ** DeadGrep
 
 #+BEGIN_SRC emacs-lisp :results silent
+(which-key-add-key-based-replacements
+  ", s" "search")
+
 ;; search Search
 (define-key evil-normal-state-map (kbd ", s S") 'deadgrep)
 
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
+#+END_SRC
+
+** Which-Key
+
+#+BEGIN_SRC emacs-lisp :results silent
+(setq which-key-idle-delay 0.5)
 #+END_SRC
