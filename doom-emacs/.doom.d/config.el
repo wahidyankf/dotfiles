@@ -31,6 +31,14 @@
   ", f" "frame")
 (which-key-add-key-based-replacements
   ", f d" "frame-delete")
+(which-key-add-key-based-replacements
+  ", f f" "frame-cycle")
+(which-key-add-key-based-replacements
+  ", f n" "frame-new")
+(which-key-add-key-based-replacements
+  ", f d d" "frame-delete-current")
+(which-key-add-key-based-replacements
+  ", f d o" "frame-delete-other")
 
 ;; Frame New
 (define-key evil-normal-state-map (kbd ", f n") 'make-frame-command)
@@ -55,6 +63,13 @@
   (interactive)
   (evil-window-split)
   (evil-window-down 1))
+
+(which-key-add-key-based-replacements
+  ", \\" "window-vsplit-and-focus")
+(which-key-add-key-based-replacements
+  ", -" "window-split-and-focus")
+(which-key-add-key-based-replacements
+  ", =" "window-balance")
 
 ;; | (vertical)
 (define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
@@ -91,6 +106,18 @@
 
 (which-key-add-key-based-replacements
   ", q" "quit-window")
+(which-key-add-key-based-replacements
+  ", q h" "quit-window-left")
+(which-key-add-key-based-replacements
+  ", q j" "quit-window-below")
+(which-key-add-key-based-replacements
+  ", q k" "quit-window-above")
+(which-key-add-key-based-replacements
+  ", q l" "quit-window-right")
+(which-key-add-key-based-replacements
+  ", q q" "quit-window-current")
+(which-key-add-key-based-replacements
+  ", q c" "quit-window-compilation")
 
 ;; quit h
 (define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
@@ -125,15 +152,20 @@
 
 (which-key-add-key-based-replacements
   ", b" "buffer")
+(which-key-add-key-based-replacements
+  ", b i" "buffer-info")
+(which-key-add-key-based-replacements
+  ", b b" "buffer-revert")
+(which-key-add-key-based-replacements
+  ", b c" "buffer-close")
+(which-key-add-key-based-replacements
+  ", b c a" "buffer-close-all-but-current")
 
 ;; Get current buffer's info
 (define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
 
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
-
-(which-key-add-key-based-replacements
-  ", b c" "buffer-close")
 
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
@@ -296,6 +328,20 @@
 
 (which-key-add-key-based-replacements
   ", t" "terminal")
+(which-key-add-key-based-replacements
+  ", t t" "terminal-popup")
+(which-key-add-key-based-replacements
+  ", t T" "terminal-here")
+(which-key-add-key-based-replacements
+  ", t v" "terminal-vsplit")
+(which-key-add-key-based-replacements
+  ", t x" "terminal-split")
+(which-key-add-key-based-replacements
+  ", t q" "terminal-quit")
+(which-key-add-key-based-replacements
+  ", t q q" "terminal-quit-current")
+(which-key-add-key-based-replacements
+  ", t q c" "terminal-quit-compilation")
 
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd ", t t") '+vterm/toggle)
@@ -308,9 +354,6 @@
 
 ;; Terminal Horizontal
 (define-key evil-normal-state-map (kbd ", t x") 'wkf/vterm-open-horizontal)
-
-(which-key-add-key-based-replacements
-  ", t q" "terminal-quit")
 
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd ", t q q") 'wkf/vterm-close-main)
@@ -363,12 +406,22 @@
 
 (which-key-add-key-based-replacements
   "<backspace> c" "config-open")
-
 (which-key-add-key-based-replacements
-  "<backspace> c z" "config-open-zshrc")
-
+  "<backspace> c z" "config-open-zsh")
+(which-key-add-key-based-replacements
+  "<backspace> c z z" "config-open-zsh-rc")
 (which-key-add-key-based-replacements
   "<backspace> c e" "config-emacs")
+(which-key-add-key-based-replacements
+  "<backspace> c e i" "config-emacs-init")
+(which-key-add-key-based-replacements
+  "<backspace> c e p" "config-emacs-packages")
+(which-key-add-key-based-replacements
+  "<backspace> c e c" "config-emacs-config-org")
+(which-key-add-key-based-replacements
+  "<backspace> c e C" "config-emacs-config-el")
+(which-key-add-key-based-replacements
+  "<backspace> c e s" "config-emacs-scratch")
 
 ;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
@@ -526,6 +579,12 @@
 
 (which-key-add-key-based-replacements
   ", g" "goto")
+(which-key-add-key-based-replacements
+  ", g d" "goto-def-split")
+(which-key-add-key-based-replacements
+  ", g k" "goto-doc-split")
+(which-key-add-key-based-replacements
+  ", g D" "goto-def-new-frame")
 
 ;; Go to Definition in current pane
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
@@ -562,9 +621,13 @@
         (t (wkf/buffer-format)))
   (save-buffer))
 
+(which-key-add-key-based-replacements
+  ", w" "buffer-save-and-format")
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 
+(which-key-add-key-based-replacements
+  ", c f" "buffer-format")
 ;; Format
 (define-key evil-normal-state-map (kbd ", c f") 'wkf/buffer-format)
 
@@ -593,11 +656,17 @@
          (compilation-previous-error 1))
         (t (flycheck-previous-error))))
 
+(which-key-add-key-based-replacements
+  ", c w" "compilation-window")
 ;; compilation window open
 (define-key evil-normal-state-map (kbd ", c w") 'wkf/window-show-compilation)
 
 (which-key-add-key-based-replacements
   ", d c" "diagnosis-compilation")
+(which-key-add-key-based-replacements
+  ", d c n" "diagnosis-compilation-next")
+(which-key-add-key-based-replacements
+  ", d c p" "diagnosis-compilation-previous")
 
 ;; error next
 (define-key evil-normal-state-map (kbd ", d c n") 'wkf/error-next)
@@ -625,39 +694,69 @@
   ", m" "mode")
 
 (which-key-add-key-based-replacements
-  ", c t" "compile-test")
+  ", c t" "compile-file-test")
+(which-key-add-key-based-replacements
+  ", c t c" "compile-file-test-coverage")
 
 (which-key-add-key-based-replacements
   ", c" "compile-file")
+(which-key-add-key-based-replacements
+  ", c c" "compile-file-default")
 
 (which-key-add-key-based-replacements
-  ", c r" "compile-and-run")
+  ", c r" "compile-file-and-run")
+(which-key-add-key-based-replacements
+  ", c r r" "compile-file-and-run-default")
+(which-key-add-key-based-replacements
+  ", c r i" "compile-file-and-run-interactive")
 
 (which-key-add-key-based-replacements
-  ", c q" "compile-and-run")
+  ", c q" "compile-file-and-run")
 
 (which-key-add-key-based-replacements
-  ", c b" "compile-build")
+  ", c b" "compile-file-build")
+(which-key-add-key-based-replacements
+  ", c b d" "compile-file-build-dev")
+(which-key-add-key-based-replacements
+  ", c b r" "compile-file-build-release")
 
 (which-key-add-key-based-replacements
   ", r" "run-file")
+(which-key-add-key-based-replacements
+  ", r r" "run-file-default")
+(which-key-add-key-based-replacements
+  ", r i" "run-file-interactively")
 
 ;;
 
 (which-key-add-key-based-replacements
   ", C" "compile-project")
+(which-key-add-key-based-replacements
+  ", C c" "compile-project-default")
 
 (which-key-add-key-based-replacements
-  ", C r" "compile-and-run")
+  ", C r" "compile-project-and-run")
+(which-key-add-key-based-replacements
+  ", C r r" "compile-project-and-run-default")
+(which-key-add-key-based-replacements
+  ", C r i" "compile-project-and-run-interactive")
 
 (which-key-add-key-based-replacements
-  ", C q" "compile-quick")
+  ", C q" "compile-project-quick")
 
 (which-key-add-key-based-replacements
-  ", C b" "compile-build")
+  ", C b" "compile-project-build")
+(which-key-add-key-based-replacements
+  ", C b d" "compile-project-build-dev")
+(which-key-add-key-based-replacements
+  ", C b r" "compile-project-build-release")
 
 (which-key-add-key-based-replacements
   ", R" "run-project")
+(which-key-add-key-based-replacements
+  ", R r" "run-project-default")
+(which-key-add-key-based-replacements
+  ", R i" "run-project-interactively")
 
 (defun wkf/compile-interactively (cmd)
   (interactive)
@@ -666,6 +765,8 @@
            (term-send-raw-string cmd)
            (evil-normal-state))))
 
+(which-key-add-key-based-replacements
+  ", c ." "recompile-using-last-command")
 ;; compile compile (repeat)
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
 
@@ -949,12 +1050,18 @@
 
 (which-key-add-key-based-replacements
   ", o e" "org-edit")
+(which-key-add-key-based-replacements
+  ", o e i" "org-edit-index")
 
 ;; Open index file
 (define-key evil-normal-state-map (kbd ", o e i") 'wkf/find-org-index)
 
 (which-key-add-key-based-replacements
   ", o s" "org-src")
+(which-key-add-key-based-replacements
+  ", o s e" "org-src-edit-special")
+(which-key-add-key-based-replacements
+  ", o s f" "org-src-format")
 
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
@@ -965,6 +1072,10 @@
 
 (which-key-add-key-based-replacements
   ", o h" "org-heading")
+(which-key-add-key-based-replacements
+  ", o h h" "org-heading-insert")
+(which-key-add-key-based-replacements
+  ", o h s" "org-heading-sub-insert")
 
 (evil-define-key 'normal org-mode-map (kbd ", o h h") 'org-insert-heading)
 
@@ -982,6 +1093,12 @@
 
 (which-key-add-key-based-replacements
   ", o i" "org-inline-images")
+(which-key-add-key-based-replacements
+  ", o i i" "org-inline-images-toggle")
+(which-key-add-key-based-replacements
+  ", o i y" "org-inline-images-display-yes")
+(which-key-add-key-based-replacements
+  ", o i n" "org-inline-images-display-no")
 
 ;; Org Images toggle(z)
 (evil-define-key 'normal org-mode-map (kbd ", o i i") 'org-toggle-inline-images)
@@ -999,6 +1116,9 @@
   (evil-window-right 1)
   (org-open-at-point)
   (balance-windows))
+
+(which-key-add-key-based-replacements
+  ", o o" "org-open-at-point")
 
 ;; Org Open
 (evil-define-key 'normal org-mode-map (kbd ", o o") 'wkf/org-open-at-point)
@@ -1061,6 +1181,8 @@
   "<backspace> g w" "git-wkf")
 (which-key-add-key-based-replacements
   "<backspace> g w u" "git-wkf-update")
+(which-key-add-key-based-replacements
+  "<backspace> g w u a" "git-wkf-update-all")
 
 (define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
 
@@ -1102,6 +1224,12 @@
   "` e l o" "emacs-lisp-org")
 (which-key-add-key-based-replacements
   "` e l o s" "emacs-lisp-org-source")
+(which-key-add-key-based-replacements
+  "` e l o s i" "emacs-lisp-org-source-silent")
+(which-key-add-key-based-replacements
+  "` e l o s o" "emacs-lisp-org-source-output")
+(which-key-add-key-based-replacements
+  "` e l o s s" "emacs-lisp-org-source-default")
 
 (evil-define-key 'normal org-mode-map (kbd "` e l o s i") 'wkf/org-src-elisp-silent)
 (evil-define-key 'normal org-mode-map (kbd "` e l o s o") 'wkf/org-src-elisp-output)
@@ -1195,11 +1323,15 @@
 
 (which-key-add-key-based-replacements
   ", s" "search")
+(which-key-add-key-based-replacements
+  ", s s" "search-default")
+(which-key-add-key-based-replacements
+  ", s ." "search-restart")
 
 ;; search Search
-(define-key evil-normal-state-map (kbd ", s S") 'deadgrep)
+(define-key evil-normal-state-map (kbd ", s s") 'deadgrep)
 
 ;; search restart
-(define-key evil-normal-state-map (kbd ", s s") 'deadgrep-restart)
+(define-key evil-normal-state-map (kbd ", s .") 'deadgrep-restart)
 
 (setq which-key-idle-delay 0.5)
