@@ -11,11 +11,8 @@
                            :size 12))
 
 (blink-cursor-mode t)
-
 (setq display-line-numbers-type 'relative)
-
 (setq-default indicate-empty-lines t)
-
 (setq-default show-trailing-whitespace t)
 
 (which-key-add-key-based-replacements
@@ -42,13 +39,10 @@
 
 ;; Frame New
 (define-key evil-normal-state-map (kbd ", f n") 'make-frame-command)
-
 ;; Frame Frame (cycle)
 (define-key evil-normal-state-map (kbd ", f f") 'other-frame)
-
 ;; Frame Delete Delete (current)
 (define-key evil-normal-state-map (kbd ", f d d") 'delete-frame)
-
 ;; Frame Delete Other
 (define-key evil-normal-state-map (kbd ", f d o") 'delete-other-frames)
 
@@ -73,10 +67,8 @@
 
 ;; | (vertical)
 (define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
-
 ;; - (horizontal)
 (define-key evil-normal-state-map (kbd ", -") 'wkf/window-split)
-
 ;; = (equal)
 (define-key evil-normal-state-map (kbd ", =") 'balance-windows)
 
@@ -121,19 +113,14 @@
 
 ;; quit h
 (define-key evil-normal-state-map (kbd ", q h") 'wkf/window-close-left)
-
 ;; quit j
 (define-key evil-normal-state-map (kbd ", q j") 'wkf/window-close-below)
-
 ;; quit k
 (define-key evil-normal-state-map (kbd ", q k") 'wkf/window-close-above)
-
 ;; quit l
 (define-key evil-normal-state-map (kbd ", q l") 'wkf/window-close-right)
-
 ;; quit current
 (define-key evil-normal-state-map (kbd ", q q") 'delete-window)
-
 ;; quit compile
 (define-key evil-normal-state-map (kbd ", q c") 'wkf/window-close-compilation)
 
@@ -163,10 +150,8 @@
 
 ;; Get current buffer's info
 (define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
-
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
-
 ;; Close all buffers except current
 (define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
 
@@ -177,26 +162,20 @@
 (set-popup-rule! "^\\*compilation"
   :size 0.25
   :side 'bottom)
-
 (set-popup-rule! "^\\*doom:vterm-"
   :size 0.25)
-
 (set-popup-rule! "^\\*format-all-errors"
   :size 0.25
   :side 'bottom)
-
 (set-popup-rule! "^\\*Flycheck errors"
   :size 0.25
   :side 'bottom)
-
 (set-popup-rule! "^\\*eshell"
   :size 0.25
   :side 'bottom)
-
 (set-popup-rule! "^\\*terminal"
   :size 0.25
   :side 'bottom)
-
 (set-popup-rule! "^\\*info"
   :size 0.45
   :side 'right)
@@ -245,31 +224,26 @@
   (lambda ()
     (interactive)
     (wkf/popup-size "xxl")))
-
 ;; change default popup size to XL (0.5)
 (define-key evil-normal-state-map (kbd ", p s 4")
   (lambda ()
     (interactive)
     (wkf/popup-size "xl")))
-
 ;; change default popup size to L (0.35)
 (define-key evil-normal-state-map (kbd ", p s 3")
   (lambda ()
     (interactive)
     (wkf/popup-size "l")))
-
 ;; change default popup size to M (0.25)
 (define-key evil-normal-state-map (kbd ", p s 2")
   (lambda ()
     (interactive)
     (wkf/popup-size "m")))
-
 ;; change default popup size to S (0.25)
 (define-key evil-normal-state-map (kbd ", p s 1")
   (lambda ()
     (interactive)
     (wkf/popup-size "s")))
-
 ;; popup q
 (define-key evil-normal-state-map (kbd ", p q") '+popup/close-all)
 
@@ -345,19 +319,14 @@
 
 ;; terminal (mini)
 (define-key evil-normal-state-map (kbd ", t t") '+vterm/toggle)
-
 ;; Terminal (max)
 (define-key evil-normal-state-map (kbd ", t T") '+vterm/here)
-
 ;; Terminal Vertical
 (define-key evil-normal-state-map (kbd ", t v") 'wkf/vterm-open-vertical)
-
 ;; Terminal Horizontal
 (define-key evil-normal-state-map (kbd ", t x") 'wkf/vterm-open-horizontal)
-
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd ", t q q") 'wkf/vterm-close-main)
-
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd ", t q c") 'wkf/vterm-close-compilation)
 
@@ -425,19 +394,14 @@
 
 ;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
-
 ;; Config Emacs Init.el
 (define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
-
 ;; Config Emacs Packages.el
 (define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
-
 ;; Config Emacs Config.org
 (define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
-
 ;; Config Emacs Config.el (compiled version)
 (define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
-
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
 
@@ -574,9 +538,6 @@
   (balance-windows)
   (recenter))
 
-;; doKumentation
-(define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
-
 (which-key-add-key-based-replacements
   ", g" "goto")
 (which-key-add-key-based-replacements
@@ -590,14 +551,14 @@
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
 ;; Go to Definition hsplit window
 (define-key evil-normal-state-map (kbd ", g d") 'wkf/gdef-split)
-
 ;; Go to Dokumentation in current pane
 (define-key evil-normal-state-map (kbd "g k") '+lookup/documentation)
 ;; Go to doKumentation
 (define-key evil-normal-state-map (kbd ", g k") 'wkf/gdoc-split)
-
 ;; Go to Definition in the new frame
 (define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
+;; doKumentation
+(define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 (defun wkf/buffer-format ()
   "Format current buffer"
@@ -623,11 +584,11 @@
 
 (which-key-add-key-based-replacements
   ", w" "buffer-save-and-format")
-;; Write
-(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
-
 (which-key-add-key-based-replacements
   ", c f" "buffer-format")
+
+;; Write
+(define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 ;; Format
 (define-key evil-normal-state-map (kbd ", c f") 'wkf/buffer-format)
 
@@ -658,9 +619,6 @@
 
 (which-key-add-key-based-replacements
   ", c w" "compilation-window")
-;; compilation window open
-(define-key evil-normal-state-map (kbd ", c w") 'wkf/window-show-compilation)
-
 (which-key-add-key-based-replacements
   ", d c" "diagnosis-compilation")
 (which-key-add-key-based-replacements
@@ -668,9 +626,10 @@
 (which-key-add-key-based-replacements
   ", d c p" "diagnosis-compilation-previous")
 
+;; compilation window open
+(define-key evil-normal-state-map (kbd ", c w") 'wkf/window-show-compilation)
 ;; error next
 (define-key evil-normal-state-map (kbd ", d c n") 'wkf/error-next)
-
 ;; error previous
 (define-key evil-normal-state-map (kbd ", d c p") 'wkf/error-previous)
 
@@ -679,12 +638,10 @@
 
 ;; code diagnosis
 (define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
-
 ;; flycheck error - next
 (define-key evil-normal-state-map (kbd ", d ]") 'flycheck-next-error)
 ;; flycheck error - next
 (define-key evil-normal-state-map (kbd "] g") 'flycheck-next-error)
-
 ;; flycheck error - previous
 (define-key evil-normal-state-map (kbd ", d [") 'flycheck-previous-error)
 ;; flycheck error - previous
@@ -692,65 +649,52 @@
 
 (which-key-add-key-based-replacements
   ", m" "mode")
-
 (which-key-add-key-based-replacements
   ", c t" "compile-file-test")
 (which-key-add-key-based-replacements
   ", c t c" "compile-file-test-coverage")
-
 (which-key-add-key-based-replacements
   ", c" "compile-file")
 (which-key-add-key-based-replacements
   ", c c" "compile-file-default")
-
 (which-key-add-key-based-replacements
   ", c r" "compile-file-and-run")
 (which-key-add-key-based-replacements
   ", c r r" "compile-file-and-run-default")
 (which-key-add-key-based-replacements
   ", c r i" "compile-file-and-run-interactive")
-
 (which-key-add-key-based-replacements
   ", c q" "compile-file-and-run")
-
 (which-key-add-key-based-replacements
   ", c b" "compile-file-build")
 (which-key-add-key-based-replacements
   ", c b d" "compile-file-build-dev")
 (which-key-add-key-based-replacements
   ", c b r" "compile-file-build-release")
-
 (which-key-add-key-based-replacements
   ", r" "run-file")
 (which-key-add-key-based-replacements
   ", r r" "run-file-default")
 (which-key-add-key-based-replacements
   ", r i" "run-file-interactively")
-
-;;
-
 (which-key-add-key-based-replacements
   ", C" "compile-project")
 (which-key-add-key-based-replacements
   ", C c" "compile-project-default")
-
 (which-key-add-key-based-replacements
   ", C r" "compile-project-and-run")
 (which-key-add-key-based-replacements
   ", C r r" "compile-project-and-run-default")
 (which-key-add-key-based-replacements
   ", C r i" "compile-project-and-run-interactive")
-
 (which-key-add-key-based-replacements
   ", C q" "compile-project-quick")
-
 (which-key-add-key-based-replacements
   ", C b" "compile-project-build")
 (which-key-add-key-based-replacements
   ", C b d" "compile-project-build-dev")
 (which-key-add-key-based-replacements
   ", C b r" "compile-project-build-release")
-
 (which-key-add-key-based-replacements
   ", R" "run-project")
 (which-key-add-key-based-replacements
@@ -767,6 +711,7 @@
 
 (which-key-add-key-based-replacements
   ", c ." "recompile-using-last-command")
+
 ;; compile compile (repeat)
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
 
@@ -798,15 +743,12 @@
 
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", C c") 'wkf/ocaml-compile-project)
-
 ;; compile and run project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", C r r")
   'wkf/ocaml-compile-and-run-project-default)
-
 ;; compile and run project interactively
 (evil-define-key 'normal tuareg-mode-map (kbd ", C r i")
   'wkf/ocaml-compile-and-run-project-interactive)
-
 ;; clean ocaml project using dune
 (evil-define-key 'normal tuareg-mode-map (kbd ", C l") 'wkf/ocaml-clean-project)
 
@@ -838,7 +780,6 @@
 
 ;; compile quick (typecheck) current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c q") 'wkf/haskell-typecheck-file)
-
 ;; compile and run current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c r r") 'wkf/haskell-compile-and-run-file-default)
 (evil-define-key 'normal haskell-mode-map (kbd ", c r i") 'wkf/haskell-compile-and-run-file-interactive)
@@ -859,7 +800,6 @@
 
 ;; compile project
 (evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/ts-compile-project)
-
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
 (evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/ts-compile-and-run-file-interactive)
@@ -871,14 +811,11 @@
 ;; See flow coverage
 (evil-define-key 'normal rjsx-mode-map (kbd ", c t c") 'flow-minor-coverage)
 (evil-define-key 'normal js2-mode-map (kbd ", c t c") 'flow-minor-coverage)
-
 ;; See flow status
 (evil-define-key 'normal rjsx-mode-map (kbd ", c q") 'flow-status)
 (evil-define-key 'normal js2-mode-map (kbd ", c q") 'flow-status)
-
-;; enable flow minor mode on rjsx mode
+;; enable flow minor mode
 (evil-define-key 'normal rjsx-mode-map (kbd ", m f") 'flow-minor-mode)
-;; enable flow minor mode on js2 mode
 (evil-define-key 'normal js2-mode-map (kbd ", m f") 'flow-minor-mode)
 
 (defun wkf/go-compile-project ()
@@ -895,6 +832,7 @@
   "compile and run current go file - default"
   (interactive)
   (compile (format "go run %s" (buffer-file-name))))
+
 (defun wkf/go-compile-and-run-file-interactive ()
   "compile and run current go file - interactive"
   (interactive)
@@ -905,6 +843,7 @@
   "run current go file - default"
   (interactive)
   (compile (file-name-sans-extension buffer-file-name)))
+
 (defun wkf/go-run-file-interactive ()
   "run current go file - interactive"
   (interactive)
@@ -914,14 +853,11 @@
 ;; compile and run current file
 (evil-define-key 'normal go-mode-map (kbd ", c r r") 'wkf/go-compile-and-run-file-default)
 (evil-define-key 'normal go-mode-map (kbd ", c r i") 'wkf/go-compile-and-run-file-interactive)
-
 ;; run current file
 (evil-define-key 'normal go-mode-map (kbd ", r r") 'wkf/go-run-file-default)
 (evil-define-key 'normal go-mode-map (kbd ", r i") 'wkf/go-run-file-interactive )
-
 ;; compile current project
 (evil-define-key 'normal go-mode-map (kbd ", C c") 'wkf/go-compile-project)
-
 ;; compile current file
 (evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
 
@@ -966,8 +902,6 @@
   (interactive)
   (compile "cargo build"))
 
-;; ---
-
 (defun wkf/rust-build-development-project ()
   "build current rust project (development)"
   (interactive)
@@ -978,14 +912,10 @@
   (interactive)
   (compile "cargo build --release"))
 
-;; ---
-
 (defun wkf/rust-run-file ()
   "run current rust file"
   (interactive)
   (compile (format "%s" (file-name-sans-extension buffer-file-name))))
-
-;; ---
 
 (defun wkf/rust-compile-and-run-file ()
   "compile and run current rust file"
@@ -998,8 +928,6 @@
   (interactive)
   (compile "cargo run"))
 
-;; ---
-
 (defun wkf/rust-quick-check-project ()
   "check current rust project"
   (interactive)
@@ -1007,25 +935,19 @@
 
 ;; compile - compile - file
 (evil-define-key 'normal rustic-mode-map (kbd ", c c") 'wkf/rust-compile-file)
-
 ;; compile and run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", c r r") 'wkf/rust-compile-and-run-file)
-
 ;; run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", r r") 'wkf/rust-run-file)
 
 ;; compile - compile - file
 (evil-define-key 'normal rustic-mode-map (kbd ", C c") 'wkf/rust-compile-project)
-
 ;; compile quick project
 (evil-define-key 'normal rustic-mode-map (kbd ", C q") 'wkf/rust-quick-check-project)
-
 ;; compile and run current project
 (evil-define-key 'normal rustic-mode-map (kbd ", C r r") 'wkf/rust-compile-and-run-project)
-
 ;; build - release - project
 (evil-define-key 'normal rustic-mode-map (kbd ", c b r") 'wkf/rust-build-release-project-release)
-
 ;; build - development - project
 (evil-define-key 'normal rustic-mode-map (kbd ", c b d") 'wkf/rust-build-development-project)
 
@@ -1062,14 +984,6 @@
   ", o s e" "org-src-edit-special")
 (which-key-add-key-based-replacements
   ", o s f" "org-src-format")
-
-;; Org SRC edit special
-(evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
-
-;; Org SRC Format
-(evil-define-key 'normal org-mode-map (kbd ", o s f")
-  (kbd ", o s e , w : q"))
-
 (which-key-add-key-based-replacements
   ", o h" "org-heading")
 (which-key-add-key-based-replacements
@@ -1077,18 +991,19 @@
 (which-key-add-key-based-replacements
   ", o h s" "org-heading-sub-insert")
 
+;; Org SRC edit special
+(evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
+;; Org SRC Format
+(evil-define-key 'normal org-mode-map (kbd ", o s f")
+  (kbd ", o s e , w : q"))
+;; Org heading
 (evil-define-key 'normal org-mode-map (kbd ", o h h") 'org-insert-heading)
-
 (evil-define-key 'normal org-mode-map (kbd ", o h s") 'org-insert-subheading)
-
-;; (setq org-image-actual-width nil)
 
 (setq org-image-actual-width (/ (display-pixel-width) 3))
 
 (add-hook 'org-mode-hook 'org-display-user-inline-images)
-
 (add-hook 'org-mode-hook 'org-display-inline-images)
-
 (add-hook 'org-mode-hook 'org-redisplay-inline-images)
 
 (which-key-add-key-based-replacements
@@ -1102,10 +1017,8 @@
 
 ;; Org Images toggle(z)
 (evil-define-key 'normal org-mode-map (kbd ", o i i") 'org-toggle-inline-images)
-
 ;; Org Images yes
 (evil-define-key 'normal org-mode-map (kbd ", o i y") 'org-display-inline-images)
-
 ;; Org Images no
 (evil-define-key 'normal org-mode-map (kbd ", o i n") 'org-remove-inline-images)
 
@@ -1125,7 +1038,6 @@
 
 ;; disable the change slide effect, it is just cheesy
 (setq org-tree-slide-slide-in-effect nil)
-
 ;; disable the header
 (setq org-tree-slide-header nil)
 
@@ -1148,19 +1060,15 @@
 
 ;; Org Presentation
 (evil-define-key 'normal org-mode-map (kbd ", o p") 'wkf/toggle-org-presentation)
-
 ;; >
 (evil-define-key 'normal org-mode-map (kbd "s-.") 'org-tree-slide-move-next-tree)
-
 ;; <
 (evil-define-key 'normal org-mode-map (kbd "s-,") 'org-tree-slide-move-previous-tree)
-
 ;; disable minify in org mode (to make the presentation slide-back miss-hit harmless)
 (evil-define-key 'normal org-mode-map (kbd "s-m")
   (lambda ()
     (interactive)
     (message "minify frame manually disabled in org-mode")))
-
 ;; disable new buffer in org mode (to make the presentation slide-back miss-hit harmless)
 (evil-define-key 'normal org-mode-map (kbd "s-n")
   (lambda ()
@@ -1330,7 +1238,6 @@
 
 ;; search Search
 (define-key evil-normal-state-map (kbd ", s s") 'deadgrep)
-
 ;; search restart
 (define-key evil-normal-state-map (kbd ", s .") 'deadgrep-restart)
 
