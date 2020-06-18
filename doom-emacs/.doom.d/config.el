@@ -170,6 +170,9 @@
 (set-popup-rule! "^\\*Flycheck errors"
   :size 0.25
   :side 'bottom)
+(set-popup-rule! "^\\*lsp-diagnostics"
+  :size 0.25
+  :side 'bottom)
 (set-popup-rule! "^\\*eshell"
   :size 0.25
   :side 'bottom)
@@ -331,9 +334,8 @@
 (define-key evil-normal-state-map (kbd ", t q c") 'wkf/vterm-close-compilation)
 
 (defun wkf/windows-rebalance ()
-  "Balance window then recenter"
+  "Recenter windows"
   (interactive)
-  (balance-windows)
   (recenter))
 
 (defun wkf/find-file (filename)
@@ -453,7 +455,8 @@
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t)
-  (flycheck-credo-setup))
+  (flycheck-credo-setup)
+  (setq lsp-prefer-flymake nil))
 
 (use-package! company-lsp
   :after lsp-mode
@@ -636,8 +639,10 @@
 (which-key-add-key-based-replacements
   ", d" "diagnosis")
 
-;; code diagnosis
-(define-key evil-normal-state-map (kbd ", d l") 'flycheck-list-errors)
+;; code diagnosis workspace
+(define-key evil-normal-state-map (kbd ", d l") 'lsp-ui-flycheck-list)
+;; code diagnosis local
+(define-key evil-normal-state-map (kbd ", d L") 'flycheck-list-errors)
 ;; flycheck error - next
 (define-key evil-normal-state-map (kbd ", d ]") 'flycheck-next-error)
 ;; flycheck error - next
