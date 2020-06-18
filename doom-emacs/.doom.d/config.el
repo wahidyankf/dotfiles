@@ -21,7 +21,6 @@
 (define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
 
 (display-time-mode)
-
 (display-battery-mode)
 
 (which-key-add-key-based-replacements
@@ -182,6 +181,9 @@
 (set-popup-rule! "^\\*info"
   :size 0.45
   :side 'right)
+(set-popup-rule! "^\\*doom:scratch"
+  :size 0.25
+  :side 'bottom)
 
 (add-hook 'org-mode-hook (lambda ()
                            (set-popup-rule! "^\\*Org Src"
@@ -406,6 +408,16 @@
 (define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
 ;; Config Emacs Scratch.el
 (define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
+
+(which-key-add-key-based-replacements
+  ", e" "eval-elisp")
+
+;; Eval last sexp
+(define-key evil-normal-state-map (kbd ", e e") 'eval-last-sexp)
+;; Eval buffer
+(define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
+;; Emacs Lisp Mode
+(define-key evil-normal-state-map (kbd ", e m") 'emacs-lisp-mode)
 
 (setq gc-cons-threshold 200000000)
 (setq read-process-output-max (* 1024 1024))
