@@ -737,14 +737,33 @@
   (interactive)
   (compile (format "dune clean")))
 
+(defun wkf/ocaml-compile-and-run-file-interactive ()
+  "Compile and run ocaml file - interactive"
+  (interactive)
+  (wkf/compile-interactively (format "dune exec ./%s.exe\n" (file-name-sans-extension
+                                                            (buffer-name)))))
+
+(defun wkf/ocaml-compile-and-run-file-default ()
+  "Compile and run ocaml file - default"
+  (interactive)
+  (compile (format "dune build && dune exec ./%s.exe\n" (file-name-sans-extension (buffer-name)))))
+
 (defun wkf/ocaml-compile-and-run-project-interactive ()
   "Compile and run ocaml project - interactive"
   (interactive)
-  (wkf/compile-interactively "dune exec ./main.exe\n"))
+  (wkf/compile-interactively "dune build && dune exec ./main.exe\n"))
+
 (defun wkf/ocaml-compile-and-run-project-default ()
   "Compile and run ocaml project - default"
   (interactive)
   (compile "dune exec ./main.exe"))
+
+;; compile and run project default
+(evil-define-key 'normal tuareg-mode-map (kbd ", c r r")
+  'wkf/ocaml-compile-and-run-file-default)
+;; compile and run project interactively
+(evil-define-key 'normal tuareg-mode-map (kbd ", c r i")
+  'wkf/ocaml-compile-and-run-file-interactive)
 
 ;; compile project default
 (evil-define-key 'normal tuareg-mode-map (kbd ", C c") 'wkf/ocaml-compile-project)
