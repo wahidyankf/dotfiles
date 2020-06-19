@@ -578,16 +578,6 @@
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
-(add-hook 'compilation-finish-functions (lambda (buf str)
-                                          ;;        (cond ((equal major-mode 'reason-mode)
-                                          (if (null (string-match ".*exited abnormally.*" str))
-                                              ;;no errors, make the compilation window go away in a few seconds
-                                              (progn (run-at-time "2 sec" nil 'delete-windows-on
-                                                                  (get-buffer-create
-                                                                   "*compilation*")) nil))))
-
-;; ))
-
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
@@ -618,6 +608,13 @@
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 ;; Format
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
+
+(defun my-compilation-finish-function (buffer desc)
+  (if (null (string-match ".*exited abnormally.*" str))
+      ;;no errors, make the compilation window go away in a few seconds
+      (progn (run-at-time "2 sec" nil 'delete-windows-on (get-buffer-create "*compilation*")) (message "No Compilation Error"))))
+
+(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
 
 (defun wkf/window-close-compilation ()
   "Close compilation pane"

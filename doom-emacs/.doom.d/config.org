@@ -704,16 +704,6 @@ To get information about any of these functions/macros, move the cursor over the
 *** Save and Format
 
 #+BEGIN_SRC emacs-lisp :results silent
-(add-hook 'compilation-finish-functions (lambda (buf str)
-                                          ;;        (cond ((equal major-mode 'reason-mode)
-                                          (if (null (string-match ".*exited abnormally.*" str))
-                                              ;;no errors, make the compilation window go away in a few seconds
-                                              (progn (run-at-time "2 sec" nil 'delete-windows-on
-                                                                  (get-buffer-create
-                                                                   "*compilation*")) nil))))
-
-;; ))
-
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
@@ -749,6 +739,13 @@ To get information about any of these functions/macros, move the cursor over the
 *** Compilation
 
 #+BEGIN_SRC emacs-lisp :results silent
+(defun my-compilation-finish-function (buffer desc)
+  (if (null (string-match ".*exited abnormally.*" str))
+      ;;no errors, make the compilation window go away in a few seconds
+      (progn (run-at-time "2 sec" nil 'delete-windows-on (get-buffer-create "*compilation*")) (message "No Compilation Error"))))
+
+(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
+
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
   (interactive)
