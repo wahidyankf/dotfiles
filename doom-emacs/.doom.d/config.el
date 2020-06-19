@@ -14,6 +14,7 @@
 (setq display-line-numbers-type 'relative)
 (setq-default indicate-empty-lines t)
 (setq-default show-trailing-whitespace t)
+(setq global-auto-revert-mode t)
 
 (which-key-add-key-based-replacements
   ", /" "search-nohl")
@@ -599,10 +600,10 @@
         (t (wkf/buffer-format)))
   (save-buffer))
 
-(which-key-add-key-based-replacements
-  ", w" "buffer-save-and-format")
-(which-key-add-key-based-replacements
-  ", f" "format-current-buffer")
+(which-key-add-key-based-replacements ", w" "buffer-save-and-format")
+(which-key-add-key-based-replacements ", f" "format-current-buffer")
+
+(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
