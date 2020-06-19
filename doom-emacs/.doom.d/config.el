@@ -163,27 +163,27 @@
   :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*doom:vterm-"
-  :size 0.25)
+  :size 0.20)
 (set-popup-rule! "^\\*format-all-errors"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*Flycheck errors"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*lsp-diagnostics"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*eshell"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*terminal"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*info"
   :size 0.45
   :side 'right)
 (set-popup-rule! "^\\*doom:scratch"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 
 (add-hook 'org-mode-hook (lambda ()
@@ -205,10 +205,10 @@
            :size 0.5))
         ((equal size "m")
          (set-popup-rule! "^\\*"
-           :size 0.35))
+           :size 0.30))
         ((equal size "s")
          (set-popup-rule! "^\\*"
-           :size 0.25))))
+           :size 0.20))))
 
 (which-key-add-key-based-replacements
   ", p" "popup")
@@ -235,17 +235,17 @@
   (lambda ()
     (interactive)
     (wkf/popup-size "xl")))
-;; change default popup size to L (0.35)
+;; change default popup size to L (0.30)
 (define-key evil-normal-state-map (kbd ", p s 3")
   (lambda ()
     (interactive)
     (wkf/popup-size "l")))
-;; change default popup size to M (0.25)
+;; change default popup size to M (0.20)
 (define-key evil-normal-state-map (kbd ", p s 2")
   (lambda ()
     (interactive)
     (wkf/popup-size "m")))
-;; change default popup size to S (0.25)
+;; change default popup size to S (0.20)
 (define-key evil-normal-state-map (kbd ", p s 1")
   (lambda ()
     (interactive)
@@ -913,7 +913,7 @@
 (evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
 
 (set-popup-rule! "^\\*Anaconda"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 
 (defun wkf/update-elixir-language-server ()
