@@ -211,47 +211,47 @@
            :size 0.20))))
 
 (which-key-add-key-based-replacements
-  ", p" "popup")
+  "<backspace> p" "popup")
 (which-key-add-key-based-replacements
-  ", p s" "popup-size")
+  "<backspace> p s" "popup-size")
 (which-key-add-key-based-replacements
-  ", p s 1" "popup-size-s")
+  "<backspace> p s 1" "popup-size-s")
 (which-key-add-key-based-replacements
-  ", p s 2" "popup-size-m")
+  "<backspace> p s 2" "popup-size-m")
 (which-key-add-key-based-replacements
-  ", p s 3" "popup-size-l")
+  "<backspace> p s 3" "popup-size-l")
 (which-key-add-key-based-replacements
-  ", p s 4" "popup-size-xl")
+  "<backspace> p s 4" "popup-size-xl")
 (which-key-add-key-based-replacements
-  ", p s 5" "popup-size-xxl")
+  "<backspace> p s 5" "popup-size-xxl")
 
 ;; change default popup size to XXL (0.6)
-(define-key evil-normal-state-map (kbd ", p s 5")
+(define-key evil-normal-state-map (kbd "<backspace> p s 5")
   (lambda ()
     (interactive)
     (wkf/popup-size "xxl")))
 ;; change default popup size to XL (0.5)
-(define-key evil-normal-state-map (kbd ", p s 4")
+(define-key evil-normal-state-map (kbd "<backspace> p s 4")
   (lambda ()
     (interactive)
     (wkf/popup-size "xl")))
 ;; change default popup size to L (0.30)
-(define-key evil-normal-state-map (kbd ", p s 3")
+(define-key evil-normal-state-map (kbd "<backspace> p s 3")
   (lambda ()
     (interactive)
     (wkf/popup-size "l")))
 ;; change default popup size to M (0.20)
-(define-key evil-normal-state-map (kbd ", p s 2")
+(define-key evil-normal-state-map (kbd "<backspace> p s 2")
   (lambda ()
     (interactive)
     (wkf/popup-size "m")))
 ;; change default popup size to S (0.20)
-(define-key evil-normal-state-map (kbd ", p s 1")
+(define-key evil-normal-state-map (kbd "<backspace> p s 1")
   (lambda ()
     (interactive)
     (wkf/popup-size "s")))
 ;; popup q
-(define-key evil-normal-state-map (kbd ", p q") '+popup/close-all)
+(define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
 
 (which-key-add-key-based-replacements
   ", ," "workspace")
@@ -579,15 +579,14 @@
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
 (add-hook 'compilation-finish-functions (lambda (buf str)
-                                          (cond ((equal major-mode 'reason-mode)
-                                                 (if (null (string-match ".*exited abnormally.*"
-                                                                         str))
-                                                     ;;no errors, make the compilation window go away in a few seconds
-                                                     (progn (run-at-time "2 sec" nil
-                                                                         'delete-windows-on
-                                                                         (get-buffer-create
-                                                                          "*compilation*"))
-                                                            (message "No Compilation Errors!")))))))
+                                          ;;        (cond ((equal major-mode 'reason-mode)
+                                          (if (null (string-match ".*exited abnormally.*" str))
+                                              ;;no errors, make the compilation window go away in a few seconds
+                                              (progn (run-at-time "2 sec" nil 'delete-windows-on
+                                                                  (get-buffer-create
+                                                                   "*compilation*")) nil))))
+
+;; ))
 
 (defun wkf/buffer-format ()
   "Format current buffer"
@@ -614,8 +613,6 @@
 
 (which-key-add-key-based-replacements ", w" "buffer-save-and-format")
 (which-key-add-key-based-replacements ", f" "format-current-buffer")
-
-(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
@@ -748,6 +745,8 @@
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+
+(add-hook 'reason-mode-hook (lambda () (setq auto-revert-mode t)))
 
 (use-package! reason-mode
   :mode "\\.re$"
