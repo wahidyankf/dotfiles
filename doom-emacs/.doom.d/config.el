@@ -160,7 +160,7 @@
 (add-hook! '+popup-buffer-mode-hook (set-window-margins (selected-window) 1 1))
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*doom:vterm-"
   :size 0.25)
@@ -578,6 +578,17 @@
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
 
+(add-hook 'compilation-finish-functions (lambda (buf str)
+                                          (cond ((equal major-mode 'reason-mode)
+                                                 (if (null (string-match ".*exited abnormally.*"
+                                                                         str))
+                                                     ;;no errors, make the compilation window go away in a few seconds
+                                                     (progn (run-at-time "2 sec" nil
+                                                                         'delete-windows-on
+                                                                         (get-buffer-create
+                                                                          "*compilation*"))
+                                                            (message "No Compilation Errors!")))))))
+
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
@@ -596,7 +607,8 @@
 (defun wkf/buffer-save-and-format ()
   "Format current buffer"
   (interactive)
-  (cond ((equal major-mode 'reason-mode) nil)
+  (cond ((equal major-mode 'reason-mode)
+         (wkf/buffer-format))
         (t (wkf/buffer-format)))
   (save-buffer))
 

@@ -234,7 +234,7 @@ Show battery and time on the bottom.
 (add-hook! '+popup-buffer-mode-hook (set-window-margins (selected-window) 1 1))
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.25
+  :size 0.20
   :side 'bottom)
 (set-popup-rule! "^\\*doom:vterm-"
   :size 0.25)
@@ -704,6 +704,17 @@ To get information about any of these functions/macros, move the cursor over the
 *** Save and Format
 
 #+BEGIN_SRC emacs-lisp :results silent
+(add-hook 'compilation-finish-functions (lambda (buf str)
+                                          (cond ((equal major-mode 'reason-mode)
+                                                 (if (null (string-match ".*exited abnormally.*"
+                                                                         str))
+                                                     ;;no errors, make the compilation window go away in a few seconds
+                                                     (progn (run-at-time "2 sec" nil
+                                                                         'delete-windows-on
+                                                                         (get-buffer-create
+                                                                          "*compilation*"))
+                                                            (message "No Compilation Errors!")))))))
+
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
@@ -722,7 +733,8 @@ To get information about any of these functions/macros, move the cursor over the
 (defun wkf/buffer-save-and-format ()
   "Format current buffer"
   (interactive)
-  (cond ((equal major-mode 'reason-mode) nil)
+  (cond ((equal major-mode 'reason-mode)
+         (wkf/buffer-format))
         (t (wkf/buffer-format)))
   (save-buffer))
 
