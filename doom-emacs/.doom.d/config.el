@@ -609,13 +609,6 @@
 ;; Format
 (define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
-(defun my-compilation-finish-function (buffer desc)
-  (if (null (string-match ".*exited abnormally.*" str))
-      ;;no errors, make the compilation window go away in a few seconds
-      (progn (run-at-time "2 sec" nil 'delete-windows-on (get-buffer-create "*compilation*")) (message "No Compilation Error"))))
-
-(add-hook 'compilation-finish-functions 'my-compilation-finish-function)
-
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
   (interactive)
@@ -641,14 +634,10 @@
          (compilation-previous-error 1))
         (t (flycheck-previous-error))))
 
-(which-key-add-key-based-replacements
-  ", c w" "compilation-window")
-(which-key-add-key-based-replacements
-  ", d c" "diagnosis-compilation")
-(which-key-add-key-based-replacements
-  ", d c n" "diagnosis-compilation-next")
-(which-key-add-key-based-replacements
-  ", d c p" "diagnosis-compilation-previous")
+(which-key-add-key-based-replacements ", c w" "compilation-window")
+(which-key-add-key-based-replacements ", d c" "diagnosis-compilation")
+(which-key-add-key-based-replacements ", d c n" "diagnosis-compilation-next")
+(which-key-add-key-based-replacements ", d c p" "diagnosis-compilation-previous")
 
 ;; compilation window open
 (define-key evil-normal-state-map (kbd ", c w") 'wkf/window-show-compilation)
