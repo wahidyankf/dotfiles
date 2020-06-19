@@ -24,26 +24,26 @@
 (display-battery-mode)
 
 (which-key-add-key-based-replacements
-  ", f" "frame")
+  "<backspace> f" "frame")
 (which-key-add-key-based-replacements
-  ", f d" "frame-delete")
+  "<backspace> f d" "frame-delete")
 (which-key-add-key-based-replacements
-  ", f f" "frame-cycle")
+  "<backspace> f f" "frame-cycle")
 (which-key-add-key-based-replacements
-  ", f n" "frame-new")
+  "<backspace> f n" "frame-new")
 (which-key-add-key-based-replacements
-  ", f d d" "frame-delete-current")
+  "<backspace> f d d" "frame-delete-current")
 (which-key-add-key-based-replacements
-  ", f d o" "frame-delete-other")
+  "<backspace> f d o" "frame-delete-other")
 
 ;; Frame New
-(define-key evil-normal-state-map (kbd ", f n") 'make-frame-command)
+(define-key evil-normal-state-map (kbd "<backspace> f n") 'make-frame-command)
 ;; Frame Frame (cycle)
-(define-key evil-normal-state-map (kbd ", f f") 'other-frame)
+(define-key evil-normal-state-map (kbd "<backspace> f f") 'other-frame)
 ;; Frame Delete Delete (current)
-(define-key evil-normal-state-map (kbd ", f d d") 'delete-frame)
+(define-key evil-normal-state-map (kbd "<backspace> f d d") 'delete-frame)
 ;; Frame Delete Other
-(define-key evil-normal-state-map (kbd ", f d o") 'delete-other-frames)
+(define-key evil-normal-state-map (kbd "<backspace> f d o") 'delete-other-frames)
 
 (defun wkf/window-vsplit ()
   "VSplit then focus on the right pane"
@@ -602,12 +602,12 @@
 (which-key-add-key-based-replacements
   ", w" "buffer-save-and-format")
 (which-key-add-key-based-replacements
-  ", c f" "buffer-format")
+  ", f" "format-current-buffer")
 
 ;; Write
 (define-key evil-normal-state-map (kbd ", w") 'wkf/buffer-save-and-format)
 ;; Format
-(define-key evil-normal-state-map (kbd ", c f") 'wkf/buffer-format)
+(define-key evil-normal-state-map (kbd ", f") 'wkf/buffer-format)
 
 (defun wkf/window-close-compilation ()
   "Close compilation pane"
