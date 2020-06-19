@@ -478,19 +478,25 @@
 (defun wkf/gdef ()
   "Look up definition in the current window"
   (interactive)
-  (cond ((equal major-mode 'typescript-mode)
-         (evil-goto-definition))
-        ((bound-and-true-p flow-minor-mode)
-         (progn     (flow-minor-jump-to-definition)
-                    (flow-minor-mode)))
-        (t (+lookup/definition (doom-thing-at-point-or-region)))))
+  (cond
+   ((equal major-mode 'reason-mode)
+    (progn (evil-goto-definition)
+           (recenter)))
+   ((equal major-mode 'typescript-mode)
+    (evil-goto-definition))
+   ((bound-and-true-p flow-minor-mode)
+    (progn     (flow-minor-jump-to-definition)
+               (flow-minor-mode)))
+   (t (+lookup/definition (doom-thing-at-point-or-region)))))
 
 (defun wkf/gdef-new-frame ()
   "Open +lookup/definition in the new frame"
   (interactive)
   (make-frame-command)
   (cond ((equal major-mode 'reason-mode)
-         (evil-goto-definition))
+         (progn (make-frame-command)
+                (evil-goto-definition)
+                (recenter)))
         ((bound-and-true-p flow-minor-mode)
          (progn     (flow-minor-jump-to-definition)
                     (flow-minor-mode)))
@@ -553,14 +559,10 @@
   (balance-windows)
   (recenter))
 
-(which-key-add-key-based-replacements
-  ", g" "goto")
-(which-key-add-key-based-replacements
-  ", g d" "goto-def-split")
-(which-key-add-key-based-replacements
-  ", g k" "goto-doc-split")
-(which-key-add-key-based-replacements
-  ", g D" "goto-def-new-frame")
+(which-key-add-key-based-replacements ", g" "goto")
+(which-key-add-key-based-replacements ", g d" "goto-def-split")
+(which-key-add-key-based-replacements ", g k" "goto-doc-split")
+(which-key-add-key-based-replacements ", g D" "goto-def-new-frame")
 
 ;; Go to Definition in current pane
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
