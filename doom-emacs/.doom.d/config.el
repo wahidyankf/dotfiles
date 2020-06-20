@@ -10,11 +10,15 @@
 (setq doom-font (font-spec :family "Dank Mono"
                            :size 12))
 
+;; autorevert!
+(setq global-auto-revert-mode t)
+
+(setq auto-revert-mode t)
+
 (blink-cursor-mode t)
 (setq display-line-numbers-type 'relative)
 (setq-default indicate-empty-lines t)
 (setq-default show-trailing-whitespace t)
-(setq global-auto-revert-mode t)
 
 (which-key-add-key-based-replacements
   ", /" "search-nohl")
@@ -513,16 +517,23 @@
 (defun wkf/gdef-split ()
   "Open +lookup/definition in the split window below"
   (interactive)
-  (cond ((equal major-mode 'reason-mode)
-         (progn (make-frame-command)
-                (evil-goto-definition)
-                (recenter)))
+  (cond ;;((equal major-mode 'reason-mode)
+        ;; (progn (make-frame-command)
+        ;;        (evil-goto-definition)
+        ;;        (recenter)))
         ((bound-and-true-p flow-minor-mode)
          (progn (flow-minor-jump-to-definition)
                 (evil-window-split)
                 (evil-jump-backward-swap)
                 (evil-window-down 1)
                 (flow-minor-mode)
+                (balance-windows)
+                (recenter)))
+        ((equal major-mode 'reason-mode)
+         (progn (evil-goto-definition)
+                (evil-window-split)
+                (evil-jump-backward-swap)
+                (evil-window-down 1)
                 (balance-windows)
                 (recenter)))
         ((equal major-mode 'typescript-mode)
@@ -732,7 +743,8 @@
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
-(add-hook 'reason-mode-hook (lambda () (setq auto-revert-mode t)))
+(add-hook 'reason-mode-hook (lambda () ;; nil
+                              (setq auto-revert-mode t)))
 
 (use-package! reason-mode
   :mode "\\.re$"
