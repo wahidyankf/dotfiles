@@ -10,9 +10,7 @@
 (setq doom-font (font-spec :family "Dank Mono"
                            :size 12))
 
-;; autorevert!
 (setq global-auto-revert-mode t)
-
 (setq auto-revert-mode t)
 
 (blink-cursor-mode t)
