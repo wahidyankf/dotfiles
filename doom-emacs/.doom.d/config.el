@@ -147,15 +147,11 @@
   ", b b" "buffer-revert")
 (which-key-add-key-based-replacements
   ", b c" "buffer-close")
-(which-key-add-key-based-replacements
-  ", b c a" "buffer-close-all-but-current")
 
 ;; Get current buffer's info
 (define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
 ;; Revert/Reload buffer
 (define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
-;; Close all buffers except current
-(define-key evil-normal-state-map (kbd ", b c a") 'wkf/buffer-close-all)
 
 (setq-default left-margin-width 1 right-margin-width 1)
 (set-window-buffer nil (current-buffer))
