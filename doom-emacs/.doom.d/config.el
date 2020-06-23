@@ -416,37 +416,37 @@
 (which-key-add-key-based-replacements
   "<backspace> c z x" "config-open-zshrc-split")
 (which-key-add-key-based-replacements
-  "<backspace> c e" "config-emacs")
+  "<backspace> c e" "config-open-emacs")
 (which-key-add-key-based-replacements
-  "<backspace> c e i" "config-emacs-init")
+  "<backspace> c e i" "config-open-emacs-init")
 (which-key-add-key-based-replacements
-  "<backspace> c e i v" "config-emacs-init-vsplit")
+  "<backspace> c e i v" "config-open-emacs-init-vsplit")
 (which-key-add-key-based-replacements
-  "<backspace> c e i x" "config-emacs-init-split")
+  "<backspace> c e i x" "config-open-emacs-init-split")
 (which-key-add-key-based-replacements
-  "<backspace> c e p" "config-emacs-packages")
+  "<backspace> c e p" "config-open-emacs-packages")
 (which-key-add-key-based-replacements
-  "<backspace> c e p v" "config-emacs-packages-vsplit")
+  "<backspace> c e p v" "config-open-emacs-packages-vsplit")
 (which-key-add-key-based-replacements
-  "<backspace> c e p x" "config-emacs-packages-split")
+  "<backspace> c e p x" "config-open-emacs-packages-split")
 (which-key-add-key-based-replacements
-  "<backspace> c e c" "config-emacs-config-org")
+  "<backspace> c e c" "config-open-emacs-config-org")
 (which-key-add-key-based-replacements
-  "<backspace> c e c v" "config-emacs-config-org-vsplit")
+  "<backspace> c e c v" "config-open-emacs-config-org-vsplit")
 (which-key-add-key-based-replacements
-  "<backspace> c e c x" "config-emacs-config-org-split")
+  "<backspace> c e c x" "config-open-emacs-config-org-split")
 (which-key-add-key-based-replacements
-  "<backspace> c e C" "config-emacs-config-el")
+  "<backspace> c e C" "config-open-emacs-config-el")
 (which-key-add-key-based-replacements
-  "<backspace> c e C v" "config-emacs-config-el-vsplit")
+  "<backspace> c e C v" "config-open-emacs-config-el-vsplit")
 (which-key-add-key-based-replacements
-  "<backspace> c e C x" "config-emacs-config-el-split")
+  "<backspace> c e C x" "config-open-emacs-config-el-split")
 (which-key-add-key-based-replacements
-  "<backspace> c e s" "config-emacs-scratch")
+  "<backspace> c e s" "config-open-emacs-scratch")
 (which-key-add-key-based-replacements
-  "<backspace> c e s v" "config-emacs-scratch-vsplit")
+  "<backspace> c e s v" "config-open-emacs-scratch-vsplit")
 (which-key-add-key-based-replacements
-  "<backspace> c e s x" "config-emacs-scratch-split")
+  "<backspace> c e s x" "config-open-emacs-scratch-split")
 
 ;; Config ZSH
 (define-key evil-normal-state-map (kbd "<backspace> c z v") 'wkf/find-zshrc-vsplit)
