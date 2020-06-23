@@ -334,17 +334,17 @@
 ;; Terminal main Close
 (define-key evil-normal-state-map (kbd ", t q c") 'wkf/vterm-close-compilation)
 
-(defun wkf/windows-rebalance ()
-  "Recenter windows"
-  (interactive)
-  (recenter))
-
 (setq wkf/file-zshrc "~/.zshrc")
 (setq wkf/file-doom-init-el "~/.doom.d/init.el")
 (setq wkf/file-doom-packages-el "~/.doom.d/packages.el")
 (setq wkf/file-doom-config-el "~/.doom.d/config.el")
 (setq wkf/file-doom-config-org "~/.doom.d/config.org")
 (setq wkf/file-doom-scratch-el "~/.doom.d/scratch.el")
+
+(defun wkf/windows-rebalance ()
+  "Recenter windows"
+  (interactive)
+  (recenter))
 
 (defun wkf/find-file-vsplit (filename)
   "Search filename and open it in the right vsp"
