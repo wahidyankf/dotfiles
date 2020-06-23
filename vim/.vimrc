@@ -58,6 +58,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jpalardy/vim-slime'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vim-which-key'
 Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -77,7 +78,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
-
 
 call plug#end()
 
@@ -809,7 +809,18 @@ nmap <C-w>- <Plug>(golden_ratio_resize)
 nnoremap <C-w>+ <C-w><Bar><C-w>_
 
 " }}}
+
+" Plugin - Which Key {{{
  
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :WhichKey ','<CR>
+nnoremap <silent> <bs>wk :WhichKey 
+
+" By default timeoutlen is 1000 ms
+set timeoutlen=500
+
+" }}}
+
 " ============================================================
 " Languages
 " ============================================================
