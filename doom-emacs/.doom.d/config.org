@@ -237,6 +237,14 @@ Show battery and time on the bottom.
 (set-window-buffer nil (current-buffer))
 (add-hook! '+popup-buffer-mode-hook (set-window-margins (selected-window) 1 1))
 
+(setq wkf/popup-size-xs 0.10)
+(setq wkf/popup-size-s 0.15)
+(setq wkf/popup-size-m 0.25)
+(setq wkf/popup-size-l 0.35)
+(setq wkf/popup-size-xl 0.45)
+(setq wkf/popup-size-xxl 0.65)
+(setq wkf/popup-size-xxxl 0.75)
+
 (set-popup-rule! "^\\*compilation"
   :size 0.20
   :side 'bottom)
@@ -266,42 +274,22 @@ Show battery and time on the bottom.
 
 (add-hook 'org-mode-hook (lambda ()
                            (set-popup-rule! "^\\*Org Src"
-                             :size .75
+                             :size wkf/popup-size-m
                              :side 'bottom)))
 
 (defun wkf/popup-size (size)
   "Change default popup size"
   (interactive)
-  (cond ((equal size "xxl")
-         (set-popup-rule! "^\\*"
-           :size 0.75))
-        ((equal size "xl")
-         (set-popup-rule! "^\\*"
-           :size 0.6))
-        ((equal size "l")
-         (set-popup-rule! "^\\*"
-           :size 0.5))
-        ((equal size "m")
-         (set-popup-rule! "^\\*"
-           :size 0.30))
-        ((equal size "s")
-         (set-popup-rule! "^\\*"
-           :size 0.20))))
+  (set-popup-rule! "^\\*"
+    :size size))
 
-(which-key-add-key-based-replacements
-  "<backspace> p" "popup")
-(which-key-add-key-based-replacements
-  "<backspace> p s" "popup-size")
-(which-key-add-key-based-replacements
-  "<backspace> p s s" "popup-size-s")
-(which-key-add-key-based-replacements
-  "<backspace> p s m" "popup-size-m")
-(which-key-add-key-based-replacements
-  "<backspace> p s l" "popup-size-l")
-(which-key-add-key-based-replacements
-  "<backspace> p s x" "popup-size-xl")
-(which-key-add-key-based-replacements
-  "<backspace> p s X" "popup-size-xxl")
+(which-key-add-key-based-replacements "<backspace> p" "popup")
+(which-key-add-key-based-replacements "<backspace> p s" "popup-size")
+(which-key-add-key-based-replacements "<backspace> p s s" "popup-size-s")
+(which-key-add-key-based-replacements "<backspace> p s m" "popup-size-m")
+(which-key-add-key-based-replacements "<backspace> p s l" "popup-size-l")
+(which-key-add-key-based-replacements "<backspace> p s x" "popup-size-xl")
+(which-key-add-key-based-replacements "<backspace> p s X" "popup-size-xxl")
 
 ;; change default popup size to S (0.20)
 (define-key evil-normal-state-map (kbd "<backspace> p s s")
