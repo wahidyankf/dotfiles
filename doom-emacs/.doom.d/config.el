@@ -166,7 +166,7 @@
 (setq wkf/popup-size-xxxl 0.75)
 
 (set-popup-rule! "^\\*compilation"
-  :size wkf/popup-size-xs
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*doom:vterm-"
   :size wkf/popup-size-s)
