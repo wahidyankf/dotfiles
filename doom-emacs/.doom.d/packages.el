@@ -64,7 +64,7 @@
 (package! elixir-mode)
 (package! alchemist)
 (package! org-make-toc)
-(package! flow-js2-mode)
+;; (package! flow-js2-mode)
 
 (when (package! lsp-mode)
   (package! lsp-ui)

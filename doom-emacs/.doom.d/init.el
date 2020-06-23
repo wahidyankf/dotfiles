@@ -116,7 +116,8 @@
        ;;idris             ;
        json    ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)    ; all(hope(abandon(ye(who(enter(here))))))
+       ;;(javascript +lsp)              ; all(hope(abandon(ye(who(enter(here))))))
+       javascript    ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;
