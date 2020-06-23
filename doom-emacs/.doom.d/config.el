@@ -339,6 +339,13 @@
   (interactive)
   (recenter))
 
+(setq wkf/file-zshrc "~/.zshrc")
+(setq wkf/file-doom-init-el "~/.doom.d/init.el")
+(setq wkf/file-doom-packages-el "~/.doom.d/packages.el")
+(setq wkf/file-doom-config-el "~/.doom.d/config.el")
+(setq wkf/file-doom-config-org "~/.doom.d/config.org")
+(setq wkf/file-doom-scratch-el "~/.doom.d/scratch.el")
+
 (defun wkf/find-file-vsplit (filename)
   "Search filename and open it in the right vsp"
   (interactive)
@@ -353,119 +360,116 @@
   (find-file filename)
   (wkf/windows-rebalance))
 
-(defun wkf/find-zshrc-vsplit ()
-  "Open my zshrc in the right vsp"
+(defun wkf/find-config (open-in filename)
+  "Open my zshrc in current buffer"
   (interactive)
-  (wkf/find-file-vsplit "~/.zshrc"))
-(defun wkf/find-zshrc-split ()
-  "Open my zshrc in the right vsp"
-  (interactive)
-  (wkf/find-file-split "~/.zshrc"))
+  (cond ((equal open-in "v")
+         (wkf/find-file-vsplit filename))
+        ((equal open-in "x")
+         (wkf/find-file-split filename))
+        ((equal open-in "e")
+         (find-file filename))))
 
-(defun wkf/find-emacs-init-vsplit ()
-  "Open my init.el in the right vsp"
-  (interactive)
-  (wkf/find-file-vsplit "~/.doom.d/init.el"))
-(defun wkf/find-emacs-init-split ()
-  "Open my init.el in the right vsp"
-  (interactive)
-  (wkf/find-file-split "~/.doom.d/init.el"))
-
-(defun wkf/find-emacs-packages-vsplit ()
-  "Open my packages.el in the right vsp"
-  (interactive)
-  (wkf/find-file-vsplit "~/.doom.d/packages.el"))
-(defun wkf/find-emacs-packages-split ()
-  "Open my packages.el in the right vsp"
-  (interactive)
-  (wkf/find-file-split "~/.doom.d/packages.el"))
-
-(defun wkf/find-emacs-config-org-vsplit ()
-  "Open my config.org in the right vsp"
-  (interactive)
-  (wkf/find-file-vsplit "~/.doom.d/config.org"))
-(defun wkf/find-emacs-config-org-split ()
-  "Open my config.org in the right vsp"
-  (interactive)
-  (wkf/find-file-split "~/.doom.d/config.org"))
-
-(defun wkf/find-emacs-config-el-vsplit ()
-  "Open my config.org in the right vsp"
-  (interactive)
-  (wkf/find-file-vsplit "~/.doom.d/config.el"))
-(defun wkf/find-emacs-config-el-split ()
-  "Open my config.org in the right vsp"
-  (interactive)
-  (wkf/find-file-split "~/.doom.d/config.el"))
-
-(defun wkf/find-emacs-scratch-vsplit ()
-  "Open my scratch.el in the right vsp"
-  (interactive)
-  (wkf/find-file-vsplit "~/.doom.d/scratch.el"))
-(defun wkf/find-emacs-scratch-split ()
-  "Open my scratch.el in the right vsp"
-  (interactive)
-  (wkf/find-file-split "~/.doom.d/scratch.el"))
-
-(which-key-add-key-based-replacements
-  "<backspace> c" "config-open")
-(which-key-add-key-based-replacements
-  "<backspace> c z" "config-open-zshrc")
-(which-key-add-key-based-replacements
-  "<backspace> c z v" "config-open-zshrc-vsplit")
-(which-key-add-key-based-replacements
-  "<backspace> c z x" "config-open-zshrc-split")
-(which-key-add-key-based-replacements
-  "<backspace> c e" "config-open-emacs")
-(which-key-add-key-based-replacements
-  "<backspace> c e i" "config-open-emacs-init")
-(which-key-add-key-based-replacements
-  "<backspace> c e i v" "config-open-emacs-init-vsplit")
-(which-key-add-key-based-replacements
-  "<backspace> c e i x" "config-open-emacs-init-split")
-(which-key-add-key-based-replacements
-  "<backspace> c e p" "config-open-emacs-packages")
-(which-key-add-key-based-replacements
-  "<backspace> c e p v" "config-open-emacs-packages-vsplit")
-(which-key-add-key-based-replacements
-  "<backspace> c e p x" "config-open-emacs-packages-split")
-(which-key-add-key-based-replacements
-  "<backspace> c e c" "config-open-emacs-config-org")
-(which-key-add-key-based-replacements
-  "<backspace> c e c v" "config-open-emacs-config-org-vsplit")
-(which-key-add-key-based-replacements
-  "<backspace> c e c x" "config-open-emacs-config-org-split")
-(which-key-add-key-based-replacements
-  "<backspace> c e C" "config-open-emacs-config-el")
-(which-key-add-key-based-replacements
-  "<backspace> c e C v" "config-open-emacs-config-el-vsplit")
-(which-key-add-key-based-replacements
-  "<backspace> c e C x" "config-open-emacs-config-el-split")
-(which-key-add-key-based-replacements
-  "<backspace> c e s" "config-open-emacs-scratch")
-(which-key-add-key-based-replacements
-  "<backspace> c e s v" "config-open-emacs-scratch-vsplit")
-(which-key-add-key-based-replacements
-  "<backspace> c e s x" "config-open-emacs-scratch-split")
+(which-key-add-key-based-replacements "<backspace> c" "config-open")
+(which-key-add-key-based-replacements "<backspace> c z" "config-open-zshrc")
+(which-key-add-key-based-replacements "<backspace> c z e" "config-open-zshrc-current-buffer")
+(which-key-add-key-based-replacements "<backspace> c z v" "config-open-zshrc-vsplit")
+(which-key-add-key-based-replacements "<backspace> c z x" "config-open-zshrc-split")
+(which-key-add-key-based-replacements "<backspace> c e" "config-open-emacs")
+(which-key-add-key-based-replacements "<backspace> c e i" "config-open-emacs-init")
+(which-key-add-key-based-replacements "<backspace> c e i v" "config-open-emacs-init-vsplit")
+(which-key-add-key-based-replacements "<backspace> c e i x" "config-open-emacs-init-split")
+(which-key-add-key-based-replacements "<backspace> c e p" "config-open-emacs-packages")
+(which-key-add-key-based-replacements "<backspace> c e p v" "config-open-emacs-packages-vsplit")
+(which-key-add-key-based-replacements "<backspace> c e p x" "config-open-emacs-packages-split")
+(which-key-add-key-based-replacements "<backspace> c e c" "config-open-emacs-config-org")
+(which-key-add-key-based-replacements "<backspace> c e c v" "config-open-emacs-config-org-vsplit")
+(which-key-add-key-based-replacements "<backspace> c e c x" "config-open-emacs-config-org-split")
+(which-key-add-key-based-replacements "<backspace> c e C" "config-open-emacs-config-el")
+(which-key-add-key-based-replacements "<backspace> c e C v" "config-open-emacs-config-el-vsplit")
+(which-key-add-key-based-replacements "<backspace> c e C x" "config-open-emacs-config-el-split")
+(which-key-add-key-based-replacements "<backspace> c e s" "config-open-emacs-scratch")
+(which-key-add-key-based-replacements "<backspace> c e s v" "config-open-emacs-scratch-vsplit")
+(which-key-add-key-based-replacements "<backspace> c e s x" "config-open-emacs-scratch-split")
 
 ;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z v") 'wkf/find-zshrc-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> c z x") 'wkf/find-zshrc-split)
+(define-key evil-normal-state-map (kbd "<backspace> c z e")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "e" wkf/file-zshrc)))
+(define-key evil-normal-state-map (kbd "<backspace> c z v")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "v" wkf/file-zshrc)))
+(define-key evil-normal-state-map (kbd "<backspace> c z x")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "x" wkf/file-zshrc)))
 ;; Config Emacs Init.el
-(define-key evil-normal-state-map (kbd "<backspace> c e i v") 'wkf/find-emacs-init-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> c e i x") 'wkf/find-emacs-init-split)
+(define-key evil-normal-state-map (kbd "<backspace> c e i e")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "e" wkf/file-doom-init-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e i v")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "v" wkf/file-doom-init-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e i x")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "x" wkf/file-doom-init-el)))
 ;; Config Emacs Packages.el
-(define-key evil-normal-state-map (kbd "<backspace> c e p v") 'wkf/find-emacs-packages-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> c e p x") 'wkf/find-emacs-packages-split)
+(define-key evil-normal-state-map (kbd "<backspace> c e p e")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "e" wkf/file-doom-packages-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e p v")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "v" wkf/file-doom-packages-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e p x")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "x" wkf/file-doom-packages-el)))
 ;; Config Emacs Config.org
-(define-key evil-normal-state-map (kbd "<backspace> c e c v") 'wkf/find-emacs-config-org-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> c e c x") 'wkf/find-emacs-config-org-split)
+(define-key evil-normal-state-map (kbd "<backspace> c e c e")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "e" wkf/file-doom-config-org)))
+(define-key evil-normal-state-map (kbd "<backspace> c e c v")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "v" wkf/file-doom-config-org)))
+(define-key evil-normal-state-map (kbd "<backspace> c e c x")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "x" wkf/file-doom-config-org)))
 ;; Config Emacs Config.el (compiled version)
-(define-key evil-normal-state-map (kbd "<backspace> c e C v") 'wkf/find-emacs-config-el-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> c e C x") 'wkf/find-emacs-config-el-split)
+(define-key evil-normal-state-map (kbd "<backspace> c e C e")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "e" wkf/file-doom-config-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e C v")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "v" wkf/file-doom-config-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e C x")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "x" wkf/file-doom-config-el)))
 ;; Config Emacs Scratch.el
-(define-key evil-normal-state-map (kbd "<backspace> c e s v") 'wkf/find-emacs-scratch-vsplit)
-(define-key evil-normal-state-map (kbd "<backspace> c e s x") 'wkf/find-emacs-scratch-split)
+(define-key evil-normal-state-map (kbd "<backspace> c e s e")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "e" wkf/file-doom-scratch-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e s v")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "v" wkf/file-doom-scratch-el)))
+(define-key evil-normal-state-map (kbd "<backspace> c e s x")
+  (lambda ()
+    (interactive)
+    (wkf/find-config "x" wkf/file-doom-scratch-el)))
 
 (which-key-add-key-based-replacements
   ", e" "eval-elisp")
