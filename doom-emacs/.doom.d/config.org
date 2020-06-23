@@ -238,7 +238,7 @@ Show battery and time on the bottom.
 (add-hook! '+popup-buffer-mode-hook (set-window-margins (selected-window) 1 1))
 
 (setq wkf/popup-size-xs 0.10)
-(setq wkf/popup-size-s 0.15)
+(setq wkf/popup-size-s 0.175)
 (setq wkf/popup-size-m 0.25)
 (setq wkf/popup-size-l 0.35)
 (setq wkf/popup-size-xl 0.45)
@@ -246,35 +246,35 @@ Show battery and time on the bottom.
 (setq wkf/popup-size-xxxl 0.75)
 
 (set-popup-rule! "^\\*compilation"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*doom:vterm-"
-  :size 0.20)
+  :size wkf/popup-size-s)
 (set-popup-rule! "^\\*format-all-errors"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*Flycheck errors"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*lsp-diagnostics"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*eshell"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*terminal"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 (set-popup-rule! "^\\*info"
-  :size 0.45
+  :size wkf/popup-size-xl
   :side 'right)
 (set-popup-rule! "^\\*doom:scratch"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 
 (add-hook 'org-mode-hook (lambda ()
                            (set-popup-rule! "^\\*Org Src"
-                             :size wkf/popup-size-m
+                             :size wkf/popup-size-xxxl
                              :side 'bottom)))
 
 (defun wkf/popup-size (size)
@@ -291,31 +291,26 @@ Show battery and time on the bottom.
 (which-key-add-key-based-replacements "<backspace> p s x" "popup-size-xl")
 (which-key-add-key-based-replacements "<backspace> p s X" "popup-size-xxl")
 
-;; change default popup size to S (0.20)
 (define-key evil-normal-state-map (kbd "<backspace> p s s")
   (lambda ()
     (interactive)
-    (wkf/popup-size "s")))
-;; change default popup size to M (0.20)
+    (wkf/popup-size wkf/popup-size-s)))
 (define-key evil-normal-state-map (kbd "<backspace> p s m")
   (lambda ()
     (interactive)
-    (wkf/popup-size "m")))
-;; change default popup size to L (0.30)
+    (wkf/popup-size wkf/popup-size-m)))
 (define-key evil-normal-state-map (kbd "<backspace> p s l")
   (lambda ()
     (interactive)
-    (wkf/popup-size "l")))
-;; change default popup size to XL (0.5)
+    (wkf/popup-size wkf/popup-size-l)))
 (define-key evil-normal-state-map (kbd "<backspace> p s x")
   (lambda ()
     (interactive)
-    (wkf/popup-size "xl")))
-;; change default popup size to XXL (0.6)
+    (wkf/popup-size wkf/popup-size-xl)))
 (define-key evil-normal-state-map (kbd "<backspace> p s X")
   (lambda ()
     (interactive)
-    (wkf/popup-size "xxl")))
+    (wkf/popup-size wkf/popup-size-xxl)))
 ;; popup q
 (define-key evil-normal-state-map (kbd "<backspace> p q") '+popup/close-all)
 #+END_SRC
