@@ -308,8 +308,6 @@ command! -nargs=0 CDProjectRoot :execute 'cd' GetProjectRootPWD()
 nnoremap <silent> n   n:call HLNext(0.025)<cr>
 nnoremap <silent> N   N:call HLNext(0.025)<cr>
 
-nnoremap <c-w>t :tab split<cr>
-nnoremap <bs>ts :tab split<cr>
 nnoremap <bs>1 1gt
 nnoremap <bs>2 2gt
 nnoremap <bs>3 3gt
@@ -576,6 +574,8 @@ noremap <leader>cd :lcd %:h<cr>
 " Leader - Window management {{{
 
 nnoremap <leader>tn :tabnew<Space>
+nnoremap <c-w>t :tab split<cr>
+nnoremap <bs>ts :tab split<cr>
 
 " }}}
 
