@@ -63,14 +63,18 @@
 (which-key-add-key-based-replacements
   ", \\" "window-vsplit-and-focus")
 (which-key-add-key-based-replacements
+  ", x" "window-vsplit-and-focus")
+(which-key-add-key-based-replacements
   ", -" "window-split-and-focus")
+(which-key-add-key-based-replacements
+  ", v" "window-split-and-focus")
 (which-key-add-key-based-replacements
   ", =" "window-balance")
 
 ;; | (vertical)
-(define-key evil-normal-state-map (kbd ", \\") 'wkf/window-vsplit)
+(define-key evil-normal-state-map (kbd ", v") 'wkf/window-vsplit)
 ;; - (horizontal)
-(define-key evil-normal-state-map (kbd ", -") 'wkf/window-split)
+(define-key evil-normal-state-map (kbd ", x") 'wkf/window-split)
 ;; = (equal)
 (define-key evil-normal-state-map (kbd ", =") 'balance-windows)
 
