@@ -339,74 +339,133 @@
   (interactive)
   (recenter))
 
-(defun wkf/find-file (filename)
+(defun wkf/find-file-vsplit (filename)
   "Search filename and open it in the right vsp"
   (interactive)
   (wkf/window-vsplit)
   (find-file filename)
   (wkf/windows-rebalance))
 
-(defun wkf/find-zshrc ()
+(defun wkf/find-file-split (filename)
+  "Search filename and open it in the right vsp"
+  (interactive)
+  (wkf/window-split)
+  (find-file filename)
+  (wkf/windows-rebalance))
+
+(defun wkf/find-zshrc-vsplit ()
   "Open my zshrc in the right vsp"
   (interactive)
-  (wkf/find-file "~/.zshrc"))
+  (wkf/find-file-vsplit "~/.zshrc"))
+(defun wkf/find-zshrc-split ()
+  "Open my zshrc in the right vsp"
+  (interactive)
+  (wkf/find-file-split "~/.zshrc"))
 
-(defun wkf/find-emacs-init ()
+(defun wkf/find-emacs-init-vsplit ()
   "Open my init.el in the right vsp"
   (interactive)
-  (wkf/find-file "~/.doom.d/init.el"))
+  (wkf/find-file-vsplit "~/.doom.d/init.el"))
+(defun wkf/find-emacs-init-split ()
+  "Open my init.el in the right vsp"
+  (interactive)
+  (wkf/find-file-split "~/.doom.d/init.el"))
 
-(defun wkf/find-emacs-packages ()
+(defun wkf/find-emacs-packages-vsplit ()
   "Open my packages.el in the right vsp"
   (interactive)
-  (wkf/find-file "~/.doom.d/packages.el"))
+  (wkf/find-file-vsplit "~/.doom.d/packages.el"))
+(defun wkf/find-emacs-packages-split ()
+  "Open my packages.el in the right vsp"
+  (interactive)
+  (wkf/find-file-split "~/.doom.d/packages.el"))
 
-(defun wkf/find-emacs-config-org ()
+(defun wkf/find-emacs-config-org-vsplit ()
   "Open my config.org in the right vsp"
   (interactive)
-  (wkf/find-file "~/.doom.d/config.org"))
-
-(defun wkf/find-emacs-config-el ()
+  (wkf/find-file-vsplit "~/.doom.d/config.org"))
+(defun wkf/find-emacs-config-org-split ()
   "Open my config.org in the right vsp"
   (interactive)
-  (wkf/find-file "~/.doom.d/config.el"))
+  (wkf/find-file-split "~/.doom.d/config.org"))
 
-(defun wkf/find-emacs-scratch ()
+(defun wkf/find-emacs-config-el-vsplit ()
+  "Open my config.org in the right vsp"
+  (interactive)
+  (wkf/find-file-vsplit "~/.doom.d/config.el"))
+(defun wkf/find-emacs-config-el-split ()
+  "Open my config.org in the right vsp"
+  (interactive)
+  (wkf/find-file-split "~/.doom.d/config.el"))
+
+(defun wkf/find-emacs-scratch-vsplit ()
   "Open my scratch.el in the right vsp"
   (interactive)
-  (wkf/find-file "~/.doom.d/scratch.el"))
+  (wkf/find-file-vsplit "~/.doom.d/scratch.el"))
+(defun wkf/find-emacs-scratch-split ()
+  "Open my scratch.el in the right vsp"
+  (interactive)
+  (wkf/find-file-split "~/.doom.d/scratch.el"))
 
 (which-key-add-key-based-replacements
   "<backspace> c" "config-open")
 (which-key-add-key-based-replacements
-  "<backspace> c z" "config-open-zsh")
+  "<backspace> c z" "config-open-zshrc")
 (which-key-add-key-based-replacements
-  "<backspace> c z z" "config-open-zsh-rc")
+  "<backspace> c z v" "config-open-zshrc-vsplit")
+(which-key-add-key-based-replacements
+  "<backspace> c z x" "config-open-zshrc-split")
 (which-key-add-key-based-replacements
   "<backspace> c e" "config-emacs")
 (which-key-add-key-based-replacements
   "<backspace> c e i" "config-emacs-init")
 (which-key-add-key-based-replacements
+  "<backspace> c e i v" "config-emacs-init-vsplit")
+(which-key-add-key-based-replacements
+  "<backspace> c e i x" "config-emacs-init-split")
+(which-key-add-key-based-replacements
   "<backspace> c e p" "config-emacs-packages")
+(which-key-add-key-based-replacements
+  "<backspace> c e p v" "config-emacs-packages-vsplit")
+(which-key-add-key-based-replacements
+  "<backspace> c e p x" "config-emacs-packages-split")
 (which-key-add-key-based-replacements
   "<backspace> c e c" "config-emacs-config-org")
 (which-key-add-key-based-replacements
+  "<backspace> c e c v" "config-emacs-config-org-vsplit")
+(which-key-add-key-based-replacements
+  "<backspace> c e c x" "config-emacs-config-org-split")
+(which-key-add-key-based-replacements
   "<backspace> c e C" "config-emacs-config-el")
 (which-key-add-key-based-replacements
+  "<backspace> c e C v" "config-emacs-config-el-vsplit")
+(which-key-add-key-based-replacements
+  "<backspace> c e C x" "config-emacs-config-el-split")
+(which-key-add-key-based-replacements
   "<backspace> c e s" "config-emacs-scratch")
+(which-key-add-key-based-replacements
+  "<backspace> c e s v" "config-emacs-scratch-vsplit")
+(which-key-add-key-based-replacements
+  "<backspace> c e s x" "config-emacs-scratch-split")
 
 ;; Config ZSH
-(define-key evil-normal-state-map (kbd "<backspace> c z z") 'wkf/find-zshrc)
+(define-key evil-normal-state-map (kbd "<backspace> c z v") 'wkf/find-zshrc-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> c z x") 'wkf/find-zshrc-split)
 ;; Config Emacs Init.el
-(define-key evil-normal-state-map (kbd "<backspace> c e i") 'wkf/find-emacs-init)
+(define-key evil-normal-state-map (kbd "<backspace> c e i v") 'wkf/find-emacs-init-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> c e i x") 'wkf/find-emacs-init-split)
 ;; Config Emacs Packages.el
-(define-key evil-normal-state-map (kbd "<backspace> c e p") 'wkf/find-emacs-packages)
+(define-key evil-normal-state-map (kbd "<backspace> c e p v") 'wkf/find-emacs-packages-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> c e p x") 'wkf/find-emacs-packages-split)
 ;; Config Emacs Config.org
-(define-key evil-normal-state-map (kbd "<backspace> c e c") 'wkf/find-emacs-config-org)
+(define-key evil-normal-state-map (kbd "<backspace> c e c v") 'wkf/find-emacs-config-org-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> c e c x") 'wkf/find-emacs-config-org-split)
 ;; Config Emacs Config.el (compiled version)
-(define-key evil-normal-state-map (kbd "<backspace> c e C") 'wkf/find-emacs-config-el)
+(define-key evil-normal-state-map (kbd "<backspace> c e C v") 'wkf/find-emacs-config-el-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> c e C x") 'wkf/find-emacs-config-el-split)
 ;; Config Emacs Scratch.el
-(define-key evil-normal-state-map (kbd "<backspace> c e s") 'wkf/find-emacs-scratch)
+(define-key evil-normal-state-map (kbd "<backspace> c e s v") 'wkf/find-emacs-scratch-vsplit)
+(define-key evil-normal-state-map (kbd "<backspace> c e s x") 'wkf/find-emacs-scratch-split)
 
 (which-key-add-key-based-replacements
   ", e" "eval-elisp")
@@ -482,9 +541,6 @@
                 (recenter)))
         ((equal major-mode 'typescript-mode)
          (evil-goto-definition))
-        ;;   ((bound-and-true-p flow-minor-mode)
-        ;;   (progn     (flow-minor-jump-to-definition)
-        ;;              (flow-minor-mode)))
         (t (+lookup/definition (doom-thing-at-point-or-region)))))
 
 (defun wkf/gdef-new-frame ()
@@ -495,9 +551,6 @@
          (progn (make-frame-command)
                 (evil-goto-definition)
                 (recenter)))
-        ;;        ((bound-and-true-p flow-minor-mode)
-        ;;         (progn     (flow-minor-jump-to-definition)
-        ;;                    (flow-minor-mode)))
         ((equal major-mode 'typescript-mode)
          (evil-goto-definition))
         ((equal major-mode 'js2-mode)
@@ -511,18 +564,6 @@
   "Open +lookup/definition in the split window below"
   (interactive)
   (cond
-   ;;((equal major-mode 'reason-mode)
-   ;; (progn (make-frame-command)
-   ;;        (evil-goto-definition)
-   ;;        (recenter)))
-   ;;   ((bound-and-true-p flow-minor-mode)
-   ;;    (progn (flow-minor-jump-to-definition)
-   ;;           (evil-window-split)
-   ;;           (evil-jump-backward-swap)
-   ;;           (evil-window-down 1)
-   ;;           (flow-minor-mode)
-   ;;           (balance-windows)
-   ;;           (recenter)))
    ((equal major-mode 'reason-mode)
     (progn (evil-goto-definition)
            (evil-window-split)
@@ -588,8 +629,6 @@
   (interactive)
   (cond ((equal major-mode 'reason-mode)
          (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
-;;        ((bound-and-true-p flow-minor-mode)
-;;         (+format/buffer))
         ((equal major-mode 'python-mode)
          (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
@@ -845,24 +884,6 @@
 ;; compile and run current file
 (evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
 (evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/ts-compile-and-run-file-interactive)
-
-;;(use-package! flow-js2-mode
-;;  :config (add-hook 'js2-mode-hook #'flow-js2-mode)
-;;  (add-hook 'rjsx-mode-hook #'flow-js2-mode))
-
-(set-popup-rule! "^\\*Flow Output"
-  :size 0.20
-  :side 'bottom)
-
-;; See flow coverage
-;;(evil-define-key 'normal rjsx-mode-map (kbd ", c t c") 'flow-minor-coverage)
-;;(evil-define-key 'normal js2-mode-map (kbd ", c t c") 'flow-minor-coverage)
-;; See flow status
-;;(evil-define-key 'normal rjsx-mode-map (kbd ", c q") 'flow-status)
-;;(evil-define-key 'normal js2-mode-map (kbd ", c q") 'flow-status)
-;; enable flow minor mode
-;;(evil-define-key 'normal rjsx-mode-map (kbd ", m f") 'flow-minor-mode)
-;;(evil-define-key 'normal js2-mode-map (kbd ", m f") 'flow-minor-mode)
 
 (defun wkf/go-compile-project ()
   "compile current go project"
