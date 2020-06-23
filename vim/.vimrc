@@ -447,6 +447,8 @@ nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
 
 " reload current buffer
 nnoremap <bs>e :e<cr>
+" reload current buffer
+nnoremap <bs>bb :e!<cr>
 
 " bufdo e
 nnoremap <bs>bdoe :bufdo e<cr>
