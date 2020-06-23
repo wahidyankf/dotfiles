@@ -216,18 +216,38 @@ Show battery and time on the bottom.
                    (buffer-file-name))))
 
 (which-key-add-key-based-replacements
-  ", b" "buffer")
+  "<backspace> b" "buffer")
 (which-key-add-key-based-replacements
-  ", b i" "buffer-info")
+  "<backspace> b i" "current-buffer-info")
 (which-key-add-key-based-replacements
-  ", b b" "buffer-revert")
+  "<backspace> b b" "buffer-revert")
 (which-key-add-key-based-replacements
-  ", b c" "buffer-close")
+  "<backspace> b c" "buffer-close")
+(which-key-add-key-based-replacements
+  "<backspace> b c a" "buffer-close-all-except-current")
+(which-key-add-key-based-replacements
+  "<backspace> b i" "buffer-list-all")
+(which-key-add-key-based-replacements
+  "<backspace> b x" "buffer-kill")
+(which-key-add-key-based-replacements
+  "<backspace> b l" "buffer-list")
+(which-key-add-key-based-replacements
+  "<backspace> b l s" "buffer-list-current-perspective")
+(which-key-add-key-based-replacements
+  "<backspace> b l S" "buffer-list-all")
 
 ;; Get current buffer's info
-(define-key evil-normal-state-map (kbd ", b i") 'wkf/buffer-info)
+(define-key evil-normal-state-map (kbd "<backspace> b i") 'wkf/buffer-info)
 ;; Revert/Reload buffer
-(define-key evil-normal-state-map (kbd ", b b") 'revert-buffer)
+(define-key evil-normal-state-map (kbd "<backspace> b b") 'revert-buffer)
+;; Kill other buffers
+(define-key evil-normal-state-map (kbd "<backspace> b c a") 'doom/kill-other-buffers)
+;; Kill buffer
+(define-key evil-normal-state-map (kbd "<backspace> b x") 'kill-buffer)
+;; Buffer list current perspective
+(define-key evil-normal-state-map (kbd "<backspace> b l s") 'persp-switch-to-buffer)
+;; Buffer list all
+(define-key evil-normal-state-map (kbd "<backspace> b l S") 'ibuffer)
 #+END_SRC
 
 ** Pop Up
