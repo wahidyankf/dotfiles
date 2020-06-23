@@ -545,17 +545,6 @@ nnoremap <bs>ssbq :mks! ~/.vim/sessions/book-session.vim<cr>:qa!<cr>
 
 " }}}
 
-" Key-Bindings - Quick Fix {{{
-
-nnoremap <localleader>en :cnext<CR>
-nnoremap <localleader>ep :cprevious<CR>
-nnoremap <localleader>eq :cclose<CR>
-" popup close
-nnoremap <localleader>pq :cclose<CR>
-nnoremap <localleader>eo :copen<CR>
-
-" }}}
-
 " ===========================================================
 " KEY-BINDINGS - LEADER
 " ============================================================
@@ -590,6 +579,17 @@ nnoremap <bs>ts :tab split<cr>
 " ============================================================
 
 let maplocalleader=","
+
+" Key-Bindings - Quick Fix {{{
+
+nnoremap <localleader>en :cnext<CR>
+nnoremap <localleader>ep :cprevious<CR>
+nnoremap <localleader>eq :cclose<CR>
+" popup close
+nnoremap <localleader>pq :cclose<CR>
+nnoremap <localleader>eo :copen<CR>
+
+" }}}
 
 " ============================================================
 " PLUGINS
