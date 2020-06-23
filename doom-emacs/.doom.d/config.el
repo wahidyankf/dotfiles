@@ -19,9 +19,9 @@
 (setq-default show-trailing-whitespace t)
 
 (which-key-add-key-based-replacements
-  ", /" "search-nohl")
+  "<backspace> /" "search-nohl")
 
-(define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
+(define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
 
 (display-time-mode)
 (display-battery-mode)
