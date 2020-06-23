@@ -61,11 +61,7 @@
   (evil-window-down 1))
 
 (which-key-add-key-based-replacements
-  ", \\" "window-vsplit-and-focus")
-(which-key-add-key-based-replacements
   ", x" "window-vsplit-and-focus")
-(which-key-add-key-based-replacements
-  ", -" "window-split-and-focus")
 (which-key-add-key-based-replacements
   ", v" "window-split-and-focus")
 (which-key-add-key-based-replacements
