@@ -418,6 +418,8 @@ nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 xnoremap <bs>s :sort<cr>
 
 " nvim terminal
+set shell=/bin/bash\ -i
+set shell=/bin/zsh\ -i
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>ts :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <localleader>tt :CDProjectRoot<cr>:tabnew term://zsh<cr>
@@ -543,10 +545,12 @@ nnoremap <bs>ssbq :mks! ~/.vim/sessions/book-session.vim<cr>:qa!<cr>
 
 " Key-Bindings - Quick Fix {{{
 
-nnoremap <localleader>fn :cnext<CR>
-nnoremap <localleader>fp :cprevious<CR>
-nnoremap <localleader>fc :cclose<CR>
-nnoremap <localleader>fo :copen<CR>
+nnoremap <localleader>en :cnext<CR>
+nnoremap <localleader>ep :cprevious<CR>
+nnoremap <localleader>eq :cclose<CR>
+" popup close
+nnoremap <localleader>pq :cclose<CR>
+nnoremap <localleader>eo :copen<CR>
 
 " }}}
 
@@ -628,16 +632,16 @@ nnoremap <c-g> :GFiles<cr>
 nnoremap <c-p> :CDProjectRoot<cr>:Files<cr>
 nnoremap <c-b> :Buffers<cr>
 
-nnoremap <leader>gg :CDProjectRoot<cr>:Ack!<Space>-i<Space>
-nnoremap <leader>grg :CDProjectRoot<cr>:Rg<cr>
-nnoremap <leader>gatd :CDProjectRoot<cr>:Ack!<Space>--atd<Space>-i<Space>
-nnoremap <leader>gcss :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
-nnoremap <leader>gjson :CDProjectRoot<cr>:Ack!<Space>--json<Space>-i<Space>
-nnoremap <leader>gjs :CDProjectRoot<cr>:Ack!<Space>--js<Space>-i<Space>
-nnoremap <leader>gmd :CDProjectRoot<cr>:Ack!<Space>--md<Space>-i<Space>
-nnoremap <leader>gml :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
-nnoremap <leader>gre :CDProjectRoot<cr>:Ack!<Space>--reason<Space>-i<Space>
-nnoremap <leader>g :CDProjectRoot<cr>:Ack!<Space>-i<Space>
+nnoremap <localleader>sg :CDProjectRoot<cr>:Ack!<Space>-i<Space>
+nnoremap <localleader>srg :CDProjectRoot<cr>:Rg<cr>
+nnoremap <localleader>satd :CDProjectRoot<cr>:Ack!<Space>--atd<Space>-i<Space>
+nnoremap <localleader>scss :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
+nnoremap <localleader>sjson :CDProjectRoot<cr>:Ack!<Space>--json<Space>-i<Space>
+nnoremap <localleader>sjs :CDProjectRoot<cr>:Ack!<Space>--js<Space>-i<Space>
+nnoremap <localleader>smd :CDProjectRoot<cr>:Ack!<Space>--md<Space>-i<Space>
+nnoremap <localleader>sml :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
+nnoremap <localleader>sre :CDProjectRoot<cr>:Ack!<Space>--reason<Space>-i<Space>
+nnoremap <localleader>s :CDProjectRoot<cr>:Ack!<Space>-i<Space>
 
 let g:ack_mappings={
               \ 'v':  '<c-W><cr><c-W>L<c-W>p<c-W>J<c-W>p<c-W>=',
@@ -674,7 +678,7 @@ nnoremap <bs>gf :GFiles?<cr>
 nnoremap <bs>gvd :Gvdiff<cr>
 nnoremap <bs>gbl :Gblame<cr>
 nnoremap <bs>gbc :BCommits<cr>
-nnoremap <bs>gwua :Dispatch ls<cr>
+nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
 
 " }}}
 
@@ -785,7 +789,7 @@ let g:vrc_curl_opts = {
 
 " Plugin - Presenting.vim {{{
 
-nnoremap <bs>ps :PresentingStart<cr>
+nnoremap <localleader>op :PresentingStart<cr>
 
 au FileType md let b:presenting_slide_separator = '\v(^|\n)\#'
 
