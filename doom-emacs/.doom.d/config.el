@@ -916,7 +916,7 @@
 (evil-define-key 'normal go-mode-map (kbd ", c c") 'wkf/go-compile-file)
 
 (set-popup-rule! "^\\*Anaconda"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 
 (defun wkf/update-elixir-language-server ()
@@ -941,7 +941,7 @@
 (use-package! exunit)
 
 (set-popup-rule! "^\\*alchemist"
-  :size 0.2)
+  :size wkf/popup-size-s)
 
 ;; run current file
 (evil-define-key 'normal elixir-mode-map (kbd ", r r") 'alchemist-eval-buffer)
@@ -1012,7 +1012,7 @@
 
 (add-hook 'org-mode-hook (lambda ()
                            (set-popup-rule! "^\\*Org Src"
-                             :size .75
+                             :size wkf/popup-size-xxxl
                              :side 'bottom)
                            (setq org-log-done 'time)
                            (setq org-agenda-files (directory-files-recursively "~/wkf-org/"

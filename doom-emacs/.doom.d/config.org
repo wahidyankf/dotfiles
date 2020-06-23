@@ -1207,7 +1207,7 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 #+BEGIN_SRC emacs-lisp :results silent
 (set-popup-rule! "^\\*Anaconda"
-  :size 0.20
+  :size wkf/popup-size-s
   :side 'bottom)
 #+END_SRC
 
@@ -1240,7 +1240,7 @@ More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/191
 (use-package! exunit)
 
 (set-popup-rule! "^\\*alchemist"
-  :size 0.2)
+  :size wkf/popup-size-s)
 #+END_SRC
 
 
@@ -1368,7 +1368,7 @@ If you use =org= and don't want your org files in the default location below, ch
 
 (add-hook 'org-mode-hook (lambda ()
                            (set-popup-rule! "^\\*Org Src"
-                             :size .75
+                             :size wkf/popup-size-xxxl
                              :side 'bottom)
                            (setq org-log-done 'time)
                            (setq org-agenda-files (directory-files-recursively "~/wkf-org/"
