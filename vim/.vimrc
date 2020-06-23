@@ -403,26 +403,14 @@ nnoremap <bs>cwv :vsp ~/wkf-repos/ruangguru/source/package.re.json<cr>
 nnoremap <bs>cws :sp ~/wkf-repos/ruangguru/source/package.re.json<cr>
 
 " zsh
-
 nnoremap <bs>czt :tabnew ~/.zshrc<cr>
 nnoremap <bs>czv :vsp ~/.zshrc<cr>
 nnoremap <bs>czs :sp ~/.zshrc<cr>
 
-
-" private
-nnoremap <bs>nt :tabnew ~/wkf-notes/README.md<cr>
-nnoremap <bs>nv :vsp ~/wkf-notes/README.md<cr>
-nnoremap <bs>ns :sp ~/wkf-notes/README.md<cr>
-
-nnoremap <bs>ntdt :tabnew ~/wkf-notes/daily/todo.md<cr>
-nnoremap <bs>ntdv :vsp ~/wkf-notes/daily/todo.md<cr>
-nnoremap <bs>ntds :sp ~/wkf-notes/daily/todo.md<cr>
-
-" skillacademy
-
-nnoremap <bs>nsat :tabnew ~/wkf-notes/ruangguru/skill_academy/README.md<cr>
-nnoremap <bs>nsav :vsp ~/wkf-notes/ruangguru/skill_academy/README.md<cr>
-nnoremap <bs>nsas :sp ~/wkf-notes/ruangguru/skill_academy/README.md<cr>
+" zsh
+nnoremap <bs>cftt :tabnew ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>cftv :vsp ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>cfts :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
 nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
@@ -431,10 +419,10 @@ nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 " sort
 xnoremap <bs>s :sort<cr>
 
-" nvim terminl
-nnoremap <bs>zv :CDProjectRoot<cr>:vsp term://zsh<cr>
-nnoremap <bs>zs :CDProjectRoot<cr>:sp term://zsh<cr>
-nnoremap <bs>zt :CDProjectRoot<cr>:tabnew term://zsh<cr>
+" nvim terminal
+nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
+nnoremap <localleader>ts :CDProjectRoot<cr>:sp term://zsh<cr>
+nnoremap <localleader>tt :CDProjectRoot<cr>:tabnew term://zsh<cr>
 tnoremap <C-[> <C-\><C-n>
 
 " book
@@ -686,6 +674,7 @@ nnoremap <bs>gf :GFiles?<cr>
 nnoremap <bs>gvd :Gvdiff<cr>
 nnoremap <bs>gbl :Gblame<cr>
 nnoremap <bs>gbc :BCommits<cr>
+nnoremap <bs>gwua :Dispatch ls<cr>
 
 " }}}
 
@@ -890,6 +879,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gk <Plug>(coc-declaration)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -924,31 +914,6 @@ augroup coc_format_expr
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" The editor.action.organizeImport code action will auto-format code and add missing imports.
-" The code below used to run this automatically on save
-augroup go_pls
-    autocmd! BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-augroup END
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <localleader>car <Plug>(coc-codeaction-selected)
-nmap <localleader>car <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <localleader>caa <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <localleader>dff <Plug>(coc-fix-current)
-
-" Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <c-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <c-d> <Plug>(coc-range-select)
-xmap <silent> <c-d> <Plug>(coc-range-select)
-
 function! Format()
     let cursorpos = getpos(".")
     call CocAction('format')
@@ -973,11 +938,10 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <localleader>dl :<c-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <bs>cole :<c-u>CocList extensions<cr>
-" B
 " Show commands
-nnoremap <silent> <bs>colc :<c-u>CocList commands<cr>
+nnoremap <silent> <localleader>dc :<c-u>CocList commands<cr>
+" Remap for do codeAction of current line
+nmap <localleader>da <Plug>(coc-codeaction)
 " Find symbol of current document
 nnoremap <silent> <localleader>do :<c-u>CocList outline<cr>
 " Search workspace symbols
@@ -986,10 +950,8 @@ nnoremap <silent> <localleader>dsl :<c-u>CocList -I symbols<cr>
 nnoremap <silent> <localleader>dn :<c-u>CocNext<cr>
 " Do default action for previous item.
 nnoremap <silent> <localleader>dp :<c-u>CocPrev<cr>
-" Resume latest coc list
-nnoremap <silent> <bs>colr :<c-u>CocListResume<cr>
-" Restart
-nnoremap <silent> <bs>cor :<c-u>CocDisable<cr> :<c-u>CocRestart<cr>
+" Fix autofix problem of current line
+nmap <localleader>dff <Plug>(coc-fix-current)
 
 " Modify leader w to format and save
 nnoremap <localleader>w :Format<cr>:w<cr>

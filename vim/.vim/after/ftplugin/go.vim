@@ -39,6 +39,10 @@ augroup goLang
   " make newly opened buffer not folded when first opened
   " the folding is kinda meh if we use it with fold
   autocmd BufNewFile,BufRead *.go call SetGoIndentation()
+
+  " The editor.action.organizeImport code action will auto-format code and add missing imports.
+  " The code below used to run this automatically on save
+  autocmd! BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 augroup END
 
 nmap <buffer> <localleader>bq  <bs>qq
