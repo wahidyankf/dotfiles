@@ -23,18 +23,6 @@
 
 (define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
 
-(defun wkf/comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)))
-
-(define-key evil-normal-state-map (kbd "<SPC> c <SPC>") 'wkf/comment-or-uncomment-region-or-line)
-(define-key evil-visual-state-map (kbd "<SPC> c <SPC>") 'wkf/comment-or-uncomment-region-or-line)
-
 (setq treemacs-no-png-images t
       treemacs-follow-after-init t
       treemacs-width 30
@@ -496,6 +484,9 @@
   (lambda ()
     (interactive)
     (wkf/find-config "x" wkf/file-doom-scratch-el)))
+
+(define-key evil-normal-state-map (kbd "<SPC> c <SPC>") 'comment-line)
+(define-key evil-visual-state-map (kbd "<SPC> c <SPC>") 'comment-line)
 
 (which-key-add-key-based-replacements
   ", e" "eval-elisp")
