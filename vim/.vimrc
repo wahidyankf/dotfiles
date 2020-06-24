@@ -683,7 +683,7 @@ command! -bang -nargs=0 GCheckout
 " Plugin - Git Ops {{{
 
 nnoremap <leader>gg :Gstatus<cr>
-nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr>igit_wkf_update_all<cr>
+nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr>igit_wkf_update_all<cr>a
 
 nnoremap <bs>gco :GCheckout<cr>
 nnoremap <bs>gcm :Commits<cr>
