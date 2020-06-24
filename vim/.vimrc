@@ -460,10 +460,10 @@ nnoremap <bs>i :echo expand('%:p')<cr>
 nnoremap <bs>bde :BDExt 
 
 " buffer quit hjkl
-nnoremap <bs>bqh <c-w>h:q<cr>
-nnoremap <bs>bqj <c-w>j:q<cr>
-nnoremap <bs>bqk <c-w>k:q<cr>
-nnoremap <bs>bql <c-w>l:q<cr>
+nnoremap <localleader>qh <c-w>h:q<cr>
+nnoremap <localleader>qj <c-w>j:q<cr>
+nnoremap <localleader>qk <c-w>k:q<cr>
+nnoremap <localleader>ql <c-w>l:q<cr>
 
 nnoremap <bs>burc :bufdo set undoreload=0<cr>:bufdo e<cr>:bufdo set undoreload=1000<cr><C-o><cr>:windo e<cr>
 
