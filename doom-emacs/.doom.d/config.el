@@ -23,6 +23,18 @@
 
 (define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
 
+(defun wkf/comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)))
+
+(define-key evil-normal-state-map (kbd "<SPC> c <SPC>") 'wkf/comment-or-uncomment-region-or-line)
+(define-key evil-visual-state-map (kbd "<SPC> c <SPC>") 'wkf/comment-or-uncomment-region-or-line)
+
 (setq treemacs-no-png-images t
       treemacs-follow-after-init t
       treemacs-width 30
