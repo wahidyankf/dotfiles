@@ -8,7 +8,7 @@
 
 ;; the mighty dank-mono
 (setq doom-font (font-spec :family "Dank Mono"
-                           :size 12))
+                           :size 11))
 
 (setq global-auto-revert-mode t)
 (setq auto-revert-mode t)

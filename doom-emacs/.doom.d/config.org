@@ -45,7 +45,7 @@ They all accept either a =font-spec=, =font string("Input Mono-12")=, or =xlfd= 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; the mighty dank-mono
 (setq doom-font (font-spec :family "Dank Mono"
-                           :size 12))
+                           :size 11))
 #+END_SRC
 
 ** Auto Revert

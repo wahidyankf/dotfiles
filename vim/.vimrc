@@ -475,8 +475,9 @@ nnoremap <bs>burc :bufdo set undoreload=0<cr>:bufdo e<cr>:bufdo set undoreload=1
 
 " windo e
 nnoremap <bs>wde :windo e<cr>
-nnoremap <bs>- :sp<cr>
-nnoremap <bs>\ :vsp<cr>
+nnoremap <localleader>= <c-w>=
+nnoremap <localleader>x :sp<cr>
+nnoremap <localleader>v :vsp<cr>
 nnoremap <c-c><c-o> :vertical wincmd f<CR>
 
 " }}}
