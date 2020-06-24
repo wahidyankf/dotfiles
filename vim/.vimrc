@@ -680,8 +680,7 @@ nnoremap <bs>gf :GFiles?<cr>
 nnoremap <bs>gvd :Gvdiff<cr>
 nnoremap <bs>gbl :Gblame<cr>
 nnoremap <bs>gbc :BCommits<cr>
-" nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
-nnoremap <bs>gwua :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_wkf_update_all<cr>
+nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr>igit_wkf_update_all<cr>
 
 " }}}
 
