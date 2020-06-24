@@ -429,7 +429,8 @@ xnoremap <bs>s :sort<cr>
 " set shell=/bin/zsh\ -i
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>tx :CDProjectRoot<cr>:sp term://zsh<cr>
-nnoremap <localleader>tt :CDProjectRoot<cr>:tabnew term://zsh<cr>
+nnoremap <localleader>tT :CDProjectRoot<cr>:tabnew term://zsh<cr>
+nnoremap <localleader>tt :CDProjectRoot<cr>:sp term://zsh<cr><c-w>J:resize12.5<cr>
 tnoremap <C-[> <C-\><C-n>
 
 " book
@@ -683,7 +684,8 @@ command! -bang -nargs=0 GCheckout
 " Plugin - Git Ops {{{
 
 nnoremap <leader>gg :Gstatus<cr>
-nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr>igit_wkf_update_all<cr>
+" nnoremap <bs>gwua :CDProjectRoot<cr>:new +resize10 term://zsh<cr>igit_wkf_update_all<cr>
+nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr><c-w>J:resize12.5<cr>igit_wkf_update_all<cr><esc>
 
 nnoremap <bs>gco :GCheckout<cr>
 nnoremap <bs>gcm :Commits<cr>
@@ -1027,3 +1029,4 @@ endfunction
 " Use `:Format` to format current buffer
 command! -nargs=0 BsReFormat :call BsReFormat()
 " }}}
+
