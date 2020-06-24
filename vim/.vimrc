@@ -359,38 +359,38 @@ nnoremap <bs>coc :CocConfig<cr>
 " ack
 nnoremap <bs>cat :tabnew ~/.ackrc<cr>
 nnoremap <bs>cav :vsp ~/.ackrc<cr>p
-nnoremap <bs>cas :sp ~/.ackrc<cr>
+nnoremap <bs>cax :sp ~/.ackrc<cr>
 
 " tmux
 nnoremap <bs>ctt :tabnew ~/.tmux.conf<cr>
 nnoremap <bs>ctv :vsp ~/.tmux.conf<cr>
-nnoremap <bs>cts :sp ~/.tmux.conf<cr>
+nnoremap <bs>ctx :sp ~/.tmux.conf<cr>
 
 nnoremap <bs>ctwt :tabnew ~/.config/tmuxinator/work.yml<cr>
 nnoremap <bs>ctwv :vsp ~/.config/tmuxinator/work.yml<cr>
-nnoremap <bs>ctws :sp ~/.config/tmuxinator/work.yml<cr>
+nnoremap <bs>ctwx :sp ~/.config/tmuxinator/work.yml<cr>
 
 nnoremap <bs>ctlt :tabnew ~/.config/tmuxinator/learn.yml<cr>
 nnoremap <bs>ctlv :vsp ~/.config/tmuxinator/learn.yml<cr>
-nnoremap <bs>ctls :sp ~/.config/tmuxinator/learn.yml<cr>
+nnoremap <bs>ctlx :sp ~/.config/tmuxinator/learn.yml<cr>
 
 nnoremap <bs>ctbt :tabnew ~/.config/tmuxinator/book.yml<cr>
 nnoremap <bs>ctbv :vsp ~/.config/tmuxinator/book.yml<cr>
-nnoremap <bs>ctbs :sp ~/.config/tmuxinator/book.yml<cr>
+nnoremap <bs>ctbx :sp ~/.config/tmuxinator/book.yml<cr>
 
 nnoremap <bs>ctpt :tabnew ~/.config/tmuxinator/prod.yml<cr>
 nnoremap <bs>ctpv :vsp ~/.config/tmuxinator/prod.yml<cr>
-nnoremap <bs>ctps :sp ~/.config/tmuxinator/prod.yml<cr>
+nnoremap <bs>ctpx :sp ~/.config/tmuxinator/prod.yml<cr>
 
 " vim
 nnoremap <bs>cvt :tabnew ~/.vimrc<cr>
 nnoremap <bs>cvv :vsp ~/.vimrc<cr>
-nnoremap <bs>cvs :sp ~/.vimrc<cr>
+nnoremap <bs>cvx :sp ~/.vimrc<cr>
 nnoremap <bs>cve :e ~/.vimrc<cr>
 
 nnoremap <bs>cnvt :tabnew $MYVIMRC<cr>
 nnoremap <bs>cnvv :vsp $MYVIMRC<cr>
-nnoremap <bs>cnvs :sp $MYVIMRC<cr>
+nnoremap <bs>cnvx :sp $MYVIMRC<cr>
 nnoremap <bs>cnve :e $MYVIMRC<cr>
 
 nnoremap <bs>cvr :source ~/.vimrc<cr>:mode<cr><c-w>=
@@ -398,17 +398,17 @@ nnoremap <bs>cvr :source ~/.vimrc<cr>:mode<cr><c-w>=
 " work
 nnoremap <bs>cwt :tabnew ~/wkf-repos/ruangguru/source/package.re.json<cr>
 nnoremap <bs>cwv :vsp ~/wkf-repos/ruangguru/source/package.re.json<cr>
-nnoremap <bs>cws :sp ~/wkf-repos/ruangguru/source/package.re.json<cr>
+nnoremap <bs>cwx :sp ~/wkf-repos/ruangguru/source/package.re.json<cr>
 
 " zsh
 nnoremap <bs>czt :tabnew ~/.zshrc<cr>
 nnoremap <bs>czv :vsp ~/.zshrc<cr>
-nnoremap <bs>czs :sp ~/.zshrc<cr>
+nnoremap <bs>czx :sp ~/.zshrc<cr>
 
 " ftplugin
 nnoremap <bs>cct :tabnew ~/.vim/after/ftplugin/README.org<cr>
 nnoremap <bs>ccv :vsp ~/.vim/after/ftplugin/README.org<cr>
-nnoremap <bs>ccs :sp ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>ccx :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
 nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
@@ -421,14 +421,14 @@ xnoremap <bs>s :sort<cr>
 " set shell=/bin/bash\ -i
 " set shell=/bin/zsh\ -i
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
-nnoremap <localleader>ts :CDProjectRoot<cr>:sp term://zsh<cr>
+nnoremap <localleader>tx :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <localleader>tt :CDProjectRoot<cr>:tabnew term://zsh<cr>
 tnoremap <C-[> <C-\><C-n>
 
 " book
 nnoremap <bs>cbt :tabnew ~/wkf-book/README.md<cr>
 nnoremap <bs>cbv :vsp ~/wkf-book/README.md<cr>
-nnoremap <bs>cbs :sp ~/wkf-book/README.md<cr>
+nnoremap <bs>cbx :sp ~/wkf-book/README.md<cr>
 
 " }}}
 
@@ -680,7 +680,8 @@ nnoremap <bs>gf :GFiles?<cr>
 nnoremap <bs>gvd :Gvdiff<cr>
 nnoremap <bs>gbl :Gblame<cr>
 nnoremap <bs>gbc :BCommits<cr>
-nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
+" nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
+nnoremap <bs>gwua :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_wkf_update_all<cr>
 
 " }}}
 
