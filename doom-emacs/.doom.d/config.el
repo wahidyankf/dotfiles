@@ -276,7 +276,7 @@
 (define-key evil-normal-state-map (kbd ", , n") '+workspace/new)
 (define-key evil-normal-state-map (kbd ", , r") '+workspace/rename)
 (define-key evil-normal-state-map (kbd ", , s") '+workspace/save)
-(define-key evil-normal-state-map (kbd ", , x") '+workspace/kill-session)
+(define-key evil-normal-state-map (kbd ", , X") '+workspace/kill-session)
 (define-key evil-normal-state-map (kbd ", , H") '+workspace/swap-left)
 (define-key evil-normal-state-map (kbd ", , L") '+workspace/swap-right)
 
@@ -532,8 +532,8 @@
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t)
-  (flycheck-credo-setup)
-  (setq lsp-prefer-flymake nil))
+  (lsp-ui-flycheck-enable t)
+  )
 
 (use-package! company-lsp
   :after lsp-mode
@@ -945,6 +945,16 @@
   (compile
    "cd ~/.doom.d/elixir-ls && git reset --hard HEAD && git pull origin master && mix deps.get && mix elixir_ls.release"))
 
+(use-package! flycheck-credo
+  :after flycheck
+  :after lsp-ui
+  :config (flycheck-credo-setup))
+
+(after! lsp (add-hook 'elixir-mode-hook (lambda ()
+                                          (add-hook 'before-save-hook 'lsp-format-buffer nil t)
+                                          (add-hook 'after-save-hook
+                                                    'alchemist-iex-reload-module))))
+
 (use-package! alchemist
   :after elixir-mode
   :hook (elixir-mode . alchemist-mode)
@@ -957,7 +967,6 @@
   (setq alchemist-hooks-compile-on-save t)
   (map! :map elixir-mode-map
         :nv "m" alchemist-mode-keymap))
-
 (use-package! exunit)
 
 (set-popup-rule! "^\\*alchemist"

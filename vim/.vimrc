@@ -238,7 +238,7 @@ cnoreabbrev yarn_cbl yarn clean && yarn build:libs
 function! g:GetProjectRootPWD()
     " config - what files/dir will be used for project's root directory marker
     " lower index means higher priority
-    let l:project_root_marker = ["package.json", ".git", "dune-project", ".wkf-root", "service.yaml"]
+    let l:project_root_marker = ["package.json", ".git", "dune-project",  "mix.exs", ".wkf-root", "service.yaml"]
     " set maximum round of tree traversal
     let l:maximum_traversal_round = 10
 
@@ -405,10 +405,10 @@ nnoremap <bs>czt :tabnew ~/.zshrc<cr>
 nnoremap <bs>czv :vsp ~/.zshrc<cr>
 nnoremap <bs>czs :sp ~/.zshrc<cr>
 
-" zsh
-nnoremap <bs>cftt :tabnew ~/.vim/after/ftplugin/README.org<cr>
-nnoremap <bs>cftv :vsp ~/.vim/after/ftplugin/README.org<cr>
-nnoremap <bs>cfts :sp ~/.vim/after/ftplugin/README.org<cr>
+" ftplugin
+nnoremap <bs>cct :tabnew ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>ccv :vsp ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>ccs :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
 nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
@@ -418,8 +418,8 @@ nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 xnoremap <bs>s :sort<cr>
 
 " nvim terminal
-set shell=/bin/bash\ -i
-set shell=/bin/zsh\ -i
+" set shell=/bin/bash\ -i
+" set shell=/bin/zsh\ -i
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>ts :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <localleader>tt :CDProjectRoot<cr>:tabnew term://zsh<cr>
