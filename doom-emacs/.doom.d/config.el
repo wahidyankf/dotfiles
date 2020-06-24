@@ -23,6 +23,17 @@
 
 (define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
 
+(setq treemacs-no-png-images t
+      treemacs-follow-after-init t
+      treemacs-width 30
+      treemacs-position 'right
+      treemacs-is-never-other-window t
+      treemacs-silent-refresh nil
+      treemacs-indentation 1
+      treemacs-sorting 'alphabetic-desc
+      treemacs-show-hidden-files t
+      treemacs-goto-tag-strategy 'refetch-index)
+
 (display-time-mode)
 (display-battery-mode)
 

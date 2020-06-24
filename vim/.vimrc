@@ -679,14 +679,15 @@ command! -bang -nargs=0 GCheckout
 
 " Plugin - Git Ops {{{
 
+nnoremap <leader>gg :Gstatus<cr>
+nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr>igit_wkf_update_all<cr>
+
 nnoremap <bs>gco :GCheckout<cr>
 nnoremap <bs>gcm :Commits<cr>
 nnoremap <bs>gs :Gstatus<cr>
-nnoremap <bs>gf :GFiles?<cr>
 nnoremap <bs>gvd :Gvdiff<cr>
-nnoremap <bs>gbl :Gblame<cr>
 nnoremap <bs>gbc :BCommits<cr>
-nnoremap <bs>gwua :CDProjectRoot<cr>:sp term://zsh<cr>igit_wkf_update_all<cr>
+nnoremap <bs>gbl :Gblame<cr>
 
 " }}}
 
@@ -709,14 +710,23 @@ let g:lightline={
 
 " Plugin - NERDTree {{{
 
+augroup nerdtreeconcealbrackets
+      autocmd!
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+      autocmd FileType nerdtree setlocal conceallevel=3
+      autocmd FileType nerdtree setlocal concealcursor=nvic
+augroup END
+
 " display bookmarks on startup
 let NERDTreeShowBookmarks=1
 " don't let nerdtree hijack netrw
 let NERDTreeHijackNetrw=0
 " show hidden files in nerdtree
 let NERDTreeShowHidden=1
-let g:NERDTreeIgnore = ['.bs.js$']
-let g:NERDTreeWinPos = "left"
+" let g:NERDTreeIgnore = ['.bs.js$']
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinSize=40
 
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
