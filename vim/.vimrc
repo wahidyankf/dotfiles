@@ -15,7 +15,14 @@
 
 " ============================================================
 " BASIC SETTINGS 
+" ============================================================
 
+" LEADERS {{{
+
+let mapleader="\<Space>"
+let maplocalleader=","
+
+" }}}
 
 " AUTOCMD {{{
 
@@ -552,8 +559,6 @@ nnoremap <bs>ssbq :mks! ~/.vim/sessions/book-session.vim<cr>:qa!<cr>
 " KEY-BINDINGS - LEADER
 " ============================================================
 
-let mapleader="\<Space>"
-
 " Leader - Editing {{{
 
 nnoremap <leader>q :q<cr>
@@ -580,8 +585,6 @@ nnoremap <bs>ts :tab split<cr>
 " ============================================================
 " KEY-BINDINGS - LOCAL LEADER
 " ============================================================
-
-let maplocalleader=","
 
 " Key-Bindings - Quick Fix {{{
 
@@ -817,7 +820,6 @@ nnoremap <C-w>+ <C-w><Bar><C-w>_
  
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :WhichKey ','<CR>
-nnoremap <silent> <bs>wk :WhichKey 
 
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
