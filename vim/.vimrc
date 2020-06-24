@@ -418,8 +418,8 @@ nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 xnoremap <bs>s :sort<cr>
 
 " nvim terminal
-" set shell=/bin/bash\ -i
-" set shell=/bin/zsh\ -i
+set shell=/bin/bash\ -i
+set shell=/bin/zsh\ -i
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>ts :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <localleader>tt :CDProjectRoot<cr>:tabnew term://zsh<cr>

@@ -1247,14 +1247,10 @@
 
 (evil-define-key 'normal org-mode-map (kbd "` s h o s") 'wkf/org-src-sh)
 
-(which-key-add-key-based-replacements
-  "` j" "javascript")
-(which-key-add-key-based-replacements
-  "` j s" "javascript")
-(which-key-add-key-based-replacements
-  "` j s o" "javascript-org")
-(which-key-add-key-based-replacements
-  "` j s o s" "javascript-org-source")
+(which-key-add-key-based-replacements "` j" "javascript")
+(which-key-add-key-based-replacements "` j s" "javascript")
+(which-key-add-key-based-replacements "` j s o" "javascript-org")
+(which-key-add-key-based-replacements "` j s o s" "javascript-org-source")
 
 (defun wkf/org-src-js ()
   "Insert Org SRC for javascript"
@@ -1282,13 +1278,13 @@
          (evil-open-above 1)
          (insert "// ")))
 
-(which-key-add-key-based-replacements
-  "` j s c" "javascript-comment")
-(which-key-add-key-based-replacements
-  "` j s c h" "javascript-comment-heading")
+(which-key-add-key-based-replacements "` j s c" "javascript-comment")
+(which-key-add-key-based-replacements "` j s c h" "javascript-comment-heading")
 
 (evil-define-key 'normal typescript-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
 (evil-define-key 'normal js2-mode-map (kbd "` j s c h") 'wkf/js-comment-heading)
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
 
 (which-key-add-key-based-replacements
   "` m" "ocaml")
