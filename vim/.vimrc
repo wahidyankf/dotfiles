@@ -861,6 +861,7 @@ let g:coc_global_extensions=[
             \ 'coc-java',
             \ 'coc-elixir',
             \ 'coc-yaml', 
+            \ 'coc-rls', 
             \ ]
 
 " setup prettier command
