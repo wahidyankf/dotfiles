@@ -638,7 +638,10 @@ nnoremap <bs>fh: :History:<cr>
 
 nnoremap <c-g> :GFiles<cr>
 nnoremap <c-p> :CDProjectRoot<cr>:Files<cr>
+
 nnoremap <c-b> :Buffers<cr>
+nnoremap <leader>bi :Buffers<cr>
+nnoremap <leader>, :Buffers<cr>
 
 nnoremap <localleader>sg :CDProjectRoot<cr>:Ack!<Space>-i<Space>
 nnoremap <localleader>srg :CDProjectRoot<cr>:Rg<cr>
