@@ -27,7 +27,7 @@
 
 (setq treemacs-no-png-images t
       treemacs-follow-after-init t
-      treemacs-width 30
+      treemacs-width 35
       treemacs-position 'right
       treemacs-is-never-other-window t
       treemacs-silent-refresh nil

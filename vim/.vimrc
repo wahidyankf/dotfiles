@@ -245,7 +245,7 @@ cnoreabbrev yarn_cbl yarn clean && yarn build:libs
 function! g:GetProjectRootPWD()
     " config - what files/dir will be used for project's root directory marker
     " lower index means higher priority
-    let l:project_root_marker = ["package.json", ".git", "dune-project",  "mix.exs", ".wkf-root", "service.yaml"]
+    let l:project_root_marker = ["package.json", ".git", "dune-project",  "mix.exs",  ".projectile", ".wkf-root", "service.yaml"]
     " set maximum round of tree traversal
     let l:maximum_traversal_round = 10
 
