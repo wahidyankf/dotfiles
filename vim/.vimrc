@@ -327,6 +327,18 @@ nnoremap <bs>9 9gt
 nnoremap <bs>l gt
 nnoremap <bs>h gT
 
+nnoremap <localleader><localleader>1 1gt
+nnoremap <localleader><localleader>2 2gt
+nnoremap <localleader><localleader>3 3gt
+nnoremap <localleader><localleader>4 4gt
+nnoremap <localleader><localleader>5 5gt
+nnoremap <localleader><localleader>6 6gt
+nnoremap <localleader><localleader>7 7gt
+nnoremap <localleader><localleader>8 8gt
+nnoremap <localleader><localleader>9 9gt
+nnoremap <localleader><localleader>l gt
+nnoremap <localleader><localleader>h gT
+
 " }}}
 
 " ============================================================
@@ -783,9 +795,12 @@ nmap <c-c>v     <Plug>SlimeConfig
 set guioptions-=e
 set sessionoptions+=tabpages,globals
 
-nnoremap <bs>tn :TabooRename 
+nnoremap <bs>tr :TabooRename 
+nnoremap <bs>r :TabooRename 
+nnoremap <localleader><localleader>r :TabooRename 
+
 nnoremap <bs>to :TabooOpen 
-nnoremap <bs>tr :TabooReset<cr>
+nnoremap <bs>te :TabooReset<cr>
 nnoremap <bs>tm :tabmove 
 
 let g:taboo_tab_format=" |> %N %f%m (%W) "

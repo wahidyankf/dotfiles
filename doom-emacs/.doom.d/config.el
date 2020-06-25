@@ -284,6 +284,7 @@
 (define-key evil-normal-state-map (kbd "<backspace> l") '+workspace/switch-right)
 (define-key evil-normal-state-map (kbd "<backspace> H") '+workspace/swap-left)
 (define-key evil-normal-state-map (kbd "<backspace> L") '+workspace/swap-right)
+(define-key evil-normal-state-map (kbd "<backspace> r") '+workspace/rename)
 
 (define-key evil-normal-state-map (kbd ", , ,") '+workspace/display)
 (define-key evil-normal-state-map (kbd ", , 0") '+workspace/switch-to-final)
@@ -301,11 +302,11 @@
 (define-key evil-normal-state-map (kbd ", , l") '+workspace/switch-right)
 (define-key evil-normal-state-map (kbd ", , H") '+workspace/swap-left)
 (define-key evil-normal-state-map (kbd ", , L") '+workspace/swap-right)
+(define-key evil-normal-state-map (kbd ", , r") '+workspace/rename)
 
 (define-key evil-normal-state-map (kbd ", , d") '+workspace/delete)
 (define-key evil-normal-state-map (kbd ", , o") '+workspace/load)
 (define-key evil-normal-state-map (kbd ", , n") '+workspace/new)
-(define-key evil-normal-state-map (kbd ", , r") '+workspace/rename)
 (define-key evil-normal-state-map (kbd ", , s") '+workspace/save)
 (define-key evil-normal-state-map (kbd ", , X") '+workspace/kill-session)
 
