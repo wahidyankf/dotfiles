@@ -1100,6 +1100,11 @@
 (define-key evil-normal-state-map (kbd ", o e i") 'wkf/find-org-index)
 
 (which-key-add-key-based-replacements
+  ", o c" "org-chekcbox")
+
+(which-key-add-key-based-replacements
+  ", o c t" "org-checkbox-toggle")
+(which-key-add-key-based-replacements
   ", o s" "org-src")
 (which-key-add-key-based-replacements
   ", o s e" "org-src-edit-special")
@@ -1111,6 +1116,9 @@
   ", o h h" "org-heading-insert")
 (which-key-add-key-based-replacements
   ", o h s" "org-heading-sub-insert")
+
+
+(evil-define-key 'normal org-mode-map (kbd ", o c t") 'org-toggle-checkbox)
 
 ;; Org SRC edit special
 (evil-define-key 'normal org-mode-map (kbd ", o s e") 'org-edit-special)
