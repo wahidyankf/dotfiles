@@ -356,6 +356,23 @@ Show battery and time on the bottom.
 (which-key-add-key-based-replacements
   ", ," "workspace")
 
+(define-key evil-normal-state-map (kbd "<backspace> <backspace>") '+workspace/display)
+(define-key evil-normal-state-map (kbd "<backspace> 0") '+workspace/switch-to-final)
+(define-key evil-normal-state-map (kbd "<backspace> 1") '+workspace/switch-to-0)
+(define-key evil-normal-state-map (kbd "<backspace> 2") '+workspace/switch-to-1)
+(define-key evil-normal-state-map (kbd "<backspace> 3") '+workspace/switch-to-2)
+(define-key evil-normal-state-map (kbd "<backspace> 4") '+workspace/switch-to-3)
+(define-key evil-normal-state-map (kbd "<backspace> 5") '+workspace/switch-to-4)
+(define-key evil-normal-state-map (kbd "<backspace> 6") '+workspace/switch-to-5)
+(define-key evil-normal-state-map (kbd "<backspace> 7") '+workspace/switch-to-6)
+(define-key evil-normal-state-map (kbd "<backspace> 8") '+workspace/switch-to-7)
+(define-key evil-normal-state-map (kbd "<backspace> 9") '+workspace/switch-to-8)
+(define-key evil-normal-state-map (kbd "<backspace> R") '+workspace/restore-last-session)
+(define-key evil-normal-state-map (kbd "<backspace> h") '+workspace/switch-left)
+(define-key evil-normal-state-map (kbd "<backspace> l") '+workspace/switch-right)
+(define-key evil-normal-state-map (kbd "<backspace> H") '+workspace/swap-left)
+(define-key evil-normal-state-map (kbd "<backspace> L") '+workspace/swap-right)
+
 (define-key evil-normal-state-map (kbd ", , ,") '+workspace/display)
 (define-key evil-normal-state-map (kbd ", , 0") '+workspace/switch-to-final)
 (define-key evil-normal-state-map (kbd ", , 1") '+workspace/switch-to-0)
@@ -370,14 +387,15 @@ Show battery and time on the bottom.
 (define-key evil-normal-state-map (kbd ", , R") '+workspace/restore-last-session)
 (define-key evil-normal-state-map (kbd ", , h") '+workspace/switch-left)
 (define-key evil-normal-state-map (kbd ", , l") '+workspace/switch-right)
+(define-key evil-normal-state-map (kbd ", , H") '+workspace/swap-left)
+(define-key evil-normal-state-map (kbd ", , L") '+workspace/swap-right)
+
 (define-key evil-normal-state-map (kbd ", , d") '+workspace/delete)
 (define-key evil-normal-state-map (kbd ", , o") '+workspace/load)
 (define-key evil-normal-state-map (kbd ", , n") '+workspace/new)
 (define-key evil-normal-state-map (kbd ", , r") '+workspace/rename)
 (define-key evil-normal-state-map (kbd ", , s") '+workspace/save)
 (define-key evil-normal-state-map (kbd ", , X") '+workspace/kill-session)
-(define-key evil-normal-state-map (kbd ", , H") '+workspace/swap-left)
-(define-key evil-normal-state-map (kbd ", , L") '+workspace/swap-right)
 #+END_SRC
 
 * Terminal
