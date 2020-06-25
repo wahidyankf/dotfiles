@@ -88,6 +88,9 @@ Config text editor's preference.
       treemacs-sorting 'alphabetic-desc
       treemacs-show-hidden-files t
       treemacs-goto-tag-strategy 'refetch-index)
+
+;; Project Explorer
+(define-key evil-normal-state-map (kbd "<backspace> e p") '+treemacs/toggle)
 #+END_SRC
 
 ** Doom Modeline

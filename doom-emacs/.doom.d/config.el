@@ -36,6 +36,9 @@
       treemacs-show-hidden-files t
       treemacs-goto-tag-strategy 'refetch-index)
 
+;; Project Explorer
+(define-key evil-normal-state-map (kbd "<backspace> e p") '+treemacs/toggle)
+
 (display-time-mode)
 (display-battery-mode)
 
