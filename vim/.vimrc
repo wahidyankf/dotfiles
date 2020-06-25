@@ -338,6 +338,7 @@ nnoremap <localleader><localleader>8 8gt
 nnoremap <localleader><localleader>9 9gt
 nnoremap <localleader><localleader>l gt
 nnoremap <localleader><localleader>h gT
+nnoremap <localleader><localleader><localleader> :echom "ffs, this is not emacs!"<cr>
 
 " }}}
 
