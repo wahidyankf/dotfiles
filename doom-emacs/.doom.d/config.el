@@ -18,6 +18,8 @@
 (setq-default indicate-empty-lines t)
 (setq-default show-trailing-whitespace t)
 
+(global-visual-line-mode 1)
+
 (which-key-add-key-based-replacements
   "<backspace> /" "search-nohl")
 
@@ -1191,13 +1193,14 @@
     (interactive)
     (message "create new buffer manually disabled in org-mode")))
 
-;; Git Wkf Update All
 (defun wkf/git-wkf-update-all ()
   "auto-update all of my essential git repos"
   (interactive)
-  (let* ((output-buffer (generate-new-buffer "*Async shell command*"))
-         (proc (progn (compile (format "git_wkf_update_all"))
-                      (get-buffer-process output-buffer))))))
+  (compile "git_wkf_update_all"))
+(defun wkf/git-complom-clean ()
+  "checkout master -> clean all branch -> pull latest"
+  (interactive)
+  (compile "git_complom_clean"))
 
 (which-key-add-key-based-replacements
   "<backspace> g" "git")
@@ -1207,8 +1210,15 @@
   "<backspace> g w u" "git-wkf-update")
 (which-key-add-key-based-replacements
   "<backspace> g w u a" "git-wkf-update-all")
+(which-key-add-key-based-replacements
+  "<backspace> g c" "git-checkout-master")
+(which-key-add-key-based-replacements
+  "<backspace> g c p" "git-checkout-master-pull-origin")
+(which-key-add-key-based-replacements
+  "<backspace> g c p c" "git-checkout-master-pull-origin-clean-branch")
 
 (define-key evil-normal-state-map (kbd "<backspace> g w u a") 'wkf/git-wkf-update-all)
+(define-key evil-normal-state-map (kbd "<backspace> g c p c") 'wkf/git-complom-clean)
 
 (defun wkf/org-src-elisp ()
   "Insert Org SRC for elisp"

@@ -652,6 +652,7 @@ nnoremap <bs>fh: :History:<cr>
 
 nnoremap <c-g> :GFiles<cr>
 nnoremap <c-p> :CDProjectRoot<cr>:Files<cr>
+nnoremap <leader><leader> :CDProjectRoot<cr>:Files<cr>
 
 nnoremap <c-b> :Buffers<cr>
 nnoremap <leader>bi :Buffers<cr>
@@ -698,6 +699,7 @@ command! -bang -nargs=0 GCheckout
 
 nnoremap <leader>gg :Gstatus<cr>
 nnoremap <bs>gwua :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_wkf_update_all<cr>
+nnoremap <bs>gcpc :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_complom_clean<cr>
 
 nnoremap <bs>gco :GCheckout<cr>
 nnoremap <bs>gcm :Commits<cr>
