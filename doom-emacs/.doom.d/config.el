@@ -3,7 +3,24 @@
 ;; make emacs fullscreen on startup.
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+(defun wkf/theme-main ()
+  "use main theme"
+  (interactive)
+  (load-theme 'doom-gruvbox t))
+
+(defun wkf/theme-monochrome ()
+  "use primary theme"
+  (interactive)
+  (load-theme 'monochrome t))
+
+(which-key-add-key-based-replacements
+  "<backspace> t" "theme")
+
 ;; default: doom-one
+(define-key evil-normal-state-map (kbd "<backspace> t 1") 'wkf/theme-main)
+(define-key evil-normal-state-map (kbd "<backspace> t 2") 'wkf/theme-monochrome)
+
+(load "~/.doom.d/monochrome-theme.el")
 (setq doom-theme 'doom-gruvbox)
 
 ;; the mighty dank-mono
