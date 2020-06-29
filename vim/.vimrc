@@ -85,6 +85,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
+Plug 'fxn/vim-monochrome'
 
 call plug#end()
 
@@ -102,6 +103,12 @@ syntax on
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 set bg=dark
+
+let g:monochrome_italic_comments = 1
+" colorscheme monochrome
+
+nnoremap <bs>t1 :colorscheme gruvbox<CR>
+nnoremap <bs>t2 :colorscheme monochrome<CR>
 
 " color palette: 223, 233, 235, 240, 241, 246, 250,
 
