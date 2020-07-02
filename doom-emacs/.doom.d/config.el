@@ -927,25 +927,35 @@
 (evil-define-key 'normal haskell-mode-map (kbd ", c r r") 'wkf/haskell-compile-and-run-file-default)
 (evil-define-key 'normal haskell-mode-map (kbd ", c r i") 'wkf/haskell-compile-and-run-file-interactive)
 
-(defun wkf/ts-compile-project ()
-  "compile typescript project"
-  (interactive)
-  (compile (format "yarn tsc")))
-
-(defun wkf/ts-compile-and-run-file-default ()
+(defun wkf/jts-compile-project ()
   "compile and run current typescript file - default"
   (interactive)
-  (compile (format "yarn ts-node %s" (buffer-file-name))))
-(defun wkf/ts-compile-and-run-file-interactive ()
+  (if (member (file-name-extension (buffer-file-name))
+              '("ts", "tsx"))
+      (compile (format "yarn tsc")) nil))
+
+(defun wkf/jts-compile-and-run-file-default ()
+  "compile and run current typescript file - default"
+  (interactive)
+  (if (member (file-name-extension (buffer-file-name))
+              '("ts", "tsx"))
+      (compile (format "yarn ts-node %s" (buffer-file-name)))
+    (compile (format "node %s" (buffer-file-name)))))
+
+
+(defun wkf/jts-compile-and-run-file-interactive ()
   "compile and run current typescript file - interactive"
   (interactive)
-  (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name))))
+  (if (member (file-name-extension (buffer-file-name))
+              '("ts", "tsx"))
+      (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name)))
+    (wkf/compile-interactively (format "node %s\n" (buffer-file-name)))))
 
 ;; compile project
-(evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/ts-compile-project)
+(evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/jts-compile-project)
 ;; compile and run current file
-(evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
-(evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/ts-compile-and-run-file-interactive)
+(evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/jts-compile-and-run-file-default)
+(evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/jts-compile-and-run-file-interactive)
 
 (defun wkf/go-compile-project ()
   "compile current go project"

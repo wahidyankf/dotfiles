@@ -1097,7 +1097,7 @@ opam pin add ocaml-lsp-server https://github.com/ocaml/ocaml-lsp.git && opam ins
 
 Basically following this: [[https://dev.realworldocaml.org/install.html][Real World OCaml - Installation]]
 
-#+BEGIN_EXAMPLE sh :results output
+#+BEGIN_EXAMPLE sh
 opam install core utop && opam install async yojson core_extended core_bench cohttp async_graphics cryptokit menhir
 #+END_EXAMPLE
 
@@ -1205,32 +1205,42 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 (evil-define-key 'normal haskell-mode-map (kbd ", c r i") 'wkf/haskell-compile-and-run-file-interactive)
 #+END_SRC
 
-*** Typescript
+*** Typescript/Javascript
 
 **** Keybindings
 
 #+BEGIN_SRC emacs-lisp :results silent
-(defun wkf/ts-compile-project ()
-  "compile typescript project"
-  (interactive)
-  (compile (format "yarn tsc")))
-
-(defun wkf/ts-compile-and-run-file-default ()
+(defun wkf/jts-compile-project ()
   "compile and run current typescript file - default"
   (interactive)
-  (compile (format "yarn ts-node %s" (buffer-file-name))))
-(defun wkf/ts-compile-and-run-file-interactive ()
+  (if (member (file-name-extension (buffer-file-name))
+              '("ts", "tsx"))
+      (compile (format "yarn tsc")) nil))
+
+(defun wkf/jts-compile-and-run-file-default ()
+  "compile and run current typescript file - default"
+  (interactive)
+  (if (member (file-name-extension (buffer-file-name))
+              '("ts", "tsx"))
+      (compile (format "yarn ts-node %s" (buffer-file-name)))
+    (compile (format "node %s" (buffer-file-name)))))
+
+
+(defun wkf/jts-compile-and-run-file-interactive ()
   "compile and run current typescript file - interactive"
   (interactive)
-  (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name))))
+  (if (member (file-name-extension (buffer-file-name))
+              '("ts", "tsx"))
+      (wkf/compile-interactively (format "yarn ts-node %s\n" (buffer-file-name)))
+    (wkf/compile-interactively (format "node %s\n" (buffer-file-name)))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :results silent
 ;; compile project
-(evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/ts-compile-project)
+(evil-define-key 'normal typescript-mode-map (kbd ", C c") 'wkf/jts-compile-project)
 ;; compile and run current file
-(evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/ts-compile-and-run-file-default)
-(evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/ts-compile-and-run-file-interactive)
+(evil-define-key 'normal typescript-mode-map (kbd ", c r r") 'wkf/jts-compile-and-run-file-default)
+(evil-define-key 'normal typescript-mode-map (kbd ", c r i") 'wkf/jts-compile-and-run-file-interactive)
 #+END_SRC
 
 *** Golang
