@@ -762,7 +762,8 @@ let NERDTreeChDirMode=2
 nnoremap <bs>et :NERDTreeToggle<cr><c-w>=
 nnoremap <bs>ee :NERDTree<cr><c-w>=
 nnoremap <bs>ep :CDProjectRoot<cr>:NERDTree<cr><c-w>=
-nnoremap <leader>op :CDProjectRoot<cr>:NERDTree<cr><c-w>=
+" nnoremap <leader>op :CDProjectRoot<cr>:NERDTree<cr><c-w>=
+nnoremap <leader>op :NERDTreeToggle<cr><c-w>=
 nnoremap <bs>ef :NERDTreeFocus<cr>
 nnoremap <bs>eq :NERDTreeClose<cr>
 nnoremap <bs>eg :NERDTreeVCS<cr><c-w>=
