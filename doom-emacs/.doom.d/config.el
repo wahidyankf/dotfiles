@@ -590,6 +590,14 @@
   (lsp-ui-flycheck-enable t)
   )
 
+(which-key-add-key-based-replacements ", p" "popup")
+(which-key-add-key-based-replacements ", p p" "popup-focus-frame")
+(which-key-add-key-based-replacements ", p q" "popup-unfocus-frame")
+
+;; focus unfocus frame
+(define-key evil-normal-state-map (kbd ", p p") 'lsp-ui-doc-focus-frame)
+(define-key evil-normal-state-map (kbd ", p q") 'lsp-ui-doc-unfocus-frame)
+
 (use-package! company-lsp
   :after lsp-mode
   :config (set-company-backend! 'lsp-mode 'company-lsp)

@@ -621,7 +621,7 @@ nnoremap <localleader>en :cnext<CR>
 nnoremap <localleader>ep :cprevious<CR>
 nnoremap <localleader>eq :cclose<CR>
 " popup close
-nnoremap <localleader>pq :cclose<CR>
+nnoremap <localleader>pq <c-w>p
 nnoremap <localleader>pp <c-w>p
 nnoremap <localleader>eo :copen<CR>
 

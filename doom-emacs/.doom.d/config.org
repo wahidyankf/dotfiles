@@ -715,6 +715,14 @@ Make sure eshell and mx-compile use zsh (copied alias)
   (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t)
   (lsp-ui-flycheck-enable t)
   )
+
+(which-key-add-key-based-replacements ", p" "popup")
+(which-key-add-key-based-replacements ", p p" "popup-focus-frame")
+(which-key-add-key-based-replacements ", p q" "popup-unfocus-frame")
+
+;; focus unfocus frame
+(define-key evil-normal-state-map (kbd ", p p") 'lsp-ui-doc-focus-frame)
+(define-key evil-normal-state-map (kbd ", p q") 'lsp-ui-doc-unfocus-frame)
 #+END_SRC
 
 *** Company LSP
