@@ -615,7 +615,7 @@ nnoremap <bs>ts :tab split<cr>
 " KEY-BINDINGS - LOCAL LEADER
 " ============================================================
 
-" Key-Bindings - Quick Fix {{{
+" Key-Bindings - Quick Fix 
 
 nnoremap <localleader>en :cnext<CR>
 nnoremap <localleader>ep :cprevious<CR>
