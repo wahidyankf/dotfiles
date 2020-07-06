@@ -227,11 +227,19 @@ augroup filetype_vim
     autocmd!
     autocmd FileType javascript setlocal foldmethod=syntax
     autocmd FileType reason setlocal foldmethod=syntax
+    autocmd FileType elixir setlocal foldmethod=syntax
     autocmd FileType go setlocal foldmethod=manual
     autocmd FileType vim setlocal foldmethod=marker
     autocmd BufRead *.md normal zR
     autocmd BufRead *.re normal zR
 augroup END
+
+augroup elixirLang
+  au!
+  autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
+  autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
+augroup END
+
 
 " }}}
 

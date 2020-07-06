@@ -1,5 +1,2 @@
-augroup elixirLang
-  au!
-  autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
-  autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
-augroup END
+setlocal foldmethod=expr
+setlocal foldexpr=elixir#folding#elixir_folds(v:lnum)
