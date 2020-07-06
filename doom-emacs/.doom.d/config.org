@@ -1316,7 +1316,10 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 
 **** Config and Utils
 
-More info: [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
+More info:
+
+- [[https://elixirforum.com/t/emacs-elixir-setup-configuration-wiki/19196][Elixir Forum]], [[https://adam.kruszewski.name/articles/2019-10-20-elixir-setup/][Adam Kruszewski's Config]]
+- [[https://thinkingelixir.com/install-elixir-using-asdf/][Elixir Version Manager]]
 
 #+BEGIN_SRC emacs-lisp :results silent
 (defun wkf/update-elixir-language-server ()
