@@ -1,5 +1,11 @@
 #+TITLE: WKF - Doom Emacs - Config
 
+* The Most Essential
+
+#+BEGIN_SRC emacs-lisp :results silent
+(exec-path-from-shell-initialize)
+#+END_SRC
+
 * User Data
 
 Some functionality uses this to identify us (e.g.GPG configuration, email clients, file templates and snippets).
@@ -670,6 +676,7 @@ Make sure eshell and mx-compile use zsh (copied alias)
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
   :hook (elixir-mode . lsp)
+  :init (add-to-list 'exec-path "~/.doom.d/elixir-ls")
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"

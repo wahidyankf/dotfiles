@@ -64,6 +64,7 @@
 (package! elixir-mode)
 (package! alchemist)
 (package! org-make-toc)
+(package! exec-path-from-shell)
 
 (when (package! lsp-mode)
   (package! lsp-ui)

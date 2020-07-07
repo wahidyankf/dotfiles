@@ -1,3 +1,5 @@
+(exec-path-from-shell-initialize)
+
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 
 ;; make emacs fullscreen on startup.
@@ -548,6 +550,7 @@
   :hook (haskell-mode . lsp)
   :hook (tuareg-mode . lsp)
   :hook (elixir-mode . lsp)
+  :init (add-to-list 'exec-path "~/.doom.d/elixir-ls")
   :config (lsp-register-client (make-lsp-client :new-connection (lsp-stdio-connection "ocamllsp")
                                                 :major-modes '(tuareg-mode)
                                                 :notification-handlers (ht ("client/registerCapability"
