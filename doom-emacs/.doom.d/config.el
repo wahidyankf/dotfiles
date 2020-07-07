@@ -1040,7 +1040,7 @@
   (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
   (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
   (setq alchemist-mix-env "dev")
-  (setq alchemist-hooks-compile-on-save t)
+  ;; (setq alchemist-hooks-compile-on-save t)
   (map! :map elixir-mode-map
         :nv "m" alchemist-mode-keymap))
 (use-package! exunit)
