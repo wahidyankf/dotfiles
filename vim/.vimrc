@@ -96,6 +96,7 @@ call plug#end()
 
 " }}}
 
+" set timeout for success keystroke sequence
 set timeoutlen=2000
 
 " Settings - Theme {{{
