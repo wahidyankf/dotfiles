@@ -67,7 +67,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovimhaskell/haskell-vim'
 Plug 'plasticboy/vim-markdown'
@@ -85,7 +84,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
-Plug 'fxn/vim-monochrome'
+
+" color theme
+Plug 'romainl/vim-dichromatic'
+Plug 'morhetz/gruvbox'
+" another favourite for color-blindness friendly theme
+" Plug 'Jorengarenar/vim-darkness'
+" Plug 'fxn/vim-monochrome'
 
 call plug#end()
 
@@ -108,7 +113,7 @@ let g:monochrome_italic_comments = 1
 " colorscheme monochrome
 
 nnoremap <bs>t1 :colorscheme gruvbox<CR>
-nnoremap <bs>t2 :colorscheme monochrome<CR>
+nnoremap <bs>t2 :colorscheme dichromatic<CR>
 
 " color palette: 223, 233, 235, 240, 241, 246, 250,
 
