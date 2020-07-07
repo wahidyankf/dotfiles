@@ -86,19 +86,19 @@ Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
 
 " color theme
-Plug 'romainl/vim-dichromatic'
 Plug 'morhetz/gruvbox'
+Plug 'romainl/vim-dichromatic'
+Plug 'Jorengarenar/vim-darkness'
+Plug 'fxn/vim-monochrome'
 " another favourite for color-blindness friendly theme
-" Plug 'Jorengarenar/vim-darkness'
-" Plug 'fxn/vim-monochrome'
 
 call plug#end()
 
 " }}}
 
-" Settings - Theme {{{
+set timeoutlen=2000
 
-" set term=xterm-256color
+" Settings - Theme {{{
 
 " enable syntax highlighting
 syntax on
@@ -109,11 +109,13 @@ let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 set bg=dark
 
-let g:monochrome_italic_comments = 1
 " colorscheme monochrome
+let g:monochrome_italic_comments = 1
 
 nnoremap <bs>t1 :colorscheme gruvbox<CR>
-nnoremap <bs>t2 :colorscheme dichromatic<CR>
+nnoremap <bs>t2 :colorscheme darkness<CR>
+nnoremap <bs>t3 :colorscheme dichromatic<CR>
+nnoremap <bs>t4 :colorscheme monochrome<CR>
 
 " color palette: 223, 233, 235, 240, 241, 246, 250,
 
