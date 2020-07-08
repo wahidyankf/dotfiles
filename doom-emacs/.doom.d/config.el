@@ -1106,9 +1106,9 @@
 ;; compile and run current project
 (evil-define-key 'normal rustic-mode-map (kbd ", C r r") 'wkf/rust-compile-and-run-project)
 ;; build - release - project
-(evil-define-key 'normal rustic-mode-map (kbd ", c b r") 'wkf/rust-build-release-project-release)
+(evil-define-key 'normal rustic-mode-map (kbd ", C b r") 'wkf/rust-build-release-project)
 ;; build - development - project
-(evil-define-key 'normal rustic-mode-map (kbd ", c b d") 'wkf/rust-build-development-project)
+(evil-define-key 'normal rustic-mode-map (kbd ", C b d") 'wkf/rust-build-development-project)
 
 (which-key-add-key-based-replacements
   ", o" "org")
