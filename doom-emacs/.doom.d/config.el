@@ -1082,10 +1082,21 @@
   (compile (format "rustc %s && %s" (buffer-file-name)
                    (file-name-sans-extension buffer-file-name))))
 
+(defun wkf/rust-compile-and-run-file-interactive ()
+  "compile and run current rust file"
+  (interactive)
+  (wkf/compile-interactively (format "rustc %s && %s\n" (buffer-file-name)
+                   (file-name-sans-extension buffer-file-name))))
+
 (defun wkf/rust-compile-and-run-project ()
   "compile and run current rust project"
   (interactive)
   (compile "cargo run"))
+
+(defun wkf/rust-compile-and-run-project-interactive ()
+  "compile and run current rust project interactively"
+  (interactive)
+  (wkf/compile-interactively "cargo run\n"))
 
 (defun wkf/rust-quick-check-project ()
   "check current rust project"
@@ -1096,6 +1107,8 @@
 (evil-define-key 'normal rustic-mode-map (kbd ", c c") 'wkf/rust-compile-file)
 ;; compile and run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", c r r") 'wkf/rust-compile-and-run-file)
+;; compile and run current file interactive
+(evil-define-key 'normal rustic-mode-map (kbd ", c r i") 'wkf/rust-compile-and-run-file-interactive)
 ;; run current file
 (evil-define-key 'normal rustic-mode-map (kbd ", r r") 'wkf/rust-run-file)
 
@@ -1105,6 +1118,8 @@
 (evil-define-key 'normal rustic-mode-map (kbd ", C q") 'wkf/rust-quick-check-project)
 ;; compile and run current project
 (evil-define-key 'normal rustic-mode-map (kbd ", C r r") 'wkf/rust-compile-and-run-project)
+;; compile and run current project interactively
+(evil-define-key 'normal rustic-mode-map (kbd ", C r i") 'wkf/rust-compile-and-run-project-interactive)
 ;; build - release - project
 (evil-define-key 'normal rustic-mode-map (kbd ", C b r") 'wkf/rust-build-release-project)
 ;; build - development - project
