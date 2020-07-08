@@ -544,18 +544,23 @@ Make sure eshell and mx-compile use zsh (copied alias)
 (which-key-add-key-based-replacements "<backspace> c z x" "config-open-zshrc-split")
 (which-key-add-key-based-replacements "<backspace> c e" "config-open-emacs")
 (which-key-add-key-based-replacements "<backspace> c e i" "config-open-emacs-init")
+(which-key-add-key-based-replacements "<backspace> c e i e" "config-open-emacs-init-current-buffer")
 (which-key-add-key-based-replacements "<backspace> c e i v" "config-open-emacs-init-vsplit")
 (which-key-add-key-based-replacements "<backspace> c e i x" "config-open-emacs-init-split")
 (which-key-add-key-based-replacements "<backspace> c e p" "config-open-emacs-packages")
+(which-key-add-key-based-replacements "<backspace> c e p e" "config-open-emacs-packages-current-buffer")
 (which-key-add-key-based-replacements "<backspace> c e p v" "config-open-emacs-packages-vsplit")
 (which-key-add-key-based-replacements "<backspace> c e p x" "config-open-emacs-packages-split")
 (which-key-add-key-based-replacements "<backspace> c e c" "config-open-emacs-config-org")
+(which-key-add-key-based-replacements "<backspace> c e c e" "config-open-emacs-config-org-current-buffer")
 (which-key-add-key-based-replacements "<backspace> c e c v" "config-open-emacs-config-org-vsplit")
 (which-key-add-key-based-replacements "<backspace> c e c x" "config-open-emacs-config-org-split")
 (which-key-add-key-based-replacements "<backspace> c e C" "config-open-emacs-config-el")
+(which-key-add-key-based-replacements "<backspace> c e C e" "config-open-emacs-config-el-current-buffer")
 (which-key-add-key-based-replacements "<backspace> c e C v" "config-open-emacs-config-el-vsplit")
 (which-key-add-key-based-replacements "<backspace> c e C x" "config-open-emacs-config-el-split")
 (which-key-add-key-based-replacements "<backspace> c e s" "config-open-emacs-scratch")
+(which-key-add-key-based-replacements "<backspace> c e s e" "config-open-emacs-scratch-current-buffer")
 (which-key-add-key-based-replacements "<backspace> c e s v" "config-open-emacs-scratch-vsplit")
 (which-key-add-key-based-replacements "<backspace> c e s x" "config-open-emacs-scratch-split")
 
@@ -719,7 +724,7 @@ Make sure eshell and mx-compile use zsh (copied alias)
   :config (set-lookup-handlers! 'lsp-ui-mode
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
-  (setq lsp-ui-doc-max-height 16 lsp-ui-doc-max-width 50 lsp-ui-sideline-ignore-duplicate t)
+  (setq lsp-ui-doc-max-height 50 lsp-ui-doc-max-width 100 lsp-ui-sideline-ignore-duplicate t)
   (lsp-ui-flycheck-enable t)
   )
 
@@ -1485,6 +1490,16 @@ Project
 (evil-define-key 'normal rustic-mode-map (kbd ", C b r") 'wkf/rust-build-release-project)
 ;; build - development - project
 (evil-define-key 'normal rustic-mode-map (kbd ", C b d") 'wkf/rust-build-development-project)
+#+END_SRC
+
+* Info Mode
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; >
+(evil-define-key 'normal Info-mode-map (kbd "s-.") 'Info-forward-node)
+;; <
+(evil-define-key 'normal Info-mode-map (kbd "s-,") 'Info-backward-node)
+
 #+END_SRC
 
 * Org Mode
