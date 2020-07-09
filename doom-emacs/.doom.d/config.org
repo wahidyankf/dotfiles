@@ -724,7 +724,7 @@ Make sure eshell and mx-compile use zsh (copied alias)
   :config (set-lookup-handlers! 'lsp-ui-mode
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
-  (setq lsp-ui-doc-max-height 50 lsp-ui-doc-max-width 100 lsp-ui-sideline-ignore-duplicate t)
+  (setq lsp-ui-doc-max-height 25 lsp-ui-doc-max-width 100 lsp-ui-sideline-ignore-duplicate t)
   (lsp-ui-flycheck-enable t)
   )
 
