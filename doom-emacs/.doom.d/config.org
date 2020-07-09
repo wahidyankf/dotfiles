@@ -849,8 +849,9 @@ To get information about any of these functions/macros, move the cursor over the
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
-  (cond ((equal major-mode 'reason-mode)
-         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+  (cond ;;((equal major-mode 'reason-mode)
+       ;;  (lsp-format-buffer))
+         ;; (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
         ((equal major-mode 'python-mode)
          (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
@@ -1080,8 +1081,8 @@ To get information about any of these functions/macros, move the cursor over the
 **** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
-(add-hook 'reason-mode-hook (lambda () ;; nil
-                              (setq auto-revert-mode t)))
+;; (add-hook 'reason-mode-hook (lambda () ;; nil
+;;                               (setq auto-revert-mode t)))
 
 (use-package! reason-mode
   :mode "\\.re$"

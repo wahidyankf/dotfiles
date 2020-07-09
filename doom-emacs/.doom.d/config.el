@@ -705,8 +705,9 @@
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
-  (cond ((equal major-mode 'reason-mode)
-         (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
+  (cond ;;((equal major-mode 'reason-mode)
+       ;;  (lsp-format-buffer))
+         ;; (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
         ((equal major-mode 'python-mode)
          (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
@@ -854,8 +855,8 @@
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
-(add-hook 'reason-mode-hook (lambda () ;; nil
-                              (setq auto-revert-mode t)))
+;; (add-hook 'reason-mode-hook (lambda () ;; nil
+;;                               (setq auto-revert-mode t)))
 
 (use-package! reason-mode
   :mode "\\.re$"
