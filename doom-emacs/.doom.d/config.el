@@ -1023,8 +1023,8 @@
 (defun wkf/update-elixir-language-server ()
   "Update elixir language server's binary"
   (interactive)
-  (compile
-   "cd ~/.doom.d/elixir-ls && git reset --hard HEAD && git pull origin master && mix deps.get && mix elixir_ls.release"))
+  (wkf/compile-interactively
+   "cd ~/.doom.d/elixir-ls && git reset --hard HEAD && git pull origin master && cp -r ~/.tool-versions . && mix deps.get && mix compile && mix elixir_ls.release -o release\n"))
 
 (use-package! flycheck-credo
   :after flycheck
