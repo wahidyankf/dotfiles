@@ -429,15 +429,6 @@ Show battery and time on the bottom.
 
 * Terminal
 
-** Tramp
-
-#+BEGIN_SRC emacs-lisp :results silent
-;; (add-hook 'dired-mode-hook
-;;           (lambda ()
-;;             (when (file-remote-p dired-directory)
-;;               (setq-local dired-actual-switches "-alhB"))))
-#+END_SRC
-
 ** Enviroment
 
 Make sure eshell and mx-compile use zsh (copied alias)
@@ -859,10 +850,7 @@ To get information about any of these functions/macros, move the cursor over the
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
-  (cond ;;((equal major-mode 'reason-mode)
-       ;;  (lsp-format-buffer))
-         ;; (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
-        ((equal major-mode 'python-mode)
+  (cond ((equal major-mode 'python-mode)
          (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
@@ -1091,9 +1079,6 @@ To get information about any of these functions/macros, move the cursor over the
 **** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
-;; (add-hook 'reason-mode-hook (lambda () ;; nil
-;;                               (setq auto-revert-mode t)))
-
 (use-package! reason-mode
   :mode "\\.re$"
   :hook (before-save . (lambda ()

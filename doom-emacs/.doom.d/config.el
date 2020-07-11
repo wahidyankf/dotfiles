@@ -334,11 +334,6 @@
 (define-key evil-normal-state-map (kbd ", , s") '+workspace/save)
 (define-key evil-normal-state-map (kbd ", , X") '+workspace/kill-session)
 
-;; (add-hook 'dired-mode-hook
-;;           (lambda ()
-;;             (when (file-remote-p dired-directory)
-;;               (setq-local dired-actual-switches "-alhB"))))
-
 (setq shell-file-name "zsh")
 (setq shell-command-switch "-ic")
 
@@ -711,10 +706,7 @@
 (defun wkf/buffer-format ()
   "Format current buffer"
   (interactive)
-  (cond ;;((equal major-mode 'reason-mode)
-       ;;  (lsp-format-buffer))
-         ;; (compile (format "bsrefmt --in-place %s" (buffer-file-name))))
-        ((equal major-mode 'python-mode)
+  (cond ((equal major-mode 'python-mode)
          (py-yapf-buffer))
         ((bound-and-true-p lsp-mode)
          (lsp-format-buffer))
@@ -860,9 +852,6 @@
 (define-key evil-normal-state-map (kbd ", c .") 'recompile)
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-
-;; (add-hook 'reason-mode-hook (lambda () ;; nil
-;;                               (setq auto-revert-mode t)))
 
 (use-package! reason-mode
   :mode "\\.re$"
