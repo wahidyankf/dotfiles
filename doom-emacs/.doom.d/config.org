@@ -726,7 +726,7 @@ Make sure eshell and mx-compile use zsh (copied alias)
             :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 25 lsp-ui-doc-max-width 100 lsp-ui-sideline-ignore-duplicate t)
   ;; hack for lsp-ui issue: https://github.com/emacs-lsp/lsp-ui/issues/414
-  (add-to-list 'lsp-ui-doc-frame-parameters '(no-accept-focus . t))
+  ;; (add-to-list 'lsp-ui-doc-frame-parameters '(no-accept-focus . t))
   (lsp-ui-flycheck-enable t))
 
 (which-key-add-key-based-replacements ", p" "popup")
