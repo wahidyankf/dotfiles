@@ -334,6 +334,11 @@
 (define-key evil-normal-state-map (kbd ", , s") '+workspace/save)
 (define-key evil-normal-state-map (kbd ", , X") '+workspace/kill-session)
 
+;; (add-hook 'dired-mode-hook
+;;           (lambda ()
+;;             (when (file-remote-p dired-directory)
+;;               (setq-local dired-actual-switches "-alhB"))))
+
 (setq shell-file-name "zsh")
 (setq shell-command-switch "-ic")
 
@@ -595,8 +600,9 @@
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 25 lsp-ui-doc-max-width 100 lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-flycheck-enable t)
-  )
+  ;; hack for lsp-ui issue: https://github.com/emacs-lsp/lsp-ui/issues/414
+  (add-to-list 'lsp-ui-doc-frame-parameters '(no-accept-focus . t))
+  (lsp-ui-flycheck-enable t))
 
 (which-key-add-key-based-replacements ", p" "popup")
 (which-key-add-key-based-replacements ", p p" "popup-focus-frame")

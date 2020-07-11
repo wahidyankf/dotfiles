@@ -429,6 +429,15 @@ Show battery and time on the bottom.
 
 * Terminal
 
+** Tramp
+
+#+BEGIN_SRC emacs-lisp :results silent
+;; (add-hook 'dired-mode-hook
+;;           (lambda ()
+;;             (when (file-remote-p dired-directory)
+;;               (setq-local dired-actual-switches "-alhB"))))
+#+END_SRC
+
 ** Enviroment
 
 Make sure eshell and mx-compile use zsh (copied alias)
@@ -725,8 +734,9 @@ Make sure eshell and mx-compile use zsh (copied alias)
             :definition #'lsp-ui-peek-find-definitions
             :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 25 lsp-ui-doc-max-width 100 lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-flycheck-enable t)
-  )
+  ;; hack for lsp-ui issue: https://github.com/emacs-lsp/lsp-ui/issues/414
+  (add-to-list 'lsp-ui-doc-frame-parameters '(no-accept-focus . t))
+  (lsp-ui-flycheck-enable t))
 
 (which-key-add-key-based-replacements ", p" "popup")
 (which-key-add-key-based-replacements ", p p" "popup-focus-frame")
