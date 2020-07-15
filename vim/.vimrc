@@ -540,6 +540,7 @@ function! ToggleSignColumn()
 endfunction
 
 nnoremap <bs>/ :noh<cr>
+nnoremap <localleader>/ :noh<cr>
 nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
 
 " }}}

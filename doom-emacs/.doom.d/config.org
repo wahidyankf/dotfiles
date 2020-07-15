@@ -94,8 +94,11 @@ Config text editor's preference.
 
 (which-key-add-key-based-replacements
   "<backspace> /" "search-nohl")
+(which-key-add-key-based-replacements
+  ", /" "search-nohl")
 
 (define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
+(define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
 #+END_SRC
 
 ** Treemacs

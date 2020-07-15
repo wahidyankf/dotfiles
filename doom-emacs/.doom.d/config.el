@@ -41,8 +41,11 @@
 
 (which-key-add-key-based-replacements
   "<backspace> /" "search-nohl")
+(which-key-add-key-based-replacements
+  ", /" "search-nohl")
 
 (define-key evil-normal-state-map (kbd "<backspace> /") 'evil-ex-nohighlight)
+(define-key evil-normal-state-map (kbd ", /") 'evil-ex-nohighlight)
 
 (setq treemacs-no-png-images t
       treemacs-follow-after-init t
