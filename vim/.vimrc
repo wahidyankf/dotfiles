@@ -47,7 +47,6 @@ augroup END
 " }}}
 
 " VIM Plug {{{
-
 call plug#begin()
 
 Plug 'Twinside/vim-haskellFold'
@@ -162,16 +161,6 @@ hi SignColumn ctermfg=none ctermbg=darkgray cterm=NONE
 
 " that gutter
 set signcolumn=no
-
-
-" Haskell
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 set statusline^=%{coc#status()}
 
@@ -467,9 +456,6 @@ nnoremap <bs>ccx :sp ~/.vim/after/ftplugin/README.org<cr>
 nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
 nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 
-" sort
-xnoremap <bs>s :sort<cr>
-
 " nvim terminal
 " set shell=/bin/bash\ -i
 " set shell=/bin/zsh\ -i
@@ -478,6 +464,8 @@ nnoremap <localleader>tx :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <localleader>tT :CDProjectRoot<cr>:tabnew term://zsh<cr>
 nnoremap <localleader>tt :CDProjectRoot<cr>:sp term://zsh<cr><c-w>J:resize10<cr>
 nnoremap <localleader>tq :BDExt zsh<cr>
+nnoremap <localleader>t= <c-w>=:resize10<cr>
+nnoremap <bs>zs :resize10<cr>
 tnoremap <C-[> <C-\><C-n>
 
 " boo
@@ -635,7 +623,7 @@ nnoremap <bs>ts :tab split<cr>
 " KEY-BINDINGS - LOCAL LEADER
 " ============================================================
 
-" Key-Bindings - Quick Fix 
+" Key-Bindings - Quick Fix  {{{
 
 nnoremap <localleader>en :cnext<cr>
 nnoremap <localleader>ep :cprevious<cr>
@@ -838,7 +826,6 @@ set guioptions-=e
 set sessionoptions+=tabpages,globals
 
 nnoremap <bs>tr :TabooRename 
-nnoremap <bs>r :TabooRename 
 nnoremap <localleader><localleader>r :TabooRename 
 
 nnoremap <bs>to :TabooOpen 
@@ -884,6 +871,8 @@ let g:golden_ratio_autocommand = 0
 nmap <C-w>- <Plug>(golden_ratio_resize)
 " Fill screen with current window.
 nnoremap <C-w>+ <C-w><Bar><C-w>_
+
+set noea
 
 " }}}
 
