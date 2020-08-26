@@ -1,24 +1,39 @@
 {
-  "coc.preferences.hoverTarget": "float",
-  "coc.preferences.jumpCommand": "split",
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "javascriptreact",
     "typescript",
-    "json"
+    "elixir",
+    "java",
+    "reason",
+    "ocaml"
   ],
+  "coc.preferences.hoverTarget": "float",
+  "codeLens.enable": true,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.maxWindowHeight": 200,
   "diagnostic.errorSign": "☠!",
-  "diagnostic.infoSign": "ⓘ ",
   "diagnostic.hintSign": "🔍",
+  "diagnostic.infoSign": "ⓘ ",
+  "diagnostic.maxWindowHeight": 200,
+  "elixir.pathToElixirLS": "~/.doom.d/elixir-ls/release/language_server.sh",
+  "elixirLS.dialyzerEnabled": true,
   "flow.enable": true,
   "flow.useNPMPackagedFlow": true,
-  "git.enableGutters": false,
+  "git.enableGutters": true,
   "json.format.enable": false,
   "list.extendedSearchMode": true,
-  "tsserver.enableJavascript": true,
+  "python.jediEnabled": false,
+  "suggest.timeout": 2000,
+  "tsserver.enableJavascript": false,
   "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    },
     "flow": {
       "command": "flow",
       "args": ["lsp"],
@@ -28,25 +43,28 @@
       "settings": {},
       "rootPatterns": [".flowconfig"]
     },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true
-      }
-    },
-    "ocaml": {
-      "command": "ocaml-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["ocaml"],
-      "rootPatterns": [".merlin"]
+    "ocaml-lsp": {
+      "command": "opam",
+      "args": ["config", "exec", "--", "ocamllsp"],
+      "filetypes": ["ocaml"]
     },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
+    },
+    "haskell": {
+      "command": "hie-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {
+        "languageServerHaskell": {
+          "hlintOn": true,
+          "formattingProvider": "floskell"
+        }
+      }
     }
   }
 }

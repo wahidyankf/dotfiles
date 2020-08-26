@@ -10,9 +10,9 @@ let g:go_highlight_function_calls =1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_info_mode='gopls'
-let g:go_metalinter_autosave = 1
 let g:go_metalinter_deadline = "5s"
 
+let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
 let g:go_metalinter_enabled = ['vet', 'errcheck']
 " to also enable lint
@@ -45,21 +45,27 @@ augroup goLang
   autocmd! BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 augroup END
 
-nmap <buffer> <localleader>bq  <bs>qq
-nmap <buffer> <localleader>rr  <Plug>(go-run)
-nmap <buffer> <localleader>r  <Plug>(go-run-split)
-nmap <buffer> <localleader>rt  <Plug>(go-run-tab)
-nmap <buffer> <localleader>rs  <Plug>(go-run-split)
-nmap <buffer> <localleader>rv  <Plug>(go-run-vertical)
-nmap <buffer> <localleader>rq  <bs>bqj
-nmap <buffer> <localleader>rvq  <bs>bql
-nmap <buffer> <localleader>rsq  <bs>bqj
-nmap <buffer> <localleader>b :<C-u>call <SID>build_go_files()<CR>
-nmap <buffer> <localleader>tr  <Plug>(go-test)
-nmap <buffer> <localleader>tt  <Plug>(go-alternate-edit)
-nmap <buffer> <localleader>ts  <Plug>(go-alternate-split)
-nmap <buffer> <localleader>tv  <Plug>(go-alternate-vertical)
-nmap <buffer> <localleader>tc <Plug>(go-coverage-toggle)
+nmap <buffer> <localleader>gK  :GoDocBrowser<cr>
+
+nmap <buffer> <localleader>cc :<C-u>call <SID>build_go_files()<cr>
+nmap <buffer> <localleader>crr  <Plug>(go-run)
+nmap <buffer> <localleader>crt  <Plug>(go-run-tab)
+nmap <buffer> <localleader>crx  <Plug>(go-run-split)
+nmap <buffer> <localleader>crv  <Plug>(go-run-vertical)
+
+nmap <buffer> <localleader>ctr  <Plug>(go-test)
+nmap <buffer> <localleader>ctt  <Plug>(go-alternate-edit)
+nmap <buffer> <localleader>ctx  <Plug>(go-alternate-split)
+nmap <buffer> <localleader>ctv  <Plug>(go-alternate-vertical)
+nmap <buffer> <localleader>ctc <Plug>(go-coverage-toggle)
+
+nmap <buffer> <localleader>dr :GoRename 
+nmap <buffer> <localleader>di :GoImport 
+nmap <buffer> <localleader>dI :GoInstall 
+
+nmap <buffer> <localleader>w :w<cr>:<C-u>call <SID>build_go_files()<cr>
+
 nmap <buffer> <localleader>l <Plug>(go-metalinter)
 nmap <buffer> <localleader>i <Plug>(go-info)
-nnoremap <buffer> <localleader>s :GoPlay<cr>
+
+nnoremap <buffer> <localleader>p :GoPlay<cr>

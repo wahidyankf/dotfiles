@@ -113,10 +113,10 @@ set bg=dark
 " colorscheme monochrome
 let g:monochrome_italic_comments = 1
 
-nnoremap <bs>t1 :colorscheme gruvbox<CR>
-nnoremap <bs>t2 :colorscheme darkness<CR>
-nnoremap <bs>t3 :colorscheme dichromatic<CR>
-nnoremap <bs>t4 :colorscheme monochrome<CR>
+nnoremap <bs>t1 :colorscheme gruvbox<cr>
+nnoremap <bs>t2 :colorscheme darkness<cr>
+nnoremap <bs>t3 :colorscheme dichromatic<cr>
+nnoremap <bs>t4 :colorscheme monochrome<cr>
 
 " color palette: 223, 233, 235, 240, 241, 246, 250,
 
@@ -160,6 +160,10 @@ set number relativenumber
 " TODO update the color theme
 hi SignColumn ctermfg=none ctermbg=darkgray cterm=NONE
 
+" that gutter
+set signcolumn=no
+
+
 " Haskell
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -168,6 +172,8 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+set statusline^=%{coc#status()}
 
 " }}}
 
@@ -202,7 +208,10 @@ set smartcase
 " set so=15
 
 " copy text under visual to clipboard
-vmap <bs>yv :w !pbcopy<CR><CR>
+vmap <bs>yv :w !pbcopy<cr><cr>
+" copy all text
+nnoremap <bs>ya ggvGy<c-o>
+nnoremap <bs>yA ggvGy<c-o>:w !pbcopy<cr><cr>
 
 " }}}
 
@@ -398,6 +407,7 @@ vnoremap <m-k> :m '<-2<cr>gv=gv
 " mnemonic: config-action-type
 " vim-coc
 nnoremap <bs>coc :CocConfig<cr>
+nnoremap <bs>cr :CocRestart<cr>
 
 " ack
 nnoremap <bs>cat :tabnew ~/.ackrc<cr>
@@ -466,10 +476,11 @@ xnoremap <bs>s :sort<cr>
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>tx :CDProjectRoot<cr>:sp term://zsh<cr>
 nnoremap <localleader>tT :CDProjectRoot<cr>:tabnew term://zsh<cr>
-nnoremap <localleader>tt :CDProjectRoot<cr>:sp term://zsh<cr><c-w>J:resize12.5<cr>
+nnoremap <localleader>tt :CDProjectRoot<cr>:sp term://zsh<cr><c-w>J:resize10<cr>
+nnoremap <localleader>tq :BDExt zsh<cr>
 tnoremap <C-[> <C-\><C-n>
 
-" book
+" boo
 nnoremap <bs>cbt :tabnew ~/wkf-book/README.md<cr>
 nnoremap <bs>cbv :vsp ~/wkf-book/README.md<cr>
 nnoremap <bs>cbx :sp ~/wkf-book/README.md<cr>
@@ -522,7 +533,7 @@ nnoremap <bs>wde :windo e<cr>
 nnoremap <localleader>= <c-w>=
 nnoremap <localleader>x :sp<cr>
 nnoremap <localleader>v :vsp<cr>
-nnoremap <c-c><c-o> :vertical wincmd f<CR>
+nnoremap <c-c><c-o> :vertical wincmd f<cr>
 
 " }}}
 
@@ -541,7 +552,7 @@ endfunction
 
 nnoremap <bs>/ :noh<cr>
 nnoremap <localleader>/ :noh<cr>
-nnoremap <bs>y :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
+nnoremap <bs>yy :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
 
 " }}}
 
@@ -553,7 +564,7 @@ function! VisualLengthCount()
   exe 'normal gv'
 endfunction
 
-map <bs>vlc "xy:call VisualLengthCount()<CR>
+map <bs>vlc "xy:call VisualLengthCount()<cr>
 
 " }}}
 
@@ -626,13 +637,13 @@ nnoremap <bs>ts :tab split<cr>
 
 " Key-Bindings - Quick Fix 
 
-nnoremap <localleader>en :cnext<CR>
-nnoremap <localleader>ep :cprevious<CR>
-nnoremap <localleader>eq :cclose<CR>
+nnoremap <localleader>en :cnext<cr>
+nnoremap <localleader>ep :cprevious<cr>
+nnoremap <localleader>eq :cclose<cr>
 " popup close
 nnoremap <localleader>pq :call <SID>show_documentation()<cr>
 nnoremap <localleader>pp <c-w>p
-nnoremap <localleader>eo :copen<CR>
+nnoremap <localleader>eo :copen<cr>
 
 " }}}
 
@@ -743,10 +754,11 @@ let g:lightline={
       \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status'
       \ },
       \ }
 
@@ -769,7 +781,7 @@ let NERDTreeHijackNetrw=0
 " show hidden files in nerdtree
 let NERDTreeShowHidden=1
 " let g:NERDTreeIgnore = ['.bs.js$']
-let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinPos = "left"
 let g:NERDTreeWinSize=40
 
 let NERDTreeMinimalUI=1
@@ -877,8 +889,8 @@ nnoremap <C-w>+ <C-w><Bar><C-w>_
 
 " Plugin - Which Key {{{
  
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :WhichKey ','<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<cr>
+nnoremap <silent> <localleader> :WhichKey ','<cr>
 
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
@@ -898,7 +910,6 @@ let g:coc_global_extensions=[
             \ 'coc-html', 
             \ 'coc-json', 
             \ 'coc-prettier',
-            \ 'coc-python',
             \ 'coc-reason',
             \ 'coc-svg',
             \ 'coc-tsserver',
@@ -906,6 +917,7 @@ let g:coc_global_extensions=[
             \ 'coc-java',
             \ 'coc-elixir',
             \ 'coc-yaml', 
+            \ 'coc-python',
             \ 'coc-rls', 
             \ ]
 
@@ -927,9 +939,6 @@ set updatetime=100
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -961,15 +970,15 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> <localleader>gd :sp<CR><Plug>(coc-definition)
+nmap <silent> <localleader>gd :sp<cr><Plug>(coc-definition)
 nmap <silent> gk <Plug>(coc-declaration)
-nmap <silent> <localleader>gk :sp<CR><Plug>(coc-declaration)
+nmap <silent> <localleader>gk :sp<cr><Plug>(coc-declaration)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> <localleader>gy :sp<CR><Plug>(coc-type-definition)
+nmap <silent> <localleader>gy :sp<cr><Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> <localleader>gi :sp<CR><Plug>(coc-implementation)
+nmap <silent> <localleader>gi :sp<cr><Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <localleader>gr :sp<CR><Plug>(coc-references)
+nmap <silent> <localleader>gr :sp<cr><Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nmap <silent> K :call <SID>show_documentation()<cr>
@@ -1010,7 +1019,7 @@ endfunction
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call Format()
 
-" Use leader cof to format reason
+" Use leader cof to format 
 nnoremap <silent> <localleader>f :Format<cr>
 
 " Use `:Fold` to fold current buffer
@@ -1041,7 +1050,7 @@ nnoremap <silent> <localleader>dp :<c-u>CocPrev<cr>
 nmap <localleader>dff <Plug>(coc-fix-current)
 
 " Modify leader w to format and save
-nnoremap <localleader>w :Format<cr>:w<cr>
+nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
 
 " }}}
