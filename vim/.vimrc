@@ -98,6 +98,8 @@ call plug#end()
 " set timeout for success keystroke sequence
 set timeoutlen=2000
 
+set equalalways
+
 " Settings - Theme {{{
 
 " enable syntax highlighting
