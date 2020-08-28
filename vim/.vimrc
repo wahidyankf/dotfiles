@@ -872,8 +872,6 @@ nmap <C-w>- <Plug>(golden_ratio_resize)
 " Fill screen with current window.
 nnoremap <C-w>+ <C-w><Bar><C-w>_
 
-set noea
-
 " }}}
 
 " Plugin - Which Key {{{
