@@ -83,6 +83,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
+Plug 'pseewald/vim-anyfold'
 
 " color theme
 Plug 'morhetz/gruvbox'
@@ -233,7 +234,7 @@ let g:netrw_localrmdir='rm -r'
 
 augroup filetype_vim
     au!
-    au FileType javascript setlocal foldmethod=syntax
+    au FileType javascript AnyFoldActivate
     au FileType reason setlocal foldmethod=syntax
     au FileType elixir setlocal foldmethod=syntax
     au FileType go setlocal foldmethod=manual
