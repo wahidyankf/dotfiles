@@ -31,17 +31,17 @@ augroup vim_enter
     " half of the screen available on start up) we can also adjust zoom to make
     " vim recalculate its stuffs
     
-    autocmd!
-    autocmd VimEnter * :mode
+    au!
+    au VimEnter * :mode
 augroup END
 
 augroup vim_cd
     " automatically change current directory to be the same directory as current
     " buffer.
 
-    autocmd!
+    au!
     set autochdir
-    autocmd BufEnter * silent! cd %:p:h
+    au BufEnter * silent! cd %:p:h
 augroup END
 
 " }}}
@@ -131,9 +131,9 @@ function! g:SetTablineTheme ()
 endfunction
 
 augroup configure_tabline
-    autocmd!
-    autocmd SourcePost * silent call SetTablineTheme()
-    autocmd SessionLoadPost * silent call SetTablineTheme()
+    au!
+    au SourcePost * silent call SetTablineTheme()
+    au SessionLoadPost * silent call SetTablineTheme()
 augroup END
 
 " }}}
@@ -171,7 +171,7 @@ set statusline^=%{coc#status()}
 " Settings - Editing & Navigation {{{
 
 " writes the content of the file automatically if we call :make
-autocmd FileType go set autowrite
+au FileType go set autowrite
 
 set encoding=UTF-8
 
@@ -232,20 +232,20 @@ let g:netrw_localrmdir='rm -r'
 " Folding {{{
 
 augroup filetype_vim
-    autocmd!
-    autocmd FileType javascript setlocal foldmethod=syntax
-    autocmd FileType reason setlocal foldmethod=syntax
-    autocmd FileType elixir setlocal foldmethod=syntax
-    autocmd FileType go setlocal foldmethod=manual
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd BufRead *.md normal zR
-    autocmd BufRead *.re normal zR
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+    au FileType reason setlocal foldmethod=syntax
+    au FileType elixir setlocal foldmethod=syntax
+    au FileType go setlocal foldmethod=manual
+    au FileType vim setlocal foldmethod=marker
+    au BufRead *.md normal zR
+    au BufRead *.re normal zR
 augroup END
 
 augroup elixirLang
   au!
-  autocmd BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
-  autocmd BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
+  au BufNewFile,BufRead *.ex set filetype=elixir syntax=elixir
+  au BufNewFile,BufRead *.exs set filetype=elixir syntax=elixir
 augroup END
 
 
@@ -757,11 +757,11 @@ let g:lightline={
 " Plugin - NERDTree {{{
 
 augroup nerdtreeconcealbrackets
-      autocmd!
-      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
-      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
-      autocmd FileType nerdtree setlocal conceallevel=3
-      autocmd FileType nerdtree setlocal concealcursor=nvic
+      au!
+      au FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+      au FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+      au FileType nerdtree setlocal conceallevel=3
+      au FileType nerdtree setlocal concealcursor=nvic
 augroup END
 
 " display bookmarks on startup
@@ -981,22 +981,22 @@ function! s:show_documentation()
 endfunction
 
 augroup coc_cursor_hold
-    autocmd!
+    au!
 
     " Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
+    au CursorHold * silent call CocActionAsync('highlight')
 augroup END
 
 " Remap for rename current word
 nmap <localleader>ncw <Plug>(coc-rename)
 
 augroup coc_format_expr
-  autocmd!
+  au!
 
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  au FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 function! Format()
