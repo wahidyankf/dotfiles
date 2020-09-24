@@ -235,6 +235,7 @@ let g:netrw_localrmdir='rm -r'
 augroup filetype_vim
     au!
     au FileType javascript AnyFoldActivate
+    au FileType typescript AnyFoldActivate
     au FileType reason setlocal foldmethod=syntax
     au FileType elixir setlocal foldmethod=syntax
     au FileType go setlocal foldmethod=manual
