@@ -774,7 +774,7 @@ let NERDTreeHijackNetrw=0
 let NERDTreeShowHidden=1
 " let g:NERDTreeIgnore = ['.bs.js$']
 let g:NERDTreeWinPos = "left"
-let g:NERDTreeWinSize=35
+let g:NERDTreeWinSize=28
 
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
