@@ -109,16 +109,18 @@ syntax on
 " Gruvbox - active {{{
 
 let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'hard'
 colorscheme gruvbox
 set bg=dark
 
 " colorscheme monochrome
 let g:monochrome_italic_comments = 1
 
-nnoremap <bs>t1 :colorscheme gruvbox<cr>
-nnoremap <bs>t2 :colorscheme darkness<cr>
-nnoremap <bs>t3 :colorscheme dichromatic<cr>
-nnoremap <bs>t4 :colorscheme monochrome<cr>
+nnoremap <bs>t1 :colorscheme gruvbox<cr>:set bg=dark<cr>
+nnoremap <bs>t2 :colorscheme gruvbox<cr>:set bg=light<cr>
+nnoremap <bs>t3 :colorscheme darkness<cr>
+nnoremap <bs>t6 :colorscheme monochrome<cr>
+nnoremap <bs>t5 :colorscheme dichromatic<cr>
 
 " color palette: 223, 233, 235, 240, 241, 246, 250,
 
@@ -742,6 +744,7 @@ nnoremap <bs>gbl :Gblame<cr>
 
 set laststatus=2
 
+
 let g:lightline={
       \ 'colorscheme': 'powerline',
       \ 'active': {
@@ -774,7 +777,7 @@ let NERDTreeHijackNetrw=0
 let NERDTreeShowHidden=1
 " let g:NERDTreeIgnore = ['.bs.js$']
 let g:NERDTreeWinPos = "left"
-let g:NERDTreeWinSize=28
+let g:NERDTreeWinSize=30
 
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
@@ -1080,3 +1083,16 @@ endfunction
 command! -nargs=0 BsReFormat :call BsReFormat()
 " }}}
 
+" Language - ejs {{{
+autocmd BufNewFile,BufRead *.ejs set filetype=ejs
+autocmd BufNewFile,BufRead *._ejs set filetype=ejs
+
+function! s:DetectEjs()
+    if getline(1) =~ '^#!.*\<ejs\>'
+        set filetype=ejs
+    endif
+endfunction
+
+autocmd BufNewFile,BufRead * call s:DetectEjs()
+
+" }}}
