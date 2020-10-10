@@ -430,6 +430,11 @@ nnoremap <bs>ctpt :tabnew ~/.config/tmuxinator/prod.yml<cr>
 nnoremap <bs>ctpv :vsp ~/.config/tmuxinator/prod.yml<cr>
 nnoremap <bs>ctpx :sp ~/.config/tmuxinator/prod.yml<cr>
 
+nnoremap <bs>ctmt :tabnew ~/.config/tmuxinator/main.yml<cr>
+nnoremap <bs>ctmv :vsp ~/.config/tmuxinator/main.yml<cr>
+nnoremap <bs>ctmx :sp ~/.config/tmuxinator/main.yml<cr>
+
+
 " vim
 nnoremap <bs>cvt :tabnew ~/.vimrc<cr>
 nnoremap <bs>cvv :vsp ~/.vimrc<cr>
