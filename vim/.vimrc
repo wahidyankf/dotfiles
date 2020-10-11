@@ -500,8 +500,6 @@ command! -nargs=1 BDExt :call s:BDExt(<f-args>)
 nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
 
 " reload current buffer
-nnoremap <bs>e :e<cr>
-" reload current buffer
 nnoremap <bs>bb :e!<cr>
 
 " bufdo e
@@ -550,7 +548,8 @@ function! ToggleSignColumn()
 endfunction
 
 nnoremap <bs>/ :noh<cr>
-nnoremap <localleader>/ :noh<cr>
+
+" sign column exist? add:call ToggleSignColumn()<cr>
 nnoremap <bs>yy :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
 
 " }}}
