@@ -12,12 +12,20 @@ let g:go_highlight_operators = 1
 let g:go_info_mode='gopls'
 let g:go_metalinter_deadline = "5s"
 
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
 let g:go_metalinter_enabled = ['vet', 'errcheck']
 " to also enable lint
 " let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 " let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+ 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()

@@ -459,9 +459,9 @@ nnoremap <bs>czv :vsp ~/.zshrc<cr>
 nnoremap <bs>czx :sp ~/.zshrc<cr>
 
 " ftplugin
-nnoremap <bs>cct :tabnew ~/.vim/after/ftplugin/README.org<cr>
-nnoremap <bs>ccv :vsp ~/.vim/after/ftplugin/README.org<cr>
-nnoremap <bs>ccx :sp ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>cft :tabnew ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>cfv :vsp ~/.vim/after/ftplugin/README.org<cr>
+nnoremap <bs>cfx :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
 nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
@@ -635,13 +635,13 @@ nnoremap <bs>ts :tab split<cr>
 
 " Key-Bindings - Quick Fix  {{{
 
-nnoremap <localleader>en :cnext<cr>
-nnoremap <localleader>ep :cprevious<cr>
-nnoremap <localleader>eq :cclose<cr>
+nnoremap <localleader>cn :cnext<cr>
+nnoremap <localleader>cp :cprevious<cr>
+nnoremap <localleader>cq :cclose<cr>
+nnoremap <localleader>ce :copen<cr>
 " popup close
 nnoremap <localleader>pq :call <SID>show_documentation()<cr>
 nnoremap <localleader>pp <c-w>p
-nnoremap <localleader>eo :copen<cr>
 
 " }}}
 
