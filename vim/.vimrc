@@ -84,6 +84,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'wakatime/vim-wakatime'
 Plug 'pseewald/vim-anyfold'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'neoclide/jsonc.vim'
 
 " color theme
 Plug 'morhetz/gruvbox'
@@ -242,6 +245,8 @@ augroup filetype_vim
     au FileType elixir setlocal foldmethod=syntax
     au FileType go setlocal foldmethod=manual
     au FileType vim setlocal foldmethod=marker
+    au BufRead *.ts normal zR
+    au BufRead *.js normal zR
     au BufRead *.md normal zR
     au BufRead *.re normal zR
 augroup END
@@ -550,7 +555,8 @@ endfunction
 nnoremap <bs>/ :noh<cr>
 
 " sign column exist? add:call ToggleSignColumn()<cr>
-nnoremap <bs>yy :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
+" nnoremap <bs>yy :set number! relativenumber! list!<cr> :call ToggleSignColumn()<cr>
+nnoremap <bs>yy :set number! relativenumber! list!<cr> :set signcolumn=no<cr>
 
 " }}}
 
@@ -635,10 +641,10 @@ nnoremap <bs>ts :tab split<cr>
 
 " Key-Bindings - Quick Fix  {{{
 
-nnoremap <localleader>cn :cnext<cr>
-nnoremap <localleader>cp :cprevious<cr>
-nnoremap <localleader>cq :cclose<cr>
-nnoremap <localleader>ce :copen<cr>
+nnoremap <localleader>en :cnext<cr>
+nnoremap <localleader>ep :cprevious<cr>
+nnoremap <localleader>eq :cclose<cr>
+nnoremap <localleader>ee :copen<cr>
 " popup close
 nnoremap <localleader>pq :call <SID>show_documentation()<cr>
 nnoremap <localleader>pp <c-w>p
@@ -1086,6 +1092,12 @@ endfunction
 " Use `:Format` to format current buffer
 command! -nargs=0 BsReFormat :call BsReFormat()
 " }}}
+"
+" Language - JavaScript RCs {{{
+
+autocmd BufNewFile,BufRead *.babelrc set filetype=json
+
+" }}}
 
 " Language - ejs {{{
 autocmd BufNewFile,BufRead *.ejs set filetype=ejs
@@ -1098,5 +1110,19 @@ function! s:DetectEjs()
 endfunction
 
 autocmd BufNewFile,BufRead * call s:DetectEjs()
+
+" }}}
+
+" Language - typescript {{{
+
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
+" }}}
+
+" Language - json {{{
+
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.json set filetype=jsonc
 
 " }}}

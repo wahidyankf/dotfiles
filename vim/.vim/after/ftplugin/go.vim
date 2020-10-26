@@ -11,6 +11,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_info_mode='gopls'
 let g:go_metalinter_deadline = "5s"
+let g:go_fmt_command = "gofmt"
 
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
