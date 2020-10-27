@@ -909,20 +909,21 @@ set timeoutlen=500
 
 let g:coc_global_extensions=[
             \ 'coc-css',
+            \ 'coc-elixir',
+            \ 'coc-eslint', 
             \ 'coc-flow',
             \ 'coc-git',
             \ 'coc-html', 
+            \ 'coc-java',
             \ 'coc-json', 
             \ 'coc-prettier',
+            \ 'coc-python',
             \ 'coc-reason',
+            \ 'coc-rls', 
             \ 'coc-svg',
             \ 'coc-tsserver',
             \ 'coc-vimlsp',
-            \ 'coc-java',
-            \ 'coc-elixir',
             \ 'coc-yaml', 
-            \ 'coc-python',
-            \ 'coc-rls', 
             \ ]
 
 " setup prettier command
