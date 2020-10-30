@@ -1,5 +1,5 @@
 nnoremap <silent> <buffer> <localleader>f :MarkdownFormat<cr>
-nnoremap <silent> <buffer> <localleader>w :w<cr>:MarkdownFormat<cr>
+nnoremap <silent> <buffer> <localleader>w :w<cr>:Format<cr>
 
 augroup vim_markdown
   autocmd!
