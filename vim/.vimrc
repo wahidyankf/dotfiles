@@ -707,6 +707,7 @@ nnoremap <localleader>sjs :CDProjectRoot<cr>:Ack!<Space>--js<Space>-i<Space>
 nnoremap <localleader>smd :CDProjectRoot<cr>:Ack!<Space>--md<Space>-i<Space>
 nnoremap <localleader>sml :CDProjectRoot<cr>:Ack!<Space>--css<Space>-i<Space>
 nnoremap <localleader>sre :CDProjectRoot<cr>:Ack!<Space>--reason<Space>-i<Space>
+nnoremap <localleader>sgo :CDProjectRoot<cr>:Ack!<Space>--go<Space>-i<Space>
 nnoremap <localleader>s :CDProjectRoot<cr>:Ack!<Space>-i<Space>
 
 let g:ack_mappings={
