@@ -920,6 +920,7 @@ let g:coc_global_extensions=[
             \ 'coc-python',
             \ 'coc-reason',
             \ 'coc-rls', 
+            \ 'coc-rust-analyzer',
             \ 'coc-svg',
             \ 'coc-tsserver',
             \ 'coc-vimlsp',
