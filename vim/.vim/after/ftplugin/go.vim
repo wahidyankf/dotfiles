@@ -68,7 +68,7 @@ nmap <buffer> <localleader>ctx  <Plug>(go-alternate-split)
 nmap <buffer> <localleader>ctv  <Plug>(go-alternate-vertical)
 nmap <buffer> <localleader>ctc <Plug>(go-coverage-toggle)
 
-nmap <buffer> <localleader>dr :GoRename 
+nmap <buffer> <localleader>dm :GoRename 
 nmap <buffer> <localleader>di :GoImport 
 nmap <buffer> <localleader>dI :GoInstall 
 

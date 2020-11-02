@@ -970,7 +970,10 @@ inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 
 " Or use `complete_info` if your vim support it, like:
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<c-y>" : "\<c-g>u\<cr>"
- 
+
+nnoremap <silent> <bs>dr :CocRestart<cr>
+nnoremap <silent> <localleader>dr :CocRestart<cr>
+
 " navigate diagnostic
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
