@@ -1,1 +1,1 @@
-set filetype=typescript
+" set filetype=typescript
