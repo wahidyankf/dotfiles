@@ -321,6 +321,8 @@ endfunction
 
 " Use `:GetProjectRootPWD` to cd Project root
 command! -nargs=0 GetProjectRootPWD :call GetProjectRootPWD()
+" Use `:CDProjectRoot` to cd Project root
+command! -nargs=0 CDProjectRoot :execute 'cd' GetProjectRootPWD()
 
 function! HLNext (blinktime)
     let [bufnum, lnum, col, off]=getpos('.')
@@ -332,9 +334,6 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
-
-" Use `:CDProjectRoot` to cd Project root
-command! -nargs=0 CDProjectRoot :execute 'cd' GetProjectRootPWD()
 
 " }}}
 
@@ -475,7 +474,7 @@ nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 " nvim terminal
 " set shell=/bin/bash\ -i
 " set shell=/bin/zsh\ -i
-set shellcmdflag+=i
+" set shellcmdflag+=i
 
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>tx :CDProjectRoot<cr>:sp term://zsh<cr>
@@ -692,8 +691,8 @@ nnoremap <bs>fhh :History<cr>
 nnoremap <bs>fh/ :History/<cr>
 nnoremap <bs>fh: :History:<cr>
 
-nnoremap <c-g> :GFiles<cr>
 nnoremap <c-p> :CDProjectRoot<cr>:Files<cr>
+nnoremap <c-g> :GFiles<cr>
 nnoremap <leader><leader> :CDProjectRoot<cr>:Files<cr>
 
 nnoremap <c-b> :Buffers<cr>
@@ -743,12 +742,12 @@ command! -bang -nargs=0 GCheckout
 nnoremap <leader>gg :Gstatus<cr>
 
 " no terminal profile integration
-" nnoremap <bs>gwua :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_wkf_update_all<cr>
-" nnoremap <bs>gcpc :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_complom_clean<cr>
+nnoremap <bs>gwua :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_wkf_update_all<cr>
+nnoremap <bs>gcpc :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_complom_clean<cr>
 
 " with terminal profile integration
-nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
-nnoremap <bs>gcpc :Dispatch git_complom_clean<cr>
+" nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
+" nnoremap <bs>gcpc :Dispatch git_complom_clean<cr>
 
 
 nnoremap <bs>gco :GCheckout<cr>
