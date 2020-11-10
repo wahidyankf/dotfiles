@@ -739,9 +739,15 @@ command! -bang -nargs=0 GCheckout
 " Plugin - Git Ops {{{
 
 nnoremap <leader>gg :Gstatus<cr>
+
+" no terminal profile integration
 " nnoremap <bs>gwua :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_wkf_update_all<cr>
+" nnoremap <bs>gcpc :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_complom_clean<cr>
+
+" with terminal profile integration
 nnoremap <bs>gwua :Dispatch git_wkf_update_all<cr>
-nnoremap <bs>gcpc :CDProjectRoot<cr>:tabnew term://zsh<cr>igit_complom_clean<cr>
+nnoremap <bs>gcpc :Dispatch git_complom_clean<cr>
+
 
 nnoremap <bs>gco :GCheckout<cr>
 nnoremap <bs>gcm :Commits<cr>
