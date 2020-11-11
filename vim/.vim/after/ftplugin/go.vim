@@ -64,7 +64,7 @@ nmap <buffer> <localleader>cc :<C-u>call <SID>build_go_files()<cr>
 nmap <buffer> <localleader>crr  <Plug>(go-run)
 nmap <buffer> <localleader>crt  <Plug>(go-run-tab)
 nmap <buffer> <localleader>crx  <Plug>(go-run-split)
-nmap <buffer> <localleader>crv  <Plug>(go-run-vertical)
+tmap <buffer> <localleader>crv  <Plug>(go-run-vertical)
 
 nmap <buffer> <localleader>ctr  <Plug>(go-test)
 nmap <buffer> <localleader>ctt  <Plug>(go-alternate-edit)
