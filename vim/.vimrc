@@ -87,6 +87,7 @@ Plug 'pseewald/vim-anyfold'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/jsonc.vim'
+" Plug 'kassio/neoterm'
 
 " color theme
 Plug 'morhetz/gruvbox'
@@ -1140,3 +1141,4 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 autocmd BufNewFile,BufRead *.json set filetype=jsonc
 
 " }}}
+
