@@ -473,7 +473,7 @@ nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
 
 " nvim terminal
 " set shell=/bin/bash\ -i
-" set shell=/bin/zsh\ -i
+" set shell=/bin/zsj\ -i
 " set shellcmdflag+=i
 
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
