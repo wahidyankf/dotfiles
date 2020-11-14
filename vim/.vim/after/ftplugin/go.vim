@@ -72,9 +72,16 @@ nmap <buffer> <localleader>ctx  <Plug>(go-alternate-split)
 nmap <buffer> <localleader>ctv  <Plug>(go-alternate-vertical)
 nmap <buffer> <localleader>ctc <Plug>(go-coverage-toggle)
 
-nmap <buffer> <localleader>dm :GoRename 
-nmap <buffer> <localleader>di :GoImport 
-nmap <buffer> <localleader>dI :GoInstall 
+nmap <buffer> <bs>dm :GoRename 
+nmap <buffer> <bs>di :GoImport 
+nmap <buffer> <bs>dI :GoInstall 
+
+nmap <buffer> <localleader>dn :GoDebugNext
+nmap <buffer> <localleader>ds :GoDebugStart
+nmap <buffer> <localleader>dS :GoDebugStop
+nmap <buffer> <localleader>dc :GoDebugContinue
+nmap <buffer> <localleader>db :GoDebugBreakpoint
+nmap <buffer> <localleader>dp :GoDebugPrint
 
 nmap <buffer> <localleader>w :w<cr>:<C-u>call <SID>build_go_files()<cr>
 
