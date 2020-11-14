@@ -76,6 +76,7 @@ nmap <buffer> <bs>dm :GoRename
 nmap <buffer> <bs>di :GoImport 
 nmap <buffer> <bs>dI :GoInstall 
 
+nmap <buffer> <localleader>dl :GoDiagnostics!<cr>
 nmap <buffer> <localleader>dn :GoDebugNext
 nmap <buffer> <localleader>ds :GoDebugStart
 nmap <buffer> <localleader>dS :GoDebugStop
