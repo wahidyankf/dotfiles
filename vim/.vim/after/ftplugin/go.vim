@@ -77,12 +77,16 @@ nmap <buffer> <bs>di :GoImport
 nmap <buffer> <bs>dI :GoInstall 
 
 nmap <buffer> <localleader>dl :GoDiagnostics!<cr>
-nmap <buffer> <localleader>dn :GoDebugNext
-nmap <buffer> <localleader>ds :GoDebugStart
-nmap <buffer> <localleader>dS :GoDebugStop
-nmap <buffer> <localleader>dc :GoDebugContinue
-nmap <buffer> <localleader>db :GoDebugBreakpoint
-nmap <buffer> <localleader>dp :GoDebugPrint
+nmap <buffer> <localleader>dL :GoLint<cr>
+nmap <buffer> <localleader>dn :GoDebugNext<cr>
+nmap <buffer> <localleader>ds :GoDebugStart<cr>
+nmap <buffer> <localleader>dS :GoDebugStop<cr>
+nmap <buffer> <localleader>dR :GoDebugRestart<cr>
+nmap <buffer> <localleader>d. :GoDebugStep<cr>
+nmap <buffer> <localleader>d, :GoDebugStepOut<cr>
+nmap <buffer> <localleader>dc :GoDebugContinue<cr>
+nmap <buffer> <localleader>db :GoDebugBreakpoint<cr>
+nmap <buffer> <localleader>dp :GoDebugPrint 
 
 nmap <buffer> <localleader>dwa :GoAddWorkspace 
 
