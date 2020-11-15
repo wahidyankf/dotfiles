@@ -84,6 +84,8 @@ nmap <buffer> <localleader>dc :GoDebugContinue
 nmap <buffer> <localleader>db :GoDebugBreakpoint
 nmap <buffer> <localleader>dp :GoDebugPrint
 
+nmap <buffer> <localleader>dwa :GoAddWorkspace 
+
 nmap <buffer> <localleader>w :w<cr>:<C-u>call <SID>build_go_files()<cr>
 
 nmap <buffer> <localleader>l <Plug>(go-metalinter)
