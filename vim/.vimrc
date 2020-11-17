@@ -202,14 +202,18 @@ set incsearch
 set ignorecase
 set smartcase
 
-" make scroll happened at 15 from top/bottom
-" set so=15
+" make scroll happened at x from top/bottom
+" set so=7
 
 " copy text under visual to clipboard
 vmap <bs>yv :w !pbcopy<cr><cr>
 " copy all text
 nnoremap <bs>ya ggvGy<c-o>
 nnoremap <bs>yA ggvGy<c-o>:w !pbcopy<cr><cr>
+
+" to map j and k to also centered
+" nnoremap j jzz
+" nnoremap k kzz
 
 " }}}
 
