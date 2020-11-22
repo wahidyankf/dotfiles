@@ -14,6 +14,7 @@ Some functionality uses this to identify us (e.g.GPG configuration, email client
 (setq user-full-name "Wahidyan Kresna Fridayoka" user-mail-address "wahidyankf@gmail.com")
 #+END_SRC
 
+
 * Theming
 
 ** Base
