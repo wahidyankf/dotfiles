@@ -27,7 +27,7 @@
 
 ;; the mighty dank-mono
 (setq doom-font (font-spec :family "Dank Mono"
-                           :size 11))
+                           :size 12))
 
 (setq global-auto-revert-mode t)
 (setq auto-revert-mode t)
@@ -50,7 +50,7 @@
 (setq treemacs-no-png-images t
       treemacs-follow-after-init t
       treemacs-width 35
-      treemacs-position 'right
+      treemacs-position 'left
       treemacs-is-never-other-window t
       treemacs-silent-refresh nil
       treemacs-indentation 1
@@ -1420,6 +1420,27 @@
   (evil-insert-state))
 
 (evil-define-key 'normal tuareg-mode-map (kbd "` m l c h") 'wkf/ocaml-comment-heading)
+
+(defun wkf/org-src-query-sql ()
+  "Insert Org SRC for sh"
+  (interactive)
+  (progn (insert "#+BEGIN_SRC sql")
+         (evil-normal-state)
+         (evil-open-below 1)
+         (insert "#+END_SRC")
+         (evil-normal-state)
+         (evil-open-above 1)))
+
+(which-key-add-key-based-replacements
+  "` q" "query")
+(which-key-add-key-based-replacements
+  "` q s" "query-sql")
+(which-key-add-key-based-replacements
+  "` q s o" "query-sql-org")
+(which-key-add-key-based-replacements
+  "` q s o s" "query-sql-org-source")
+
+(evil-define-key 'normal org-mode-map (kbd "` q s o s") 'wkf/org-src-query-sql)
 
 (use-package! wakatime-mode
   :hook (after-init . global-wakatime-mode))

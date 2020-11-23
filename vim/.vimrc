@@ -473,8 +473,12 @@ nnoremap <bs>cfv :vsp ~/.vim/after/ftplugin/README.org<cr>
 nnoremap <bs>cfx :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
-nnoremap <bs>apimain :tabnew ~/wkf-devbox/rest/main.rest<cr>
-nnoremap <bs>apirgsa :tabnew ~/wkf-devbox/rest/skillacademy.rest<cr>
+nnoremap <bs>p :tabnew ~/wkf-devbox/rest/README.md<cr>
+
+" notes
+nnoremap <bs>mdt :tabnew ~/wkf-notes/README.md<cr>
+nnoremap <bs>mdv :vsp ~/wkf-notes/README.md<cr>
+nnoremap <bs>mdx :sp ~/wkf-notes/README.md<cr>
 
 " nvim terminal
 " set shell=/bin/bash\ -i
