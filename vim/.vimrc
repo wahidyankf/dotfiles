@@ -474,6 +474,8 @@ nnoremap <bs>cfx :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
 nnoremap <bs>p :tabnew ~/wkf-devbox/rest/README.md<cr>
+nnoremap <bs>pv :vsp ~/wkf-devbox/rest/README.md<cr>
+nnoremap <bs>px :sp ~/wkf-devbox/rest/README.md<cr>
 
 " notes
 nnoremap <bs>mdt :tabnew ~/wkf-notes/README.md<cr>
