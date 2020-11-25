@@ -423,26 +423,9 @@ nnoremap <bs>ctt :tabnew ~/.tmux.conf<cr>
 nnoremap <bs>ctv :vsp ~/.tmux.conf<cr>
 nnoremap <bs>ctx :sp ~/.tmux.conf<cr>
 
-nnoremap <bs>ctwt :tabnew ~/.config/tmuxinator/work.yml<cr>
-nnoremap <bs>ctwv :vsp ~/.config/tmuxinator/work.yml<cr>
-nnoremap <bs>ctwx :sp ~/.config/tmuxinator/work.yml<cr>
-
-nnoremap <bs>ctlt :tabnew ~/.config/tmuxinator/learn.yml<cr>
-nnoremap <bs>ctlv :vsp ~/.config/tmuxinator/learn.yml<cr>
-nnoremap <bs>ctlx :sp ~/.config/tmuxinator/learn.yml<cr>
-
-nnoremap <bs>ctbt :tabnew ~/.config/tmuxinator/book.yml<cr>
-nnoremap <bs>ctbv :vsp ~/.config/tmuxinator/book.yml<cr>
-nnoremap <bs>ctbx :sp ~/.config/tmuxinator/book.yml<cr>
-
-nnoremap <bs>ctpt :tabnew ~/.config/tmuxinator/prod.yml<cr>
-nnoremap <bs>ctpv :vsp ~/.config/tmuxinator/prod.yml<cr>
-nnoremap <bs>ctpx :sp ~/.config/tmuxinator/prod.yml<cr>
-
-nnoremap <bs>ctmt :tabnew ~/.config/tmuxinator/main.yml<cr>
-nnoremap <bs>ctmv :vsp ~/.config/tmuxinator/main.yml<cr>
-nnoremap <bs>ctmx :sp ~/.config/tmuxinator/main.yml<cr>
-
+nnoremap <bs>cTt :tabnew ~/.config/tmuxinator/README.md<cr>
+nnoremap <bs>cTv :vsp ~/.config/tmuxinator/README.md<cr>
+nnoremap <bs>cTx :sp ~/.config/tmuxinator/README.md<cr>
 
 " vim
 nnoremap <bs>cvt :tabnew ~/.vimrc<cr>
@@ -450,10 +433,10 @@ nnoremap <bs>cvv :vsp ~/.vimrc<cr>
 nnoremap <bs>cvx :sp ~/.vimrc<cr>
 nnoremap <bs>cve :e ~/.vimrc<cr>
 
-nnoremap <bs>cnvt :tabnew $MYVIMRC<cr>
-nnoremap <bs>cnvv :vsp $MYVIMRC<cr>
-nnoremap <bs>cnvx :sp $MYVIMRC<cr>
-nnoremap <bs>cnve :e $MYVIMRC<cr>
+nnoremap <bs>cVt :tabnew $MYVIMRC<cr>
+nnoremap <bs>cVv :vsp $MYVIMRC<cr>
+nnoremap <bs>cVx :sp $MYVIMRC<cr>
+nnoremap <bs>cVe :e $MYVIMRC<cr>
 
 nnoremap <bs>cvr :source ~/.vimrc<cr>:mode<cr><c-w>=
 
@@ -473,7 +456,7 @@ nnoremap <bs>cfv :vsp ~/.vim/after/ftplugin/README.org<cr>
 nnoremap <bs>cfx :sp ~/.vim/after/ftplugin/README.org<cr>
 
 " rest client
-nnoremap <bs>p :tabnew ~/wkf-devbox/rest/README.md<cr>
+nnoremap <bs>pt :tabnew ~/wkf-devbox/rest/README.md<cr>
 nnoremap <bs>pv :vsp ~/wkf-devbox/rest/README.md<cr>
 nnoremap <bs>px :sp ~/wkf-devbox/rest/README.md<cr>
 
@@ -481,11 +464,6 @@ nnoremap <bs>px :sp ~/wkf-devbox/rest/README.md<cr>
 nnoremap <bs>mdt :tabnew ~/wkf-notes/README.md<cr>
 nnoremap <bs>mdv :vsp ~/wkf-notes/README.md<cr>
 nnoremap <bs>mdx :sp ~/wkf-notes/README.md<cr>
-
-" nvim terminal
-" set shell=/bin/bash\ -i
-" set shell=/bin/zsj\ -i
-" set shellcmdflag+=i
 
 nnoremap <localleader>tv :CDProjectRoot<cr>:vsp term://zsh<cr>
 nnoremap <localleader>tx :CDProjectRoot<cr>:sp term://zsh<cr>
@@ -496,7 +474,7 @@ nnoremap <localleader>t= <c-w>=:resize10<cr>
 nnoremap <bs>zs :resize10<cr>
 tnoremap <C-[> <C-\><C-n>
 
-" boo
+" book
 nnoremap <bs>cbt :tabnew ~/wkf-book/README.md<cr>
 nnoremap <bs>cbv :vsp ~/wkf-book/README.md<cr>
 nnoremap <bs>cbx :sp ~/wkf-book/README.md<cr>
