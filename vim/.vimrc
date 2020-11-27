@@ -1127,6 +1127,7 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.json set filetype=jsonc
+autocmd BufNewFile,BufRead *.prettierrc set filetype=jsonc
 
 " }}}
 
