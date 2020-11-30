@@ -1,5 +1,5 @@
-augroup vim_autoread_reason
   " https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
+  augroup vim_autoread_reason
   autocmd!
   autocmd FileType reason set autoread
 
@@ -15,4 +15,4 @@ augroup vim_autoread_reason
   endif
 augroup END
 
-nnoremap <localleader>w :w<cr>
+nnoremap <buffer> <localleader>w :w<cr>:BsReFormat<cr>:CocRestart<cr>
