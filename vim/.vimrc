@@ -1119,7 +1119,8 @@ autocmd BufNewFile,BufRead * call s:DetectEjs()
 " Language - typescript {{{
 
 " set filetypes as typescript.tsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript
 
 " }}}
 
