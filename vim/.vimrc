@@ -87,6 +87,7 @@ Plug 'pseewald/vim-anyfold'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/jsonc.vim'
+Plug 'sdiehl/vim-ormolu'
 " Plug 'kassio/neoterm'
 
 " color theme
@@ -1134,3 +1135,5 @@ autocmd BufNewFile,BufRead *.prettierrc set filetype=jsonc
 
 " }}}
 
+" let g:ormolu_ghc_opt=["TypeApplications", "RankNTypes"]
+" let g:neoformat_enabled_haskell = ['sortimports', 'ormolu']

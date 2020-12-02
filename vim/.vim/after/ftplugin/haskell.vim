@@ -1,5 +1,3 @@
-" to enable highlighting of `forall`1=
-let g:haskell_enable_quantification
 " to enable highlighting of `mdo` and `rec`
 let g:haskell_enable_recursivedo = 1
 " to enable highlighting of `proc`
@@ -14,7 +12,10 @@ let g:haskell_enable_static_pointers = 1
 let g:haskell_backpack = 1
 
 nnoremap <buffer> <localleader>l :Dispatch ghc -fwarn-incomplete-patterns % -e 'return ()'<cr>
-nnoremap <buffer> <localleader>w :Format<cr>:w<cr>:Make<cr>
+" nnoremap <buffer> <localleader>w :Format<cr>:w<cr>:Make<cr>
+nnoremap <buffer> <localleader>w :call RunOrmolu()<cr>:w<cr>:Make<cr>
+
+" nnoremap tf :call RunOrmolu()<CR>
 
 set makeprg=ghc\ -fwarn-incomplete-patterns\ %\ -e\ 'return()'
 
