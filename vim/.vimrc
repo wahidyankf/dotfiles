@@ -923,6 +923,7 @@ let g:coc_global_extensions=[
             \ 'coc-tsserver',
             \ 'coc-vimlsp',
             \ 'coc-yaml', 
+            \ 'coc-tabnine',
             \ ]
 
 " setup prettier command
@@ -1059,6 +1060,7 @@ nmap <localleader>dff <Plug>(coc-fix-current)
 " Modify leader w to format and save
 nnoremap <localleader>w :w<cr>
 nnoremap <leader>w :w<cr>
+nnoremap <leader>f :Format<cr>
 
 " }}}
 
