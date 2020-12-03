@@ -1185,10 +1185,10 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 **** Config and Utils
 
 #+BEGIN_SRC emacs-lisp :results silent
-(use-package! lsp-haskell
-  :after lsp-mode
-  :config (setq lsp-haskell-process-path-hie "hie-wrapper")
-  (lsp-haskell-set-formatter-floskell))
+;; (use-package! lsp-haskell
+;;   :after lsp-mode
+;;   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
+;;   (lsp-haskell-set-formatter-floskell))
 #+END_SRC
 
 **** Keybindings
@@ -1223,6 +1223,9 @@ As of this time, we cannot use ReasonML and OCaml version > 4.06.0 at the same t
 ;; compile and run current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c r r") 'wkf/haskell-compile-and-run-file-default)
 (evil-define-key 'normal haskell-mode-map (kbd ", c r i") 'wkf/haskell-compile-and-run-file-interactive)
+
+;; Go to doKumentation
+(evil-define-key 'normal haskell-mode-map (kbd "K") 'wkf/gdoc-split)
 #+END_SRC
 
 *** Typescript/Javascript

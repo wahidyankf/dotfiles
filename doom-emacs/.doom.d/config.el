@@ -910,10 +910,10 @@
 ;; clean ocaml project using dune
 (evil-define-key 'normal tuareg-mode-map (kbd ", C l") 'wkf/ocaml-clean-project)
 
-(use-package! lsp-haskell
-  :after lsp-mode
-  :config (setq lsp-haskell-process-path-hie "hie-wrapper")
-  (lsp-haskell-set-formatter-floskell))
+;; (use-package! lsp-haskell
+;;   :after lsp-mode
+;;   :config (setq lsp-haskell-process-path-hie "hie-wrapper")
+;;   (lsp-haskell-set-formatter-floskell))
 
 ;; type check haskell code for exhaustiveness
 (defun wkf/haskell-typecheck-file ()
@@ -941,6 +941,9 @@
 ;; compile and run current file
 (evil-define-key 'normal haskell-mode-map (kbd ", c r r") 'wkf/haskell-compile-and-run-file-default)
 (evil-define-key 'normal haskell-mode-map (kbd ", c r i") 'wkf/haskell-compile-and-run-file-interactive)
+
+;; Go to doKumentation
+(evil-define-key 'normal haskell-mode-map (kbd "K") 'wkf/gdoc-split)
 
 (defun wkf/jts-compile-project ()
   "compile and run current typescript file - default"
