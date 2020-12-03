@@ -692,6 +692,7 @@
 (which-key-add-key-based-replacements ", g d" "goto-def-split")
 (which-key-add-key-based-replacements ", g k" "goto-doc-split")
 (which-key-add-key-based-replacements ", g D" "goto-def-new-frame")
+(which-key-add-key-based-replacements ", d r" "restart-lsp")
 
 ;; Go to Definition in current pane
 (define-key evil-normal-state-map (kbd "g d") 'wkf/gdef)
@@ -705,6 +706,8 @@
 (define-key evil-normal-state-map (kbd ", g D") 'wkf/gdef-new-frame)
 ;; doKumentation
 (define-key evil-normal-state-map (kbd "K") 'lsp-ui-doc-glance)
+;; doKumentation
+(define-key evil-normal-state-map (kbd ", d r") 'lsp-restart-workspace)
 
 (defun wkf/buffer-format ()
   "Format current buffer"
