@@ -493,7 +493,7 @@ endfunction
 command! -nargs=1 BDExt :call s:BDExt(<f-args>)
 
 " close all buffers except this one
-nnoremap <bs>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
+nnoremap <leader>bca :w <bar> %bd <bar> e# <bar> bd# <cr>
 
 " reload current buffer
 nnoremap <bs>bb :e!<cr>
@@ -795,6 +795,7 @@ let NERDTreeChDirMode=2
 " e stands for explorer
 nnoremap <bs>et :NERDTreeToggle<cr><c-w>=
 nnoremap <bs>ee :NERDTree<cr><c-w>=
+nnoremap <c-x><c-x> :NERDTreeFocus<cr>
 nnoremap <bs>ep :CDProjectRoot<cr>:NERDTree<cr><c-w>=
 " nnoremap <leader>op :CDProjectRoot<cr>:NERDTree<cr><c-w>=
 nnoremap <leader>op :NERDTreeToggle<cr><c-w>=
