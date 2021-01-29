@@ -95,6 +95,7 @@ Plug 'morhetz/gruvbox'
 Plug 'romainl/vim-dichromatic'
 Plug 'Jorengarenar/vim-darkness'
 Plug 'fxn/vim-monochrome'
+Plug 'joshdick/onedark.vim'
 " another favourite for color-blindness friendly theme
 
 call plug#end()
@@ -116,16 +117,18 @@ syntax on
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 colorscheme gruvbox
+" colorscheme onedark
 set bg=dark
 
 " colorscheme monochrome
 let g:monochrome_italic_comments = 1
 
-nnoremap <bs>t1 :colorscheme gruvbox<cr>:set bg=dark<cr>
-nnoremap <bs>t2 :colorscheme gruvbox<cr>:set bg=light<cr>
-nnoremap <bs>t3 :colorscheme darkness<cr>
-nnoremap <bs>t6 :colorscheme monochrome<cr>
-nnoremap <bs>t5 :colorscheme dichromatic<cr>
+nnoremap <bs>t1 :colorscheme onedark<cr>
+nnoremap <bs>t2 :colorscheme gruvbox<cr>:set bg=dark<cr>
+nnoremap <bs>t3 :colorscheme gruvbox<cr>:set bg=light<cr>
+nnoremap <bs>t4 :colorscheme darkness<cr>
+nnoremap <bs>t5 :colorscheme monochrome<cr>
+nnoremap <bs>t6 :colorscheme dichromatic<cr>
 
 " color palette: 223, 233, 235, 240, 241, 246, 250,
 
@@ -754,6 +757,7 @@ nnoremap <bs>gbl :Gblame<cr>
 set laststatus=2
 
 
+" \ 'colorscheme': 'onedark',
 let g:lightline={
       \ 'colorscheme': 'powerline',
       \ 'active': {
